@@ -100,7 +100,6 @@ services:
           if [ -n "$APP_HOST" ]; then
             if [ "${APP_PORT:-80}" != "80" ] || [ "${APP_PROTOCOL:-}" = "http" ] || { [ "${APP_PRIVATE_HOST:-false}" != "true" ] && is_ip "$APP_HOST"; }; then
               echo "http://$APP_HOST:80 {";
-              echo "  auto_https off";
               echo "  reverse_proxy web:3000";
               echo "}";
             elif [ "${APP_PRIVATE_HOST:-false}" = "true" ]; then
