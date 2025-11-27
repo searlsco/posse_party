@@ -75,7 +75,7 @@ services:
       web:
         condition: service_started
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:2019/config/ > /dev/null"]
+      test: ["CMD-SHELL", "wget --max-redirect=1 -qO- http://localhost:80/ > /dev/null"]
       interval: 10s
       timeout: 3s
       retries: 5
