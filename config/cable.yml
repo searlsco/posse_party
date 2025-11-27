@@ -1,0 +1,8 @@
+development:
+  adapter: enhanced_postgresql
+
+test:
+  adapter: test
+
+production:
+  adapter: enhanced_postgresql

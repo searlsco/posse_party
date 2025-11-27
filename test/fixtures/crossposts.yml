@@ -1,0 +1,11 @@
+admin_bsky_crosspost:
+  post: admin_post
+  account: admin_bsky_account
+  status: ready
+  content: "This is the admin's first post content."
+  
+admin_mastodon_crosspost:
+  post: admin_post
+  account: admin_mastodon_account
+  status: ready
+  content: "This is the admin's first post content."

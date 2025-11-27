@@ -1,0 +1,18 @@
+<h1 class="text-3xl font-bold text-primary mb-8">Invite User</h1>
+
+<%= form_with model: @invite, url: invites_path, local: true do |f| %>
+  <div class="<%= form_class_pack %>">
+    <div>
+      <%= f.label :email, "Email", class: label_classes %>
+      <%= f.email_field :email, required: true, class: input_classes %>
+    </div>
+
+    <div class="mt-8">
+      <%= render "shared/button",
+        text: "Invite User",
+        variant: :primary,
+        type: :submit,
+        icon: "user_plus" %>
+    </div>
+  </div>
+<% end %>

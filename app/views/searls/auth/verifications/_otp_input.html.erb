@@ -1,0 +1,20 @@
+<%= f.label local_assigns[:attribute], "Code" %>
+<div class="relative h-16 mt-4 w-[288px] sm:w-108 sm:h-20" data-controller="otp">
+  <%= f.text_field local_assigns[:attribute],
+  maxlength: 6,
+  inputmode: "numeric",
+  pattern: "\\d{6}",
+  class: "absolute w-88 sm:w-120 top-2 sm:top-1 ml-1 sm:ml-3 focus:ring-0 override-defaults bg-transparent focus:outline-none border-none font-mono text-[29px] sm:text-[44px] tracking-[29px] sm:tracking-[44px] caret-success",
+  autocomplete: "one-time-code",
+  title: "six-digit code that was emailed to you",
+  data: {
+    action: "paste->otp#pasted input->otp#caret click->otp#caret keydown->otp#caret keyup->otp#caret",
+    otp_target: "input"
+  },
+  **local_assigns[:options] %>
+  <div class="absolute flex w-full h-full border rounded-lg pointer-events-none bg-none">
+    <% 5.times do %>
+      <div class="border-r border-dashed w-[46px] ml-[1.5px] sm:w-[69px] sm:ml-[3px]" ></div>
+    <% end %>
+  </div>
+</div>

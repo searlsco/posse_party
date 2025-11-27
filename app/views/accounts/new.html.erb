@@ -1,0 +1,4 @@
+<h1 class="mb-8 text-3xl font-bold text-primary">Create new account</h1>
+<%= form_with model: @account, local: true do |f| %>
+  <%= render partial: "form", locals: { f: } %>
+<% end %>

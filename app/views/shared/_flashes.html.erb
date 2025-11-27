@@ -1,0 +1,25 @@
+<% flash.each do |type, message| %>
+  <% container_class = class_names(local_assigns[:container_class], case type
+    when "notice" then "border-success bg-success"
+    when "alert" then "border-danger bg-danger"
+    else "bg-info"
+  end) %>
+  <% text_color = case type
+    when "notice" then "text-success"
+    when "alert" then "text-danger"
+    else "text-info"
+  end %>
+  <div class="p-4 my-6 mx-2 border rounded-md [&_a]:underline [&_a]:underline-offset-2 <%= container_class %>">
+    <p class="text-sm font-medium <%= text_color %>"><%=
+      safe_join(Array(message).map do |m|
+        next m if m.is_a?(ActiveSupport::SafeBuffer)
+
+        sanitize(
+          m.to_s,
+          tags: %w[a strong em b i u br],
+          attributes: %w[href class target rel title data-action data-turbo data-turbo-method data-turbo-confirm aria-label]
+        )
+      end, tag.br)
+    %></p>
+  </div>
+<% end %>

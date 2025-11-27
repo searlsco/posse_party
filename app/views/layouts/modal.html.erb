@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <%= render partial: "shared/head" %>
+  </head>
+  <body class="flex flex-col min-h-dvh bg-primary text-primary">
+    <%= link_to "https://posseparty.com", class: "block w-12 h-12 mt-4 ml-4" do %>
+      <div class="w-12 h-12">
+        <%= render "shared/logo" %>
+      </div>
+    <% end %>
+    <%= content_tag :main, class: "flex items-center justify-center mx-auto grow" do %>
+      <section class="w-[90vw] max-w-lg sm:max-w-xl mx-auto <%= "pt-10" unless flash_messages? %> pb-12 px-10 md:px-16 bg-primary rounded-xl border border-primary shadow-xl space-y-6">
+        <div id="flashes" data-controller="flashes">
+          <%= render partial: "shared/flashes", locals: {container_class: "mt-10"} %>
+        </div>
+        <%= yield %>
+      </section>
+    <% end %>
+    <footer class="flex items-center justify-center py-4 text-sm text-secondary">
+      <span>POSSE Party™ is a <%= link_to "Searls LLC", "https://searls.co", class: "text-accent hover:underline" %> production.</span>
+    </footer>
+  </body>
+</html>

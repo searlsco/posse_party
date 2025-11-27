@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/forms" {
+  strategy: "class";
+}
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/container-queries";
+
+@config '../../../config/tailwind.config.js';
+
+@theme {
+  --breakpoint-xs: 26rem;
+
+  --spacing-sm: 2px;
+  --text-xxs: 0.625rem;
+
+  --color-accent-50: oklch(95.091% 0.0304 315.91);
+  --color-accent-100: oklch(90.905% 0.05799 315.19);
+  --color-accent-200: oklch(82.679% 0.11294 314.9);
+  --color-accent-300: oklch(74.854% 0.16727 314.46);
+  --color-accent-400: oklch(67.724% 0.21712 313.74);
+  --color-accent-500: oklch(59.894% 0.26685 311.87);
+  --color-accent-600: oklch(52.737% 0.25869 310.11);
+  --color-accent-700: oklch(43.116% 0.20914 310.38);
+  --color-accent-800: oklch(32.956% 0.156 310.84);
+  --color-accent-900: oklch(21.826% 0.09894 312.14);
+  --color-accent-950: oklch(15.775% 0.06785 314.82);
+}
+
+:root,
+.light {
+  --bg-primary: var(--color-slate-50);
+  --bg-secondary: var(--color-slate-200);
+  --bg-tertiary: var(--color-slate-300);
+  --bg-inverted: var(--color-slate-800);
+
+  --border-primary: var(--color-slate-300);
+  --border-secondary: var(--color-slate-700);
+  --border-tertiary: var(--color-slate-900);
+  --border-inverted: var(--color-slate-600);
+
+  --text-primary: var(--color-slate-800);
+  --text-secondary: var(--color-slate-600);
+  --text-tertiary: var(--color-slate-900);
+  --text-inverted: var(--color-slate-100);
+
+  --text-solid: var(--color-slate-50);
+  --accent: var(--color-accent-500);
+  --accent-bg: var(--color-accent-50);
+  --accent-bg-solid: var(--color-accent-500);
+  --accent-border: var(--color-accent-700);
+  --info: var(--color-blue-600);
+  --info-bg: var(--color-blue-50);
+  --info-bg-solid: var(--color-blue-700);
+  --info-border: var(--color-blue-800);
+  --warn: var(--color-yellow-600);
+  --warn-bg: var(--color-yellow-50);
+  --warn-bg-solid: var(--color-yellow-700);
+  --warn-border: var(--color-yellow-800);
+  --danger: var(--color-red-600);
+  --danger-bg: var(--color-red-50);
+  --danger-bg-solid: var(--color-red-700);
+  --danger-border: var(--color-red-800);
+  --success: var(--color-green-600);
+  --success-bg: var(--color-green-50);
+  --success-bg-solid: var(--color-green-700);
+  --success-border: var(--color-green-800);
+  --neutral: var(--color-gray-600);
+  --neutral-bg: var(--color-gray-50);
+  --neutral-bg-solid: var(--color-gray-700);
+  --neutral-border: var(--color-gray-800);
+}
+
+@utility dark {
+  --bg-primary: var(--color-slate-800);
+  --bg-secondary: var(--color-slate-700);
+  --bg-tertiary: var(--color-slate-600);
+  --bg-inverted: var(--color-slate-300);
+
+  --border-primary: var(--color-slate-500);
+  --border-secondary: var(--color-slate-400);
+  --border-tertiary: var(--color-slate-300);
+  --border-inverted: var(--color-slate-700);
+
+  --text-primary: var(--color-slate-100);
+  --text-secondary: var(--color-slate-200);
+  --text-tertiary: var(--color-slate-300);
+  --text-inverted: var(--color-slate-800);
+
+  --text-solid: var(--color-slate-50);
+  --accent: var(--color-accent-50);
+  --accent-bg: var(--color-accent-800);
+  --accent-bg-solid: var(--color-accent-500);
+  --accent-border: var(--color-accent-400);
+  --info: var(--color-blue-100);
+  --info-bg: var(--color-blue-900);
+  --info-bg-solid: var(--color-blue-600);
+  --info-border: var(--color-blue-500);
+  --warn: var(--color-yellow-100);
+  --warn-bg: var(--color-yellow-900);
+  --warn-bg-solid: var(--color-yellow-600);
+  --warn-border: var(--color-yellow-500);
+  --danger: var(--color-red-100);
+  --danger-bg: var(--color-red-900);
+  --danger-bg-solid: var(--color-red-600);
+  --danger-border: var(--color-red-500);
+  --success: var(--color-green-100);
+  --success-bg: var(--color-green-900);
+  --success-bg-solid: var(--color-green-600);
+  --success-border: var(--color-green-500);
+  --neutral: var(--color-slate-200);
+  --neutral-bg: var(--color-slate-900);
+  --neutral-bg-solid: var(--color-slate-600);
+  --neutral-border: var(--color-slate-500);
+}
+
+/* Derek uses this to enforce lower-priority of base styles on components:
+ * so use base:px-1 on a component and then pass px-1 in a property to override
+ * So let’s say you’re building a component that has base styles like `px-2 py-1`. You use some props to pass in some additional classes like `px-3` for a needed use case and for some reason the cascade annoyingly gives the `px-2` the priority. This `base` is to guarantee that any base styles will always surface higher in the css. So for a reusable component that has base styles like this I’d use `base:px-2 base:px-1` so that they are compiled up in the base layer of the stylesheet so that when I then add a `px-3` class to this component externally for my need it’s 100% guaranteed that it will override that base component class.
+ */
+@custom-variant base {
+  @layer base {
+    @slot;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @apply dark;
+  }
+}
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl font-bold;
+  }
+
+  h4 {
+    @apply text-lg font-extrabold text-secondary;
+  }
+
+  h5 {
+    @apply font-extrabold text-secondary;
+  }
+
+  [disabled] {
+    filter: opacity(60%);
+    cursor: not-allowed;
+  }
+}
+
+/*
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-200;
+  }
+}
+
+*/
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}

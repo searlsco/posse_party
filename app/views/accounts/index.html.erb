@@ -1,0 +1,21 @@
+<%= render "shared/page_header",
+  title: "Accounts",
+  button_path: new_account_path,
+  button_text: "Add Account",
+  button_icon: "plus" %>
+
+<% if @accounts.any? %>
+  <%= render partial: "syndication_toggle", locals: {user: current_user} %>
+  <div class="grid grid-cols-1 gap-4 mt-6 md:grid-cols-2">
+    <% @accounts.each do |account| %>
+      <%= render "shared/account_card", account: account %>
+    <% end %>
+  </div>
+<% else %>
+  <%= render "shared/empty_state",
+    icon: "user_group",
+    title: "No accounts yet",
+    description: "Connect your social media accounts to start crossposting",
+    button_path: new_account_path,
+    button_text: "Create your first account" %>
+<% end %>

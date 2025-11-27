@@ -1,0 +1,72 @@
+<div id="danger_zone">
+  <%= render "shared/card",
+    class: "mb-6",
+    presentation_class: "border border-danger bg-danger/10 shadow-rose-300/50 shadow-sm" do %>
+    <h2 class="mb-4 text-lg font-semibold text-danger">Danger Zone</h2>
+
+    <div class="space-y-6">
+      <div class="space-y-4">
+        <div class="flex flex-col gap-4 pt-4 border-t border-danger/30 sm:flex-row sm:items-center sm:justify-between sm:border-0 sm:pt-0">
+          <p class="text-sm font-semibold text-primary">Log out of POSSE Party</p>
+          <div class="sm:shrink-0">
+            <%= render "shared/button",
+              path: searls_auth.logout_path,
+              text: "Log out",
+              variant: :danger_outline,
+              size: :medium,
+              class: "w-44 justify-center",
+              data: { turbo_prefetch: "false" } %>
+          </div>
+        </div>
+
+        <% if user.admin? %>
+          <div class="flex flex-col gap-4 pt-4 border-t border-danger/30 sm:flex-row sm:items-center sm:justify-between sm:border-0 sm:pt-0">
+            <p class="text-sm font-semibold text-primary">Demote your account to Standard access, relinquishing admin privileges</p>
+            <div class="sm:shrink-0">
+              <%= render "shared/deletion_confirmation_dialog",
+                user: user,
+                trigger_text: "Demote Account",
+                confirm_text: "Confirm Demotion",
+                cancel_text: "Keep Admin Access",
+                title: "Demote your admin access",
+                trigger_variant: :danger_outline,
+                trigger_class: "w-44 justify-center",
+                form_path: user_path(user),
+                form_method: :patch,
+                hidden_fields: { admin: false } do %>
+                <p>Demoting removes admin-only capabilities. Another administrator must promote you again to restore access.</p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="pt-6 mt-6 space-y-4 border-t border-danger/30 sm:mt-8">
+        <div class="space-y-3 text-sm">
+          <p class="font-medium text-danger">Deleting your account is permanent and cannot be undone.</p>
+          <p class="text-secondary">
+            All feeds, account configurations, and records of any posts or crossposts stored in POSSE Party will be deleted.
+            Crossposts that were already published to your connected accounts and the site hosting your feed will remain untouched.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm font-semibold text-primary">Delete your own account, including all your data</p>
+          <div class="sm:shrink-0">
+            <%= render "shared/deletion_confirmation_dialog",
+              user: user,
+              trigger_text: "Delete Account",
+              confirm_text: "Delete account",
+              cancel_text: "Keep account",
+              title: "Delete your POSSE Party account",
+              trigger_class: "w-44 justify-center",
+              form_path: account_deletion_path do %>
+              <p>This action permanently deletes your account, including all feeds, account configurations, posts, and crossposts stored here.</p>
+              <p>Published posts on the platforms you syndicate to and the site hosting your feed will not be affected.</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

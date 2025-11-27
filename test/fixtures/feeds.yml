@@ -1,0 +1,9 @@
+admin_feed:
+  user: admin
+  label: "Admin's Blog"
+  url: "https://admin.example.com/feed.xml"
+  
+user_feed:
+  user: user
+  label: "User's Blog"
+  url: "https://user.example.com/feed.xml"

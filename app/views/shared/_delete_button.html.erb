@@ -1,0 +1,10 @@
+<%
+  # Required locals: path, confirm_message, label (default: "Delete")
+  label ||= "Delete"
+%>
+<%= link_to label, path,
+    class: "#{button_class_pack(:danger)} block text-center min-w-64 max-w-xs",
+    data: {
+      turbo_method: :delete,
+      turbo_confirm: confirm_message
+    } %>

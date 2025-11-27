@@ -1,0 +1,27 @@
+<!-- Letterpress logo with fixed positioning -->
+<div class="fixed top-0 left-0 z-0 flex items-center justify-center w-48 h-20 px-4 pointer-events-none lg:w-56">
+  <div class="flex items-center justify-center mt-4 size-16 grayscale dark:invert dark:brightness-200 dark:contrast-50 text-slate-700">
+    <%= render partial: "shared/logo", locals: { letterpress: true } %>
+  </div>
+</div>
+
+<!-- Colorful logo in front -->
+<%= link_to "https://posseparty.com", class: "relative z-10 block" do %>
+  <div class="flex items-center justify-center h-20 px-4">
+    <div class="flex items-center justify-center mt-4 size-16">
+      <%= render partial: "shared/logo", locals: { letterpress: false } %>
+    </div>
+  </div>
+<% end %>
+
+<div class="sticky top-20 flex flex-col h-[calc(100dvh-5rem)] w-48 lg:w-56 bg-primary relative overflow-hidden">
+  <nav class="flex-1 px-3 py-4 space-y-1">
+    <%= render partial: "shared/side_bar_item", locals: {name: :feeds, path: feeds_path, current_tab: current_tab, icon: "newspaper"} %>
+    <%= render partial: "shared/side_bar_item", locals: {name: :accounts, path: accounts_path, current_tab: current_tab, icon: "user_group"} %>
+    <%= render partial: "shared/side_bar_item", locals: {name: :posts, path: posts_path, current_tab: current_tab, icon: "chat_bubble_left_right"} %>
+    <%= render partial: "shared/side_bar_item", locals: {name: :logs, label: "Logs", path: logs_path, current_tab: current_tab, icon: "server", badge: current_user.notifications.where(badge: true, seen_at: nil).exists?} %>
+  </nav>
+  <div class="px-3 py-4">
+    <%= render partial: "shared/side_bar_item", locals: {name: :settings, path: settings_path, current_tab: current_tab, icon: "cog" } %>
+  </div>
+</div>

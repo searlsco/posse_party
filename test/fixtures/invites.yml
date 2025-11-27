@@ -1,0 +1,9 @@
+admin_invited_user:
+  email: ~
+  status: accepted
+  invited_by: admin
+  received_by: user
+  token: <%= SecureRandom.hex(24) %>
+  accepted_at: 2025-09-01 12:00:00
+  created_at: 2025-09-01 12:00:00
+  updated_at: 2025-09-01 12:00:00

@@ -1,0 +1,91 @@
+{{ define "main" }}
+<h1 class="text-accent-300">Colors</h1>
+<div class="flex flex-col mt-2 gap-y-8">
+  <div>
+    <h2>Basics</h2>
+    <div class="mt-2 flex flex-wrap gap-2 [&>*]:p-4 [&>*]:border [&>*]:rounded-lg">
+      <div class="border-primary bg-primary text-primary">
+        Primary
+      </div>
+      <div class="border-secondary bg-secondary text-secondary">
+        Secondary
+      </div>
+      <div class="border-tertiary bg-tertiary text-tertiary">
+        Tertiary
+      </div>
+      <div class="border-inverted bg-inverted text-inverted">
+        Inverted
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2>UI State - Hollow</h2>
+    <div class="mt-2 flex flex-wrap gap-2 [&>*]:p-4 [&>*]:border [&>*]:rounded-lg">
+      <div class="border-info bg-info text-info">
+        Info
+      </div>
+      <div class="border-warn bg-warn text-warn">
+        Warn
+      </div>
+      <div class="border-danger bg-danger text-danger">
+        Danger
+      </div>
+      <div class="border-success bg-success text-success">
+        Success
+      </div>
+      <div class="border-neutral bg-neutral text-neutral">
+        Neutral
+      </div>
+      <div class="border-accent bg-accent text-accent">
+        Accent
+      </div>
+    </div>
+  </div>
+  <div>
+    <h2>UI State - Buttons</h2>
+    <div class="mt-2 flex flex-wrap gap-2 [&>*]:p-1 [&>*]:border [&>*]:rounded-lg [&>*]:cursor-pointer">
+      <button class="border-info bg-info-solid text-solid">
+        Info
+      </button>
+      <button class="border-warn bg-warn-solid text-solid">
+        Warn
+      </button>
+      <button class="border-danger bg-danger-solid text-solid">
+        Danger
+      </button>
+      <button class="border-success bg-success-solid text-solid">
+        Success
+      </button>
+      <button class="border-neutral bg-neutral-solid text-solid">
+        Neutral
+      </button>
+      <button class="border-accent bg-accent-solid text-solid">
+        Accent
+      </button>
+    </div>
+  </div>
+  <div>
+    <h3>UI State - Disabled</h3>
+    <div class="mt-2 flex flex-wrap gap-2 [&>*]:p-1 [&>*]:border [&>*]:rounded-lg [&>*]:cursor-pointer">
+      <button disabled class="border-info bg-info-solid text-solid">
+        Info
+      </button>
+      <button disabled class="border-warn bg-warn-solid text-solid">
+        Warn
+      </button>
+      <button disabled class="border-danger bg-danger-solid text-solid">
+        Danger
+      </button>
+      <button disabled class="border-success bg-success-solid text-solid">
+        Success
+      </button>
+      <button disabled class="border-neutral bg-neutral-solid text-solid">
+        Neutral
+      </button>
+      <button disabled class="border-accent bg-accent-solid text-solid">
+        Accent
+      </button>
+    </div>
+  </div>
+</div>
+{{ end }}

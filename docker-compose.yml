@@ -1,0 +1,108 @@
+x-app-env: &app-env
+  env_file:
+    - .env
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  migrate:
+    image: ${POSSE_IMAGE:-ghcr.io/searlsco/posse_party:latest}
+    <<: *app-env
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["./script/release"]
+    restart: "no"
+
+  web:
+    image: ${POSSE_IMAGE:-ghcr.io/searlsco/posse_party:latest}
+    restart: unless-stopped
+    <<: *app-env
+    command: ["./script/server"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:3000/up || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    stdin_open: true
+    tty: true
+
+  worker:
+    image: ${POSSE_IMAGE:-ghcr.io/searlsco/posse_party:latest}
+    restart: unless-stopped
+    <<: *app-env
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    command: ["./script/worker"]
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "./bin/rails runner 'exit(SolidQueue::Process.where(\"last_heartbeat_at > ?\", SolidQueue.process_alive_threshold.ago).exists? ? 0 : 1)'"
+      ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    environment:
+      APP_HOST: ${APP_HOST}
+      APP_PRIVATE_HOST: ${APP_PRIVATE_HOST:-false}
+    depends_on:
+      web:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:2019/config/ > /dev/null"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    ports:
+      - "${APP_PORT:-80}:80"
+      - "443:443"
+    command: >
+      sh -c '
+        {
+          echo ":80 {";
+          echo "  reverse_proxy web:3000";
+          echo "}";
+          if [ -n "$APP_HOST" ]; then
+            echo "$APP_HOST {";
+            echo "  reverse_proxy web:3000";
+            if [ "$APP_PRIVATE_HOST" = "true" ]; then
+              echo "  tls internal";
+            fi
+            echo "}";
+          fi
+        } > /etc/caddy/Caddyfile
+        exec caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+      '
+    volumes:
+      - proxy_data:/data
+
+volumes:
+  db_data:
+  proxy_data:

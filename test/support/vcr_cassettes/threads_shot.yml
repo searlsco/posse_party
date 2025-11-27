@@ -1,0 +1,188 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.threads.net/v1.0/me/threads?access_token=some_access_token&link_attachment=https://justin.searls.co/shots/2024-10-28-09h56m20s/&media_type=TEXT&text=Orlando,%20I%20love%20you%20%F0%9F%8E%B6
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      X-Business-Use-Case-Usage:
+      - '{"9584830098240907":[{"type":"threads","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
+      Threads-Api-Version:
+      - v1.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - Afb5tx_vOn2dkTQQFiV3h1Z
+      X-Fb-Trace-Id:
+      - EPCR6hGNV4Z
+      X-Fb-Rev:
+      - '1020644452'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - CuCMRkzZlXuJ2iuQgVYA8NUNi+TqQMgNf50RvANtrB4SUep82l2igVPk8Kqx9oYixWdEfWwC84W41PQU3XbRjQ==
+      Date:
+      - Thu, 06 Mar 2025 17:39:48 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=22, rtx=0, c=14, mss=1380, tbw=3645, tp=-1, tpl=-1,
+        uplat=1825, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"id":"18087522505579577"}'
+  recorded_at: Thu, 06 Mar 2025 17:39:48 GMT
+- request:
+    method: post
+    uri: https://graph.threads.net/v1.0/me/threads_publish?access_token=some_access_token&creation_id=18087522505579577
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      X-Business-Use-Case-Usage:
+      - '{"9584830098240907":[{"type":"threads","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
+      Threads-Api-Version:
+      - v1.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - A0kDl4DPWwXJflYTTSHRrU8
+      X-Fb-Trace-Id:
+      - BMUz8AdE8pK
+      X-Fb-Rev:
+      - '1020644452'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - DUgzayQn5oArCrai5zDwMJcR2ue14hFHSEVEntfk5Pk0UR8xKFc4e5YiGpJfiRE84rUdBsgIRrNZWQUFgD1tkw==
+      Date:
+      - Thu, 06 Mar 2025 17:39:51 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=21, rtx=0, c=14, mss=1380, tbw=3645, tp=-1, tpl=-1,
+        uplat=3118, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"id":"17990266949795149"}'
+  recorded_at: Thu, 06 Mar 2025 17:39:51 GMT
+- request:
+    method: get
+    uri: https://graph.threads.net/v1.0/17990266949795149?access_token=some_access_token&fields=permalink
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"f9064dc3963f16118a470c933018985c5245ac05"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      X-Business-Use-Case-Usage:
+      - '{"9584830098240907":[{"type":"threads","call_count":1,"total_cputime":1,"total_time":1,"estimated_time_to_regain_access":0}]}'
+      Threads-Api-Version:
+      - v1.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - ALitx1AYXYat382ZeJeW3xy
+      X-Fb-Trace-Id:
+      - H8+YV2jwLcG
+      X-Fb-Rev:
+      - '1020644452'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - Z07Kj3NiVIUNiirNna1LZ+eWzjX4x+03CixWbGw5FXfhWwQGvPTyYQrRUBeKk8E0oerll3hH9yLs8CPyhkjh9w==
+      Date:
+      - Thu, 06 Mar 2025 17:39:51 GMT
+      X-Fb-Connection-Quality:
+      - GOOD; q=0.7, rtt=147, rtx=0, c=14, mss=1380, tbw=3645, tp=-1, tpl=-1, uplat=103,
+        ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '122'
+    body:
+      encoding: UTF-8
+      string: '{"permalink":"https:\/\/www.threads.net\/\u0040wackywavinginflatableflailing\/post\/DG3dlMLxZxS","id":"17990266949795149"}'
+  recorded_at: Thu, 06 Mar 2025 17:39:51 GMT
+recorded_with: VCR 6.3.1

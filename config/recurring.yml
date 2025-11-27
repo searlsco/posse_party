@@ -1,0 +1,26 @@
+default: &default
+  clear_completed_jobs:
+    class: "ClearCompletedJobsJob"
+    schedule: every day
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  check_feeds:
+    class: "CheckFeedsJob"
+    schedule: every minute
+  kick_off_crossposts:
+    class: "KickOffCrosspostsJob"
+    schedule: every minute
+  requeue_abandoned_wip_crossposts:
+    class: "RequeueAbandonedWipCrosspostsJob"
+    schedule: "*/10 * * * *"
+  renew_access_tokens_job:
+    class: "RenewAccessTokensJob"
+    schedule: "0 * * * *"
+

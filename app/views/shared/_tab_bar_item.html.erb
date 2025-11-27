@@ -1,0 +1,31 @@
+<% active = current_tab == name %>
+<% label = local_assigns[:label] || name.to_s.titleize %>
+<% icon = local_assigns[:icon] || nil %>
+<% badge = !!local_assigns[:badge] %>
+
+<%= content_tag :a,
+  class: class_names(
+    "flex flex-col items-center justify-center py-2 px-2 rounded-lg transition-all duration-200 cursor-pointer",
+    ("text-secondary hover:text-accent" unless active),
+    ("text-accent" if active)
+  ),
+  data: {
+    fake_linker_target: "link",
+    link_path: path
+  } do %>
+  <div class="relative">
+    <% if icon %>
+      <% if icon.starts_with?("<") %>
+        <svg class="<%= active ? 'size-6' : 'size-5' %> transition-all duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= icon.html_safe %>
+        </svg>
+      <% else %>
+        <%= render "icons/#{icon}", class: "#{active ? 'size-6' : 'size-5'} transition-all duration-200" %>
+      <% end %>
+      <% if badge %>
+        <span class="<%= badge_dot_classes(active: active, context: :tabbar) %>"></span>
+      <% end %>
+    <% end %>
+  </div>
+  <span class="text-xs mt-0.5 font-medium"><%= label %></span>
+<% end %>

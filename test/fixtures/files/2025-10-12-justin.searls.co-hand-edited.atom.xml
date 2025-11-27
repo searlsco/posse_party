@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:posse="https://posseparty.com/2024/Feed">
+  <title>POSSE Party IG Stories Record Fixture</title>
+  <updated>2025-10-12T00:00:00Z</updated>
+
+  <!-- Image (shot) entry -->
+  <entry>
+    <id>https://justin.searls.co/shots/2025-01-14-12h49m31s/</id>
+    <title>Story Image</title>
+    <updated>2025-10-12T02:00:00Z</updated>
+    <link rel="alternate" href="https://justin.searls.co/shots/2025-01-14-12h49m31s/" />
+    <posse:post format="json"><![CDATA[{
+      "id": "https://justin.searls.co/shots/2025-01-14-12h49m31s/",
+      "url": "https://justin.searls.co/shots/2025-01-14-12h49m31s/",
+      "title": "Story Image",
+      "content": "This is a Story image test",
+      "platform_overrides": {"instagram": {"channel": "story"}},
+      "media": [{"type": "image", "url": "https://justin.searls.co/shots/2025-01-14-12h49m00s-7fec399.jpeg"}]
+    }]]></posse:post>
+  </entry>
+
+  <!-- Video (clip) entry -->
+  <entry>
+    <id>https://justin.searls.co/clips/v31-what-is-refactoring/</id>
+    <title>Story Video</title>
+    <updated>2025-10-12T01:00:00Z</updated>
+    <link rel="alternate" href="https://justin.searls.co/clips/v31-what-is-refactoring/" />
+    <posse:post format="json"><![CDATA[{
+      "id": "https://justin.searls.co/clips/v31-what-is-refactoring/",
+      "url": "https://justin.searls.co/clips/v31-what-is-refactoring/",
+      "title": "Story Video",
+      "content": "This is a Story video test",
+      "platform_overrides": {"instagram": {"channel": "story"}},
+      "media": [{"type": "video", "url": "https://podcast-cdn.searls.co/clips/v31-what-is-refactoring.1080p.mp4"}]
+    }]]></posse:post>
+  </entry>
+
+  <!-- Carousel entry (feed) -->
+  <entry>
+    <id>https://justin.searls.co/shots/fake-lol/</id>
+    <title>Too many videos</title>
+    <updated>2025-10-12T00:00:00Z</updated>
+    <link rel="alternate" href="https://justin.searls.co/shots/fake-lol/" />
+    <posse:post format="json"><![CDATA[{
+      "id": "https://justin.searls.co/shots/fake-lol/",
+      "url": "https://justin.searls.co/shots/fake-lol/",
+      "title": "Too many videos",
+      "content": "pretend i'm a big carousel",
+      "media": [
+        {"url": "https://podcast-cdn.searls.co/clips/v30-the-startup-shell-game.1080p.mp4", "type": "video"},
+        {"url": "https://podcast-cdn.searls.co/clips/v30-the-wrong-programmers.1080p.mp4", "type": "video"},
+        {"url": "https://podcast-cdn.searls.co/clips/v31-what-is-refactoring.1080p.mp4", "type": "video"}
+      ]
+    }]]></posse:post>
+  </entry>
+</feed>

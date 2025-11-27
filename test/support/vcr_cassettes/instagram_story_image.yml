@@ -1,0 +1,259 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.instagram.com/v24.0/{{user_id}}/media?access_token={{access_token}}&image_url=https://justin.searls.co/shots/2025-01-14-12h49m00s-7fec399.jpeg&media_type=STORIES
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - ApjSTHOcRmF-lyt0wu_s9MM
+      X-Fb-Trace-Id:
+      - CTPSPWYqkjA
+      X-Fb-Rev:
+      - '1028406838'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - cm2Fk+FyMDkfuyX2fB3Pdm0+Pj39quJ6s1JA5m1avyT4UKmriZcmk424b5WkWU0Km8GgtaUbk0qsaCURhuzCXA==
+      Date:
+      - Tue, 14 Oct 2025 20:00:29 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=29, rtx=0, c=15, mss=1380, tbw=4431, tp=-1, tpl=-1,
+        uplat=3176, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"id":"17874544032429190"}'
+  recorded_at: Tue, 14 Oct 2025 20:00:29 GMT
+- request:
+    method: get
+    uri: https://graph.instagram.com/v24.0/17874544032429190?access_token={{access_token}}&fields=status_code,status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"73a170d13997fd548a25aa66b4818db26643f73e"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AXiV26RDp5_n491HcOyaWoc
+      X-Fb-Trace-Id:
+      - DWQ2aI/oer2
+      X-Fb-Rev:
+      - '1028406838'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - l9QnohySvpcySmeRvYTFfkXQaw53D03Svk+0EK2kYkL3nRnGImcgOmHXc+ghb+LebCoYttEikK4f6ScsjhmlRQ==
+      Date:
+      - Tue, 14 Oct 2025 20:00:30 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=41, rtx=0, c=15, mss=1380, tbw=4430, tp=-1, tpl=-1,
+        uplat=98, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '77'
+    body:
+      encoding: UTF-8
+      string: '{"status_code":"IN_PROGRESS","status":"IN_PROGRESS","id":"17874544032429190"}'
+  recorded_at: Tue, 14 Oct 2025 20:00:30 GMT
+- request:
+    method: get
+    uri: https://graph.instagram.com/v24.0/17874544032429190?access_token={{access_token}}&fields=status_code,status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"d28820bfd261a32fed7619447b2247e9482f6ebf"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AiLz5DndQ_Yv8pttkXGuilW
+      X-Fb-Trace-Id:
+      - DOgIK8MR+zI
+      X-Fb-Rev:
+      - '1028397221'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - 3mfE1WgJrJ9h2uQPjOETB1lKu4ajOQnt4kPztapxv1YVov9M0G38mkHEXbaOFZhyQ85K7c5KALuvgOa/mCi7Rw==
+      Date:
+      - Tue, 14 Oct 2025 20:01:00 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=32, rtx=0, c=15, mss=1380, tbw=4430, tp=-1, tpl=-1,
+        uplat=118, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '71'
+    body:
+      encoding: UTF-8
+      string: '{"status_code":"FINISHED","status":"FINISHED","id":"17874544032429190"}'
+  recorded_at: Tue, 14 Oct 2025 20:01:00 GMT
+- request:
+    method: post
+    uri: https://graph.instagram.com/v24.0/{{user_id}}/media_publish?access_token={{access_token}}&creation_id=17874544032429190
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - A6ts-9LZOCNoDCvRRCDKjqF
+      X-Fb-Trace-Id:
+      - GUb0Mt/3UHh
+      X-Fb-Rev:
+      - '1028406838'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - EPBKIAcmGsGbITehPfn+mZx36b7IpLfUaXL/0pZdCpsjjx7cIgicKSU2/ZJWRvlhGrib05HujFuVk3GZ104V/w==
+      Date:
+      - Tue, 14 Oct 2025 20:01:01 GMT
+      X-Fb-Connection-Quality:
+      - GOOD; q=0.7, rtt=51, rtx=0, c=15, mss=1380, tbw=4429, tp=-1, tpl=-1, uplat=1315,
+        ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"id":"18068657540343979"}'
+  recorded_at: Tue, 14 Oct 2025 20:01:01 GMT
+recorded_with: VCR 6.3.1

@@ -1,0 +1,80 @@
+<%
+  size ||= :medium
+  title ||= nil
+
+  icon_size = case size
+  when :small
+    "size-5"
+  when :medium
+    "size-6"
+  when :large
+    "size-7"
+  else
+    "size-6"
+  end
+
+  wrapper_size = case size
+  when :small
+    "size-8"
+  when :medium
+    "size-10"
+  when :large
+    "size-12"
+  else
+    "size-10"
+  end
+
+  platform_color = case platform.to_s.downcase
+  when "bsky"
+    "bg-blue-500"
+  when "facebook"
+    "bg-blue-600"
+  when "instagram"
+    "bg-gradient-to-br from-purple-600 to-pink-500"
+  when "linkedin"
+    "bg-blue-700"
+  when "mastodon"
+    "bg-purple-600"
+  when "threads"
+    "bg-neutral-solid"
+  when "x", "twitter"
+    "bg-neutral-solid"
+  when "youtube"
+    "bg-red-600"
+  else
+    "bg-neutral"
+  end
+%>
+
+<div class="<%= wrapper_size %> rounded-lg <%= platform_color %> flex items-center justify-center text-white shadow-sm flex-shrink-0"<%= title ? " title=\"#{title}\"".html_safe : "" %>>
+  <%
+    icon_file = case platform.to_s.downcase
+    when "bsky", "bluesky"
+      "bluesky.svg"
+    when "facebook"
+      "facebook.svg"
+    when "instagram"
+      "instagram.svg"
+    when "linkedin"
+      "linkedin.svg"
+    when "mastodon"
+      "mastodon.svg"
+    when "threads"
+      "threads.svg"
+    when "x", "twitter"
+      "x.svg"
+    when "youtube"
+      "youtube.svg"
+    else
+      nil
+    end
+  %>
+
+  <% if icon_file %>
+    <%= image_tag "icons/#{icon_file}", class: "#{icon_size} brightness-0 invert object-contain", alt: platform.to_s.capitalize %>
+  <% else %>
+    <svg class="<%= icon_size %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+    </svg>
+  <% end %>
+</div>

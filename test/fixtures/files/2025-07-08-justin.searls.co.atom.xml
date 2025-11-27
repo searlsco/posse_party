@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+  xml:lang="en-us"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:posse="https://posseparty.com/2024/Feed"
+  xsi:schemaLocation="
+    http://www.w3.org/2005/Atom https://raw.githubusercontent.com/docjason/XmlValidate/refs/heads/master/schemas/atom.xsd
+    https://posseparty.com/2024/Feed https://posseparty.com/2024/Feed.xsd">
+  <id>https://justin.searls.co/atom.xml</id>
+    <title>justin․searls․co</title>
+  <updated>2025-07-07T18:06:11+00:00</updated>
+  <author>
+      <name>Justin Searls</name>
+      <email>website@searls.co</email>
+  </author>
+  <link href="https://justin.searls.co/" rel="alternate" type="text/html" title="HTML" />
+  <link href="https://justin.searls.co/atom.xml" rel="self" type="application/atom+xml" title="Atom" />
+  <category term="Software"/>
+  <generator uri="https://gohugo.io/" version="0.145.0">Hugo</generator>
+  <icon>https://justin.searls.co/favicon.ico</icon>
+  <logo>https://justin.searls.co/img/wide_logo.png</logo>
+  <rights>Copyright Justin Searls. All rights reserved.</rights>
+  <subtitle>Where Justin Searls is content to post content.</subtitle>
+
+  <entry>
+    <id>https://justin.searls.co/takes/2025-07-06-17h23m32s/</id>
+      <title type="text">🔥  Anybody else have a recent MacBook Pro (M4 Pro…</title>
+      <link href="https://justin.searls.co/takes/2025-07-06-17h23m32s/" rel="alternate" type="text/html" />
+    <author>
+      <name>Justin Searls</name>
+      <email>website@searls.co</email>
+    </author>
+    <published>2025-07-06T21:23:32+00:00</published>
+    <updated>2025-07-06T17:23:53-04:00</updated>
+    <content type="html"><![CDATA[<p>Anybody else have a recent MacBook Pro (M4 Pro in my case) for which the keyboard suddenly became really squeaky? Every time I hit the space bar, it's like nails on a chalkboard.</p>]]></content>
+    <summary type="html"><![CDATA[<p>Anybody else have a recent MacBook Pro (M4 Pro in my case) for which the keyboard suddenly became really squeaky? Every time I hit the space bar, it's like nails on a chalkboard.</p>]]></summary>
+
+    <posse:post format="json"><![CDATA[{"alternate_url":"https://justin.searls.co/takes/2025-07-06-17h23m32s/","append_url":false,"append_url_if_truncated":true,"append_url_label":"continued","append_url_spacer":" ","attach_link":false,"content":"\u003cp\u003eAnybody else have a recent MacBook Pro (M4 Pro in my case) for which the keyboard suddenly became really squeaky? Every time I hit the space bar, it's like nails on a chalkboard.\u003c/p\u003e\n","format_string":"{{content}}","id":"https://justin.searls.co/takes/2025-07-06-17h23m32s/","og_image":"https://justin.searls.co/img/face.jpg","platform_overrides":{"instagram":{"syndicate":false}},"published_at":"2025-07-06T21:23:32Z","title":"","updated_at":"2025-07-06T17:23:53-04:00","url":"https://justin.searls.co/takes/2025-07-06-17h23m32s/"}]]></posse:post>
+  </entry>
+
+</feed>

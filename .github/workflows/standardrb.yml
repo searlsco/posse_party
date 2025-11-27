@@ -1,0 +1,17 @@
+name: Standard Ruby
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: write
+
+    steps:
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev
+
+      - name: Standard Ruby
+        uses: standardrb/standard-ruby-action@main

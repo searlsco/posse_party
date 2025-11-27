@@ -1,0 +1,41 @@
+<% posts.each do |post| %>
+  <%
+    # Create searchable content string
+    searchable_content = [
+      post.title,
+      post.summary,
+      post.url,
+      post.remote_published_at&.to_date&.to_s,
+    ].compact.join(" ")
+  %>
+
+  <%= render "shared/card", padding_class: "p-2", hover: false, data: { post_id: post.id, filterable_target: "filterable", content: html_escape(searchable_content) } do %>
+    <div class="border-b border-primary/10">
+      <h2 class="mb-2 text-xl font-semibold break-words text-primary line-clamp-2">
+        <%= link_to post_path(post), class: "block transition-colors duration-200 hover:text-accent" do %>
+          <%= post.title.presence || post.summary&.truncate(80) %>
+        <% end %>
+      </h2>
+      <div class="flex items-center gap-4 text-sm text-secondary">
+        <div class="flex items-center gap-1.5 flex-1 min-w-0">
+          <%= render "icons/link", class: "flex-shrink-0 size-4" %>
+          <strong class="flex-shrink-0 text-primary"><%= post.feed.label %>:</strong> <%= link_to post.url.gsub(%r{^https?://[^/]+}, ''), post.url, class: "flex-1 block font-mono text-xs truncate transition-colors duration-200 hover:text-accent", target: "_blank", rel: "noopener" %>
+        </div>
+        <% if post.remote_published_at %>
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <%= render "icons/calendar", class: "size-4" %>
+            <span class="text-xs"><%= post.remote_published_at.to_date.to_fs(:long) %></span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="my-2 md:my-4">
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <% post.crossposts.sort_by { |cp| cp.account.platform_tag }.each do |crosspost| %>
+          <%= render "shared/crosspost_card", crosspost: crosspost, size: :small %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

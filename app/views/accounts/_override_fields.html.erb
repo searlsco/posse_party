@@ -1,0 +1,25 @@
+<% platform_api = PublishesCrosspost::MatchesPlatformApi.new.match(account) %>
+<% defaults = platform_api.default_crosspost_options %>
+<% tag = account.platform_tag %>
+<% disabled = local_assigns[:disabled] || false %>
+<% provenance = local_assigns[:provenance] %>
+<% show_heading = local_assigns.fetch(:show_heading, true) %>
+<% show_instructions = local_assigns.fetch(:show_instructions, !disabled) %>
+
+<div class="mt-4">
+  <% if show_heading %>
+    <h3 class="mb-2 text-lg font-semibold text-primary">Configuration Overrides</h3>
+  <% end %>
+  <% if show_instructions %>
+    <p class="mb-4 text-sm text-secondary">Leave blank or select "-- Default --" to rely on platform defaults.</p>
+  <% end %>
+
+  <%= render "shared/override_inputs",
+        f: f,
+        object: f.object,
+        defaults: defaults,
+        provenance: provenance,
+        skip_overrides: account.platform.irrelevant_config_options,
+        disabled: disabled,
+        default_label: "-- Default --" %>
+</div>

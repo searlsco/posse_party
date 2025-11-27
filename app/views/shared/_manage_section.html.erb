@@ -1,0 +1,32 @@
+<%
+  wrapper_class = local_assigns.fetch(:wrapper_class, "mt-6 w-fit mx-auto md:mx-0")
+  padding_class = local_assigns.fetch(:padding_class, "p-6")
+  variant = local_assigns.fetch(:variant, :primary)
+  icon_name = local_assigns.fetch(:icon, "cog")
+  card_class = local_assigns[:class]
+
+  variant_styles = {
+    primary: {
+      title_class: "text-primary",
+      icon_class: "text-primary"
+    },
+    danger: {
+      title_class: "text-danger",
+      icon_class: "text-danger"
+    }
+  }
+
+  colors = variant_styles.fetch(variant) { variant_styles[:primary] }
+%>
+
+<div class="<%= wrapper_class %>">
+  <%= render "shared/card", padding_class: padding_class, class: card_class do %>
+    <h2 class="<%= class_names('mb-4 text-lg font-semibold flex items-center gap-2', colors[:title_class]) %>">
+      <%= render "icons/#{icon_name}", class: class_names("size-5", colors[:icon_class]) %>
+      <%= title %>
+    </h2>
+    <div class="flex flex-col gap-3 [&_a]:min-w-64 md:[&_a]:min-w-96 [&_button]:min-w-64 md:[&_button]:min-w-96">
+      <%= yield %>
+    </div>
+  <% end %>
+</div>

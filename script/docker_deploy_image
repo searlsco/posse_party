@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+env_file=".env"
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: ${0##*/} <image-reference>" >&2
+  exit 1
+fi
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+if [[ ! -f "${env_file}" ]]; then
+  echo ".env is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+image="$1"
+
+if ! docker pull "${image}"; then
+  if [[ "${image}" != sha256:* ]] || ! docker image inspect "${image}" >/dev/null 2>&1; then
+    echo "Unable to pull ${image}" >&2
+    exit 1
+  fi
+fi
+
+POSSE_IMAGE="${image}" docker run --rm -u root -v "$PWD":/host "${image}" bash -lc 'source /rails/script/docker_sync_assets; copy_docker_assets /rails /host'
+
+POSSE_IMAGE="${image}" docker compose -f "${compose_file}" up -d

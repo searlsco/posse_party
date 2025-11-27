@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Link dotfiles if available (dev convenience)
+if command -v project-dotfiles-link >/dev/null 2>&1; then
+  project-dotfiles-link
+fi
+
+# Verify libidn is installed before bundling (idn-ruby via twitter-text needs it)
+if ! (pkg-config --exists libidn 2>/dev/null || command -v idn >/dev/null 2>&1); then
+  cat >&2 <<-'MSG'
+Missing libidn system library required by idn-ruby (pulled in by twitter-text).
+
+Install it and re-run script/setup:
+  - macOS:   brew install libidn
+  - Debian/Ubuntu: sudo apt-get update && sudo apt-get install -y libidn12 libidn-dev
+  - Alpine:  apk add --no-cache libidn libidn-dev
+
+After installing, run script/setup again
+MSG
+  exit 1
+fi
+
+bundle
+yarn
+
+# Run the playwright installer
+export PLAYWRIGHT_CLI_VERSION=$(bundle exec ruby -e 'require "playwright"; puts Playwright::COMPATIBLE_PLAYWRIGHT_VERSION.strip')
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 yarn add -D "playwright@$PLAYWRIGHT_CLI_VERSION"
+yarn run playwright install chromium
+
+DEVELOPMENT_DB_EXISTS=$(psql -lqt | cut -d \| -f 1 | grep -w posse_party_development | wc -l)
+if [ "$DEVELOPMENT_DB_EXISTS" -eq 0 ]; then
+  echo "Creating development and test databases."
+  bin/rails db:create
+fi
+
+bin/rails db:migrate db:seed

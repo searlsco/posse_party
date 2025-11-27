@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+backup_file="${1:-}"
+
+if [[ -z "${backup_file}" ]]; then
+  echo "Usage: ./bin/restore path/to/backup.(sql|dump|sql.gz|dump.gz)" >&2
+  exit 1
+fi
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+if [[ ! -f "${backup_file}" ]]; then
+  echo "Backup file not found: ${backup_file}" >&2
+  exit 1
+fi
+
+docker compose -f "${compose_file}" up -d db
+db_exists=$(docker compose -f "${compose_file}" exec -T db psql -U postgres -tAc "SELECT 1 FROM pg_database WHERE datname='posse_party_production'")
+if [[ "${db_exists}" == "1" ]]; then
+  echo "Database posse_party_production already exists. Drop it first with ./bin/drop_database --confirm." >&2
+  exit 1
+fi
+
+docker compose -f "${compose_file}" exec -T db psql -U postgres -c "CREATE DATABASE posse_party_production;"
+
+input_cmd=(cat "${backup_file}")
+if gzip -t "${backup_file}" >/dev/null 2>&1; then
+  input_cmd=(gzip -dc "${backup_file}")
+fi
+
+if [[ "$("${input_cmd[@]}" | head -c 5)" == $'PGDMP' ]]; then
+  "${input_cmd[@]}" | docker compose -f "${compose_file}" exec -T db pg_restore -U postgres -d posse_party_production --no-owner --no-privileges
+else
+  "${input_cmd[@]}" | docker compose -f "${compose_file}" exec -T db psql -U postgres posse_party_production
+fi
+
+echo "Restore complete from ${backup_file}"

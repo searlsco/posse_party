@@ -1,0 +1,24 @@
+<% default_label ||= "-- Default --" %>
+<% skip_overrides = local_assigns[:skip_overrides] || [] %>
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+  <% PublishesCrosspost::OVERRIDABLE_FIELDS.each do |attribute_name, meta| %>
+    <% next if skip_overrides.include?(attribute_name) %>
+    <div>
+      <%= f.label attribute_name, label_for(attribute_name), class: label_classes, for: attribute_name, escape: false %>
+      <div class="<%= hint_text_classes %>" rel="<%= "#{attribute_name}_default" %>">
+        <%= override_default_details(default: defaults[attribute_name], source: provenance&.source(attribute_name)) %>
+      </div>
+
+      <% if meta[:type] == :boolean %>
+        <% current = object.respond_to?(attribute_name) ? object.public_send(attribute_name) : nil %>
+        <%= f.select attribute_name,
+              options_for_select(default_preserving_boolean_select_options(default_label: default_label), (current.nil? ? "" : current.to_s)),
+              {}, { class: "#{select_classes} mt-2 !cursor-auto", disabled: disabled, id: attribute_name, data: { turbo_permanent: true } } %>
+      <% else %>
+        <% value = object.respond_to?(attribute_name) ? object.public_send(attribute_name) : nil %>
+        <%= f.text_field attribute_name, value: value, class: "#{input_classes} mt-2 !cursor-auto", disabled: disabled, id: attribute_name, data: { turbo_permanent: true } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

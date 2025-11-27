@@ -1,0 +1,18 @@
+<h1 class="text-3xl font-bold text-primary mb-8">Edit Feed</h1>
+
+<%= form_with model: @feed, local: true do |f| %>
+  <%= render 'form', f: f %>
+<% end %>
+
+<%= render "shared/manage_section", title: "Manage this feed" do %>
+  <%= link_to "Check Feed", check_feed_path(@feed),
+      class: "#{button_class_pack(:info)} block text-center",
+      data: {
+        turbo_method: :patch,
+        turbo_confirm: @feed.active? ? nil : "This feed is inactive. Checking it will update posts even for an inactive feed. Continue?"
+      } %>
+  <%= render "shared/delete_button",
+      path: feed_path(@feed),
+      confirm_message: "Are you sure you want to delete this feed? This will permanently delete the feed and all #{@feed.posts.count} post(s) and #{@feed.crossposts.count} crosspost(s). This action cannot be undone.",
+      label: "Delete Feed" %>
+<% end %>

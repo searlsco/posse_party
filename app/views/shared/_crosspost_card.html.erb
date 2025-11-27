@@ -1,0 +1,67 @@
+<%
+  size ||= :medium
+  is_small = size == :small
+
+  status_config = case crosspost.status.downcase
+    when "published"
+      { bg: "bg-success", border: "border-success", text: "text-success", icon: "check" }
+    when "failed"
+      { bg: "bg-danger", border: "border-danger", text: "text-danger", icon: "x_mark" }
+    when "wip"
+      { bg: "bg-info", border: "border-info", text: "text-info", icon: "plus" }
+    when "skipped"
+      { bg: "bg-warn", border: "border-warn", text: "text-warn", icon: "forward_fast" }
+    when "ready"
+      { bg: "bg-secondary", border: "border-secondary", text: "text-primary", icon: "check_circle" }
+    else
+      { bg: "bg-secondary", border: "border-secondary", text: "text-primary", icon: "exclamation_circle" }
+  end
+%>
+
+<div class="<%= is_small ? 'p-1' : 'p-2 sm:p-4' %> rounded-lg border <%= status_config[:bg] %> <%= status_config[:border] %> group hover:shadow-sm transition-all duration-200">
+  <div class="grid grid-cols-2 <%= is_small ? 'gap-1' : 'gap-1.5 sm:gap-3' %>">
+    <!-- Top row -->
+    <div class="flex items-start">
+      <!-- Top-left: Icon -->
+      <%= render "shared/platform_icon", platform: crosspost.account.platform_tag, size: :small, title: crosspost.account.platform_label %>
+    </div>
+    <div class="flex items-start justify-end">
+      <!-- Top-right: Status -->
+      <div class="flex items-center gap-1 <%= status_config[:text] %> <%= is_small ? 'text-xs' : 'text-sm' %>">
+        <span class="font-semibold"><%= crosspost.status.capitalize %></span>
+        <%= render "icons/#{status_config[:icon]}", class: is_small ? 'size-3.5' : 'size-4' %>
+      </div>
+    </div>
+
+    <!-- Bottom row -->
+    <div class="flex flex-col min-w-0 overflow-hidden">
+      <!-- Bottom-left: Label + Platform name -->
+      <div class="<%= is_small ? 'text-xs' : 'text-xs sm:text-sm' %> font-semibold text-primary truncate">
+        <%= crosspost.account.label %>
+      </div>
+      <div class="<%= is_small ? 'text-xs' : 'text-xs sm:text-sm' %> text-secondary truncate">
+        <%= crosspost.account.platform_label %>
+      </div>
+    </div>
+    <div class="flex gap-1.5 items-end justify-end">
+      <%= render "shared/button",
+          path: crosspost.url.presence || "#",
+          text: "",
+          variant: :info,
+          size: :small,
+          icon: "arrow_top_right_on_square",
+          title: "View",
+          target: "_blank",
+          rel: "noopener",
+          class: "!px-2 #{crosspost.url.blank? ? 'invisible' : ''}" %>
+      <%= render "shared/button",
+          path: crosspost_path(crosspost),
+          text: "",
+          variant: :secondary,
+          size: :small,
+          icon: "magnifying_glass",
+          title: "Details",
+          class: "!px-2 !bg-white/50 dark:!bg-black/50 backdrop-blur-sm" %>
+    </div>
+  </div>
+</div>

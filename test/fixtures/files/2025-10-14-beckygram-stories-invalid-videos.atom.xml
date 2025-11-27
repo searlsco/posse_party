@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-us" xmlns:posse="https://posseparty.com/2024/Feed">
+  <id>https://gram.betterwithbecky.com/syndications/stories</id>
+  <title>Beckygram Stories</title>
+  <updated>2025-10-13T14:30:36Z</updated>
+  <author>
+    <name>Becky Searls</name>
+    <email>becky@example.com</email>
+  </author>
+  <link href="https://gram.betterwithbecky.com/syndications/stories" rel="self" type="application/atom+xml" title="Beckygram Stories"/>
+  <category term="Fitness"/>
+  <generator uri="https://rubyonrails.org/" version="8.0.3">
+Ruby on Rails  </generator>
+  <icon>https://gram.betterwithbecky.com/favicon.ico</icon>
+  <logo>https://static-cdn.betterwithbecky.com/assets/logo-fa728624.png</logo>
+  <rights>Copyright Better with Becky LLC. All rights reserved.</rights>
+  <subtitle>Ephemeral stories from Beckygram.</subtitle>
+  <entry>
+    <id>1760365828</id>
+    <title type="text">Story at 10:30 AM on 10/13</title>
+    <link href="https://example.com/not_applicable" rel="alternate" type="text/html"/>
+    <author>
+      <name>Becky Searls</name>
+      <email>becky@example.com</email>
+    </author>
+    <published>2025-10-13T14:30:28Z</published>
+    <updated>2025-10-13T14:30:36Z</updated>
+    <content type="html">
+      <![CDATA[<video controls playsinline poster="https://content-cdn.betterwithbecky.com/fw7b6k07nnp1iiwx0yuqn388x50q">
+  <source src="https://content-cdn.betterwithbecky.com/4gxvztst5nu3wguhp0u9h01tfr9h" type="video/mp4" />
+</video>
+]]>
+    </content>
+    <posse:post format="json">
+      <![CDATA[{"title":"Story at 10:30 AM on 10/13","channel":"story","media":[{"type":"video","url":"https://content-cdn.betterwithbecky.com/4gxvztst5nu3wguhp0u9h01tfr9h"}]}]]>
+    </posse:post>
+  </entry>
+  <entry>
+    <id>1760362905</id>
+    <title type="text">Story at 9:41 AM on 10/13</title>
+    <link href="https://example.com/not_applicable" rel="alternate" type="text/html"/>
+    <author>
+      <name>Becky Searls</name>
+      <email>becky@example.com</email>
+    </author>
+    <published>2025-10-13T13:41:45Z</published>
+    <updated>2025-10-13T13:41:47Z</updated>
+    <content type="html">
+      <![CDATA[<video controls playsinline poster="https://content-cdn.betterwithbecky.com/0qd4hjkgcv6b285tiqs60mtck09c">
+  <source src="https://content-cdn.betterwithbecky.com/ktcegp2g59laikpgov043b2zowkc" type="video/mp4" />
+</video>
+]]>
+    </content>
+    <posse:post format="json">
+      <![CDATA[{"title":"Story at 9:41 AM on 10/13","channel":"story","media":[{"type":"video","url":"https://content-cdn.betterwithbecky.com/ktcegp2g59laikpgov043b2zowkc"}]}]]>
+    </posse:post>
+  </entry>
+</feed>

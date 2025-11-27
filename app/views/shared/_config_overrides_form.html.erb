@@ -1,0 +1,21 @@
+<% account_or_post = local_assigns[:object] %>
+<% provenance = local_assigns[:provenance] %>
+<div class="space-y-4">
+  <%= fields_for :config, account_or_post do |config_fields| %>
+    <%= render "shared/override_inputs",
+          f: config_fields,
+          object: account_or_post,
+          defaults: provenance ? Hash[PublishesCrosspost::OVERRIDABLE_FIELDS.keys.map { |k| [k, provenance.default(k)] }] : {},
+          provenance: provenance,
+          skip_overrides: [],
+          disabled: true,
+          default_label: "Not specified" %>
+  <% end %>
+
+  <% if account_or_post.respond_to?(:platform_overrides) %>
+    <div>
+      <%= label_tag :platform_overrides, label_for(:platform_overrides), class: label_classes %>
+      <%= text_area_tag "config[platform_overrides]", JSON.pretty_generate(account_or_post.platform_overrides.as_json), class: "#{input_classes} font-mono text-xs !cursor-auto", rows: 6, disabled: true, id: "platform_overrides" %>
+    </div>
+  <% end %>
+</div>

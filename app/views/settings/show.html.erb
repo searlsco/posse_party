@@ -1,0 +1,200 @@
+<%
+  admin_links = if @user.admin?
+    verification = @status_verification
+    overall = verification&.overall || :red
+    badge_styles = {
+      green: {
+        border: "border-success",
+        text: "text-success",
+        background: "bg-success/20",
+        hover_background: "hover:bg-success/50",
+        dot: "bg-success-solid"
+      },
+      yellow: {
+        border: "border-warn",
+        text: "text-warn",
+        background: "bg-warn/20",
+        hover_background: "hover:bg-warn/50",
+        dot: "bg-warn-solid"
+      },
+      red: {
+        border: "border-danger",
+        text: "text-danger",
+        background: "bg-danger/20",
+        hover_background: "hover:bg-danger/50",
+        dot: "bg-danger-solid"
+      }
+    }
+    styles = badge_styles.fetch(overall) { badge_styles[:red] }
+    pill_classes = "inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-medium border"
+
+    capture do
+      content_tag :div, class: "flex flex-wrap justify-end gap-2" do
+        concat(
+          link_to(
+            status_path,
+            class: class_names(pill_classes, styles[:border], styles[:text], styles[:background], styles[:hover_background])
+          ) do
+            concat content_tag(:span, "", class: class_names("inline-block size-2.5 rounded-full", styles[:dot]))
+            concat "System Status"
+          end
+        )
+
+        concat(
+          link_to(
+            "/jobs",
+            class: class_names(pill_classes, "border-accent", "text-accent", "bg-accent/20", "hover:bg-accent/50")
+          ) do
+            concat "Job Status"
+          end
+        )
+      end
+    end
+  end
+%>
+
+<%= render "shared/page_header",
+  title: "Settings",
+  description: "Manage your account settings and preferences",
+  right_content: admin_links %>
+
+<%= render "shared/card", class: "mb-6" do %>
+  <h2 class="mb-4 text-xl font-semibold text-primary">Account Information</h2>
+  <%= form_with model: @user, url: settings_path, method: :patch, local: true do |f| %>
+    <%= render 'settings/form', f: f %>
+  <% end %>
+
+  <div class="pt-6 mt-6 border-t border-primary/60">
+    <h3 class="text-lg font-semibold text-primary">Change Password</h3>
+    <p class="mt-1 mb-4 text-sm text-secondary">Update your password by confirming your current one and providing a new password.</p>
+    <%= form_with scope: :settings,
+      url: searls_auth.settings_path,
+      method: :patch,
+      local: true,
+      html: { class: "space-y-4" } do |f| %>
+      <div>
+        <%= f.label :current_password, "Current password", class: label_classes %>
+        <%= f.password_field :current_password,
+              required: true,
+              autocomplete: "current-password",
+              class: input_classes %>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <%= f.label :password, "New password", class: label_classes %>
+          <%= f.password_field :password,
+                required: true,
+                autocomplete: "new-password",
+                class: input_classes %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation, "Confirm new password", class: label_classes %>
+          <%= f.password_field :password_confirmation,
+                required: true,
+                autocomplete: "new-password",
+                class: input_classes %>
+        </div>
+      </div>
+
+      <div>
+        <%= render "shared/button",
+          type: :submit,
+          text: "Update Password",
+          variant: :primary %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "shared/card", class: "mb-6" do %>
+  <div class="flex flex-col gap-3 mb-4 sm:flex-row sm:items-center sm:justify-between">
+    <h2 class="text-xl font-semibold text-primary">API Access</h2>
+    <%= link_to api_settings_path,
+        class: "inline-flex items-center gap-2 text-sm font-medium transition-colors text-accent hover:text-accent hover:brightness-75" do %>
+      <%= render "icons/information_circle", class: "size-4" %>
+      How to use the API
+    <% end %>
+  </div>
+  <p class="mb-4 text-sm text-secondary">Use this API key to authenticate requests to the POSSE Party API</p>
+
+  <div class="mb-4 space-y-3">
+    <%= render "shared/copyable_code_block", code: @user.api_key %>
+
+    <%= button_to regenerate_api_key_settings_path, method: :patch,
+        form: { class: "w-full sm:w-auto", data: { turbo_confirm: "Are you sure? This will invalidate your current API key." } },
+        class: class_names(button_class_pack(:accent), "w-full sm:w-auto flex items-center justify-center gap-2") do %>
+      <span class="flex items-center gap-2 whitespace-nowrap">
+        <%= render "icons/arrow_path", class: "size-4" %>
+        Regenerate
+      </span>
+    <% end %>
+  </div>
+
+<% end %>
+
+<% if @user.admin? %>
+  <%= render "shared/card", class: "mb-6" do %>
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-semibold text-primary">Users</h2>
+      <%= render "shared/button",
+        path: new_invite_path,
+        text: "Invite User",
+        variant: :primary,
+        size: :small,
+        icon: "plus"
+      %>
+    </div>
+
+    <% if @open_invites.any? %>
+      <% unless @email_delivery_enabled %>
+        <div class="p-4 mb-4 text-sm border rounded-lg border-warn bg-warn/20 text-warn">
+          Email delivery is disabled. Pending invitees will not be notified automatically, so use the Email buttons below to reach out manually.
+        </div>
+      <% end %>
+      <h3 class="mb-3 text-sm font-semibold tracking-wide uppercase text-secondary">Pending invitations</h3>
+      <div class="flex flex-col gap-3">
+        <% @open_invites.each do |invite| %>
+          <div class="p-3 border rounded-lg border-primary/30 bg-secondary/5" data-invite-email="<%= invite.email %>">
+            <div class="flex flex-col gap-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-5">
+              <span class="max-w-full text-base font-semibold truncate sm:text-lg text-primary" title="<%= invite.email %>"><%= invite.email %></span>
+
+              <% if @email_delivery_enabled %>
+                <%= button_to remind_invite_path(invite),
+                    method: :post,
+                    form: { class: "mx-auto w-70 sm:mx-0 sm:w-32" },
+                    class: class_names(button_class_pack(:secondary), "!flex w-full items-center justify-center gap-2 whitespace-nowrap") do %>
+                  <%= render "icons/arrow_path", class: "size-4" %>
+                  Resend
+                <% end %>
+              <% else %>
+                <% draft = BuildsInviteEmail.new.build(invite) %>
+                <%= mail_to invite.email,
+                    class: class_names(button_class_pack(:secondary), "!flex w-70 items-center justify-center gap-2 whitespace-nowrap mx-auto sm:mx-0 sm:w-32"),
+                    subject: draft.subject,
+                    body: draft.body,
+                    data: { turbo: "false" } do %>
+                  <%= render "icons/inbox", class: "size-4" %>
+                  Email
+                <% end %>
+              <% end %>
+
+              <%= button_to invite_path(invite), method: :delete,
+                  form: { class: "mx-auto w-70 sm:mx-0 sm:w-32", data: { turbo_confirm: "Are you sure you want to revoke this invitation?" } },
+                  class: class_names(button_class_pack(:danger), "!flex w-full items-center justify-center gap-2 whitespace-nowrap") do %>
+                <%= render "icons/x_mark", class: "size-4" %>
+                Revoke
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <h3 class="mb-3 text-sm font-semibold tracking-wide uppercase text-secondary">Active users</h3>
+    <%= render "settings/user_list",
+      users: @managed_users %>
+  <% end %>
+<% end %>
+
+<%= render "settings/danger_zone", user: @user %>

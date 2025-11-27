@@ -1,0 +1,124 @@
+<% content_for :container_classes, "w-full max-w-5xl px-4 sm:px-6 lg:px-8 py-6" %>
+
+ 
+
+<%
+  status_config = case @notification.severity.to_s
+    when "success"
+      { bg: "bg-success", border: "border-success", text: "text-success", icon: "check_circle", label: "Success" }
+    when "warn"
+      { bg: "bg-warn", border: "border-warn", text: "text-warn", icon: "exclamation_triangle", label: "Warning" }
+    when "danger"
+      { bg: "bg-danger", border: "border-danger", text: "text-danger", icon: "exclamation_circle", label: "Danger" }
+    else
+      { bg: "bg-info", border: "border-info", text: "text-info", icon: "information_circle", label: "Info" }
+  end
+%>
+
+<div class="flex items-start justify-between gap-4 mb-2">
+  <h2 class="text-2xl font-bold text-primary"><%= @notification.title %></h2>
+  <div class="flex items-center gap-2 px-4 py-2 rounded-lg <%= status_config[:bg] %> <%= status_config[:border] %> <%= status_config[:text] %>">
+    <%= render "icons/#{status_config[:icon]}", class: "size-5" %>
+    <span class="font-semibold"><%= status_config[:label] %></span>
+  </div>
+</div>
+
+<div class="mb-4 text-sm text-secondary">
+  <time datetime="<%= @notification.created_at.iso8601 %>"><%= @notification.created_at.strftime('%Y-%m-%d %H:%M') %></time>
+</div>
+
+<div class="mb-6 p-4 border rounded-lg bg-primary border-primary" data-controller="clipboard">
+  <div class="flex items-center justify-between mb-2">
+    <h3 class="text-lg font-semibold text-primary">Log</h3>
+    <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="<%= button_class_pack(:neutral) %>">Copy</button>
+  </div>
+  <pre class="whitespace-pre-wrap text-sm max-h-96 overflow-y-auto" data-clipboard-target="source"><%= linkify_notification_text(@notification.text) %></pre>
+  <input type="hidden" value="<%= @notification.text %>" data-clipboard-target="hidden" />
+  <span class="sr-only" aria-live="polite" data-clipboard-target="status"></span>
+  
+</div>
+
+<% refs = Array(@notification.refs) %>
+<% if refs.any? %>
+  <div class="mb-8">
+    <h3 class="mb-3 text-lg font-semibold text-primary">References</h3>
+
+    <%
+      url_refs = refs.select { |r| r["url"].present? }
+      model_refs = refs.select { |r| r["model"].present? && r["id"].present? }
+      grouped_models = model_refs.group_by { |r| r["model"].to_s }
+    %>
+
+    <% if grouped_models["Account"].present? %>
+      <h4 class="mt-4 mb-2 text-sm font-semibold text-secondary">Accounts</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <% grouped_models["Account"].each do |ref| %>
+          <% record = @ref_records.dig("Account", ref["id"]) %>
+          <%= render "shared/account_card", account: record, padding_class: "p-3", enable_hover_accent: true if record.present? %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if grouped_models["Post"].present? %>
+      <h4 class="mt-4 mb-2 text-sm font-semibold text-secondary">Posts</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <% grouped_models["Post"].each do |ref| %>
+          <% record = @ref_records.dig("Post", ref["id"]) %>
+          <% if record.present? %>
+            <%= render "shared/card", padding_class: "p-3", clickable: true, path: post_path(record) do %>
+              <div class="flex items-start gap-3">
+                <div class="size-8 rounded bg-accent/10 flex items-center justify-center"><%= render "icons/newspaper", class: "size-4 text-accent" %></div>
+                <div class="min-w-0">
+                  <div class="text-sm font-semibold text-primary truncate"><%= record.title.presence || "Post ##{record.id}" %></div>
+                  <div class="text-xs text-secondary truncate"><%= record.url %></div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if grouped_models["Feed"].present? %>
+      <h4 class="mt-4 mb-2 text-sm font-semibold text-secondary">Feeds</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <% grouped_models["Feed"].each do |ref| %>
+          <% record = @ref_records.dig("Feed", ref["id"]) %>
+          <%= render "shared/feed_card", feed: record, padding_class: "p-3", enable_hover_accent: true if record.present? %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if grouped_models["Crosspost"].present? %>
+      <h4 class="mt-4 mb-2 text-sm font-semibold text-secondary">Crossposts</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <% grouped_models["Crosspost"].each do |ref| %>
+          <% record = @ref_records.dig("Crosspost", ref["id"]) %>
+          <%= render "shared/crosspost_card", crosspost: record, size: :small if record.present? %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if url_refs.any? %>
+      <h4 class="mt-4 mb-2 text-sm font-semibold text-secondary">Links</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <% url_refs.each do |ref| %>
+          <%= render "shared/card", padding_class: "p-3", clickable: true, path: ref["url"], class: "from-primary via-primary to-accent-50" do %>
+            <div class="flex items-start gap-3">
+              <div class="size-8 rounded bg-accent/10 flex items-center justify-center"><%= render "icons/arrow_top_right_on_square", class: "size-4 text-accent" %></div>
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-accent break-all hover:underline"><%= ref["url"] %></div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div>
+  <%= button_to "Delete", log_path(@notification), method: :delete,
+        form: { data: { turbo_confirm: "Delete this log?" } },
+        class: button_class_pack(:danger) %>
+</div>

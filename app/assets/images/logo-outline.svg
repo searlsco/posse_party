@@ -1,0 +1,73 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Desaturated outline version for letterpress effect -->
+  <defs>
+    <!-- Clipping mask for cone-aligned dots -->
+    <clipPath id="coneClipOutline">
+      <path d="M 30 8 L 5 70 L 55 70 Z"/>
+    </clipPath>
+    
+    <!-- Inset shadow filter for embossed effect -->
+    <filter id="inset">
+      <!-- Inner dark shadow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+      <feOffset in="blur" dx="2" dy="2" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.8"/>
+      <feComposite in2="offsetBlur" operator="out"/>
+      <feComposite in2="SourceAlpha" operator="in" result="innerShadow1"/>
+      
+      <!-- Inner light shadow -->
+      <feOffset in="blur" dx="-2" dy="-2" result="offsetBlur2"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.6"/>
+      <feComposite in2="offsetBlur2" operator="out"/>
+      <feComposite in2="SourceAlpha" operator="in" result="innerShadow2"/>
+      
+      <!-- Merge -->
+      <feMerge>
+        <feMergeNode in="innerShadow1"/>
+        <feMergeNode in="innerShadow2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main party hat group - flipped horizontally, pointing down and to the right -->
+  <g transform="translate(50, 50) scale(-1, 1) rotate(135) translate(-30, -40)">
+    <!-- Hat cone with embossed effect -->
+    <path d="M 30 8 L 5 70 L 55 70 Z" fill="currentColor" opacity="0.15" filter="url(#inset)"/>
+    
+    <!-- Polka dots clipped to cone shape - outline only -->
+    <g clip-path="url(#coneClipOutline)">
+      <!-- Red dot embossed -->
+      <circle cx="42" cy="38" r="7" fill="currentColor" opacity="0.1" filter="url(#inset)"/>
+      <!-- Turquoise dot embossed -->
+      <circle cx="15" cy="50" r="5" fill="currentColor" opacity="0.1" filter="url(#inset)"/>
+      <!-- Green dot embossed -->
+      <circle cx="30" cy="60" r="8" fill="currentColor" opacity="0.1" filter="url(#inset)"/>
+    </g>
+    
+    <!-- Party hat band embossed -->
+    <rect x="5" y="65" width="50" height="8" rx="2" ry="2" fill="currentColor" opacity="0.15" filter="url(#inset)"/>
+    
+    <!-- Pom pom embossed -->
+    <circle cx="30" cy="8" r="8" fill="currentColor" opacity="0.15" filter="url(#inset)"/>
+    
+    <!-- Ribbon streamers outline -->
+    <g transform="translate(30, 76)">
+      <!-- Streamer 1: Far left ribbon -->
+      <path d="M -15 0 Q -19 6 -25 10 Q -28 15 -30 20 Q -31 24 -32 28" 
+            stroke="currentColor" stroke-width="3" fill="none" opacity="0.4"/>
+      
+      <!-- Streamer 2: Left ribbon -->
+      <path d="M -6 0 Q -9 4 -14 8 Q -17 13 -19 18 Q -20 22 -21 26" 
+            stroke="currentColor" stroke-width="3" fill="none" opacity="0.4"/>
+      
+      <!-- Streamer 3: Right ribbon -->
+      <path d="M 6 0 Q 9 4 14 8 Q 17 13 19 18 Q 20 22 21 26" 
+            stroke="currentColor" stroke-width="3" fill="none" opacity="0.4"/>
+      
+      <!-- Streamer 4: Far right ribbon -->
+      <path d="M 15 0 Q 19 6 25 10 Q 28 15 30 20 Q 31 24 32 28" 
+            stroke="currentColor" stroke-width="3" fill="none" opacity="0.4"/>
+    </g>
+  </g>
+</svg>

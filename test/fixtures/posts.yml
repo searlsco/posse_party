@@ -1,0 +1,26 @@
+admin_post:
+  feed: admin_feed
+  url: "https://admin.example.com/posts/1"
+  remote_id: "https://admin.example.com/posts/1"
+  remote_published_at: <%= 1.day.ago %>
+  remote_updated_at: <%= 1.day.ago %>
+  title: "Admin's First Post"
+  content: "This is the admin's first post content."
+
+admin_post_without_crossposts:
+  feed: admin_feed
+  url: "https://admin.example.com/posts/unshared"
+  remote_id: "https://admin.example.com/posts/unshared"
+  remote_published_at: <%= 3.days.ago %>
+  remote_updated_at: <%= 3.days.ago %>
+  title: "Admin's Unshared Post"
+  content: "This post has not been crossposted yet."
+  
+user_post:
+  feed: user_feed
+  url: "https://user.example.com/posts/1"
+  remote_id: "https://user.example.com/posts/1"
+  remote_published_at: <%= 2.days.ago %>
+  remote_updated_at: <%= 2.days.ago %>
+  title: "User's First Post"
+  content: "This is the user's first post content."

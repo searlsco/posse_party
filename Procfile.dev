@@ -1,0 +1,3 @@
+web: ./script/server
+worker: ./script/worker
+css: ./bin/rails tailwindcss:watch

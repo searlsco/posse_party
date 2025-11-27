@@ -1,0 +1,45 @@
+<%
+  clickable = local_assigns.fetch(:clickable, false)
+  hover = local_assigns.fetch(:hover, clickable)
+  padding_class = local_assigns.fetch(:padding_class, "p-6")
+  layout_class = local_assigns[:class]
+  presentation_override = local_assigns[:presentation_class]
+  background_class = local_assigns[:background_class]
+  hover_background_class = local_assigns[:hover_background_class]
+
+  card_classes = card_wrapper_classes(
+    clickable:,
+    hover:,
+    padding_class:,
+    layout_class:,
+    presentation_override:,
+    background_class:,
+    hover_background_class:
+  )
+
+  passthrough_keys = local_assigns.except(
+    :clickable,
+    :hover,
+    :padding_class,
+    :presentation_class,
+    :background_class,
+    :hover_background_class,
+    :class,
+    :path,
+    :variant,
+    :size,
+    :type,
+    :icon,
+    :icon_position
+  )
+%>
+
+<% if clickable && defined?(path) %>
+  <%= link_to path, class: card_classes, **passthrough_keys do %>
+    <%= yield %>
+  <% end %>
+<% else %>
+  <div class="<%= card_classes %>" <%= tag.attributes(passthrough_keys) %>>
+    <%= yield %>
+  </div>
+<% end %>

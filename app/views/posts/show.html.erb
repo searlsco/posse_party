@@ -1,0 +1,164 @@
+<% content_for :container_classes, "w-full max-w-4xl" %>
+
+<div class="mx-2 mt-2 sm:mt-4">
+  <h1 class="mb-6 text-2xl font-bold text-primary">Post Details</h1>
+
+  <!-- Post Summary -->
+  <div class="mb-8 overflow-hidden border shadow-lg bg-secondary rounded-xl border-secondary">
+    <div class="p-4 border-b border-tertiary sm:p-6">
+      <h2 class="mb-4 text-xl font-bold text-primary">
+        <%= @post.title.presence || "Untitled Post" %>
+      </h2>
+
+      <div class="grid grid-cols-1 gap-4 text-sm md:grid-cols-2">
+        <div>
+          <span class="font-semibold text-secondary">URL:</span>
+          <%= link_to @post.url, @post.url, class: "break-all text-accent hover:underline", target: "_blank", rel: "noopener" %>
+        </div>
+
+        <div>
+          <span class="font-semibold text-secondary">Remote ID:</span>
+          <span class="font-mono text-xs"><%= @post.remote_id %></span>
+        </div>
+
+        <% if @post.remote_published_at.present? %>
+          <div>
+            <span class="font-semibold text-secondary">Published:</span>
+            <%= @post.remote_published_at.to_fs(:long) %>
+          </div>
+        <% end %>
+
+        <% if @post.remote_updated_at.present? %>
+          <div>
+            <span class="font-semibold text-secondary">Updated:</span>
+            <%= @post.remote_updated_at.to_fs(:long) %>
+          </div>
+        <% end %>
+
+        <% if @post.author_name.present? %>
+          <div>
+            <span class="font-semibold text-secondary">Author:</span>
+            <%= @post.author_name %>
+          </div>
+        <% end %>
+
+        <% if @post.author_email.present? %>
+          <div>
+            <span class="font-semibold text-secondary">Author Email:</span>
+            <%= @post.author_email %>
+          </div>
+        <% end %>
+
+        <% if @post.syndicate.present? %>
+          <div>
+            <span class="font-semibold text-secondary">Syndicate:</span>
+            <span class="<%= @post.syndicate ? 'text-success' : 'text-secondary' %>">
+              <%= @post.syndicate ? 'Yes' : 'No' %>
+            </span>
+          </div>
+        <% end %>
+
+        <% if @post.channel.present? %>
+          <div>
+            <span class="font-semibold text-secondary">Channel:</span>
+            <span class="text-primary"><%= @post.channel %></span>
+          </div>
+        <% end %>
+      </div>
+
+      <% if @post.subtitle.present? %>
+        <div class="mt-4">
+          <span class="block mb-2 font-semibold text-secondary">Subtitle:</span>
+          <p class="text-primary"><%= @post.subtitle %></p>
+        </div>
+      <% end %>
+
+      <% summary_equals_content = @post.summary.present? && @post.content.present? && @post.summary.strip == @post.content.strip %>
+
+      <% if @post.summary.present? && !summary_equals_content %>
+        <div class="mt-4">
+          <span class="block mb-2 font-semibold text-secondary">Summary:</span>
+          <div class="prose-sm prose max-w-none text-primary">
+            <%= simple_format(@post.summary) %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @post.content.present? %>
+        <div class="mt-4" data-controller="expandable" data-expandable-max-height-value="300">
+          <span class="block mb-2 font-semibold text-secondary"><%= summary_equals_content ? "Content and Summary:" : "Content:" %></span>
+          <div class="relative">
+            <div class="prose-sm prose max-w-none text-primary" data-expandable-target="content">
+              <%= simple_format(@post.content) %>
+            </div>
+          </div>
+          <div class="flex justify-center mt-4">
+            <button data-expandable-target="button"
+                    data-action="click->expandable#toggle"
+                    class="hidden px-4 py-2 text-sm font-medium transition-colors duration-200 border rounded-lg cursor-pointer text-accent bg-accent/10 border-accent/20 hover:bg-accent/20">
+              Show more
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h2 class="mb-4 text-xl font-bold text-primary">From feed</h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <%= render "shared/feed_card", feed: @post.feed, padding_class: "p-4" %>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h2 class="mb-4 text-xl font-bold text-primary">Crossposts (<%= @post.crossposts.count %>)</h2>
+
+    <% if @post.crossposts.any? %>
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <% @post.crossposts.sort_by { |cp| cp.account.platform_tag }.each do |crosspost| %>
+          <%= render "shared/crosspost_card", crosspost: crosspost %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="p-8 text-center border-2 border-dotted rounded-lg text-secondary border-accent/40">
+        <p class="text-lg">No crossposts have been created for this post yet.</p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-8">
+    <%= render "shared/card", padding_class: "p-6" do %>
+      <h2 class="<%= section_heading_classes %>">
+        <%= render "icons/cog", class: "size-5" %>
+        Configuration
+      </h2>
+      <%= form_with url: '#', method: :get, local: true do %>
+        <%= render "shared/config_overrides_form", object: @post %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= render "shared/manage_section", title: "Manage this post" do %>
+    <%= form_with url: create_crosspost_post_path(@post), scope: :crosspost, method: :post, local: true do |form| %>
+      <div class="flex flex-col gap-3">
+        <div class="w-full">
+          <%= form.label :account_id, "Account", class: "sr-only" %>
+          <%= form.select :account_id,
+            @eligible_accounts.map { |account| [account.notification_label, account.id] },
+            { prompt: (@eligible_accounts.any? ? "Select an account" : (@has_accounts ? "All crossposts created" : "No accounts exist yet")) },
+            class: "w-full h-12 px-3 text-sm transition-all border rounded-lg border-primary bg-primary text-primary focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-70",
+            disabled: @eligible_accounts.blank? %>
+        </div>
+        <%= form.button "Create Crosspost",
+          class: class_names(button_class_pack(:accent), "w-full inline-flex items-center justify-center gap-2 text-sm font-semibold"),
+          disabled: @eligible_accounts.blank? %>
+      </div>
+    <% end %>
+    <%= render "shared/delete_button",
+        path: post_path(@post),
+        confirm_message: "Are you sure you want to delete this post? This will permanently delete the post and all #{@post.crossposts.count} crosspost(s). This action cannot be undone.",
+        label: "Delete Post" %>
+  <% end %>
+
+</div>

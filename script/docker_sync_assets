@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+copy_docker_assets() {
+  local src_root="$1"
+  local dest_root="$2"
+
+  local dest_bin="${dest_root%/}/bin"
+  mkdir -p "${dest_bin}"
+
+  local warn_scripts
+  warn_scripts="# GENERATED FILE, DO NOT EDIT: LOCAL EDITS WILL BE OVERWRITTEN BY bin/upgrade"
+  warn_scripts+=$'\n''# Keep custom scripts separate; this file is replaced on each upgrade.'
+
+  local warn_compose
+  warn_compose="# GENERATED FILE, DO NOT EDIT: LOCAL EDITS WILL BE OVERWRITTEN BY bin/upgrade"
+  warn_compose+=$'\n''# To configure environment variables, edit .env instead of this file.'
+
+  prepend_warning() {
+    local src="$1"
+    local dest="$2"
+    local warning="$3"
+    local mode="$4"
+
+    local tmp
+    tmp="$(mktemp)"
+
+    if head -n1 "$src" | grep -q '^#!'; then
+      IFS= read -r first_line <"$src"
+      printf '%s\n' "$first_line" >"$tmp"
+      printf '%s\n' "$warning" >>"$tmp"
+      tail -n +2 "$src" >>"$tmp"
+    else
+      printf '%s\n' "$warning" >"$tmp"
+      cat "$src" >>"$tmp"
+    fi
+
+    install -m"$mode" "$tmp" "$dest"
+    rm -f "$tmp"
+  }
+
+  prepend_warning "${src_root%/}/docker-compose.yml" "${dest_root%/}/docker-compose.yml" "$warn_compose" 644
+
+  for src_script in "${src_root%/}"/script/docker_*; do
+    local name
+    name="${src_script##*/docker_}"
+    prepend_warning "$src_script" "${dest_bin}/${name}" "$warn_scripts" 755
+  done
+}

@@ -1,0 +1,29 @@
+<%
+  # Required locals: post
+  # Optional locals: clickable (default: true), padding_class, enable_hover_accent
+  clickable = local_assigns.fetch(:clickable, true)
+  padding_class = local_assigns.fetch(:padding_class, "p-6")
+  enable_hover_accent = local_assigns.fetch(:enable_hover_accent, false)
+%>
+
+<%= render "shared/card", clickable: clickable, path: clickable ? post_path(post) : nil, padding_class: padding_class, class: "group" do %>
+  <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-3 mb-2">
+      <div class="<%= card_icon_box_classes %>">
+        <%= render "icons/newspaper", class: "size-5 text-accent" %>
+      </div>
+      <h3 class="<%= card_title_text_classes(clickable: clickable, enable_hover_accent: enable_hover_accent) %>">
+        <%= post.title.presence || post.summary&.truncate(80) || "Untitled Post" %>
+      </h3>
+    </div>
+    <% if post.url.present? %>
+      <p class="text-sm text-secondary mb-1 font-mono break-all">
+        <%= post.url %>
+      </p>
+    <% end %>
+    <div class="flex items-center gap-2 text-xs text-secondary">
+      <%= render "icons/clock", class: "size-4" %>
+      Published <%= time_ago_in_words(post.created_at) %> ago
+    </div>
+  </div>
+<% end %>

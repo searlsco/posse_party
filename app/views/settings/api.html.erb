@@ -1,0 +1,186 @@
+<%= render "shared/page_header",
+  title: "API Documentation",
+  description: "Learn how to use the POSSE Party API to retrieve crossposts" %>
+
+<%= render "shared/card", class: "mb-6" do %>
+  <h2 class="mb-4 text-xl font-semibold text-primary">Authentication</h2>
+  <p class="mb-4 text-secondary">All API requests require authentication using your API key as a Bearer token.</p>
+
+  <%= render "shared/copyable_code_block", code: @user.api_key %>
+
+  <div class="mt-4 space-y-3">
+    <p class="text-sm font-medium text-primary">Include this header in all requests</p>
+    <%= render "shared/copyable_code_block", code: "Authorization: Bearer #{@user.api_key}" %>
+  </div>
+<% end %>
+
+<%= render "shared/card", class: "mb-6" do %>
+  <h2 class="mb-4 text-xl font-semibold text-primary">GET /api/crossposts</h2>
+  <p class="mb-4 text-secondary">Retrieve published crossposts. Use to get crossposts for a specific post or all posts.</p>
+
+  <div class="space-y-4">
+    <div>
+      <h3 class="<%= subheading_classes %>">Parameters</h3>
+      <div class="p-4 border rounded-md bg-secondary/5 border-primary">
+        <div class="space-y-2">
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">id</span>
+            <span class="ml-2 text-xs text-secondary">(optional)</span>
+          </div>
+          <p class="<%= muted_sm_indent_classes %>">The remote ID of a specific post (typically the full URL from your feed). If omitted, returns all crosspost links for all posts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="<%= subheading_classes %>">Example Requests</h3>
+
+      <h4 class="mt-3 mb-1 font-medium text-md text-primary">Get crossposts for a specific post:</h4>
+      <%= render "shared/copyable_code_block",
+            code: <<~CURL.strip
+              curl -H "Authorization: Bearer #{@user.api_key}" "https://posseparty.com/api/crossposts?id=https://justin.searls.co/takes/2025-01-29-12h07m26s/"
+            CURL
+          %>
+
+      <h4 class="mt-3 mb-1 font-medium text-md text-primary">Get all crossposts:</h4>
+      <%= render "shared/copyable_code_block",
+            code: <<~CURL.strip
+              curl -H "Authorization: Bearer #{@user.api_key}" "https://posseparty.com/api/crossposts"
+            CURL
+          %>
+    </div>
+
+    <div>
+      <h3 class="<%= subheading_classes %>">Example Responses</h3>
+
+      <h4 class="mt-3 mb-1 font-medium text-md text-primary">Response for a specific post:</h4>
+      <pre class="px-3 py-3 overflow-x-auto font-mono text-xs border rounded-md bg-primary border-primary"><%= JSON.pretty_generate([
+  {
+    platform: "bsky",
+    account: "justin.searls.co",
+    url: "https://bsky.app/profile/justin.searls.co/post/3li5nqrpqns2c",
+    status: "published",
+    crosspost_url: "https://posseparty.com/crossposts/123",
+    error: nil
+  },
+  {
+    platform: "mastodon",
+    account: "@searls@mastodon.social",
+    url: "https://mastodon.social/@searls/113915897293549058",
+    status: "published",
+    crosspost_url: "https://posseparty.com/crossposts/124",
+    error: nil
+  },
+  {
+    platform: "x",
+    account: "@searls",
+    url: "https://x.com/searls/status/1884629834505625797",
+    status: "failed",
+    crosspost_url: "https://posseparty.com/crossposts/125",
+    error: "Failed to syndicate to X"
+  }
+]) %></pre>
+
+      <h4 class="mt-3 mb-1 font-medium text-md text-primary">Response for all posts:</h4>
+      <pre class="px-3 py-3 overflow-x-auto font-mono text-xs border rounded-md bg-primary border-primary"><%= JSON.pretty_generate({
+  crossposts: {
+    "https://justin.searls.co/takes/2025-01-29-12h07m26s/" => [
+      {
+        platform: "bsky",
+        account: "justin.searls.co",
+        url: "https://bsky.app/profile/justin.searls.co/post/3li5nqrpqns2c",
+        status: "published",
+        crosspost_url: "https://posseparty.com/crossposts/123",
+        error: nil
+      },
+      {
+        platform: "mastodon",
+        account: "@searls@mastodon.social",
+        url: "https://mastodon.social/@searls/113915897293549058",
+        status: "published",
+        crosspost_url: "https://posseparty.com/crossposts/124",
+        error: nil
+      }
+    ],
+    "https://justin.searls.co/takes/2025-01-28-09h15m43s/" => [
+      {
+        platform: "x",
+        account: "@searls",
+        url: "https://x.com/searls/status/1884512345678901234",
+        status: "failed",
+        crosspost_url: "https://posseparty.com/crossposts/125",
+        error: "Failed to syndicate to X"
+      }
+    ]
+  },
+  updated_at: "2025-01-29T12:30:45Z"
+}) %></pre>
+    </div>
+
+    <div>
+      <h3 class="<%= subheading_classes %>">Response Fields</h3>
+
+      <h4 class="mt-3 mb-1 font-medium text-md text-primary">For a specific post (array of crossposts):</h4>
+      <div class="p-4 mb-4 border rounded-md bg-secondary/5 border-primary">
+        <div class="space-y-3">
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">platform</span>
+            <p class="<%= muted_sm_indent_classes %>">The platform identifier (e.g., "bsky", "mastodon", "x", "threads", "linkedin")</p>
+          </div>
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">account</span>
+            <p class="<%= muted_sm_indent_classes %>">The account label as configured in your settings</p>
+          </div>
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">url</span>
+            <p class="<%= muted_sm_indent_classes %>">The full URL to the published crosspost on the platform</p>
+          </div>
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">status</span>
+            <p class="<%= muted_sm_indent_classes %>">The crosspost status (e.g., "ready", "wip", "published", "failed", "skipped")</p>
+          </div>
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">crosspost_url</span>
+            <p class="<%= muted_sm_indent_classes %>">A URL to the crosspost details in POSSE Party</p>
+          </div>
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">error</span>
+            <p class="<%= muted_sm_indent_classes %>">The error message recorded on the most recent attempt, if any (null when none)</p>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="mb-1 font-medium text-md text-primary">For all posts (object with metadata):</h4>
+      <div class="p-4 border rounded-md bg-secondary/5 border-primary">
+        <div class="space-y-3">
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">crossposts</span>
+            <p class="<%= muted_sm_indent_classes %>">Object mapping post remote IDs to arrays of crossposts (same structure as above)</p>
+          </div>
+          <div>
+            <span class="<%= mono_label_sm_primary_classes %>">updated_at</span>
+            <p class="<%= muted_sm_indent_classes %>">ISO 8601 timestamp of the most recently updated post with crossposts</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="<%= subheading_classes %>">Error Responses</h3>
+      <div class="space-y-3">
+        <div class="p-4 border rounded-md bg-danger/10 border-danger">
+          <p class="mb-1 text-sm font-medium text-danger">401 Unauthorized</p>
+          <code class="font-mono text-xs text-secondary">{"error": "Authorization header is required"}</code>
+        </div>
+        <div class="p-4 border rounded-md bg-danger/10 border-danger">
+          <p class="mb-1 text-sm font-medium text-danger">401 Unauthorized</p>
+          <code class="font-mono text-xs text-secondary">{"error": "Invalid API key"}</code>
+        </div>
+        <div class="p-4 border rounded-md bg-info/10 border-info">
+          <p class="mb-1 text-sm font-medium text-info">404 Not Found</p>
+          <code class="font-mono text-xs text-secondary">{"error": "Post not found"}</code>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

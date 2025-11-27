@@ -1,0 +1,61 @@
+admin_bsky_account:
+  user: admin
+  platform_tag: bsky
+  active: true
+  label: "Bluesky Test"
+  credentials:
+    email: "admin@bsky.social"
+    password: "test123"
+    
+admin_mastodon_account:
+  user: admin
+  platform_tag: mastodon
+  active: true
+  label: "Mastodon Test"
+  credentials:
+    access_token: "test_mastodon_token"
+    instance_url: "https://mastodon.social"
+    
+admin_x_account:
+  user: admin
+  platform_tag: x
+  active: true
+  label: "X Test Admin"
+  credentials:
+    api_key: "test_x_api_key"
+    access_token: "test_x_token"
+    api_key_secret: "test_x_api_secret"
+    access_token_secret: "test_x_token_secret"
+    
+user_x_account:
+  user: user
+  platform_tag: x
+  active: true
+  label: "X Test"
+  credentials:
+    api_key: "user_x_api_key"
+    access_token: "user_x_token"
+    api_key_secret: "user_x_api_secret"
+    access_token_secret: "user_x_token_secret"
+
+user_linkedin_account:
+  user: user
+  platform_tag: linkedin
+  active: true
+  label: "LinkedIn Test"
+  credentials:
+    client_id: "linkedin-client-id"
+    access_token: "linkedin-access-token"
+    client_secret: "linkedin-client-secret"
+    person_urn: "urn:li:person:TEST123"
+
+user_youtube_account:
+  user: user
+  platform_tag: youtube
+  active: true
+  label: "YouTube Test"
+  credentials:
+    client_id: "youtube-client-id"
+    client_secret: "youtube-client-secret"
+    access_token: "youtube-access-token"
+    refresh_token: "youtube-refresh-token"

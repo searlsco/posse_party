@@ -1,0 +1,180 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.twitter.com/2/users/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - api.twitter.com
+      Content-Type:
+      - application/json; charset=utf-8
+      User-Agent:
+      - X-Client/0.14.1 ruby/3.4.1 (arm64-darwin24)
+      Authorization:
+      - OAuth oauth_consumer_key="U99tE3teVm0pRu0iXglZGhYxp", oauth_nonce="22f98801e6c16f241edffec5e716ac38",
+        oauth_signature="U5VkYXA5peQW7u%2Fk4ZVIZ7Z0dg8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1738501798", oauth_token="OAUTH_TOKEN_PLACEHOLDER",
+        oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 02 Feb 2025 13:09:58 UTC
+      Perf:
+      - '7402827104'
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id=v1%3A173850179861384251; Max-Age=63072000; Expires=Tue, 02 Feb 2027
+        13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A173850179861384251; Max-Age=63072000; Expires=Tue, 02 Feb
+        2027 13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_marketing=v1%3A173850179861384251; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_ePhsxsFrElZHjIdE38Fspw=="; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Api-Version:
+      - '2.125'
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Length:
+      - '68'
+      X-Access-Level:
+      - read-write
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Transaction-Id:
+      - cd834ac47a04d4c2
+      X-Xss-Protection:
+      - '0'
+      X-Rate-Limit-Limit:
+      - '1200000'
+      X-Rate-Limit-Reset:
+      - '1738501990'
+      Content-Disposition:
+      - attachment; filename=json.json
+      X-Content-Type-Options:
+      - nosniff
+      X-Rate-Limit-Remaining:
+      - '1199998'
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-User-Limit-24hour-Limit:
+      - '25'
+      X-User-Limit-24hour-Reset:
+      - '1738511233'
+      X-User-Limit-24hour-Remaining:
+      - '17'
+      X-Response-Time:
+      - '40'
+      X-Connection-Hash:
+      - 13816fab15efb98c1a02f2aad9582e0c7d3f58bb4d58710559f67578ed80c4c5
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":"9038902","name":"Justin Searls","username":"searls"}}'
+  recorded_at: Sun, 02 Feb 2025 13:09:58 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/2/tweets
+    body:
+      encoding: UTF-8
+      string: "{\"text\":\"Orlando, I love you \U0001F3B6 https://justin.searls.co/shots/2024-10-28-09h56m20s/\"}"
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - api.twitter.com
+      Content-Type:
+      - application/json; charset=utf-8
+      User-Agent:
+      - X-Client/0.14.1 ruby/3.4.1 (arm64-darwin24)
+      Authorization:
+      - OAuth oauth_consumer_key="U99tE3teVm0pRu0iXglZGhYxp", oauth_nonce="ea707b588a7bb0fb11fc7047664a47de",
+        oauth_signature="hciM%2BGD7mqFHstsJvJ0OEep7Yn0%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1738501798", oauth_token="OAUTH_TOKEN_PLACEHOLDER",
+        oauth_version="1.0"
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Sun, 02 Feb 2025 13:09:58 UTC
+      Perf:
+      - '7402827104'
+      Server:
+      - tsa_b
+      Location:
+      - https://api.x.com/2/tweets/1886039359113077138
+      Set-Cookie:
+      - guest_id=v1%3A173850179875017554; Max-Age=63072000; Expires=Tue, 02 Feb 2027
+        13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A173850179875017554; Max-Age=63072000; Expires=Tue, 02 Feb
+        2027 13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_marketing=v1%3A173850179875017554; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_3Dh87Kjjr0ai5dLlMITx9g=="; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 13:09:58 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Api-Version:
+      - '2.125'
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Length:
+      - '152'
+      X-Access-Level:
+      - read-write
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Transaction-Id:
+      - d86fa0e206d68a9c
+      X-Xss-Protection:
+      - '0'
+      X-Rate-Limit-Limit:
+      - '1080000'
+      X-Rate-Limit-Reset:
+      - '1738501991'
+      Content-Disposition:
+      - attachment; filename=json.json
+      X-Content-Type-Options:
+      - nosniff
+      X-Rate-Limit-Remaining:
+      - '1079998'
+      X-App-Limit-24hour-Limit:
+      - '17'
+      X-App-Limit-24hour-Reset:
+      - '1738587491'
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-User-Limit-24hour-Limit:
+      - '17'
+      X-User-Limit-24hour-Reset:
+      - '1738587491'
+      X-App-Limit-24hour-Remaining:
+      - '15'
+      X-User-Limit-24hour-Remaining:
+      - '15'
+      X-Response-Time:
+      - '121'
+      X-Connection-Hash:
+      - 7e5cd6709f8755625ef4cdfb42f0f496c70b3478cf60a1c0bedb64890e238807
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":"1886039359113077138","text":"Orlando, I love you \uD83C\uDFB6
+        https://t.co/7IN8LAmeOt","edit_history_tweet_ids":["1886039359113077138"]}}'
+  recorded_at: Sun, 02 Feb 2025 13:09:58 GMT
+recorded_with: VCR 6.3.1

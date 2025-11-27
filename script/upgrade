@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Updating Ruby dependencies..."
+bundle update
+
+echo "==> Updating JavaScript dependencies..."
+yarn upgrade
+
+echo "==> Running setup..."
+script/setup
+
+echo "==> Running tests..."
+script/test
+
+echo "==> Upgrade complete!"

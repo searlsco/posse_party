@@ -1,0 +1,113 @@
+<%
+  variant ||= :primary
+  size ||= :medium
+  type ||= :link
+  icon ||= nil
+  icon_position ||= :left
+  
+  base_classes = "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer hover:brightness-95 whitespace-nowrap"
+  
+  variant_classes = case variant
+  when :primary
+    class_names(button_solid_color_classes(:accent))
+  when :secondary
+    "bg-primary border border-primary text-primary hover:bg-secondary hover:border-secondary focus:ring-accent-500"
+  when :accent
+    class_names(button_solid_color_classes(:accent))
+  when :info
+    class_names(button_solid_color_classes(:info))
+  when :success
+    class_names(button_solid_color_classes(:success))
+  when :warn
+    class_names(button_solid_color_classes(:warn))
+  when :danger
+    class_names(button_solid_color_classes(:danger))
+  # Outline/soft variants – align backgrounds to helper pack (bg-<color>)
+  when :info_outline
+    class_names(button_soft_color_classes(:info), "focus:ring-info-500 shadow-sm")
+  when :accent_outline
+    class_names(button_soft_color_classes(:accent), "focus:ring-accent-500 shadow-sm")
+  when :success_outline
+    class_names(button_soft_color_classes(:success), "focus:ring-success-500 shadow-sm")
+  when :warn_outline
+    class_names(button_soft_color_classes(:warn), "focus:ring-warn-500 shadow-sm")
+  when :danger_outline
+    class_names(button_soft_color_classes(:danger), "focus:ring-danger-500 shadow-sm")
+  when :neutral_outline
+    class_names(button_soft_color_classes(:neutral), "focus:ring-neutral-500 shadow-sm")
+  when :neutral
+    class_names(button_solid_color_classes(:neutral))
+  else
+    ""
+  end
+  
+  size_classes = case size
+  when :small
+    "text-sm px-3 py-1.5 rounded-md gap-1.5"
+  when :medium
+    "text-sm px-4 py-2 rounded-lg gap-2"
+  when :large
+    "text-base px-6 py-3 rounded-lg gap-2.5"
+  else
+    ""
+  end
+  
+  icon_size = case size
+  when :small
+    "size-4"
+  when :medium
+    "size-5"
+  when :large
+    "size-6"
+  else
+    "size-5"
+  end
+  
+  classes = [base_classes, variant_classes, size_classes, local_assigns[:class]].compact.join(" ")
+%>
+
+<% if type == :link %>
+  <%= link_to path, class: classes, **local_assigns.except(:path, :text, :variant, :size, :type, :icon, :icon_position, :class) do %>
+    <% if icon && icon_position == :left %>
+      <% if icon.starts_with?("<") %>
+        <svg class="<%= icon_size %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= icon %>
+        </svg>
+      <% else %>
+        <%= render "icons/#{icon}", class: icon_size %>
+      <% end %>
+    <% end %>
+    <%= text %>
+    <% if icon && icon_position == :right %>
+      <% if icon.starts_with?("<") %>
+        <svg class="<%= icon_size %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= icon %>
+        </svg>
+      <% else %>
+        <%= render "icons/#{icon}", class: icon_size %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= button_tag type: type, class: classes, **local_assigns.except(:path, :text, :variant, :size, :type, :icon, :icon_position, :class) do %>
+    <% if icon && icon_position == :left %>
+      <% if icon.starts_with?("<") %>
+        <svg class="<%= icon_size %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= icon %>
+        </svg>
+      <% else %>
+        <%= render "icons/#{icon}", class: icon_size %>
+      <% end %>
+    <% end %>
+    <%= text %>
+    <% if icon && icon_position == :right %>
+      <% if icon.starts_with?("<") %>
+        <svg class="<%= icon_size %>" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= icon %>
+        </svg>
+      <% else %>
+        <%= render "icons/#{icon}", class: icon_size %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

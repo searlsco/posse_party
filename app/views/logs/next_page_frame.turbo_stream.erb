@@ -1,0 +1,7 @@
+<%= turbo_stream.append "logs-grid" do %>
+  <%= render partial: "logs/notification", collection: @notifications %>
+<% end %>
+
+<% unless @page.last? %>
+  <%= render partial: "logs/next_page_frame", locals: { page_number: @page.number + 1, query: @query } %>
+<% end %>
