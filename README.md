@@ -10,7 +10,7 @@ I was originally going to charge for it as a traditionally-hosted SaaS product, 
 
 ## Deployment
 
-A [Docker image for POSSE Party](https://github.com/searlsco/posse_party/pkgs/container/posse_party) is hosted on the GitHub Container Registry. You should be able to run it on anything that can host Docker containers.
+A [Docker image for POSSE Party](https://github.com/searlsco/posse_party/pkgs/container/posse_party) is [hosted on the GitHub Container Registry](https://github.com/searlsco/posse_party/pkgs/container/posse_party). You should be able to run it on anything that can host Docker containers.
 
 To get started quickly, SSH into your server and run:
 
