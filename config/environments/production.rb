@@ -2,16 +2,14 @@ require "active_support/core_ext/integer/time"
 require_relative "../../app/lib/redirects_www_to_bare_domain"
 require_relative "../../app/lib/parses_env_boolean"
 require_relative "../../app/lib/configures_mailer"
+require_relative "../../app/lib/identifies_ip_host"
+require_relative "../../app/lib/determines_host_settings"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Redirect www subdomain to bare domain, without depending on SSL middleware order.
   config.middleware.use RedirectsWwwToBareDomain
-
-  parses_env_boolean = ParsesEnvBoolean.new
-  app_host = ENV["APP_HOST"].presence
-  app_private_host = parses_env_boolean.parse("APP_PRIVATE_HOST", default: false)
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -33,14 +31,6 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
-
-  # SSL: force HTTPS in production; assume SSL when forcing SSL (behind proxies).
-  config.force_ssl = if app_private_host
-    false
-  else
-    parses_env_boolean.parse("FORCE_SSL", default: app_host.present?)
-  end
-  config.assume_ssl = config.force_ssl
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
@@ -89,14 +79,23 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   config.host_authorization = {exclude: ->(request) { request.path == "/up" }}
 
-  if app_host
-    protocol = config.force_ssl ? "https" : "http"
-    port = ENV["APP_PORT"].presence
+  app_host = ENV["APP_HOST"].presence
+  app_port = ENV["APP_PORT"].presence
+  host_settings = DeterminesHostSettings.new.determine(
+    app_host: app_host,
+    app_port: app_port,
+    app_private_host: ParsesEnvBoolean.new.parse("APP_PRIVATE_HOST", default: false),
+    app_protocol_env: ENV["APP_PROTOCOL"].presence
+  )
 
+  # SSL: force HTTPS in production; assume SSL when forcing SSL (behind proxies).
+  config.assume_ssl = config.force_ssl = host_settings.force_ssl
+
+  if app_host
     url_options = {
-      protocol: protocol,
+      protocol: host_settings.protocol,
       host: app_host,
-      port: port
+      port: app_port
     }.compact
     Rails.application.routes.default_url_options = config.action_mailer.default_url_options = url_options
   end

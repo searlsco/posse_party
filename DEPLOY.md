@@ -7,7 +7,7 @@ This app ships a single Docker Compose stack designed to run on any Linux VM wit
 On a fresh VM with Docker + Compose installed (see these [quick-start guides for various hosting services](#provider-quick-starts)), just run:
 
 ```bash
-APP_HOST=your.domain /bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"
+APP_HOST=your.domain.or.ip /bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"
 ```
 
 There are a number of [env vars to consider](#configuring-your-installation), but the two you might want to set before running the above command are:
@@ -192,5 +192,5 @@ cd posse_party
 docker compose down -v
 cd ..
 rm -rf posse_party
-APP_HOST=your.domain /bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"
+APP_HOST=your.domain.or.ip /bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"
 ```
