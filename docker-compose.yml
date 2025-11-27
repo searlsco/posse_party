@@ -103,11 +103,11 @@ services:
           echo "  reverse_proxy web:3000";
           echo "}";
           if [ -n "$APP_HOST" ]; then
-            if [ "$https_mode" = "public" ]; then
+            if [ "$$https_mode" = "public" ]; then
               echo "$APP_HOST {";
               echo "  reverse_proxy web:3000";
               echo "}";
-            elif [ "$https_mode" = "internal" ]; then
+            elif [ "$$https_mode" = "internal" ]; then
               echo "$APP_HOST {";
               echo "  reverse_proxy web:3000";
               echo "  tls internal";
