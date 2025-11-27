@@ -86,35 +86,30 @@ services:
     command: >
       sh -c '
         is_ip() {
-          ruby -ripaddr -e "begin; IPAddr.new(ARGV[0]); rescue; exit 1; end" "$1" 2>/dev/null
+          case "$1" in
+            *:*) printf "%s" "$1" | grep -Eq "^[0-9a-fA-F:]+$" ;;
+            *.*) printf "%s" "$1" | grep -Eq "^([0-9]{1,3}\.){3}[0-9]{1,3}$" ;;
+            *) return 1 ;;
+          esac
         }
-
-        https_mode=public
-        if [ "${APP_PROTOCOL:-}" = "http" ]; then
-          https_mode=off
-        elif [ "${APP_PRIVATE_HOST:-false}" = "true" ]; then
-          https_mode=internal
-        elif [ -n "${APP_HOST:-}" ] && is_ip "$APP_HOST"; then
-          https_mode=off
-        fi
 
         {
           echo ":80 {";
           echo "  reverse_proxy web:3000";
           echo "}";
           if [ -n "$APP_HOST" ]; then
-            if [ "$$https_mode" = "public" ]; then
-              echo "$APP_HOST {";
+            if [ "${APP_PORT:-80}" != "80" ] || [ "${APP_PROTOCOL:-}" = "http" ] || { [ "${APP_PRIVATE_HOST:-false}" != "true" ] && is_ip "$APP_HOST"; }; then
+              echo "http://$APP_HOST:80 {";
+              echo "  auto_https off";
               echo "  reverse_proxy web:3000";
               echo "}";
-            elif [ "$$https_mode" = "internal" ]; then
+            elif [ "${APP_PRIVATE_HOST:-false}" = "true" ]; then
               echo "$APP_HOST {";
               echo "  reverse_proxy web:3000";
               echo "  tls internal";
               echo "}";
             else
-              echo "http://$APP_HOST:80 {";
-              echo "  auto_https off";
+              echo "$APP_HOST {";
               echo "  reverse_proxy web:3000";
               echo "}";
             fi
