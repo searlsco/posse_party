@@ -1,118 +1,135 @@
-{{ define "main" }}
-<article class="flex flex-col items-center gap-y-2 sm:gap-y-4 py-2 mx-auto sm:mt-2 px-1
-  [&>.prose]:max-w-screen-lg
-  [&_img]:max-h-[60dvh]
-  [&_h1,h2]:font-serif [&_strong]:font-black [&_em]:font-bold
-  [&_a]:text-accent-300 [&_a]:hover:no-underline
-  [&_.prose]:mb-8 [&_.prose]:max-sm:px-2 [&_.prose]:text-lg
-  [&_ul]:list-none [&_ul]:pl-2 [&_ul]:sm:pl-4
-  [&_li]:relative [&_li]:pl-8 [&_li]:before:content-['\2731'] [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-0 [&_li]:before:-translate-y-1 [&_li]:before:text-3xl
-  ">
-  <img src="{{ "static/possy.webp" | relURL }}" alt="Possy, the Party Possum." />
-  <div class="prose">
-    <h1 class="text-center">
-      Meet Possy.
-    </h1>
-    <p>
-      Possy loves making friends and hates missing out. The consummate party possum, he's spent years bouncing from one party to the next. Everybody loves Possy.
-    </p>
-    {{ partial "subscribe_button.html" (dict "lede" "Already plan to hang with Possy?") }}
-    <p>
-      But Possy is <em>tired</em>. His attention span is shot. He's getting nothing done at work. His joeys call some sloth down the street "dad" now. He's the life of the party, but life is passing him by. <strong>He wants to quit partying,</strong> but worries his friends will forget him.
-    </p>
-    <h2>The social media party is dying</h2>
-    <p>
-      I used to be like Possy. Glued to my phone as I bounced between social networks. Constantly pulling to refresh. Racing to tap each notification. When I tried to get anything done, stray thoughts like <em>Who liked my post?</em> and <em>What replies am I getting?</em> clouded my focus.
-    </p>
-    <p>
-      <strong>Then Twitter went to shit.</strong> My friends are now spread across X, Mastodon, Threads, and Bluesky. Others retreated to Instagram or Facebook or (for some reason) LinkedIn.  And because no single platform can answer <em>what's happening right now</em>, some people have given up on all of them.
-    </p>
-    <img src="{{ "static/possy-tree.webp" | relURL }}" alt="Possy finds peace" class="mx-auto xs:float-right !my-0 align-top xs:max-w-48 sm:max-w-80 xs:mx-2" />
-    <p>
-      So I partied like it was 2005 and <a href="https://justin.searls.co">built myself a website</a>. Then I hacked together a bunch of scripts that crosspost my content to each social platform—a strategy somebody decided to call <a href="https://indieweb.org/POSSE">POSSE</a> ("Publish Own Site, Syndicate Elsewhere"). This lets me reach people where they are <em>without</em> wasting away, staring at my screen.
-    </p>
-    <p>
-      Taking back control of my work restored my sanity and turbocharged my creative drive. What's more, asking people to bypass the apps and <a href="mailto:justin@searls.co">just e-mail me</a> has fostered more meaningful interactions than chasing "engagement" ever did.
-    </p>
-    <p>
-      And to my surprise, <strong>I don't feel like I'm missing out.</strong> Not one bit.
-    </p>
-    <h2>I'm throwing a POSSE Party</h2>
-    <p>
-      Let's talk about you. Are you sick of juggling multiple timelines? Does doom-scrolling leave you feeling dead inside? Ever catch yourself deleting <em>that</em> app to "take a break," only to be back on your bullshit a week later?
-    </p>
-    <p>
-      How's that working out for you?
-    </p>
-    <p>
-      Imagine having what I have: a simple service that automatically posts all your tweet-length takes, photos, blog posts, and sourdough recipes to your social media accounts. Well, good news: I'm building exactly that. I'm calling it <strong>POSSE Party</strong>, and it will let <em>any dummy with a website</em> enjoy a life of algorithm-free luxury.
-    </p>
-  </div>
-  <img src="{{ "static/possy-chart.webp" | relURL }}" alt="Possy teaches us POSSE" />
-  <div class="prose">
-    <h2>This party's strictly BYOF(eed)</h2>
-    <p>
-      How does it work? It's simple! <strong>All you need is an RSS or Atom feed</strong>. (Don't know what that means? Just sign up for a Wordpress, Squarespace, Medium, or whatnot and, <em>boom</em>, you have a feed. Congrats.) From there, just log into POSSE Party, paste your feed URL, and give it access to your social accounts. Set it and forget it.
-    </p>
-    <div class="grid !max-w-screen-sm mx-auto gap-2 grid-cols-2">
-      <div>
-        <p class="font-semibold sm:text-xl">
-          What's working<span class="hidden sm:inline"> so far</span>:
-        </p>
-        <ul>
-          <li>Bluesky</li>
-          <li>Mastodon</li>
-          <li>Threads</li>
-          <li>X</li>
-          <li>Instagram</li>
-          <li>Facebook</li>
-          <li>LinkedIn</li>
-          <li>YouTube</li>
-        </ul>
-      </div>
-      <div>
-        <p class="font-semibold sm:text-xl">
-          What's up next:
-        </p>
-        <ul>
-          <li>…that's enough, maybe?</li>
-        </ul>
-      </div>
-    </div>
-    <p>
-      You'll also be able to customize how your content shows up on each platform—right down to individual posts. For some idea of what options are supported, search for the <code>posse:post</code> elements in <a href="https://justin.searls.co/atom.xml" download="justins-atom-feed.xml">my personal feed</a>.
-    </p>
-  </div>
-  <img src="{{ "static/possy-vision.webp" | relURL }}" alt="Possy and his party posse" />
-  <div class="prose" id="rsvp">
-    <h2>Gather your posse and R.S.V.P.</h2>
-    <p>
-      POSSE Party is already in production and syndicating my posts. I plan on letting others join the fun at some point in 2025, but what form the service ultimately takes depends on whether or not you add your email to the attendee list:
-    </p>
-    {{ partial "subscribe_button.html" (dict "lede" "Interested in attending?") }}
-    <p>
-      If you agree humanity would be better off if we were a little less online and the web were a little more open, I'd love for you to help me get the word out. Frankly, I don't care if I'm the only one who shows up to the party—I'm using this thing either way. But the more people RSVP, the more likely I am to build cool stuff like this:
-    </p>
-    <ul>
-      <li>A public-facing directory of feeds syndicated by POSSE Party, so people can find you and your work <em>someplace other than</em> social media</li>
-      <li>AI analysis of your feed's content to introduce you to like-minded creators, fostering collaboration and creating opportunities to expand your audience</li>
-      <li>
-        An online editor for publishing quick takes and promotional posts to your social accounts, without having to first post them to your website's feed
-      </li>
-      <li>
-        Web hosting and content management features so anyone can join the party, whether or not they have their own website
-      </li>
-      <li>
-        Machine-translated crossposts to alt accounts targeting friends & fans who speak a different language
-      </li>
-    </ul>
-    <p>
-      Anyway, thanks for reading all this. My life has improved dramatically since I logged out of the apps, and I genuinely believe the world would be a better place if more people had the tools needed to do the same. 💜
-    </p>
-    <p class="text-right before:content-['-'] before:mr-1 mr-2 sm:mr-4"><a href="https://justin.searls.co/about">Justin Searls</a></p>
-  </div>
-</article>
-<div class="my-6 text-xs text-center opacity-70">
-  POSSE Party™ is a <a href="https://searls.co" class="underline">Searls LLC</a> production. All rights reserved.
-</div>
-{{ end }}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>POSSE Party - Quit social media by posting more</title>
+    <meta name="description" content="Take your feed and shove it in theirs" />
+    <meta property="og:image" content="/img/og.jpg" />
+    <style>
+      :root {
+        --bg: #0a0b14;
+        --bg2: #090a12;
+        --fg: #eaf4ff;
+        --muted: #b5c0d0cc;
+        --accent: oklch(67.724% 0.21712 313.74);
+        --accent2: oklch(74.854% 0.16727 314.46);
+        --accent3: oklch(82.679% 0.11294 314.9);
+        --grid: #ffffff0d;
+        --section-mt: 48px;
+        color-scheme: dark;
+      }
+      body {
+        margin: 0; color: var(--fg); background:
+          radial-gradient(1200px 600px at 10% 10%, #101225, transparent),
+          radial-gradient(900px 500px at 90% 10%, #170f2a, transparent),
+          linear-gradient(180deg, var(--bg), var(--bg2));
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
+        line-height: 1.35;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+      .hero { margin: 0; display: grid; place-items: center; text-align: center; position: relative; }
+      .hero::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -48px; width: min(980px, 96%); height: 160px; background: radial-gradient(520px 100px at 50% 0, #ffffff0a, transparent 75%); pointer-events: none; filter: blur(12px); }
+      .hero-logo { max-width: min(780px, 90%); width: auto; height: auto; max-height: 40dvh; filter: drop-shadow(0 6px 28px #0008); margin-top: var(--section-mt); object-fit: contain; }
+      .hero-tag { margin-top: 12px; font-size: clamp(32px, 5.2vw, 65px); font-weight: 900; letter-spacing: .3px; }
+      .hero-sub { margin-top: 12px; font-size: clamp(24px, 3.4vw, 31px); font-weight: 700; color: var(--fg); max-width: 860px; }
+      .btn { padding: 14px 18px; border-radius: 14px; border: 1px solid #ffffff22; background: #101421; color: var(--fg); cursor: pointer; font-weight: 700; letter-spacing: .2px; }
+      .btn.primary { background: linear-gradient(135deg, var(--accent2), var(--accent)); border-color: #ffffff33; box-shadow: 0 0 0 1px #ffffff0a inset, 0 0 24px color-mix(in srgb, var(--accent) 30%, transparent); }
+      .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px #0008, 0 0 24px color-mix(in srgb, var(--accent) 50%, transparent); }
+      .btn.ghost { background: var(--bg); border-color: #ffffff33; box-shadow: none; }
+      .btn.ghost:hover { transform: translateY(-1px); box-shadow: 0 6px 18px #0006; border-color: #ffffff55; }
+      .btn.readme { color: #ffffff; background: linear-gradient(135deg, var(--accent3), var(--accent)); border-color: color-mix(in srgb, var(--accent) 40%, transparent); box-shadow: 0 10px 28px color-mix(in srgb, var(--accent) 35%, transparent); }
+      .btn.readme:hover { box-shadow: 0 14px 32px color-mix(in srgb, var(--accent) 55%, transparent); transform: translateY(-1px); text-decoration: none; }
+
+      /* Try It (single-button) */
+      .try { margin: var(--section-mt) 0 0; padding: 0; border: 0; background: none; backdrop-filter: none; display: grid; gap: 8px; justify-items: center; position: relative; }
+      .try::before { content: ''; position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: min(980px, 96%); height: 80px; background: radial-gradient(520px 80px at 50% 0, #ffffff06, transparent 75%); pointer-events: none; filter: blur(10px); }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; margin: 0; }
+
+      /* Features */
+      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: var(--section-mt) 0 0; }
+      .card { padding: 16px; border-radius: 14px; border: 1px solid #ffffff1f; background: #0c0f1b; }
+      .card h3 { margin: 0 0 6px; font-size: 16px; }
+      .card p { margin: 0; color: var(--muted); font-size: 14px; }
+
+      /* Code */
+      pre[class*="language-"] {
+        border-radius: 12px;
+        background: var(--bg);
+        border: 1px solid #ffffff26;
+        box-shadow: none;
+        position: relative;
+        padding: 12px 14px;
+        line-height: 1.4;
+        margin: 0;
+      }
+      pre[class*="language-"] code { line-height: 1.4; }
+      pre.language-bash { padding-left: 32px; max-width: min(960px, 92vw); margin: 0; overflow-x: auto; }
+      pre.language-bash code { display: block; font-size: 15px; }
+      @media (min-width: 1024px) {
+        pre.language-bash code { font-size: 16px; letter-spacing: 0.2px; }
+      }
+      pre.language-bash::before {
+        content: '$';
+        position: absolute; left: 12px; top: 12px; color: var(--muted);
+        font-family: inherit; font-size: inherit; line-height: inherit;
+        user-select: none; -webkit-user-select: none;
+        pointer-events: none;
+      }
+      #install { max-width: 640px; margin: var(--section-mt) auto 0; }
+      #install pre + pre { margin-top: 28px; }
+      #install p { text-align: center; margin-top: var(--section-mt); }
+      #install .run-text { text-align: left; margin-top: 0; color: var(--muted); }
+
+      footer { display: none; }
+
+      @media (max-width: 860px) { .features { grid-template-columns: 1fr; } }
+      @media (max-width: 400px) {
+        .wrap { padding-left: 8px; padding-right: 8px; }
+        pre[class*="language-"] { padding: 10px 12px; }
+        pre[class*="language-"] code { font-size: 12px; }
+        .mono { font-size: 12px; }
+        #install { padding: 8px 0; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <main class="wrap">
+      <section class="hero">
+        <img src="/img/hero.webp" alt="POSSE Party hero" class="hero-logo" />
+        <div class="hero-tag">Quit social media<br>by posting more.</div>
+        <div class="hero-sub">Take your site's feed and push it to everyone else's.</div>
+      </section>
+      <section class="features">
+        <div class="card">
+          <h3>Everybody's invited</h3>
+          <p>Crosspost your site's content wherever your audience still hangs out. Ghost the algorithms without becoming one yourself.</p>
+        </div>
+        <div class="card">
+          <h3>It's a ME party</h3>
+          <p>POSSE Party isn't another SaaS subscription. It's self-hosted, and you can invite friends to syndicate through your instance.</p>
+        </div>
+        <div class="card">
+          <h3>And a free party</h3>
+          <p>Built for individuals who love creating but hate wasting time in the apps. <a href="https://github.com/searlsco/posse_party/?tab=readme-ov-file#license" target="_blank" rel="noopener">Free for non-commercial use</a>.</p>
+        </div>
+      </section>
+
+      <section id="install">
+        <h2>Set up your server</h2>
+          <p class="run-text">
+            Run this command on any server that speaks Docker:
+          </p>
+          <pre class="language-bash"><code>/bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"</code></pre>
+        <p>
+          <a class="btn readme" href="https://github.com/searlsco/posse_party?tab=readme-ov-file#posse-party" target="_blank" rel="noopener">View README</a>
+      </p>
+      </section>
+    </main>
+
+  </body>
+  </html>
