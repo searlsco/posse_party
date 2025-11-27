@@ -91,6 +91,11 @@ Rails.application.configure do
   # SSL: force HTTPS in production; assume SSL when forcing SSL (behind proxies).
   config.assume_ssl = config.force_ssl = host_settings.force_ssl
 
+  config.session_store :cookie_store,
+    key: "_posse_session",
+    expire_after: 30.days,
+    secure: host_settings.cookies_secure
+
   if app_host
     url_options = {
       protocol: host_settings.protocol,

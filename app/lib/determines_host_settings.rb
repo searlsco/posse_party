@@ -2,7 +2,7 @@ require_relative "identifies_ip_host"
 require_relative "parses_env_boolean"
 
 class DeterminesHostSettings
-  Result = Struct.new(:force_ssl, :protocol, keyword_init: true)
+  Result = Struct.new(:force_ssl, :protocol, :cookies_secure, keyword_init: true)
 
   def initialize
     @identifies_ip_host = IdentifiesIpHost.new
@@ -14,9 +14,12 @@ class DeterminesHostSettings
 
     protocol = choose_protocol(app_protocol_env, app_private_host, app_port, app_host, host_is_ip)
 
+    force_ssl = choose_force_ssl(protocol, app_private_host, app_host, host_is_ip)
+
     Result.new(
-      force_ssl: choose_force_ssl(protocol, app_private_host, app_host, host_is_ip),
-      protocol: protocol
+      force_ssl: force_ssl,
+      protocol: protocol,
+      cookies_secure: force_ssl
     )
   end
 

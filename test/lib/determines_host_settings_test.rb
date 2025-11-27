@@ -6,6 +6,7 @@ class DeterminesHostSettingsTest < ActiveSupport::TestCase
 
     assert_equal "http", settings.protocol
     refute settings.force_ssl
+    refute settings.cookies_secure
   end
 
   def test_prefers_https_for_private_host_even_when_ip
@@ -13,6 +14,7 @@ class DeterminesHostSettingsTest < ActiveSupport::TestCase
 
     assert_equal "https", settings.protocol
     refute settings.force_ssl
+    refute settings.cookies_secure
   end
 
   def test_respects_app_protocol_http
@@ -20,6 +22,7 @@ class DeterminesHostSettingsTest < ActiveSupport::TestCase
 
     assert_equal "http", settings.protocol
     refute settings.force_ssl
+    refute settings.cookies_secure
   end
 
   def test_defaults_to_https_for_domain
@@ -27,6 +30,7 @@ class DeterminesHostSettingsTest < ActiveSupport::TestCase
 
     assert_equal "https", settings.protocol
     assert settings.force_ssl
+    assert settings.cookies_secure
   end
 
   def test_uses_http_when_host_missing
@@ -34,6 +38,7 @@ class DeterminesHostSettingsTest < ActiveSupport::TestCase
 
     assert_equal "http", settings.protocol
     refute settings.force_ssl
+    refute settings.cookies_secure
   end
 
   def test_disables_ssl_when_app_port_overrides_80
@@ -41,6 +46,7 @@ class DeterminesHostSettingsTest < ActiveSupport::TestCase
 
     assert_equal "http", settings.protocol
     refute settings.force_ssl
+    refute settings.cookies_secure
   end
 
   private
