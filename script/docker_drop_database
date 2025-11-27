@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+if [[ "${1:-}" != "--confirm" ]]; then
+  echo "This will drop the posse_party_production database inside the Docker volume." >&2
+  read -r -p "Type 'confirm' to proceed: " answer
+  if [[ "${answer}" != "confirm" ]]; then
+    echo "Aborted." >&2
+    exit 1
+  fi
+fi
+
+docker compose -f "${compose_file}" up -d db
+docker compose -f "${compose_file}" exec -T db psql -U postgres -c "DROP DATABASE IF EXISTS posse_party_production;"
+
+echo "Database dropped."

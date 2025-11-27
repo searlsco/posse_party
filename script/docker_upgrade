@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+env_file=".env"
+
+image_id() {
+  docker image inspect --format '{{.Id}}' "$1" 2>/dev/null | head -n1 || true
+}
+
+image_digest() {
+  docker image inspect --format '{{index .RepoDigests 0}}' "$1" 2>/dev/null | head -n1 || true
+}
+
+service_image_id() {
+  local container
+  container="$(docker compose -f "${compose_file}" ps -q "$1" 2>/dev/null | head -n1 || true)"
+  [[ -n "${container}" ]] && docker inspect --format '{{.Image}}' "${container}" 2>/dev/null | head -n1 || true
+}
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+if [[ ! -f "${env_file}" ]]; then
+  echo ".env is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+image="${POSSE_IMAGE:-$(grep '^POSSE_IMAGE=' "${env_file}" | tail -n1 | cut -d= -f2-)}"
+
+if [[ -z "${image}" ]]; then
+  echo "POSSE_IMAGE is not set. Define it in the environment or .env." >&2
+  exit 1
+fi
+
+export POSSE_IMAGE="${image}"
+
+current_id="$(service_image_id web)"
+current_digest="$(image_digest "${current_id}")"
+
+if [[ -z "${current_id}" ]]; then
+  current_id="$(image_id "${image}")"
+  current_digest="$(image_digest "${current_id}")"
+fi
+rollback_ref="${current_digest:-${current_id}}"
+
+echo "<---- Current image"
+echo "Image: ${image}"
+if [[ -n "${current_id}" ]]; then
+  [[ -n "${current_digest}" ]] && echo "Digest: ${current_digest}"
+  echo "ID: ${current_id}"
+else
+  echo "ID: not present locally; will pull ${image}"
+fi
+
+echo "<---- Upgrading Docker Image"
+docker compose -f "${compose_file}" pull
+
+echo "<---- Upgrading Management Scripts"
+docker run --rm -u root -v "$PWD":/host "${image}" bash -lc 'source /rails/script/docker_sync_assets; copy_docker_assets /rails /host'
+
+echo "<---- Restarting services"
+docker compose -f "${compose_file}" up -d
+
+new_id="$(service_image_id web)"
+new_digest="$(image_digest "${new_id}")"
+
+if [[ -z "${new_id}" ]]; then
+  new_id="$(image_id "${image}")"
+  new_digest="$(image_digest "${new_id}")"
+fi
+
+echo "<---- Upgrade result"
+if [[ -n "${new_id}" && "${new_id}" != "${current_id}" ]]; then
+  echo "Upgraded to ${image}"
+  [[ -n "${new_digest}" ]] && echo "Digest: ${new_digest}"
+  echo "ID: ${new_id}"
+  if [[ -n "${rollback_ref}" ]]; then
+    echo "If you experience any issues, you can rollback with:"
+    echo "  bin/deploy_image ${rollback_ref}"
+  fi
+elif [[ -n "${new_id}" ]]; then
+  echo "No upgrade found; still on ${image}"
+  [[ -n "${new_digest}" ]] && echo "Digest: ${new_digest}"
+  echo "ID: ${new_id}"
+else
+  echo "Unable to determine image details for ${image} after upgrade"
+fi

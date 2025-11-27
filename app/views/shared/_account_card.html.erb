@@ -1,0 +1,25 @@
+<%
+  # Required locals: account
+  # Optional locals: clickable (default: true), show_status (default: true), padding_class, enable_hover_accent
+  clickable = local_assigns.fetch(:clickable, true)
+  show_status = local_assigns.fetch(:show_status, true)
+  padding_class = local_assigns.fetch(:padding_class, "p-6")
+  enable_hover_accent = local_assigns.fetch(:enable_hover_accent, false)
+%>
+
+<%= render "shared/card", clickable: clickable, path: clickable ? edit_account_path(account) : nil, padding_class: padding_class, class: "group" do %>
+  <% if show_status %>
+    <%= render "shared/status_badge", active: account.active? %>
+  <% end %>
+  <div class="flex items-center gap-4">
+    <%= render "shared/platform_icon", platform: account.platform_tag %>
+    <div class="flex flex-col">
+      <span class="<%= card_title_text_classes(clickable: clickable, enable_hover_accent: enable_hover_accent) %>">
+        <%= account.label %>
+      </span>
+      <span class="text-sm text-secondary">
+        <%= account.platform_label %>
+      </span>
+    </div>
+  </div>
+<% end %>

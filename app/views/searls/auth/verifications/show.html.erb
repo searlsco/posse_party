@@ -1,0 +1,28 @@
+<% config = Searls::Auth.config %>
+<% email_methods = config.auth_methods & [:email_link, :email_otp] %>
+<% parts = { email_link: "a link", email_otp: "a six-digit code" }.slice(*email_methods).values %>
+
+<h1 class="<%= auth_heading_classes("mb-4") %>">Check your email!</h1>
+
+<% if email_methods.any? %>
+  <p class="mb-6 text-secondary">
+    In the next few moments you should receive an email with <%= parts.to_sentence %> you can use to finish signing in.
+  </p>
+<% else %>
+  <p class="mb-6 text-secondary">
+    Continue below to finish signing in.
+  </p>
+<% end %>
+
+<% if email_methods.include?(:email_otp) %>
+  <%= form_with url: searls_auth.verify_path, method: :post, data: { turbo: searls_auth_helper.enable_turbo? } do |f| %>
+    <%= f.hidden_field :redirect_path, value: params[:redirect_path] %>
+
+    <div class="mx-auto w-fit">
+      <%= render partial: "otp_input", locals: { f:, attribute: :short_code, options: { label: { skip: true } } } %>
+
+      <%= f.submit "Log in",
+          class: auth_primary_button_classes("mt-6 px-6") %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <%= render partial: "shared/head" %>
+  <body class="min-h-dvh bg-primary text-primary">
+    <main class="max-w-3xl mx-auto px-4 py-8">
+      <% status = @status_verification %>
+      <% overall_status = status.overall %>
+      <header class="mb-6 text-center">
+        <div class="mx-auto size-16 mb-10">
+          <%= render partial: "shared/logo", locals: { letterpress: false } %>
+        </div>
+        <div class="inline-flex items-center gap-3">
+          <% overall_class = { green: 'bg-green-500', yellow: 'bg-yellow-500', red: 'bg-red-500' }.fetch(overall_status) { 'bg-secondary' } %>
+          <span class="inline-block size-3 rounded-full <%= overall_class %>"></span>
+          <h1 class="text-xl font-semibold">System Status</h1>
+        </div>
+      </header>
+
+      <section class="rounded-xl border border-primary bg-secondary/10">
+        <div class="divide-y divide-primary/20">
+          <div class="flex items-start justify-between p-4">
+            <div>
+              <div class="font-medium">Email Configured</div>
+              <% unless status.smtp_configured %>
+                <div class="text-sm text-secondary">Emails cannot be sent without a mail provider.</div>
+              <% end %>
+            </div>
+            <% smtp_configured_class = status.smtp_configured ? 'bg-green-500' : 'bg-yellow-500' %>
+            <div class="<%= chip_classes %>">
+              <span class="size-2.5 rounded-full <%= smtp_configured_class %>"></span>
+              <span class="text-sm"><%= status.smtp_configured ? 'Yes' : 'Not Configured' %></span>
+            </div>
+          </div>
+
+          <div class="flex items-start justify-between p-4">
+            <div>
+              <div class="font-medium">Email Connectivity</div>
+              <% if status.smtp_configured == false %>
+                <div class="text-sm text-secondary">Skipped: mail not configured.</div>
+              <% elsif status.smtp_connected == false && status.smtp_error.present? %>
+                <div class="text-xs text-secondary"><%= status.smtp_error %></div>
+              <% end %>
+            </div>
+            <% smtp_connected_class = if status.smtp_configured == false
+              'bg-secondary'
+            elsif status.smtp_connected
+              'bg-green-500'
+            else
+              'bg-red-500'
+            end %>
+            <div class="<%= chip_classes %>">
+              <span class="size-2.5 rounded-full <%= smtp_connected_class %>"></span>
+              <span class="text-sm">
+                <%= status.smtp_configured == false ? 'N/A' : (status.smtp_connected ? 'OK' : 'Failed') %>
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-4">
+            <div>
+              <div class="font-medium">Database Connectivity</div>
+              <% if status.database_connected == false && status.database_error.present? %>
+                <div class="text-xs text-secondary"><%= status.database_error %></div>
+              <% end %>
+            </div>
+            <% database_class = status.database_connected ? 'bg-green-500' : 'bg-red-500' %>
+            <div class="<%= chip_classes %>">
+              <span class="size-2.5 rounded-full <%= database_class %>"></span>
+              <span class="text-sm"><%= status.database_connected ? 'OK' : 'Failed' %></span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between p-4">
+            <div>
+              <div class="font-medium">Worker (Solid Queue)</div>
+              <% if status.worker_connected == false && status.worker_error.present? %>
+                <div class="text-xs text-secondary"><%= status.worker_error %></div>
+              <% end %>
+            </div>
+            <% worker_class = status.worker_connected ? 'bg-green-500' : 'bg-red-500' %>
+            <div class="<%= chip_classes %>">
+              <span class="size-2.5 rounded-full <%= worker_class %>"></span>
+              <span class="text-sm"><%= status.worker_connected ? 'Running' : 'Not Running' %></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="mt-10 w-fit mx-auto">
+        <%= render "shared/card", padding_class: "p-6" do %>
+          <h2 class="<%= section_heading_classes %>">
+            <%= render "icons/arrow_top_right_on_square", class: "size-5" %>
+            Links
+          </h2>
+          <div class="flex flex-col gap-3 [&_a]:min-w-64 md:[&_a]:min-w-96">
+            <% if User.count == 0 %>
+              <%= link_to "Register", searls_auth.register_path, class: "#{button_class_pack(:info)} block text-center" %>
+            <% elsif session[:user_id].present? %>
+              <%= link_to "Go to Feeds", feeds_path, class: "#{button_class_pack(:accent)} block text-center" %>
+            <% else %>
+              <%= link_to "Log In", searls_auth.login_path, class: "#{button_class_pack(:info)} block text-center" %>
+            <% end %>
+            <%= link_to "Documentation", docs_path, class: "#{button_class_pack(:neutral)} block text-center" %>
+          </div>
+        <% end %>
+      </div>
+    </main>
+  </body>
+</html>

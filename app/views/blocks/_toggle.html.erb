@@ -1,0 +1,11 @@
+<%
+  options = {
+    checked: user.allow_automatic_syndication
+  }.merge(local_assigns[:options]).merge(
+    class: class_names("cursor-pointer absolute inset-0 appearance-none focus:outline-hidden", local_assigns.dig(:options, :class))
+  )
+%>
+<div class="group relative inline-flex w-11 shrink-0 rounded-full p-0.5 border border-primary bg-danger-solid transition-colors duration-200 ease-in-out has-checked:bg-success-solid focus-within:ring-2 focus-within:ring-accent">
+  <span class="transition-transform duration-200 ease-in-out rounded-full shadow-xs size-5 bg-primary ring-1 ring-border-primary group-has-checked:translate-x-5"></span>
+  <%= f.check_box :enabled, **options  %>
+</div>

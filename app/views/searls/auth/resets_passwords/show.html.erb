@@ -1,0 +1,46 @@
+<h1 class="<%= auth_heading_classes("mb-4") %>">Reset your password</h1>
+
+<p class="mb-6 text-secondary">
+  Choose a new password for <span class="font-medium text-primary"><%= @user_email %></span>.
+  Once updated you will be signed in automatically.
+</p>
+
+<%= form_with url: searls_auth.password_reset_update_path, method: :patch do |f| %>
+  <%= f.hidden_field :token, value: @token %>
+  <%= f.hidden_field :redirect_path, value: params[:redirect_path] %>
+
+  <div class="space-y-5">
+    <div>
+      <%= label_tag :email, "Email address", class: auth_label_classes %>
+      <%= email_field_tag :email, @user_email,
+          disabled: true,
+          class: "w-full px-4 py-3 rounded-lg border border-primary bg-tertiary text-secondary cursor-not-allowed" %>
+    </div>
+    <div>
+      <%= f.label :password, "New password", class: auth_label_classes %>
+      <%= f.password_field :password,
+          autocomplete: "new-password",
+          required: true,
+          class: auth_input_classes,
+          placeholder: "Enter a new password" %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation, "Confirm new password", class: auth_label_classes %>
+      <%= f.password_field :password_confirmation,
+          autocomplete: "new-password",
+          required: true,
+          class: auth_input_classes,
+          placeholder: "Repeat the new password" %>
+    </div>
+  </div>
+
+  <%= f.submit "Update password",
+      class: auth_primary_button_classes("mt-6") %>
+<% end %>
+
+<p class="mt-6 text-center text-secondary">
+  Remembered it?
+  <%= link_to "Log in", searls_auth_helper.login_path,
+      class: auth_link_classes %>
+  instead.
+</p>

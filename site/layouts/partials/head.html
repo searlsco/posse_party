@@ -1,0 +1,21 @@
+<title>{{ if .IsHome }}You're invited to my POSSE party!{{ else }}{{ with .Title }}{{ . }} · POSSE Party{{ else }}POSSE Party{{ end }}{{ end }}</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+{{ with or .Params.og_description .Params.description }}
+  <meta name="description" content="{{ . }}">
+  <meta property="og:description" content="{{ . }}">
+{{ end }}
+<meta property="og:title" content="{{ if .IsHome }}You're invited to my POSSE party!{{ else }}{{ with .Title }}{{ . }} · POSSE Party{{ else }}POSSE Party{{ end }}{{ end }}">
+{{ $og := replaceRE "^/" "" (default "static/party-invite.jpg" .Params.og_image) }}
+<meta property="og:image" content="{{ $og | relURL }}">
+
+<link rel="icon" type="image/x-icon" href="{{ "static/favicon.ico" | relURL }}">
+<link rel="icon" type="image/png" href="{{ "static/icon.png" | relURL }}">
+<link rel="apple-touch-icon" href="{{ "static/icon.png" | relURL }}">
+<link rel="apple-touch-icon-precomposed" href="{{ "static/icon.png" | relURL }}">
+
+{{ $css := resources.Get "css/app.css" | css.TailwindCSS (dict "minify" true) }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

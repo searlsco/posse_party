@@ -1,0 +1,39 @@
+<div class="<%= form_class_pack %>">
+  <div>
+    <%= f.label :label, class: label_classes %>
+    <%= f.text_field :label, class: input_classes %>
+  </div>
+
+  <div>
+    <%= f.label :url, "URL", class: label_classes %>
+    <%= f.text_field :url, class: input_classes %>
+  </div>
+
+  <div class="<%= checkbox_container_classes %>">
+    <%= f.check_box :active, class: checkbox_classes %>
+    <%= f.label :active, class: "text-sm font-medium text-primary" %>
+  </div>
+
+  <div class="<%= checkbox_container_classes %>">
+    <%= f.check_box :automatically_create_crossposts, class: checkbox_classes %>
+    <%= f.label :automatically_create_crossposts, "Automatically create crossposts", class: "text-sm font-medium text-primary" %>
+  </div>
+
+  <% if f.object.last_checked_at.present? %>
+    <div>
+      <%= f.label :last_checked_at, 'Last checked', class: label_classes %>
+      <div class="flex items-center gap-2 px-3 py-2 border rounded-md bg-tertiary border-primary/20 text-secondary">
+        <%= render "icons/clock", class: "size-4 text-secondary" %>
+        <span class="text-sm"><%= f.object.last_checked_at.to_fs(:long) %></span>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mt-8">
+    <%= render "shared/button",
+      text: "Save Feed",
+      variant: :primary,
+      type: :submit,
+      icon: "check" %>
+  </div>
+</div>

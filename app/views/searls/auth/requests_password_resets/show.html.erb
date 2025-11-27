@@ -1,0 +1,41 @@
+<% reset_enabled = Searls::Auth.config.password_reset_enabled? %>
+
+<h1 class="<%= auth_heading_classes("mb-4") %>">Forgot your password?</h1>
+
+<% if reset_enabled %>
+  <p class="mb-6 text-secondary">
+    Enter your email and we will send a link to choose a new password.
+  </p>
+
+  <%= form_with url: searls_auth.password_reset_request_path, method: :post, data: { controller: searls_auth_helper.login_stimulus_controller } do |f| %>
+    <%= f.hidden_field :redirect_path, value: params[:redirect_path] %>
+
+    <div class="space-y-5">
+      <div>
+        <%= f.label :email, "Email address", class: auth_label_classes %>
+        <%= f.email_field :email,
+            required: true,
+            value: params[:email],
+            autocomplete: "email",
+            data: searls_auth_helper.email_field_stimulus_data.merge(action: "input->searls-auth-login#updateEmail change->searls-auth-login#updateEmail"),
+            class: auth_input_classes,
+            placeholder: "you@example.com",
+            style: "appearance: none;" %>
+      </div>
+    </div>
+
+    <%= f.submit "Send reset instructions",
+        class: auth_primary_button_classes("mt-6") %>
+  <% end %>
+<% else %>
+  <div class="p-4 mb-6 border rounded-lg bg-warn border-warn text-warn">
+    Password resets are unavailable without email delivery. Contact an administrator for help.
+  </div>
+<% end %>
+
+<p class="mt-6 text-center text-secondary">
+  Remembered your password?
+  <%= link_to "Log in", searls_auth_helper.login_path,
+      class: auth_link_classes %>
+  instead.
+</p>

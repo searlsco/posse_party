@@ -1,0 +1,172 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.twitter.com/2/users/me
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - api.twitter.com
+      Content-Type:
+      - application/json; charset=utf-8
+      User-Agent:
+      - X-Client/0.14.1 ruby/3.4.1 (arm64-darwin24)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 02 Feb 2025 12:58:10 UTC
+      Perf:
+      - '7402827104'
+      Server:
+      - tsa_b
+      Set-Cookie:
+      - guest_id=v1%3A173850109073060876; Max-Age=63072000; Expires=Tue, 02 Feb 2027
+        12:58:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A173850109073060876; Max-Age=63072000; Expires=Tue, 02 Feb
+        2027 12:58:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_marketing=v1%3A173850109073060876; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 12:58:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_YOqy4ZpfzM/LijeKBhHrBw=="; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 12:58:10 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Api-Version:
+      - '2.125'
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Length:
+      - '68'
+      X-Access-Level:
+      - read-write
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Transaction-Id:
+      - deea7fab1a34b9ef
+      X-Xss-Protection:
+      - '0'
+      X-Rate-Limit-Limit:
+      - '1200000'
+      X-Rate-Limit-Reset:
+      - '1738501990'
+      Content-Disposition:
+      - attachment; filename=json.json
+      X-Content-Type-Options:
+      - nosniff
+      X-Rate-Limit-Remaining:
+      - '1199999'
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-User-Limit-24hour-Limit:
+      - '25'
+      X-User-Limit-24hour-Reset:
+      - '1738511233'
+      X-User-Limit-24hour-Remaining:
+      - '18'
+      X-Response-Time:
+      - '38'
+      X-Connection-Hash:
+      - 5e06089b140fad85535b5b926f1a589de54661af58abc51c9d87e8a9bf4045dd
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"id":"9038902","name":"Justin Searls","username":"searls"}}'
+  recorded_at: Sun, 02 Feb 2025 12:58:10 GMT
+- request:
+    method: post
+    uri: https://api.twitter.com/2/tweets
+    body:
+      encoding: UTF-8
+      string: '{"text":"Look, all I want from political news—literally the only thing
+        I’m asking for, and it isn’t much—is to tell me the literal future exactly
+        as it will unfold so that my brain can go back to focusing on anything else."}'
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      Host:
+      - api.twitter.com
+      Content-Type:
+      - application/json; charset=utf-8
+      User-Agent:
+      - X-Client/0.14.1 ruby/3.4.1 (arm64-darwin24)
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Sun, 02 Feb 2025 12:58:11 UTC
+      Perf:
+      - '7402827104'
+      Server:
+      - tsa_b
+      Location:
+      - https://api.x.com/2/tweets/1886036391227732147
+      Set-Cookie:
+      - guest_id=v1%3A173850109115143412; Max-Age=63072000; Expires=Tue, 02 Feb 2027
+        12:58:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_ads=v1%3A173850109115143412; Max-Age=63072000; Expires=Tue, 02 Feb
+        2027 12:58:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id_marketing=v1%3A173850109115143412; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 12:58:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - personalization_id="v1_zdClD3XQ9Jsm1+is2R+xLA=="; Max-Age=63072000; Expires=Tue,
+        02 Feb 2027 12:58:11 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      Api-Version:
+      - '2.125'
+      Content-Type:
+      - application/json; charset=utf-8
+      Cache-Control:
+      - no-cache, no-store, max-age=0
+      Content-Length:
+      - '317'
+      X-Access-Level:
+      - read-write
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Transaction-Id:
+      - 4ab7dcfab852c222
+      X-Xss-Protection:
+      - '0'
+      X-Rate-Limit-Limit:
+      - '1080000'
+      X-Rate-Limit-Reset:
+      - '1738501991'
+      Content-Disposition:
+      - attachment; filename=json.json
+      X-Content-Type-Options:
+      - nosniff
+      X-Rate-Limit-Remaining:
+      - '1079999'
+      X-App-Limit-24hour-Limit:
+      - '17'
+      X-App-Limit-24hour-Reset:
+      - '1738587491'
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-User-Limit-24hour-Limit:
+      - '17'
+      X-User-Limit-24hour-Reset:
+      - '1738587491'
+      X-App-Limit-24hour-Remaining:
+      - '16'
+      X-User-Limit-24hour-Remaining:
+      - '16'
+      X-Response-Time:
+      - '191'
+      X-Connection-Hash:
+      - cc1bfecc0d7caebc25553d08de74ff0388eba81713a8631f13978b354ce016df
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJkYXRhIjp7ImlkIjoiMTg4NjAzNjM5MTIyNzczMjE0NyIsInRleHQiOiJMb29rLCBhbGwgSSB3YW50IGZyb20gcG9saXRpY2FsIG5ld3PigJRsaXRlcmFsbHkgdGhlIG9ubHkgdGhpbmcgSeKAmW0gYXNraW5nIGZvciwgYW5kIGl0IGlzbuKAmXQgbXVjaOKAlGlzIHRvIHRlbGwgbWUgdGhlIGxpdGVyYWwgZnV0dXJlIGV4YWN0bHkgYXMgaXQgd2lsbCB1bmZvbGQgc28gdGhhdCBteSBicmFpbiBjYW4gZ28gYmFjayB0byBmb2N1c2luZyBvbiBhbnl0aGluZyBlbHNlLiIsImVkaXRfaGlzdG9yeV90d2VldF9pZHMiOlsiMTg4NjAzNjM5MTIyNzczMjE0NyJdfX0=
+  recorded_at: Sun, 02 Feb 2025 12:58:11 GMT
+recorded_with: VCR 6.3.1

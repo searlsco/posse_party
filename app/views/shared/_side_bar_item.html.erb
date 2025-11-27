@@ -1,0 +1,28 @@
+<% active = current_tab == name %>
+<% label = local_assigns[:label] || name.to_s.titleize %>
+<% icon = local_assigns[:icon] || nil %>
+<% badge = !!local_assigns[:badge] %>
+
+<%= link_to path, aria: {label: label}, class: class_names(
+    "flex items-center px-3 py-2 text-sm lg:text-base font-medium rounded-lg transition-all duration-200 lg:px-4 lg:py-3",
+    ("text-primary hover:text-accent hover:bg-accent/10" unless active),
+    ("text-solid bg-accent-solid shadow-sm" if active)
+  ) do %>
+  <% if icon %>
+    <span class="relative mr-2 lg:mr-2.5">
+      <% if icon.starts_with?("<") %>
+        <svg class="size-5 lg:size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <%= icon.html_safe %>
+        </svg>
+      <% else %>
+        <%= render "icons/#{icon}", class: "size-5 lg:size-6" %>
+      <% end %>
+      <% if badge %>
+        <span class="<%= badge_dot_classes(active: active, context: :sidebar) %>"></span>
+      <% end %>
+    </span>
+  <% end %>
+  <span class="flex items-center gap-2">
+    <span><%= label %></span>
+  </span>
+<% end %>

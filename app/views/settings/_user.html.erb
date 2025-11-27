@@ -1,0 +1,30 @@
+<turbo-frame id="<%= dom_id(user, :row) %>">
+  <div class="p-3 border rounded-lg border-primary/30 bg-secondary/5" data-active-user-email="<%= user.email %>">
+    <div class="flex flex-col gap-3 sm:grid sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-5">
+      <span class="max-w-full text-base font-semibold truncate sm:text-lg text-primary" title="<%= user.email %>"><%= user.email %></span>
+
+      <%= form_with url: user_path(user), method: :patch, html: { class: "mx-auto w-70 sm:mx-0 sm:w-32" } do |form| %>
+        <%= form.select :admin,
+          options_for_select([["Admin", true], ["Standard", false]], user.admin?),
+          {},
+          class: class_names(select_classes, "w-full"),
+          onchange: "this.form.requestSubmit()" %>
+      <% end %>
+      <div class="mx-auto w-70 sm:mx-0 sm:w-32">
+        <%= render "shared/deletion_confirmation_dialog",
+          user: user,
+          trigger_text: "Delete",
+          confirm_text: "Delete user",
+          cancel_text: "Cancel",
+          title: "Delete user",
+          trigger_style: :pack_danger,
+          trigger_class: class_names("!flex w-full items-center justify-center gap-2 whitespace-nowrap"),
+          trigger_icon: "trash",
+          form_path: user_path(user),
+          form_method: :delete do %>
+          <p>Please enter <strong><%= user.email %></strong> to confirm deletion.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

@@ -1,0 +1,54 @@
+<% config = Searls::Auth.config %>
+<% email_methods = config.auth_methods & [:email_link, :email_otp] %>
+
+<h1 class="<%= auth_heading_classes("mb-6") %>">Create your account</h1>
+
+<%= form_with url: searls_auth.register_path, data: { controller: searls_auth_helper.login_stimulus_controller } do |f| %>
+  <%= f.hidden_field :redirect_path, value: params[:redirect_path] %>
+
+  <div class="space-y-5">
+    <div>
+      <%= f.label :email, class: auth_label_classes %>
+      <%= f.email_field :email,
+          required: true,
+          value: params[:email],
+          data: searls_auth_helper.email_field_stimulus_data.merge(action: "input->searls-auth-login#updateEmail change->searls-auth-login#updateEmail"),
+          class: auth_input_classes,
+          placeholder: "Email address",
+          style: "appearance: none;" %>
+    </div>
+
+    <div>
+      <%= f.label :password, "Password", class: auth_label_classes %>
+      <%= f.password_field :password,
+          autocomplete: "new-password",
+          required: true,
+          class: auth_input_classes,
+          placeholder: "Create a password" %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation, "Password confirmation", class: auth_label_classes %>
+      <%= f.password_field :password_confirmation,
+          autocomplete: "new-password",
+          required: true,
+          class: auth_input_classes,
+          placeholder: "Confirm your password" %>
+    </div>
+  </div>
+
+  <% if email_methods.any? %>
+    <p class="mt-4 text-sm text-secondary">
+      We will also send a verification email so you can log in with a link or short code.
+    </p>
+  <% end %>
+
+  <%= f.submit "Register",
+      class: auth_primary_button_classes("mt-6") %>
+<% end %>
+
+<p class="mt-6 text-center text-secondary">
+  Already have an account?
+  <%= link_to "Log in", searls_auth.login_path,
+      class: auth_link_classes %>
+  instead.
+</p>

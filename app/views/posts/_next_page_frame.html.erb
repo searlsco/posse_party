@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "posts_page_#{page_number}",
+                    loading: :lazy,
+                    src: posts_path(page: page_number, q: local_assigns[:query], format: :turbo_stream),
+                    data: { 
+                      turbo_stream: true,
+                      turbo_frame_loading_class: "turbo-loading"
+                    } do %>
+  <%= render "loading_spinner" %>
+<% end %>

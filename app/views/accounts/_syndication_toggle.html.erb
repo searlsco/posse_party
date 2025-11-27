@@ -1,0 +1,6 @@
+<%= form_with url: set_syndication_accounts_path, method: :patch, class: "flex items-center gap-3 mx-auto" do |f| %>
+  <div class="text-lg">
+    <%= f.label :enabled, "Enable automated syndication", class: "font-medium text-primary" %>
+  </div>
+  <%= render "blocks/toggle", f: f, user: user, options: { onchange: "this.form.requestSubmit()" } %>
+<% end %>

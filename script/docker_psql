@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+  set -- posse_party_production
+fi
+
+docker compose -f "${compose_file}" exec -it db psql -U postgres "$@"

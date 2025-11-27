@@ -1,0 +1,192 @@
+<% content_for :container_classes, "w-full max-w-4xl px-4 sm:px-6 lg:px-8 py-6" %>
+
+<%
+  status_config = case @crosspost.status.downcase
+    when "published"
+      { bg: "bg-success", border: "border-success", text: "text-success", icon: "check_circle" }
+    when "failed"
+      { bg: "bg-danger", border: "border-danger", text: "text-danger", icon: "exclamation_circle" }
+    when "wip"
+      { bg: "bg-info", border: "border-info", text: "text-info", icon: "clock" }
+    when "skipped"
+      { bg: "bg-warn", border: "border-warn", text: "text-warn", icon: "forward_fast" }
+    when "ready"
+      { bg: "bg-secondary", border: "border-secondary", text: "text-primary", icon: "clock" }
+    else
+      { bg: "bg-tertiary", border: "border-primary", text: "text-secondary", icon: "information_circle" }
+  end
+%>
+
+<!-- Header -->
+<div class="mb-8">
+  <div class="flex items-start justify-between gap-4 mb-4">
+    <div>
+      <h1 class="mb-2 text-3xl font-bold text-primary">Crosspost Details</h1>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-2 rounded-lg <%= status_config[:bg] %> <%= status_config[:border] %> <%= status_config[:text] %>">
+      <%= render "icons/#{status_config[:icon]}", class: "size-5" %>
+      <span class="font-semibold"><%= @crosspost.status.capitalize %></span>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <% if @crosspost.url.present? %>
+    <div class="flex flex-wrap gap-2">
+      <%= render "shared/button",
+          path: @crosspost.url,
+          text: "View on #{@crosspost.account.platform_label}",
+          variant: :info,
+          size: :small,
+          icon: "arrow_top_right_on_square",
+          target: "_blank",
+          rel: "noopener" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Post × Account Info -->
+<div class="mb-6">
+  <div class="space-y-4">
+    <h2 class="<%= section_heading_classes %>">
+      <%= render "icons/link", class: "size-5" %>
+      Post × Account
+    </h2>
+    <div class="relative grid items-stretch grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+      <%= render "shared/post_card", post: @crosspost.post, clickable: true, padding_class: "p-2" %>
+      <div class="absolute hidden -translate-x-1/2 -translate-y-1/2 md:block left-1/2 top-1/2">
+        <span class="mx-2 text-3xl text-secondary">×</span>
+      </div>
+      <%= render "shared/account_card", account: @crosspost.account, clickable: true, show_status: false %>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content Grid -->
+<div class="grid gap-6 lg:grid-cols-2">
+  <!-- Left Column - Details -->
+  <div class="space-y-6">
+    <!-- Publishing Details -->
+    <%= render "shared/card", padding_class: "p-6" do %>
+      <h2 class="<%= section_heading_classes %>">
+        <%= render "icons/clock", class: "size-5" %>
+        Publishing Details
+      </h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-secondary">Channel:</span>
+          <span class="text-primary"><%= @config.channel.to_s.capitalize %></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-secondary">Attempts:</span>
+          <span class="font-medium text-primary"><%= @crosspost.attempts %></span>
+        </div>
+        <% if @crosspost.last_attempted_at.present? %>
+          <div class="flex justify-between">
+            <span class="text-secondary">Last Attempted:</span>
+            <span class="text-primary"><%= @crosspost.last_attempted_at.to_fs(:long) %></span>
+          </div>
+        <% end %>
+        <% if @crosspost.published_at.present? %>
+          <div class="flex justify-between">
+            <span class="text-secondary">Published:</span>
+            <span class="text-primary"><%= @crosspost.published_at.to_fs(:long) %></span>
+          </div>
+        <% end %>
+        <div class="flex justify-between">
+          <span class="text-secondary">Created:</span>
+          <span class="text-primary"><%= @crosspost.created_at.to_fs(:long) %></span>
+        </div>
+      </div>
+    <% end %>
+
+
+  </div>
+
+  <!-- Right Column - Content -->
+  <div class="space-y-6">
+    <!-- Content Preview -->
+    <%= render "shared/card", padding_class: "p-6" do %>
+      <h2 class="<%= section_heading_classes %>">
+        <%= render "icons/chat_bubble_left_right", class: "size-5" %>
+        Content Preview
+      </h2>
+      <pre class="p-4 overflow-x-auto text-sm whitespace-pre-wrap border rounded-lg bg-tertiary border-primary/10"><%= @content_preview %></pre>
+    <% end %>
+  </div>
+</div>
+
+<!-- Platform Embed -->
+<% platform = PublishesCrosspost::MatchesPlatformApi.new.match(@crosspost.account) %>
+<% if platform.embed_support? && (embed_html = platform.embed_html(@crosspost)) %>
+  <div class="mt-6">
+    <%= render "shared/card", padding_class: "p-6" do %>
+      <h2 class="<%= section_heading_classes %>">
+        <%= render "icons/arrow_top_right_on_square", class: "size-5" %>
+        Live Embed
+      </h2>
+      <div class="embed-container" data-controller="iframe-resize">
+        <%= embed_html.html_safe %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Failures Section (if any) -->
+<% if @crosspost.failures.present? %>
+  <div class="mt-6">
+    <%= render "shared/card", padding_class: "p-6", border_class: "border-danger" do %>
+      <h2 class="flex items-center gap-2 mb-4 text-lg font-semibold text-danger-solid">
+        <%= render "icons/exclamation_circle", class: "size-5" %>
+        Failure History
+      </h2>
+      <div class="space-y-4">
+        <% @crosspost.failures.each_with_index do |failure, idx| %>
+          <div class="p-4 border rounded-lg bg-danger/5 border-danger/20">
+            <div class="mb-2 text-sm font-medium text-danger-solid">
+              Failure #<%= idx + 1 %> at <%= failure["time"] %>
+            </div>
+            <pre class="text-sm whitespace-pre-wrap text-primary"><%= failure["message"] %></pre>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<!-- Configuration Overrides (last, before Manage) -->
+<div class="mt-6">
+  <%= render "shared/card", padding_class: "p-6" do %>
+    <h2 class="<%= section_heading_classes %>">
+      <%= render "icons/cog", class: "size-5" %>
+      Configuration Overrides
+    </h2>
+    <%= form_with url: '#', method: :get, local: true do %>
+      <%= fields_for :config, @config do |f| %>
+        <%= render "accounts/override_fields", account: @crosspost.account, f: f, disabled: true, provenance: @provenance, show_heading: false, show_instructions: false %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- Manage Crosspost Section -->
+<%= render "shared/manage_section", title: "Manage Crosspost" do %>
+  <%= link_to (@crosspost.published? ? "Re-publish crosspost" : "Trigger publish"),
+      publish_crosspost_path(@crosspost),
+      class: "#{button_class_pack(@crosspost.published? ? :danger : :info)} block text-center",
+      data: {
+        turbo_method: :patch,
+        turbo_confirm: (@crosspost.published? ? "Re-publish this crosspost?" : nil)
+      } %>
+
+  <% if @crosspost.ready? || @crosspost.failed? %>
+    <%= link_to "Skip publish",
+        skip_crosspost_path(@crosspost),
+        class: "#{button_class_pack(:warn)} block text-center",
+        data: { turbo_method: :patch } %>
+  <% end %>
+
+  <%= render "shared/delete_button",
+      path: crosspost_path(@crosspost),
+      confirm_message: "Delete this crosspost? Any queued publish/finish jobs for it will be cancelled.",
+      label: "Delete Crosspost" %>
+<% end %>

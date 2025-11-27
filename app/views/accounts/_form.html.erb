@@ -1,0 +1,97 @@
+<div class="<%= form_class_pack %>">
+  <div>
+    <%= f.label :label, class: label_classes %>
+    <%= f.text_field :label, class: input_classes %>
+  </div>
+
+  <div>
+    <%= f.label :platform_tag, "Platform", class: label_classes %>
+    <% if f.object.persisted? %>
+      <%= f.text_field :platform_tag, disabled: true, class: input_classes %>
+    <% else %>
+      <%= f.select :platform_tag,
+            options_for_select(PublishesCrosspost::MatchesPlatformApi::PLATFORMS.map { |platform_class| [platform_class::LABEL, platform_class::TAG] }, f.object.platform_tag),
+            { prompt: false },
+            {
+              data: {
+                controller: "platform-selector",
+                action: "change->platform-selector#updateCredentialFields change->platform-selector#updateOverrideFields",
+                platform_selector_url_value: credential_fields_accounts_path,
+                platform_selector_turbo_frame_id_value: "credential_fields",
+                platform_selector_overrides_url_value: override_fields_accounts_path,
+                platform_selector_overrides_turbo_frame_id_value: "override_fields"
+              },
+              class: select_classes
+            } %>
+    <% end %>
+  </div>
+
+  <div class="<%= checkbox_container_classes %>">
+    <%= f.check_box :active, class: checkbox_classes %>
+    <%= f.label :active, class: "text-sm font-medium text-primary" %>
+  </div>
+
+  <div class="<%= checkbox_container_classes %>">
+    <%= f.check_box :manually_create_crossposts, class: checkbox_classes %>
+    <%= f.label :manually_create_crossposts, "Manually create crossposts", class: "text-sm font-medium text-primary" %>
+  </div>
+  <div class="<%= checkbox_container_classes %>">
+    <%= f.check_box :manually_publish_crossposts, class: checkbox_classes %>
+    <%= f.label :manually_publish_crossposts, "Manually publish crossposts", class: "text-sm font-medium text-primary" %>
+  </div>
+
+  <% if f.object.user&.feeds&.exists? %>
+    <div class="md:col-span-2">
+      <h3 class="mb-2 text-sm font-semibold text-primary">
+        <span class="underline">Don't</span> generate crossposts for these feeds:
+      </h3>
+      <div class="space-y-2">
+        <% f.object.user.feeds.order(:label).each do |feed| %>
+          <div class="<%= checkbox_container_classes %>">
+            <% checkbox_id = "account_disabled_feed_ids_#{feed.id}" %>
+            <%= check_box_tag "account[disabled_feed_ids][]", feed.id,
+                Array(f.object.disabled_feed_ids).include?(feed.id),
+                id: checkbox_id, class: checkbox_classes %>
+            <%= label_tag checkbox_id,
+                "#{feed.label}#{' (Inactive)' if feed.respond_to?(:active?) && !feed.active?}",
+                class: "text-sm font-medium text-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div>
+      <%= f.label :crosspost_cooldown, 'Crosspost cooldown (seconds)', class: label_classes %>
+      <%= f.number_field :crosspost_cooldown, class: input_classes %>
+    </div>
+
+    <div>
+      <%= f.label :crosspost_min_age, 'Wait before crossposting (seconds)', class: label_classes %>
+      <%= f.number_field :crosspost_min_age, class: input_classes %>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag "credential_fields",
+    src: (f.object.persisted? ? credential_fields_accounts_path(id: f.object.id) : credential_fields_accounts_path(platform_tag: f.object.platform_tag.presence)),
+    class: "md:col-span-2" do %>
+    <%= render partial: "credential_fields", locals: { account: f.object } %>
+  <% end %>
+
+  <%= turbo_frame_tag "override_fields",
+    src: (override_fields_accounts_path(platform_tag: f.object.platform_tag) if f.object.new_record? && f.object.platform_tag.present?),
+    class: "md:col-span-2" do %>
+    <% if f.object.platform_tag.present? %>
+      <%= render partial: "override_fields", locals: { account: f.object, f: f } %>
+    <% end %>
+  <% end %>
+
+  <div class="mt-8">
+    <%= render "shared/button",
+      text: (f.object.persisted? ? "Save Account" : "Create Account"),
+      variant: :primary,
+      type: :submit,
+      icon: "check" %>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<nav class="fixed px-0 pb-0 bg-transparent pointer-events-none bottom-2 left-2 right-2 lg:hidden">
+  <div class="flex items-center justify-center h-16 pointer-events-auto" data-controller="fake-linker">
+    <div class="flex items-center gap-1 px-2 border shadow-lg bg-primary/30 backdrop-blur-md border-primary/20 rounded-3xl">
+      <%= render partial: "shared/tab_bar_item", locals: {
+        name: :feeds,
+        path: feeds_path,
+        current_tab: current_tab,
+        icon: "newspaper"
+      } %>
+      <%= render partial: "shared/tab_bar_item", locals: {
+        name: :accounts,
+        path: accounts_path,
+        current_tab: current_tab,
+        icon: "user_group"
+      } %>
+      <%= render partial: "shared/tab_bar_item", locals: {
+        name: :posts,
+        label: "Posts",
+        path: posts_path,
+        current_tab: current_tab,
+        icon: "chat_bubble_left_right"
+      } %>
+      <%= render partial: "shared/tab_bar_item", locals: {
+        name: :logs,
+        label: "Logs",
+        path: logs_path,
+        current_tab: current_tab,
+        icon: "server",
+        badge: current_user.notifications.where(badge: true, seen_at: nil).exists?
+      } %>
+      <%= render partial: "shared/tab_bar_item", locals: {
+        name: :settings,
+        path: settings_path,
+        current_tab: current_tab,
+        icon: "cog"
+      } %>
+    </div>
+  </div>
+</nav>

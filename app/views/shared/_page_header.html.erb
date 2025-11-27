@@ -1,0 +1,28 @@
+<%
+  # Required locals: title
+  # Optional locals: description, button_path, button_text, button_variant (default: :primary), button_icon (default: "plus")
+  button_variant ||= :primary
+  button_icon ||= "plus"
+  right_content = local_assigns[:right_content]
+%>
+
+<div class="flex flex-col gap-4 mb-8 sm:flex-row sm:items-start sm:justify-between">
+  <div class="flex-1 min-w-0">
+    <h1 class="text-3xl font-bold text-primary<%= ' mb-2' if local_assigns[:description] %>"><%= title %></h1>
+    <% if local_assigns[:description] %>
+      <p class="text-secondary"><%= description %></p>
+    <% end %>
+  </div>
+  <% if right_content.present? %>
+    <div class="flex-shrink-0 w-full sm:w-auto">
+      <%= right_content %>
+    </div>
+  <% elsif local_assigns[:button_path] && local_assigns[:button_text] %>
+    <%= render "shared/button", 
+      path: button_path, 
+      text: button_text, 
+      variant: button_variant,
+      icon: button_icon
+    %>
+  <% end %>
+</div>

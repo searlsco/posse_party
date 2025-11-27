@@ -1,0 +1,51 @@
+<% content_for :container_classes, "w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6" %>
+
+<div data-controller="filterable" data-filterable-backend-mode-value="true">
+  <div class="flex flex-col gap-4 mb-6 md:flex-row md:items-start md:justify-between">
+    <div>
+      <h1 class="mb-2 text-3xl font-bold text-primary">System Logs</h1>
+      <p class="text-secondary">System activity and notifications</p>
+    </div>
+    <% if @notifications.any? %>
+      <%= render "shared/manage_section", title: "Manage Logs", wrapper_class: "mt-0 w-fit self-center md:self-end md:ml-auto", padding_class: "p-4" do %>
+        <%= button_to "Mark all as seen", mark_all_seen_logs_path, method: :post,
+              class: "#{button_class_pack(:neutral)} block text-center" %>
+        <%= render "shared/delete_button",
+              path: destroy_all_logs_path,
+              confirm_message: "Delete all your logs?",
+              label: "Delete all",
+              class: "block text-center" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @notifications.any? %>
+    <div class="relative w-full md:w-auto md:min-w-[320px] mb-2">
+      <%= form_with url: logs_path, method: :get, class: "relative", data: { "turbo-frame": "logs-search-frame", "turbo-action": "advance" } do %>
+        <input type="text" name="q" value="<%= @query %>" placeholder="Search logs" class="w-full h-[48px] pl-10 pr-10 text-sm border border-primary rounded-lg bg-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200" data-filterable-target="queryInput" data-action="input->filterable#search keydown->filterable#keydown" />
+        <%= render "icons/magnifying_glass", class: "absolute -translate-y-1/2 left-3 top-1/2 size-4 text-secondary" %>
+        <%= link_to logs_path, class: "absolute -translate-y-1/2 right-3 top-1/2 p-1 text-secondary hover:text-primary transition-colors #{(@query.present? ? '' : 'hidden')}" , data: { "filterable-target": "clearButton", action: "click->filterable#clear" } do %>
+          <%= render "icons/x_mark", class: "size-4" %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "logs-search-frame", target: "_top" do %>
+    <% if @notifications.any? %>
+      <div class="mt-4 overflow-hidden border rounded-lg border-accent/40" id="logs-grid" data-filterable-target="container">
+        <%= render partial: "logs/notification", collection: @notifications %>
+      </div>
+
+      <% unless @page.last? %>
+        <%= render partial: "logs/next_page_frame", locals: { page_number: @page.number + 1, query: @query } %>
+      <% end %>
+    <% else %>
+      <div class="flex flex-col items-center justify-center py-16">
+        <%= render "icons/server", class: "mb-4 size-16 text-secondary" %>
+        <h3 class="<%= subheading_classes %>">No logs</h3>
+        <p class="mb-6 text-secondary">Activity will show up here</p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

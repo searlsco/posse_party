@@ -1,0 +1,176 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://bsky.social/xrpc/com.atproto.server.createSession
+    body:
+      encoding: UTF-8
+      string: '{"identifier":"user@example.com","password":"password"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Mar 2025 22:02:45 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Ratelimit-Limit:
+      - '10'
+      Ratelimit-Remaining:
+      - '9'
+      Ratelimit-Reset:
+      - '1741903365'
+      Ratelimit-Policy:
+      - 10;w=86400
+      Etag:
+      - W/"5dc-NV7l2TfyDiYmTMEJ/9nLtV17O9s"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: '{"did":"did:plc:vvwq23uzqcsoekea65qzdddk","didDoc":{"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1","https://w3id.org/security/suites/secp256k1-2019/v1"],"id":"did:plc:vvwq23uzqcsoekea65qzdddk","alsoKnownAs":["at://alharrington.bsky.social"],"verificationMethod":[{"id":"did:plc:vvwq23uzqcsoekea65qzdddk#atproto","type":"Multikey","controller":"did:plc:vvwq23uzqcsoekea65qzdddk","publicKeyMultibase":"zQ3shujw8QjiJLmHLfE8xJazAmb6L3Hz8eJ21A5ahaWj5e18X"}],"service":[{"id":"#atproto_pds","type":"AtprotoPersonalDataServer","serviceEndpoint":"https://rooter.us-west.host.bsky.network"}]},"handle":"alharrington.bsky.social","email":"user@example.com","emailConfirmed":true,"emailAuthFactor":false,"accessJwt":"ACCESS_JWT_PLACEHOLDER","refreshJwt":"REFRESH_JWT_PLACEHOLDER","active":true}'
+  recorded_at: Wed, 12 Mar 2025 22:02:45 GMT
+- request:
+    method: post
+    uri: https://bsky.social/xrpc/com.atproto.repo.createRecord
+    body:
+      encoding: UTF-8
+      string: '{"collection":"app.bsky.feed.post","$type":"app.bsky.feed.post","repo":"did:plc:vvwq23uzqcsoekea65qzdddk","record":{"$type":"app.bsky.feed.post","createdAt":"2025-03-12T22:02:45.990Z","text":"Two
+        words: POSSE Party usher.dev/…","facets":[{"$type":"app.bsky.richtext.facet","index":{"byteStart":23,"byteEnd":36},"features":[{"uri":"https://usher.dev/posts/2025-03-08-kill-your-feeds/","$type":"app.bsky.richtext.facet#link"}]}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer ACCESS_JWT_PLACEHOLDER
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Mar 2025 22:02:46 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '276'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Ratelimit-Limit:
+      - '3000'
+      Ratelimit-Remaining:
+      - '2999'
+      Ratelimit-Reset:
+      - '1741817266'
+      Ratelimit-Policy:
+      - 3000;w=300
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: '{"uri":"at://did:plc:vvwq23uzqcsoekea65qzdddk/app.bsky.feed.post/3lk7litc2yu2y","cid":"bafyreifgdpndygiqji63e5r4qlggd6c7yjcrzauwuc4sssmxh2jhqyc3w4","commit":{"cid":"bafyreifddo7vyirndp2ewrz2gmqk332necspmegr5tgykhrjq6smavu6bu","rev":"3lk7litcere2y"},"validationStatus":"valid"}'
+  recorded_at: Wed, 12 Mar 2025 22:02:46 GMT
+- request:
+    method: get
+    uri: https://plc.directory/did:plc:vvwq23uzqcsoekea65qzdddk
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Mar 2025 22:02:47 GMT
+      Content-Type:
+      - application/did+ld+json; charset=utf-8
+      Content-Length:
+      - '568'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"238-AlBoAINHXE/P6+qG6Jf/IYKeZRY"
+    body:
+      encoding: UTF-8
+      string: '{"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1","https://w3id.org/security/suites/secp256k1-2019/v1"],"id":"did:plc:vvwq23uzqcsoekea65qzdddk","alsoKnownAs":["at://alharrington.bsky.social"],"verificationMethod":[{"id":"did:plc:vvwq23uzqcsoekea65qzdddk#atproto","type":"Multikey","controller":"did:plc:vvwq23uzqcsoekea65qzdddk","publicKeyMultibase":"zQ3shujw8QjiJLmHLfE8xJazAmb6L3Hz8eJ21A5ahaWj5e18X"}],"service":[{"id":"#atproto_pds","type":"AtprotoPersonalDataServer","serviceEndpoint":"https://rooter.us-west.host.bsky.network"}]}'
+  recorded_at: Wed, 12 Mar 2025 22:02:47 GMT
+- request:
+    method: get
+    uri: https://alharrington.bsky.social/.well-known/atproto-did
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - alharrington.bsky.social
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Mar 2025 22:02:48 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"20-Ynh6l4D29pFCIVmPhEngUa5383Y"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: did:plc:vvwq23uzqcsoekea65qzdddk
+  recorded_at: Wed, 12 Mar 2025 22:02:48 GMT
+recorded_with: VCR 6.3.1

@@ -1,0 +1,99 @@
+<%
+  user = local_assigns.fetch(:user)
+  form_path = local_assigns.fetch(:form_path)
+  trigger_text = local_assigns.fetch(:trigger_text, "Delete")
+  confirm_text = local_assigns.fetch(:confirm_text, "Delete")
+  cancel_text = local_assigns.fetch(:cancel_text, "Cancel")
+  title = local_assigns.fetch(:title, "Confirm deletion")
+  form_method = local_assigns.fetch(:form_method, :delete)
+  input_name = local_assigns.fetch(:input_name, :dangerous_confirmation)
+  trigger_variant = local_assigns.fetch(:trigger_variant, :danger)
+  trigger_class = local_assigns.fetch(:trigger_class, nil)
+  trigger_icon = local_assigns[:trigger_icon]
+  trigger_icon_position = local_assigns.fetch(:trigger_icon_position, :left)
+  trigger_style = local_assigns.fetch(:trigger_style, :component) # :component or :pack_danger
+  hidden_fields = local_assigns.fetch(:hidden_fields, {})
+  body_content = capture { yield } if block_given?
+  expected_value = user.email
+%>
+
+<div data-controller="confirmation-dialog">
+  <% if trigger_style == :pack_danger %>
+    <%= button_tag type: :button,
+      class: class_names(button_class_pack(:danger), "!flex items-center justify-center gap-2 whitespace-nowrap", trigger_class),
+      data: { action: "confirmation-dialog#open" } do %>
+      <% if trigger_icon.present? %>
+        <%= render "icons/#{trigger_icon}", class: "size-4" %>
+      <% end %>
+      <%= trigger_text %>
+    <% end %>
+  <% else %>
+    <%= render "shared/button",
+      type: :button,
+      text: trigger_text,
+      variant: trigger_variant,
+      size: :medium,
+      class: trigger_class,
+      icon: trigger_icon,
+      icon_position: trigger_icon_position,
+      data: { action: "confirmation-dialog#open" } %>
+  <% end %>
+
+  <dialog
+    class="fixed top-1/2 left-1/2 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-primary bg-primary p-0 text-left shadow-xl"
+    data-confirmation-dialog-target="dialog"
+    data-action="cancel->confirmation-dialog#cancel close->confirmation-dialog#handleClose"
+  >
+    <div class="p-6 space-y-6">
+      <div class="space-y-3">
+        <h2 class="text-lg font-semibold text-danger"><%= title %></h2>
+        <% if body_content.present? %>
+          <div class="space-y-2 text-sm text-secondary">
+            <%= body_content %>
+          </div>
+        <% else %>
+          <p class="text-sm text-secondary">
+            This action permanently removes <%= user.email %>'s account, including all feeds, account configurations, posts, and crossposts stored in POSSE Party.
+          </p>
+        <% end %>
+      </div>
+
+      <%= form_with url: form_path,
+        method: form_method,
+        scope: nil,
+        data: { action: "turbo:submit-start->confirmation-dialog#disableOnSubmit turbo:submit-end->confirmation-dialog#handleSubmitEnd" } do %>
+        <% hidden_fields.each do |name, value| %>
+          <%= hidden_field_tag name, value %>
+        <% end %>
+        <div class="space-y-2">
+          <%= label_tag input_name,
+            "Type #{expected_value} to confirm",
+            class: label_classes %>
+          <%= text_field_tag input_name,
+            "",
+            required: true,
+            class: input_classes,
+            data: {
+              "confirmation-dialog-target": "input"
+            } %>
+        </div>
+
+        <div class="flex flex-col gap-2 pt-4 mt-4 border-t border-primary/60 sm:flex-row sm:justify-end">
+          <%= render "shared/button",
+            type: :button,
+            text: cancel_text,
+            variant: :secondary,
+            size: :medium,
+            data: { action: "confirmation-dialog#close" } %>
+
+          <%= render "shared/button",
+            type: :submit,
+            text: confirm_text,
+            variant: :danger,
+            size: :medium,
+            data: { "confirmation-dialog-target": "submit" } %>
+        </div>
+      <% end %>
+    </div>
+  </dialog>
+</div>

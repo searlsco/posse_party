@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.linkedin.com/rest/posts
+    body:
+      encoding: UTF-8
+      string: '{"author":"urn:li:person:fakepersonurn","commentary":"Anybody else have
+        a recent MacBook Pro \\(M4 Pro in my case\\) for which the keyboard suddenly
+        became really squeaky? Every time I hit the space bar, it''s like nails on
+        a chalkboard.","visibility":"PUBLIC","distribution":{"feedDistribution":"MAIN_FEED","targetEntities":[],"thirdPartyDistributionChannels":[]},"lifecycleState":"PUBLISHED"}'
+    headers:
+      Authorization:
+      - Bearer fakeaccesstoken
+      Linkedin-Version:
+      - '202505'
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Location:
+      - "/posts/urn%3Ali%3Ashare%3A7348349577130860544"
+      X-Restli-Id:
+      - urn:li:share:7348349577130860544
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 08 Jul 2025 13:57:45 GMT
+      X-Li-Fabric:
+      - prod-ltx1
+      Connection:
+      - keep-alive
+      X-Li-Source-Fabric:
+      - prod-lva1
+      X-Li-Pop:
+      - prod-lva1-x
+      X-Li-Proto:
+      - http/1.1
+      X-Li-Uuid:
+      - AAY5a1g6OGn7KVIYH8egFQ==
+      Set-Cookie:
+      - bcookie="v=2&6082b851-071d-45e5-8e25-0ee07b1fad7d"; domain=.linkedin.com;
+        Path=/; Secure; Expires=Wed, 08-Jul-2026 13:57:45 GMT; SameSite=None
+      - lidc="b=TB68:s=T:r=T:a=T:p=T:g=7351:u=283:x=1:i=1751983064:t=1752019977:v=2:sig=AQGcgQGGbMI-4PwGQ4Sfrn-LQcNOZRIB"
+      X-Li-Route-Key:
+      - '"b=TB68:s=T:r=T:a=T:p=T:g=7351:u=283:x=1:i=1751983064:t=1752019977:v=2:sig=AQGcgQGGbMI-4PwGQ4Sfrn-LQcNOZRIB"'
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Tue, 08 Jul 2025 13:57:45 GMT
+recorded_with: VCR 6.3.1

@@ -1,0 +1,12 @@
+<% layout_class = local_assigns.fetch(:layout_class, "flex flex-col items-center gap-4 text-center") %>
+<div class="<%= layout_class %>">
+  <p class="text-sm text-secondary sm:text-base">
+    Connect an account so POSSE Party knows where to publish your posts.
+  </p>
+  <%= render "shared/button",
+    path: new_account_path,
+    text: "Add Account",
+    variant: :primary,
+    icon: "plus"
+  %>
+</div>

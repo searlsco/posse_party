@@ -1,0 +1,59 @@
+<% config = Searls::Auth.config %>
+<% email_methods = config.auth_methods & [:email_link, :email_otp] %>
+<% password_only = email_methods.empty? %>
+<% send_login_email_enabled = email_methods.any? %>
+<% forgot_password_enabled = config.password_reset_enabled? %>
+
+<h1 class="<%= auth_heading_classes("mb-6") %>">Log In</h1>
+
+<%= form_with url: searls_auth.login_path, data: { controller: searls_auth_helper.login_stimulus_controller } do |f| %>
+  <%= f.hidden_field :redirect_path, value: params[:redirect_path] %>
+
+  <div class="space-y-5">
+    <div>
+      <%= f.label :email, class: auth_label_classes %>
+      <%= f.email_field :email,
+          required: true,
+          value: params[:email],
+          data: searls_auth_helper.email_field_stimulus_data.merge(action: "input->searls-auth-login#updateEmail change->searls-auth-login#updateEmail"),
+          class: auth_input_classes,
+          placeholder: "Email address",
+          style: "appearance: none;" %>
+    </div>
+
+    <div>
+      <%= f.label :password, class: auth_label_classes %>
+      <%= f.password_field :password,
+          autocomplete: "current-password",
+          required: password_only,
+          class: auth_input_classes,
+          placeholder: "Password" %>
+    </div>
+  </div>
+
+  <div class="mt-8 space-y-3">
+    <%= f.submit "Log in",
+        class: auth_primary_button_classes %>
+
+    <% if send_login_email_enabled %>
+      <%= button_tag "Log in via email",
+          name: "send_login_email",
+          value: "1",
+          class: auth_secondary_button_classes %>
+    <% end %>
+  </div>
+
+  <% if forgot_password_enabled %>
+    <div class="mt-4 text-center">
+      <%= link_to "Forgot your password?", searls_auth_helper.password_reset_request_path,
+          class: auth_link_classes %>
+    </div>
+  <% end %>
+<% end %>
+
+<p class="mt-6 text-center text-secondary">
+  Not registered yet?
+  <%= link_to "Sign up", searls_auth.register_path,
+      class: auth_link_classes %>
+  instead!
+</p>

@@ -1,0 +1,97 @@
+<% content_for :container_classes, "w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6" %>
+
+<style>
+  /* Make lazy loading frames trigger earlier by adding margin */
+  turbo-frame[loading="lazy"] {
+    /* This creates an invisible extension that triggers intersection observer earlier */
+    margin-bottom: 200px;
+  }
+
+  /* But keep the visual content centered */
+  turbo-frame[loading="lazy"] > * {
+    margin-bottom: -200px;
+  }
+</style>
+
+<div data-controller="filterable" data-filterable-backend-mode-value="true">
+  <div class="flex flex-col gap-4 mb-6 md:flex-row md:items-start md:justify-between">
+    <div>
+      <h1 class="mb-2 text-3xl font-bold text-primary">Posts</h1>
+      <p class="text-secondary">Manage your crossposted content across all your accounts</p>
+    </div>
+
+    <!-- Search Input -->
+    <div class="relative w-full md:w-auto md:min-w-[320px]">
+      <%= form_with url: posts_path, method: :get, class: "relative", data: { "turbo-frame": "posts-search-frame", "turbo-action": "advance" } do |f| %>
+        <%= f.text_field :q,
+            value: @query,
+            placeholder: "Search posts by title, URL, content...",
+            data: {
+              "filterable-target": "queryInput",
+              action: "input->filterable#search keydown->filterable#keydown"
+            },
+            class: "w-full h-[48px] pl-10 pr-10 text-sm border border-primary rounded-lg bg-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200" %>
+        <%= render "icons/magnifying_glass", class: "absolute -translate-y-1/2 left-3 top-1/2 size-4 text-secondary" %>
+
+        <!-- Clear button -->
+        <%= link_to posts_path,
+            class: "absolute -translate-y-1/2 right-3 top-1/2 p-1 text-secondary hover:text-primary transition-colors #{@query.present? ? '' : 'hidden'}",
+            aria: { label: "Clear search" },
+            data: {
+              "filterable-target": "clearButton",
+              action: "click->filterable#clear"
+            } do %>
+          <%= render "icons/x_mark", class: "size-4" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= turbo_frame_tag "posts-search-frame", target: "_top" do %>
+    <% if @posts.any? %>
+      <% unless @has_accounts %>
+        <div class="p-4 mb-6 border border-dashed rounded-xl border-accent/30 bg-accent/5 sm:p-6">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+            <h2 class="text-lg font-semibold text-primary">Add an account to start syndicating</h2>
+            <%= render "connect_account_prompt", layout_class: "flex flex-col gap-3 text-left sm:flex-row sm:items-center sm:gap-4" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-1 gap-6 xl:grid-cols-2" id="posts-grid" data-filterable-target="container">
+        <%= render "posts", posts: @posts %>
+      </div>
+
+      <% if @page && !@page.last? %>
+        <%= render "next_page_frame", page_number: 2, query: @query %>
+      <% end %>
+    <% else %>
+      <div class="flex flex-col items-center justify-center py-16 text-center">
+        <%= render "icons/chat_bubble_left_right", class: "mb-4 size-16 text-secondary" %>
+        <% if @query.present? %>
+          <h3 class="<%= subheading_classes %>">No results found</h3>
+          <p class="mb-6 text-secondary">Try adjusting your search terms</p>
+        <% else %>
+          <h3 class="<%= subheading_classes %>">No crossposts yet</h3>
+          <% if !@has_feeds  %>
+            <p class="mb-6 text-secondary">
+              Add a feed to import posts that POSSE Party can crosspost for you.
+            </p>
+            <%= render "shared/button",
+              path: new_feed_path,
+              text: "Add Feed",
+              variant: :primary,
+              icon: "plus"
+            %>
+          <% elsif !@has_accounts %>
+            <%= render "connect_account_prompt", layout_class: "flex flex-col items-center gap-4 text-center" %>
+          <% else %>
+            <p class="mb-6 text-secondary">
+              As soon as any posts are found on your feeds, they'll appear here.
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

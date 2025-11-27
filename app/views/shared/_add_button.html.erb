@@ -1,0 +1,7 @@
+<%= render "shared/button",
+    path: path,
+    text: text,
+    variant: :secondary,
+    size: :medium,
+    icon: "plus",
+    **local_assigns.except(:path, :text) %>

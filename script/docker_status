@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+env_file=".env"
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+os_name() {
+  if [[ -r /etc/os-release ]]; then
+    . /etc/os-release
+    echo "${PRETTY_NAME}"
+  else
+    uname -srmo
+  fi
+}
+
+cpu_count() {
+  nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo "unknown"
+}
+
+ram_total() {
+  if command -v free >/dev/null 2>&1; then
+    free -h | awk '/^Mem:/ {print $2}'
+  elif [[ -r /proc/meminfo ]]; then
+    awk '/^MemTotal:/ {printf "%.2fGB\n", $2/1024/1024}' /proc/meminfo
+  else
+    echo "unknown"
+  fi
+}
+
+image_ref() {
+  if [[ -n "${POSSE_IMAGE:-}" ]]; then
+    echo "${POSSE_IMAGE}"
+  elif [[ -f "${env_file}" ]]; then
+    grep '^POSSE_IMAGE=' "${env_file}" | tail -n1 | cut -d= -f2-
+  fi
+}
+
+image_id() {
+  docker image inspect --format '{{.Id}}' "$1" 2>/dev/null || true
+}
+
+echo "<---- Host"
+echo "OS: $(os_name)"
+echo "CPU cores: $(cpu_count)"
+echo "RAM: $(ram_total)"
+
+image="$(image_ref)"
+
+if [[ -z "${image}" ]]; then
+  echo "POSSE_IMAGE not set in environment or .env" >&2
+  exit 1
+fi
+
+current_id="$(image_id "${image}")"
+printf "\n<---- Image\n"
+echo "Configured: ${image}"
+echo "Local ID: ${current_id:-not present}"
+
+printf "\n<---- Containers\n"
+printf "%-10s %-30s %-12s %-10s\n" "SERVICE" "CONTAINER" "STATE" "HEALTH"
+docker compose -f "${compose_file}" ps --format '{{.Service}}|{{.Name}}|{{.State}}|{{.Health}}' |
+  while IFS='|' read -r service name state health; do
+    printf "%-10s %-30s %-12s %-10s\n" "${service}" "${name}" "${state}" "${health:--}"
+  done
+
+printf "\n<---- Upgrade check\n"
+before_id="${current_id}"
+if docker pull "${image}" >/dev/null 2>&1; then
+  after_id="$(image_id "${image}")"
+  if [[ -n "${before_id}" && "${before_id}" != "${after_id}" ]]; then
+    echo "Update available (fetched newer image for ${image})."
+    echo "New ID: ${after_id}"
+  else
+    echo "No update available; image is current."
+  fi
+else
+  echo "Unable to check for updates (pull failed)." >&2
+fi

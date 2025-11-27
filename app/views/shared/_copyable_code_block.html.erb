@@ -1,0 +1,14 @@
+<% base_block_classes = "text-sm font-mono whitespace-pre-wrap break-all bg-primary px-3 py-3 rounded-md border border-primary overflow-x-auto overflow-y-auto max-h-64" %>
+<% block_classes = class_names(base_block_classes, local_assigns[:classes]) %>
+<% button_wrapper_classes = class_names("flex justify-end mt-2", local_assigns[:button_wrapper_classes]) %>
+<% button_classes = class_names("cursor-pointer inline-flex items-center justify-center rounded-md border border-primary text-primary text-xs font-medium px-2.5 py-1 hover:bg-primary/10 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-primary transition", local_assigns[:button_classes]) %>
+<% button_label = local_assigns[:button_label] || "Copy" %>
+
+<div data-controller="clipboard">
+  <pre class="<%= block_classes %>"><code data-clipboard-target="source"><%= code %></code></pre>
+  <input type="hidden" value="<%= code %>" data-clipboard-target="hidden" />
+  <span class="sr-only" aria-live="polite" data-clipboard-target="status"></span>
+  <div class="<%= button_wrapper_classes %>">
+    <button type="button" data-action="clipboard#copy" data-clipboard-target="button" class="<%= button_classes %>"><%= button_label %></button>
+  </div>
+</div>

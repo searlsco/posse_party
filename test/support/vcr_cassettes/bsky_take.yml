@@ -1,0 +1,179 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://bsky.social/xrpc/com.atproto.server.createSession
+    body:
+      encoding: UTF-8
+      string: '{"identifier":"user@example.com","password":"password"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 29 Jan 2025 03:03:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Ratelimit-Limit:
+      - '10'
+      Ratelimit-Remaining:
+      - '9'
+      Ratelimit-Reset:
+      - '1738206235'
+      Ratelimit-Policy:
+      - 10;w=86400
+      Etag:
+      - W/"5dc-iOkflIibdLf9jyDo2zUdYCHiRXI"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: '{"did":"did:plc:vvwq23uzqcsoekea65qzdddk","didDoc":{"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1","https://w3id.org/security/suites/secp256k1-2019/v1"],"id":"did:plc:vvwq23uzqcsoekea65qzdddk","alsoKnownAs":["at://alharrington.bsky.social"],"verificationMethod":[{"id":"did:plc:vvwq23uzqcsoekea65qzdddk#atproto","type":"Multikey","controller":"did:plc:vvwq23uzqcsoekea65qzdddk","publicKeyMultibase":"zQ3shujw8QjiJLmHLfE8xJazAmb6L3Hz8eJ21A5ahaWj5e18X"}],"service":[{"id":"#atproto_pds","type":"AtprotoPersonalDataServer","serviceEndpoint":"https://rooter.us-west.host.bsky.network"}]},"handle":"alharrington.bsky.social","email":"user@example.com","emailConfirmed":true,"emailAuthFactor":false,"accessJwt":"ACCESS_JWT_PLACEHOLDER","refreshJwt":"REFRESH_JWT_PLACEHOLDER","active":true}'
+  recorded_at: Wed, 29 Jan 2025 03:03:55 GMT
+- request:
+    method: post
+    uri: https://bsky.social/xrpc/com.atproto.repo.createRecord
+    body:
+      encoding: UTF-8
+      string: '{"collection":"app.bsky.feed.post","$type":"app.bsky.feed.post","repo":"did:plc:vvwq23uzqcsoekea65qzdddk","record":{"$type":"app.bsky.feed.post","createdAt":"2025-01-29T03:03:55.226Z","text":"Three
+        quick takes on ChatGPT integration in iOS 18.2:\n\n1. You can disable Siri
+        prompting you for permission to query ChatGPT\n2. When using ChatGPT via Siri,
+        you can type a follow-up and it’ll hold context and respond\n3. If you want
+        to bypass vanilla Siri actions, you may need to preface... continued","facets":[{"$type":"app.bsky.richtext.facet","index":{"byteStart":293,"byteEnd":302},"features":[{"uri":"https://justin.searls.co/takes/2024-10-29-09h22m34s/","$type":"app.bsky.richtext.facet#link"}]}]}}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer ACCESS_JWT_PLACEHOLDER
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 29 Jan 2025 03:03:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '276'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Ratelimit-Limit:
+      - '3000'
+      Ratelimit-Remaining:
+      - '2998'
+      Ratelimit-Reset:
+      - '1738120027'
+      Ratelimit-Policy:
+      - 3000;w=300
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: '{"uri":"at://did:plc:vvwq23uzqcsoekea65qzdddk/app.bsky.feed.post/3lgtybpyq7l23","cid":"bafyreib7fc5jmj2pietr6tbxl6qlibprb5cnwukzowoy23xg5nbzguksc4","commit":{"cid":"bafyreiehhlf7g5ikqnhm5nvcgisklifmvqzkkvbf3tlxd6hgrmpqobjslm","rev":"3lgtybpyxzl23"},"validationStatus":"valid"}'
+  recorded_at: Wed, 29 Jan 2025 03:03:55 GMT
+- request:
+    method: get
+    uri: https://plc.directory/did:plc:vvwq23uzqcsoekea65qzdddk
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 29 Jan 2025 03:03:56 GMT
+      Content-Type:
+      - application/did+ld+json; charset=utf-8
+      Content-Length:
+      - '568'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"238-AlBoAINHXE/P6+qG6Jf/IYKeZRY"
+    body:
+      encoding: UTF-8
+      string: '{"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1","https://w3id.org/security/suites/secp256k1-2019/v1"],"id":"did:plc:vvwq23uzqcsoekea65qzdddk","alsoKnownAs":["at://alharrington.bsky.social"],"verificationMethod":[{"id":"did:plc:vvwq23uzqcsoekea65qzdddk#atproto","type":"Multikey","controller":"did:plc:vvwq23uzqcsoekea65qzdddk","publicKeyMultibase":"zQ3shujw8QjiJLmHLfE8xJazAmb6L3Hz8eJ21A5ahaWj5e18X"}],"service":[{"id":"#atproto_pds","type":"AtprotoPersonalDataServer","serviceEndpoint":"https://rooter.us-west.host.bsky.network"}]}'
+  recorded_at: Wed, 29 Jan 2025 03:03:56 GMT
+- request:
+    method: get
+    uri: https://alharrington.bsky.social/.well-known/atproto-did
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - alharrington.bsky.social
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 29 Jan 2025 03:03:56 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"20-Ynh6l4D29pFCIVmPhEngUa5383Y"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: did:plc:vvwq23uzqcsoekea65qzdddk
+  recorded_at: Wed, 29 Jan 2025 03:03:56 GMT
+recorded_with: VCR 6.3.1

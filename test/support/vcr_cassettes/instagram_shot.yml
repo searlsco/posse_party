@@ -1,0 +1,279 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.instagram.com/v24.0/{{user_id}}/media?access_token={{access_token}}&caption=Nearly%20all%20Japan%27s%20overtourism%20woes%20could%20be%20solved%20overnight%20if%20the%20nation%20simply%20outlawed%20roller%20bags.%0A%0ASee%20the%20full%20post%20at:%0Ahttps://justin.searls.co/shots/2025-06-15-14h42m44s/&image_url=https://justin.searls.co/shots/2025-06-15-09h26m00s-a30adcd.jpeg
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AZWdka_GcCqdrTVm-CDGb3C
+      X-Fb-Trace-Id:
+      - Efdwz9gEsFi
+      X-Fb-Rev:
+      - '1028397221'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - pwKFCiUQWm+7bAbRdg6O02qhkBht7PkMtrg9jMIBBwTc6XMJ2o2f0yZv3DrBuXaFw+dq52HARGaPH4ZHtsBL+A==
+      Date:
+      - Tue, 14 Oct 2025 19:03:04 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=32, rtx=1, c=15, mss=1380, tbw=4429, tp=-1, tpl=-1,
+        uplat=4043, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"id":"17874540375429190"}'
+  recorded_at: Tue, 14 Oct 2025 19:03:04 GMT
+- request:
+    method: post
+    uri: https://graph.instagram.com/v24.0/{{user_id}}/media_publish?access_token={{access_token}}&creation_id=17874540375429190
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Debug-Link:
+      - https://www.meta.com/debug/?mid=dc39e6f9fae40ecb1cb33e6a1700e6f4
+      Error-Mid:
+      - dc39e6f9fae40ecb1cb33e6a1700e6f4
+      Vary:
+      - Accept-Encoding
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Www-Authenticate:
+      - OAuth "Facebook Platform" "invalid_request" "Media ID is not available"
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-store
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - ALk_ISixO1ugUKxw_O-nRv-
+      X-Fb-Trace-Id:
+      - ARMBJBt7GZH
+      X-Fb-Rev:
+      - '1028406838'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - 2dX2zGf3CoFl4/+tkZB22yrlvXKjnYDIahNa/+Tf9SOXPUon7R18igzKonhqn7qkYool5jaEGwmjggE0S6L2sA==
+      Date:
+      - Tue, 14 Oct 2025 19:03:04 GMT
+      Proxy-Status:
+      - http_request_error; e_fb_vipaddr="AcOfuCK0Qus3Q0WbA3JzF8xLsRjVHD-2sh5Cu-rNjoqYLMRU9gXQvLVmLVttURbeh09x-YexcMtvz2On9PErdx8ucuttE3PdxvwKw7c";
+        e_clientaddr="AcPontWkP710PlUICZTk5IJdYZVZg4bz9mX5OzUlx-VkFofVJfuzATtXxblzxV1322P2fWNhQIqo8V_zXrOlibVUEciMNCJsGTrZGNqpTZq_BLTb";
+        e_upip="AcNX4Y40nsPVZyU4dZ3JmdOE0OqZSkMbMsbJBFBR3oAsgDzivyHILnan3K0P4KSUMl50bawIP5jSXnAycRANwNdrslo2qk62XuD2QsBq3vM";
+        e_fb_zone="AcOHeMxI21-6ZndXuIs6JcjcgYAWefulD3tBv_cJmbn4GdK-6qxFcM12Ip7I_dky";
+        e_fb_twtaskhandle="AcN8uktusBRHs_JasjZw0lLPSf9T4UUMk09s-Pj3TspVfVPWLNV9x2rjD0ZOOn55UYdSiFL7RwEh6nlsaYGnFwF-KHlFwETbbqECMHffAA";
+        e_proxy="AcMFFGWydJEYupu7c-zRUaSBieQxZYdIij6kfTH_8gHxhWLreN3zZgG39zThzFOUXDZLIeFLIWP6vhqW-nuU",
+        http_request_error; e_fb_vipaddr="AcN8Uyx6r5q5NOazFjpU5W338S4aG2UzqSMOaDVTOQaN99LhL8ow-Qd5qp9dpiCZzFr_wUOryw";
+        e_clientaddr="AcM-CWTa1GibrpKwSScVZallpNcKeBmhQ_52qyb05_-jf5x4TkQXKjB78dQ26KUb5nct6xTB1gLX14zgboA";
+        e_upip="AcNYtveV2mwUophkkR0bb755tN6FeWaSijep539QZqHUnAJLhp_Pj2xjRnhmO1nH6F2Q7PLgA7QndeLafQh6BixHGqp7Oc8tfupXl80";
+        e_fb_zone="AcMPzW-_5kL2_A9UQIQLQqd3QG2W1uZmwWW2ApJGcaYEYEQciMLNjkUUDNsEUA";
+        e_fb_twtaskhandle="AcOwJofGLm5eNzWBOdI-ga4Iz0LxjuTMFdWtzVQermk2SpiYLVVO8DmAJvVzeaNCWAMsvYabYcAQ27R9Ta4rDjf8H8mzStq58jJW";
+        e_proxy="AcOidmw_X6pO-Stx9om3gpiqNAYjWb2wvMImo4M0UMI6PZkiRMn5rgOA1Bdj_Y1IvHL_5vcPWoSN4qi5"
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=34, rtx=0, c=15, mss=1380, tbw=4429, tp=-1, tpl=-1,
+        uplat=177, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '288'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"error":{"message":"Media ID is not available","type":"OAuthException","code":9007,"error_subcode":2207027,"is_transient":false,"error_user_title":"Cannot
+        Publish","error_user_msg":"The media is not ready for publishing, please wait
+        for a moment","fbtrace_id":"ALk_ISixO1ugUKxw_O-nRv-"}}'
+  recorded_at: Tue, 14 Oct 2025 19:03:04 GMT
+- request:
+    method: post
+    uri: https://graph.instagram.com/v24.0/{{user_id}}/media_publish?access_token={{access_token}}&creation_id=17874540375429190
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AxJWMinLyxGb9wBa0AxjnMo
+      X-Fb-Trace-Id:
+      - GaAapOvLJ3n
+      X-Fb-Rev:
+      - '1028406838'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - 273ZDhtV6n/CQaKMCgpqoBUKY7cE2Tro7fq5edbWRNqm2ti1CyZ/UXNwVgmzLnTvI7eMjlXthaPgE/Po5h0AZg==
+      Date:
+      - Tue, 14 Oct 2025 19:03:07 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=27, rtx=0, c=15, mss=1380, tbw=4429, tp=-1, tpl=-1,
+        uplat=2215, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"id":"17856798243479380"}'
+  recorded_at: Tue, 14 Oct 2025 19:03:07 GMT
+- request:
+    method: get
+    uri: https://graph.instagram.com/v24.0/17856798243479380?access_token={{access_token}}&fields=permalink
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"017626224be89df1c473a71d00843ae7eb42d608"'
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin
+      Cross-Origin-Resource-Policy:
+      - cross-origin
+      X-App-Usage:
+      - '{"call_volume":0,"cpu_time":0}'
+      Instagram-Api-Version:
+      - v24.0
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; preload; includeSubDomains
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      X-Fb-Request-Id:
+      - AvGW7YEVUJu-cVK-KMCDII1
+      X-Fb-Trace-Id:
+      - BQP5IGUXbJY
+      X-Fb-Rev:
+      - '1028397221'
+      X-Stack:
+      - www
+      X-Fb-Debug:
+      - 9AqPuTe3vc/T8PsMGE9Hau9QDaHABvHRWl283743MH2S1dKQRlh8/GaO4NGvS2wOwRUZqFUQSvpKN/tSm5sz8A==
+      Date:
+      - Tue, 14 Oct 2025 19:03:07 GMT
+      X-Fb-Connection-Quality:
+      - EXCELLENT; q=0.9, rtt=26, rtx=0, c=15, mss=1380, tbw=4428, tp=-1, tpl=-1,
+        uplat=153, ullat=0
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '86'
+    body:
+      encoding: UTF-8
+      string: '{"permalink":"https:\/\/www.instagram.com\/p\/DPzPlMyj9W8\/","id":"17856798243479380"}'
+  recorded_at: Tue, 14 Oct 2025 19:03:07 GMT
+recorded_with: VCR 6.3.1

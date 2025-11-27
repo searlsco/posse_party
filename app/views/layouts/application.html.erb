@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <%= render partial: "shared/head" %>
+  <body class="flex flex-col min-h-dvh lg:flex-row bg-primary text-primary">
+    <nav class="hidden lg:block">
+      <%= render partial: "shared/side_bar", locals: {
+        current_tab: controller.tab_name
+      } %>
+    </nav>
+    <div class="w-full grow lg:pl-8">
+      <%= yield :navbar %>
+      <%= content_tag :main, class: class_names(
+        "flex flex-col pb-26 lg:pb-6",
+        (content_for?(:container_classes) ? yield(:container_classes) : "max-w-3xl max-lg:mx-auto py-6 px-2"),
+      ) do %>
+        <div id="flashes" data-controller="flashes">
+          <%= render partial: "shared/flashes" %>
+        </div>
+        <%= yield %>
+      <% end %>
+    </div>
+    <%= render partial: "shared/tab_bar", locals: {
+      current_tab: controller.tab_name,
+    } %>
+  </body>
+</html>

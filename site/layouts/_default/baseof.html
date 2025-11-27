@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{ partial "head.html" . }}
+    {{ block "extra_head" . }}{{ end }}
+  </head>
+  <body class="{{ with .Params.body_class }}{{ . }}{{ end }}">
+    <main class="container mx-auto">
+      {{ block "main" . }}{{ end }}
+    </main>
+  </body>
+</html>

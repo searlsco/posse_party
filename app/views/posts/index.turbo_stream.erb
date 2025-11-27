@@ -1,0 +1,33 @@
+<% if @query.present? && @page.number == 1 %>
+  <!-- Search mode first page: replace entire frame content -->
+  <%= turbo_stream.replace "posts-search-frame" do %>
+    <% if @posts.any? %>
+      <div class="grid grid-cols-1 gap-6 xl:grid-cols-2" id="posts-grid">
+        <%= render "posts", posts: @posts %>
+      </div>
+
+      <% if @page && !@page.last? %>
+        <%= render "next_page_frame", page_number: @page.number + 1, query: @query %>
+      <% end %>
+    <% else %>
+      <div class="flex flex-col items-center justify-center py-16">
+        <%= render "icons/chat_bubble_left_right", class: "mb-4 size-16 text-secondary" %>
+        <h3 class="<%= subheading_classes %>">No results found</h3>
+        <p class="mb-6 text-secondary">Try adjusting your search terms</p>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <!-- Infinite scroll mode: append to posts grid (for both search and non-search) -->
+  <%= turbo_stream.append "posts-grid" do %>
+    <%= render "posts", posts: @posts %>
+  <% end %>
+
+  <% unless @page.last? %>
+    <%= turbo_stream.replace "posts_page_#{@page.number}" do %>
+      <%= render "next_page_frame", page_number: @page.number + 1, query: @query %>
+    <% end %>
+  <% else %>
+    <%= turbo_stream.remove "posts_page_#{@page.number}" %>
+  <% end %>
+<% end %>

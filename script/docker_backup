@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+compose_file="docker-compose.yml"
+backup_dir="backups"
+timestamp="$(date +%Y-%m-%d-%H-%M-%S)"
+backup_file="${1:-}"
+
+if [[ -z "${backup_file}" ]]; then
+  backup_file="${backup_dir}/${timestamp}-posse-party-backup.sql.gz"
+fi
+
+if [[ ! -f "${compose_file}" ]]; then
+  echo "docker-compose.yml is missing. Re-run setup.sh on this host." >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "${backup_file}")"
+
+docker compose -f "${compose_file}" up -d db
+docker compose -f "${compose_file}" exec -T db pg_dump -U postgres posse_party_production |
+  gzip -c  > "${backup_file}"
+
+echo "Backup written to ${backup_file}"

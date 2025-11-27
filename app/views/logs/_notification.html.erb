@@ -1,0 +1,39 @@
+<%
+  sev_class = case notification.severity.to_s
+    when "success" then "text-success"
+    when "warn" then "text-warn"
+    when "danger" then "text-danger"
+    else "text-info"
+  end
+  unread = notification.seen_at.nil?
+  # Make unread rows more visually distinct without custom CSS
+  base_grad = unread ? (
+    # Stronger tint for unread rows
+    "bg-gradient-to-r from-accent-100/40 via-accent-200/60 to-accent-300/50 dark:from-accent-900/60 dark:via-accent-800/50 dark:to-accent-700/40"
+  ) : (
+    # Softer tint for read rows
+    "bg-gradient-to-r from-accent-50/10 via-accent-50/15 to-accent-100/25 dark:from-accent-900/30 dark:via-accent-900/20 dark:to-accent-800/15"
+  )
+  hover_grad = unread ? (
+    "hover:from-accent-100/50 hover:via-accent-200/65 hover:to-accent-300/70 dark:hover:from-accent-800/60 dark:hover:via-accent-700/50 dark:hover:to-accent-600/40"
+  ) : (
+    "hover:from-accent-50/20 hover:via-accent-100/25 hover:to-accent-200/35 dark:hover:from-accent-900/40 dark:hover:via-accent-900/30 dark:hover:to-accent-700/25"
+  )
+  title_class = unread ? "text-primary font-semibold" : "text-secondary"
+  # Extra accent affordances for unread: subtle ring and left border
+  unread_frame = unread ? "ring-1 ring-accent/40 border-l-4 border-accent" : ""
+%>
+
+<%= link_to log_path(notification), data: { turbo_prefetch: "false", turbo_preview: "false" }, class: [
+      "grid grid-cols-[24px_minmax(0,1fr)_auto] items-center gap-x-3",
+      "px-3 py-1.5 sm:px-4 sm:py-2",
+      "transition-colors duration-200 cursor-pointer",
+      "border-t border-accent/40 first:border-t-0",
+      base_grad, hover_grad, unread_frame
+    ].join(" ") do %>
+  <div class="justify-self-start">
+    <%= render "icons/#{notification_icon(notification.severity)}", class: "size-5 sm:size-6 #{sev_class}" %>
+  </div>
+  <div class="min-w-0 text-left truncate text-sm sm:text-base #{title_class}"><%= notification.title %></div>
+  <time class="hidden sm:block text-right text-xs text-secondary whitespace-nowrap" datetime="<%= notification.created_at.iso8601 %>"><%= time_ago_in_words(notification.created_at) %> ago</time>
+<% end %>

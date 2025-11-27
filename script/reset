@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+exec ./bin/rake db:migrate:reset db:seed
+exec ./script/setup

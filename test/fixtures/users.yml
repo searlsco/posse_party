@@ -1,0 +1,13 @@
+admin:
+  email: admin@example.com
+  admin: true
+  api_key: <%= SecureRandom.hex(32) %>
+  password_digest: <%= BCrypt::Password.create("AdminPassword!1") %>
+  email_verified_at: 2025-01-01 00:00:00
+
+user:
+  email: misteruser@example.com
+  admin: false
+  api_key: <%= SecureRandom.hex(32) %>
+  password_digest: <%= BCrypt::Password.create("UserPass!2") %>
+  email_verified_at: 2025-01-01 00:00:00

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Feature or enhancement ideas
+    url: https://github.com/searlsco/posse_party/pulls
+    about: Feature and enhancement requests are not accepted here and will be closed without comment.

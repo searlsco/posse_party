@@ -1,0 +1,4 @@
+baseURL = 'https://posseparty.com/'
+languageCode = 'en-us'
+title = 'POSSE Party'
+disableKinds = ['taxonomy', 'term']

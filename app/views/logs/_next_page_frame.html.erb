@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "logs_page_#{page_number}",
+  src: logs_path(page: page_number, q: query, format: :turbo_stream),
+  loading: :lazy do %>
+  <div class="p-4 text-center text-secondary">Loading more…</div>
+<% end %>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:posse="https://posseparty.com/2024/Feed"
+  xsi:schemaLocation="https://posseparty.com/2024/Feed https://posseparty.com/2024/Feed.xsd"
+  targetNamespace="https://posseparty.com/2024/Feed"
+  elementFormDefault="qualified">
+
+  <xs:element name="post">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="format" type="xs:string" default="json"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

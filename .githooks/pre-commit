@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Regenerate the curl installer so it always matches compose + scripts
+if [[ -x script/sync_setup_sh ]]; then
+  script/sync_setup_sh
+fi
+
+# Auto-stage regenerated installer to keep UX smooth
+git add site/static/setup.sh

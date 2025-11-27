@@ -1,0 +1,20 @@
+<%= render "shared/page_header",
+  title: "Feeds",
+  button_path: new_feed_path,
+  button_text: "Add Feed",
+  button_icon: "plus" %>
+
+<% if @feeds.any? %>
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <% @feeds.each do |feed| %>
+      <%= render "shared/feed_card", feed: feed %>
+    <% end %>
+  </div>
+<% else %>
+  <%= render "shared/empty_state",
+    icon: "newspaper",
+    title: "No feeds yet",
+    description: "Add your RSS/Atom feeds to import posts",
+    button_path: new_feed_path,
+    button_text: "Add your first feed" %>
+<% end %>

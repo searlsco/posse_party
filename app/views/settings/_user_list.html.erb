@@ -1,0 +1,17 @@
+<turbo-frame id="users_list">
+  <% if users.any? %>
+    <div class="flex flex-col gap-y-3">
+      <% users.each do |user| %>
+        <%= render "settings/user", user: user %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="flex flex-col items-center justify-center py-8 text-center">
+      <div class="flex items-center justify-center mb-3 rounded-full size-12 bg-secondary/10">
+        <%= render "icons/user_group", class: "size-6 text-secondary" %>
+      </div>
+      <p class="font-medium text-primary">No users to manage yet</p>
+      <p class="mt-1 text-sm text-secondary">Use the "Invite User" button to get started</p>
+    </div>
+  <% end %>
+</turbo-frame>

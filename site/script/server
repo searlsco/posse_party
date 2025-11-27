@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PORT="${PORT:-1313}"
+
+exec hugo server --port "$PORT" --disableFastRender
