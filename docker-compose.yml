@@ -74,12 +74,6 @@ services:
     depends_on:
       web:
         condition: service_started
-    healthcheck:
-      test: ["CMD-SHELL", "wget --max-redirect=1 -qO- http://localhost:80/ > /dev/null"]
-      interval: 10s
-      timeout: 3s
-      retries: 5
-      start_period: 5s
     ports:
       - "${APP_PORT:-80}:80"
       - "443:443"
