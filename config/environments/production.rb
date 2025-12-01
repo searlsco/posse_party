@@ -98,7 +98,7 @@ Rails.application.configure do
     http_port = ENV["APP_HTTP_PORT"].presence
     https_port = ENV["APP_HTTPS_PORT"].presence
 
-    port = host_settings.protocol == "https" ? https_port : http_port
+    port = (host_settings.protocol == "https") ? https_port : http_port
 
     port = nil if [host_settings.protocol, port] == ["http", "80"] ||
       [host_settings.protocol, port] == ["https", "443"]
