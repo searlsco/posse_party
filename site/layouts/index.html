@@ -37,7 +37,7 @@
       .hero-tag { margin-top: 12px; font-size: clamp(32px, 5.2vw, 65px); font-weight: 900; letter-spacing: .3px; }
       .hero-sub { margin-top: 24px; font-size: clamp(24px, 3.4vw, 31px); font-weight: 700; color: var(--fg); max-width: 860px; }
       .hero-platforms { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-      .hero-platforms-label { font-size: 18px; font-weight: 600; }
+      .hero-platforms-label { font-size: 20px; font-weight: 600; text-align: left; }
       .hero-platforms-icons { margin-top: 6px; display: grid; grid-template-columns: repeat(4, minmax(0, auto)); gap: 18px; justify-content: center; }
       .platform-icon { width: 52px; height: 52px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; box-shadow: 0 0 0 1px #ffffff22, 0 0 26px #ffffff1a, 0 12px 26px #000a; }
       .platform-icon svg { width: 30px; height: 30px; display: block; }
@@ -69,7 +69,9 @@
       .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
       /* Screenshot */
-      .posts-preview { margin: var(--section-mt) 0 0; display: flex; justify-content: center; }
+      .posts-preview { margin: var(--section-mt) 0 0; display: flex; flex-direction: column; align-items: center; gap: 0; }
+      .posts-preview-title { font-size: 20px; font-weight: 700; text-align: left; width: 100%; max-width: 640px; margin: 0 auto 0.67em; }
+      .posts-preview-text { max-width: 640px; width: 100%; text-align: left; color: var(--muted); font-size: 15px; margin: 0 auto 1em; }
       .posts-preview-picture { width: 100%; max-width: 960px; max-height: 50dvh; border-radius: 18px; overflow: hidden; border: 1px solid #ffffff26; box-shadow: 0 18px 40px #000b; }
       .posts-preview-picture img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
@@ -101,6 +103,7 @@
       #install pre + pre { margin-top: 28px; }
       #install p { text-align: center; margin-top: var(--section-mt); }
       #install .run-text { text-align: left; margin-top: 0; color: var(--muted); }
+      #install h2 { font-size: 20px; text-align: left; }
 
       footer { display: none; }
 
@@ -176,6 +179,8 @@
       </section>
 
       <section class="posts-preview" aria-label="POSSE Party posts view">
+        <h2 class="posts-preview-title">The only feed you need</h2>
+        <p class="posts-preview-text">Once configured, all your posts and crossposts will be in one place for you to manage:</p>
         <picture class="posts-preview-picture">
           <source srcset="/img/posts-dark.webp" media="(prefers-color-scheme: dark)">
           <img src="/img/posts-light.webp" alt="Screenshot of POSSE Party posts view">
