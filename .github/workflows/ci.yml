@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -25,13 +22,10 @@ jobs:
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
 
-  scan_js:
+  scan_sh:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -39,6 +33,13 @@ jobs:
         run: |
           script/sync_setup_sh
           git diff --exit-code site/static/setup.sh
+
+  scan_js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
