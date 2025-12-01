@@ -9,10 +9,10 @@ class DeterminesHostSettings
     @parses_env_boolean = ParsesEnvBoolean.new
   end
 
-  def determine(app_host:, app_private_host:, app_port:, app_protocol_env:)
+  def determine(app_host:, app_private_host:, app_protocol_env:)
     host_is_ip = app_host && @identifies_ip_host.identify(app_host)
 
-    protocol = choose_protocol(app_protocol_env, app_private_host, app_port, app_host, host_is_ip)
+    protocol = choose_protocol(app_protocol_env, app_private_host, app_host, host_is_ip)
 
     force_ssl = choose_force_ssl(protocol, app_private_host, app_host, host_is_ip)
 
@@ -25,21 +25,17 @@ class DeterminesHostSettings
 
   private
 
-  def choose_protocol(app_protocol_env, app_private_host, app_port, app_host, host_is_ip)
+  def choose_protocol(app_protocol_env, app_private_host, app_host, host_is_ip)
     return app_protocol_env if app_protocol_env
     return "http" unless app_host
-    return "http" if app_port && app_port != "80"
-    return "https" if app_private_host
-    return "http" if host_is_ip
+    return "http" if host_is_ip && !app_private_host
 
     "https"
   end
 
   def choose_force_ssl(protocol, app_private_host, app_host, host_is_ip)
-    return false if app_private_host
-    return false if protocol == "http"
-    return false if host_is_ip
+    default_force_ssl = protocol == "https" && !app_private_host
 
-    @parses_env_boolean.parse("FORCE_SSL", default: app_host.present?)
+    @parses_env_boolean.parse("FORCE_SSL", default: default_force_ssl)
   end
 end

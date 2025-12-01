@@ -80,10 +80,8 @@ Rails.application.configure do
   config.host_authorization = {exclude: ->(request) { request.path == "/up" }}
 
   app_host = ENV["APP_HOST"].presence
-  app_port = ENV["APP_PORT"].presence
   host_settings = DeterminesHostSettings.new.determine(
     app_host: app_host,
-    app_port: app_port,
     app_private_host: ParsesEnvBoolean.new.parse("APP_PRIVATE_HOST", default: false),
     app_protocol_env: ENV["APP_PROTOCOL"].presence
   )
@@ -97,10 +95,18 @@ Rails.application.configure do
     secure: host_settings.cookies_secure
 
   if app_host
+    http_port = ENV["APP_HTTP_PORT"].presence
+    https_port = ENV["APP_HTTPS_PORT"].presence
+
+    port = host_settings.protocol == "https" ? https_port : http_port
+
+    port = nil if [host_settings.protocol, port] == ["http", "80"] ||
+      [host_settings.protocol, port] == ["https", "443"]
+
     url_options = {
       protocol: host_settings.protocol,
       host: app_host,
-      port: app_port
+      port: port
     }.compact
     Rails.application.routes.default_url_options = config.action_mailer.default_url_options = url_options
   end

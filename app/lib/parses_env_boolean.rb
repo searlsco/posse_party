@@ -4,6 +4,9 @@ class ParsesEnvBoolean
   end
 
   def parse(key, default:)
-    @boolean_type.cast(ENV.fetch(key) { default })
+    raw = ENV.fetch(key, nil)
+    return default if raw.nil? || raw == ""
+
+    @boolean_type.cast(raw)
   end
 end

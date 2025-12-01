@@ -89,7 +89,8 @@ RAILS_ASSET_HOST=${RAILS_ASSET_HOST:-}
 RAILS_ALLOWED_HOSTS=${RAILS_ALLOWED_HOSTS:-}
 
 # Changing these may disable automatic HTTPS or impact security
-APP_PORT=${APP_PORT:-80}
+APP_HTTP_PORT=${APP_HTTP_PORT:-80}
+APP_HTTPS_PORT=${APP_HTTPS_PORT:-443}
 APP_PRIVATE_HOST=${APP_PRIVATE_HOST:-false}
 APP_PROTOCOL=${APP_PROTOCOL:-}
 FORCE_SSL=${FORCE_SSL:-${force_ssl_default}}
@@ -119,8 +120,9 @@ docker compose -f docker-compose.yml up -d
 
 app_host=${APP_HOST:-}
 app_private=${APP_PRIVATE_HOST:-false}
-app_port=${APP_PORT:-80}
-app_port_suffix="${app_port:+:${app_port}}"
+app_http_port=${APP_HTTP_PORT:-80}
+app_https_port=${APP_HTTPS_PORT:-443}
+app_http_port_suffix="${app_http_port:+:${app_http_port}}"
 app_protocol=${APP_PROTOCOL:-}
 
 is_ip_host=false
@@ -133,9 +135,7 @@ if [[ -n "${app_host}" ]]; then
 fi
 
 https_mode="public"
-if [[ "${app_port}" != "80" ]]; then
-  https_mode="off:port"
-elif [[ "${app_protocol}" == "http" ]]; then
+if [[ "${app_protocol}" == "http" ]]; then
   https_mode="off:protocol"
 elif [[ "${app_private}" == "true" ]]; then
   https_mode="internal"
@@ -145,23 +145,23 @@ fi
 
 if [[ -n "${app_host}" ]]; then
   https_url="https://${app_host}"
-  http_url="http://${app_host}${app_port_suffix}"
+  http_url="http://${app_host}${app_http_port_suffix}"
 
   case "${https_mode}" in
     off:port)
       app_url="${http_url}"
-      https_status="DISABLED (APP_PORT != 80 disables automatic TLS/force_ssl)"
-      access_note="Caddy serving HTTP on :${app_port}. HTTPS not configured on non-80 port."
+      https_status="DISABLED (APP_PROTOCOL=http)"
+      access_note="Caddy serving HTTP on :${app_http_port}. HTTPS disabled because APP_PROTOCOL=http."
       ;;
     off:protocol)
       app_url="${http_url}"
       https_status="DISABLED (APP_PROTOCOL=http)"
-      access_note="Caddy serving HTTP on :${app_port}. HTTPS disabled because APP_PROTOCOL=http."
+      access_note="Caddy serving HTTP on :${app_http_port}. HTTPS disabled because APP_PROTOCOL=http."
       ;;
     off:ip)
       app_url="${http_url}"
       https_status="DISABLED (APP_HOST is an IP address; automatic TLS needs DNS)"
-      access_note="Caddy serving HTTP on :${app_port}. Automatic certificates require a DNS hostname."
+      access_note="Caddy serving HTTP on :${app_http_port}. Automatic certificates require a DNS hostname."
       ;;
     internal)
       app_url="${https_url}"
@@ -175,7 +175,7 @@ if [[ -n "${app_host}" ]]; then
       ;;
   esac
 else
-  app_url="http://localhost:${app_port}"
+  app_url="http://localhost:${app_http_port}"
   https_status="DISABLED (no APP_HOST set)"
   access_note="Web server is serving plain HTTP on :${app_port}. App container listens on http://localhost:3000 internally."
 fi

@@ -75,8 +75,8 @@ services:
       web:
         condition: service_started
     ports:
-      - "${APP_PORT:-80}:80"
-      - "443:443"
+      - "${APP_HTTP_PORT:-80}:80"
+      - "${APP_HTTPS_PORT:-443}:443"
     command: >
       sh -c '
         is_ip() {
@@ -92,7 +92,7 @@ services:
           echo "  reverse_proxy web:3000";
           echo "}";
           if [ -n "$APP_HOST" ]; then
-            if [ "${APP_PORT:-80}" != "80" ] || [ "${APP_PROTOCOL:-}" = "http" ] || { [ "${APP_PRIVATE_HOST:-false}" != "true" ] && is_ip "$APP_HOST"; }; then
+            if [ "${APP_PROTOCOL:-}" = "http" ] || { [ "${APP_PRIVATE_HOST:-false}" != "true" ] && is_ip "$APP_HOST"; }; then
               echo "http://$APP_HOST:80 {";
               echo "  reverse_proxy web:3000";
               echo "}";
