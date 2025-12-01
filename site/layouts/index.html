@@ -72,7 +72,7 @@
       .posts-preview { margin: var(--section-mt) 0 0; display: flex; flex-direction: column; align-items: center; gap: 0; }
       .posts-preview-title { font-size: 20px; font-weight: 700; text-align: left; width: 100%; max-width: 640px; margin: 0 auto 0.67em; }
       .posts-preview-text { max-width: 640px; width: 100%; text-align: left; color: var(--muted); font-size: 15px; margin: 0 auto 1em; }
-      .posts-preview-picture { width: 100%; max-width: 960px; max-height: 50dvh; border-radius: 18px; overflow: hidden; border: 1px solid #ffffff26; box-shadow: 0 18px 40px #000b; }
+      .posts-preview-picture { width: 100%; max-width: 1400px; max-height: 70dvh; border-radius: 18px; overflow: hidden; border: 1px solid #ffffff26; box-shadow: 0 18px 40px #000b; }
       .posts-preview-picture img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
       /* Code */
@@ -182,6 +182,8 @@
         <h2 class="posts-preview-title">The only feed you need</h2>
         <p class="posts-preview-text">Once configured, all your posts and crossposts will be in one place for you to manage:</p>
         <picture class="posts-preview-picture">
+          <source srcset="/img/posts-mobile-dark.webp" media="(max-width: 800px) and (prefers-color-scheme: dark)">
+          <source srcset="/img/posts-mobile-light.webp" media="(max-width: 800px)">
           <source srcset="/img/posts-dark.webp" media="(prefers-color-scheme: dark)">
           <img src="/img/posts-light.webp" alt="Screenshot of POSSE Party posts view">
         </picture>
