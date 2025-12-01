@@ -29,7 +29,7 @@
       }
       a { color: var(--accent); text-decoration: none; }
       a:hover { text-decoration: underline; }
-      .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+      .wrap { margin: 0 auto; padding: 24px; }
 
       .hero { margin: 0; display: grid; place-items: center; text-align: center; position: relative; }
       .hero::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -48px; width: min(980px, 96%); height: 160px; background: radial-gradient(520px 100px at 50% 0, #ffffff0a, transparent 75%); pointer-events: none; filter: blur(12px); }
@@ -63,7 +63,7 @@
       .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; margin: 0; }
 
       /* Features */
-      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: var(--section-mt) 0 0; }
+      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 1100px; margin: var(--section-mt) auto 0; }
       .card { padding: 16px; border-radius: 14px; border: 1px solid #ffffff1f; background: #0c0f1b; }
       .card h3 { margin: 0 0 6px; font-size: 16px; }
       .card p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -105,7 +105,7 @@
       #install .run-text { text-align: left; margin-top: 0; color: var(--muted); }
       #install h2 { font-size: 20px; text-align: left; }
 
-      footer { display: none; }
+      .site-footer { margin: 120px auto 48px; font-size: 12px; color: var(--muted); text-align: center; opacity: 0.75; }
 
       @media (min-width: 900px) {
         .hero-sub { margin-top: 32px; }
@@ -199,6 +199,9 @@
           <a class="btn readme" href="https://github.com/searlsco/posse_party?tab=readme-ov-file#posse-party" target="_blank" rel="noopener">View README</a>
       </p>
       </section>
+      <footer class="site-footer">
+        Copyright <a href="https://searls.co">Searls LLC</a>, {{ now.Format "2006" }}. All rights reserved.
+      </footer>
     </main>
 
   </body>
