@@ -13,7 +13,7 @@ APP_HOST=your.domain.or.ip /bin/bash -c "$(curl -fsSL https://posseparty.com/set
 There are a number of [env vars to consider](#configuring-your-installation), but the two you might want to set before running the above command are:
 
 - `APP_HOST` sets the public host for HTTPS via Caddy/Let’s Encrypt and Rails URL helpers (IP addresses are OK, e.g., `192.168.1.24`). If omitted, Caddy still serves plain HTTP on :80 (IP access).
-- `APP_PRIVATE_HOST` (defaults to `false`) keeps Caddy from attempting a public certificate for private hosts/IPs and tells Rails’ host auto-detection to pick the first non-loopback address (useful when running on a NAS or other LAN-only host). When `true`, `FORCE_SSL` is automatically disabled.
+- `APP_PRIVATE_HOST` (defaults to `false`) when true, Caddy skips public ACME certificates and uses an internal CA for TLS, and Rails will assume HTTPS is supported but will not force HTTPS unless you explicitly set `FORCE_SSL=true`.
 
 ### What gets deployed
 
@@ -62,14 +62,16 @@ nano posse_party/.env
 
 Variables you might be interested in setting:
 
-- `APP_HOST` (hostname or IP, e.g., `myapp.posseparty.com` or `192.168.1.24`; if provided, app will be served via HTTPS unless `APP_PRIVATE_HOST=true` disables FORCE_SSL)
-- `APP_PRIVATE_HOST` — set to `true` when deploying to a private hostname/IP so Caddy skips public cert attempts, Rails prefers the first non-loopback address for URL helpers, and `FORCE_SSL` is automatically disabled
-- `FORCE_SSL` — Redirects HTTP requests to HTTPS (defaults to `true` if `APP_HOST` is set; forced to `false` when `APP_PRIVATE_HOST=true`)
+- `APP_HOST` - hostname (`myapp.posseparty.com`) or IP address (`192.168.1.24`). If this isn't set, the app won't be able to generate full URLs, which are needed for transactional emails and OAuth authorization flows (e.g., LinkedIn, YouTube)
+- `APP_HTTP_PORT` — host port to expose HTTP for the app (maps to container port 80, defaults to `80`)
+- `APP_HTTPS_PORT` — host port to expose HTTPS for the app (maps to container port 443, defaults to `443`)
+- `APP_PRIVATE_HOST` — set to `true` when deploying to a private hostname/IP so Caddy skips public ACME cert attempts and uses an internal TLS certificate; Rails will generate `https://` URLs for that host but will not force HTTPS redirects unless you explicitly set `FORCE_SSL=true`.
+- `FORCE_SSL` — redirects HTTP requests to HTTPS. When unset/blank, it defaults to `true` for public HTTPS hosts and `false` when `APP_PRIVATE_HOST=true` or HTTPS is not configured.
 - `RAILS_ASSET_HOST` — CDN host for static assets (e.g., `https://cdn.example.com`)
 - `SECRET_KEY_BASE` (set by default with `openssl rand -hex 64`)
 - Email delivery is optional, but required to send login and transactional emails:
-- `MAIL_PROVIDER` (amazon_ses | resend | mailgun | postmark | sendgrid | brevo | mailjet | smtp). Each requires a different set of environment variables (see [docs/mail.md](/docs/mail.md))
-- `MAIL_FROM_ADDRESS` (e.g. `possy@possyparty.com`)
+    - `MAIL_PROVIDER` one of: `amazon_ses`, `resend`, `mailgun`, `postmark`, `sendgrid`, `brevo`, `mailjet`, `smtp`. Each requires a different set of environment variables to be configured (see [docs/mail.md](/docs/mail.md) for details)
+    - `MAIL_FROM_ADDRESS` (e.g. `possy@possyparty.com`)
 
 Whenever you change these settings, you'll need to restart the server, which you can do by running:
 
@@ -167,6 +169,107 @@ echo "Syncing backups of POSSE Party database"
 mkdir -p "$LOCAL_DIRECTORY/database"
 rsync -av --ignore-existing "$REMOTE_ADDRESS:$REMOTE_DIRECTORY/backups/" "$LOCAL_DIRECTORY/database"
 ```
+
+### Automatically upgrading POSSE Party
+
+By default, POSSE Party will only be updated to the latest version if you SSH into your server and run:
+
+```bash
+cd posse_party
+./bin/upgrade
+```
+
+If you'd prefer to automatically fetch and deploy the latest release, here are a couple options.
+
+#### Auto-upgrades with systemd
+
+On most modern Linux distributions (Ubuntu, Debian, etc.), you can use a systemd timer to run the upgrade script at a fixed time each day.
+
+Find the full directory where POSSE Party is installed:
+
+```bash
+cd posse_party
+pwd
+```
+
+Note the full path printed by `pwd`; you will use it below.
+
+Create a systemd service that runs the upgrade script. As root:
+
+```bash
+sudo nano /etc/systemd/system/posse-party-upgrade.service
+```
+
+Paste the following, replacing `/path/to/posse_party` with the directory you found above:
+
+```ini
+[Unit]
+Description=POSSE Party upgrade
+
+[Service]
+Type=oneshot
+WorkingDirectory=/path/to/posse_party
+ExecStart=/usr/bin/env bash -lc './bin/upgrade'
+```
+
+Create a timer that runs once per night (below, we set it for 03:30 server time):
+
+```bash
+sudo nano /etc/systemd/system/posse-party-upgrade.timer
+```
+
+Paste:
+
+```ini
+[Unit]
+Description=Run POSSE Party upgrade nightly
+
+[Timer]
+OnCalendar=*-*-* 03:30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Reload systemd and enable the timer:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now posse-party-upgrade.timer
+```
+
+You can verify it is scheduled with:
+
+```bash
+systemctl list-timers | grep posse-party-upgrade
+```
+
+To disable automatic upgrades later:
+
+```bash
+sudo systemctl disable --now posse-party-upgrade.timer
+```
+
+#### Auto-upgrades with cron
+
+If your server does not use systemd, you can run the upgrade once a night using cron.
+
+Edit the crontab for the user that owns the POSSE Party install:
+
+```bash
+crontab -e
+```
+
+Add a line like this, adjusting `/path/to/posse_party` if needed:
+
+```bash
+0 3 * * * cd /path/to/posse_party && ./bin/upgrade >> ~/posse_party_upgrade.log 2>&1
+```
+
+This will attempt an upgrade every day at 03:00 and append output to `~/posse_party_upgrade.log`.
+
+Before turning on automatic upgrades, make sure your backups are working (for example, using the backup automation from the previous section), so you can roll back if something goes wrong.
 
 ## Starting over
 
