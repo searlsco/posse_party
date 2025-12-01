@@ -121,7 +121,6 @@ docker compose -f docker-compose.yml up -d
 app_host=${APP_HOST:-}
 app_private=${APP_PRIVATE_HOST:-false}
 app_http_port=${APP_HTTP_PORT:-80}
-app_https_port=${APP_HTTPS_PORT:-443}
 app_http_port_suffix="${app_http_port:+:${app_http_port}}"
 app_protocol=${APP_PROTOCOL:-}
 

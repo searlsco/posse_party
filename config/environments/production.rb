@@ -98,15 +98,14 @@ Rails.application.configure do
     http_port = ENV["APP_HTTP_PORT"].presence
     https_port = ENV["APP_HTTPS_PORT"].presence
 
-    port = (host_settings.protocol == "https") ? https_port : http_port
-
-    port = nil if [host_settings.protocol, port] == ["http", "80"] ||
-      [host_settings.protocol, port] == ["https", "443"]
-
     url_options = {
       protocol: host_settings.protocol,
       host: app_host,
-      port: port
+      port: if host_settings.protocol == "https" && https_port != "443"
+              https_port
+            elsif host_settings.protocol == "http" && http_port != "80"
+              http_port
+            end
     }.compact
     Rails.application.routes.default_url_options = config.action_mailer.default_url_options = url_options
   end
