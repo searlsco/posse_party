@@ -198,7 +198,7 @@ if [[ -n "${app_host}" ]]; then
 else
   app_url="http://localhost:${app_http_port}"
   https_status="DISABLED (no APP_HOST set)"
-  access_note="Web server is serving plain HTTP on :${app_port}. App container listens on http://localhost:3000 internally."
+  access_note="Web server is serving plain HTTP on :${app_http_port}. App container listens on http://localhost:3000 internally."
 fi
 
 cat <<MSG
