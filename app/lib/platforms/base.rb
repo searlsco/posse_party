@@ -64,6 +64,10 @@ module Platforms
       fetch_constant(:SUPPORTED_CHANNELS, %w[feed]).include?(channel.to_s)
     end
 
+    def setup_docs_available?
+      false
+    end
+
     private
 
     def fetch_constant(name, fallback)

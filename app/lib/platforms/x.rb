@@ -25,6 +25,10 @@ module Platforms
       @syndicates_x_post = SyndicatesXPost.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_x_post.syndicate!(crosspost, crosspost_content.string)
     end

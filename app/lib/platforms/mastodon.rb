@@ -24,6 +24,10 @@ module Platforms
       @syndicates_mastodon_post = SyndicatesMastodonPost.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_mastodon_post.syndicate!(crosspost, crosspost_content.string)
     end

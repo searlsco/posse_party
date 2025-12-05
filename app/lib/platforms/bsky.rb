@@ -31,6 +31,10 @@ module Platforms
       @syndicates_bsky_post = SyndicatesBskyPost.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       rich_text_facets = @assembles_rich_text_facets.assemble(crosspost_content.string, crosspost_content.pattern_ranges)
       @syndicates_bsky_post.syndicate!(crosspost, crosspost_config, crosspost_content.string, rich_text_facets)
