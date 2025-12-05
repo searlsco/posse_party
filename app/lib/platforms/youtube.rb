@@ -23,6 +23,10 @@ module Platforms
       @potentially_tells_user_to_renew_youtube_access_token = PotentiallyTellsUserToRenewYoutubeAccessToken.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       if crosspost.post.media.size == 1 && crosspost.post.media.first["type"] == "video"
         @syndicates_youtube_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
