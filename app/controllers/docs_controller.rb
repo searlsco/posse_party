@@ -1,5 +1,8 @@
 class DocsController < ApplicationController
   BASE_URL = "https://github.com/searlsco/posse_party/blob/main/docs/"
+  DOC_PATHS = {
+    "mastodon-account-setup" => "account_setup/mastodon"
+  }.freeze
 
   skip_before_action :redirect_to_registration_if_no_users
 
@@ -8,6 +11,7 @@ class DocsController < ApplicationController
   end
 
   def show
-    redirect_to "#{BASE_URL}#{params[:id]}.md", allow_other_host: true
+    path = DOC_PATHS.fetch(params[:id], params[:id])
+    redirect_to "#{BASE_URL}#{path}.md", allow_other_host: true
   end
 end
