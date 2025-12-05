@@ -5,6 +5,9 @@ module Platforms
     API_BASE_URL = "https://api.linkedin.com/"
 
     REQUIRED_CREDENTIALS = %w[client_id access_token client_secret person_urn].freeze
+    CREDENTIAL_LABELS = {
+      "person_urn" => "Person URN"
+    }.freeze
 
     POST_CONSTRAINTS = Constants::DEFAULT_POST_CONSTRAINTS.merge(
       character_limit: 3000
