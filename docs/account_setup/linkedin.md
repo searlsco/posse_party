@@ -46,9 +46,12 @@ All four values come from your LinkedIn developer app and the LinkedIn API.
 
 2. Agree to the product’s terms to enable posting via the API.
 
-3. If prompted, scroll to **Sign in with LinkedIn OpenID Connect** and follow the prompts to verify an email address and finish provisioning.
+3. If prompted, scroll to the **Sign in with LinkedIn OpenID Connect** section.
 
 ![LinkedIn Sign in with OpenID Connect section](../images/linkedin-4.png)
+
+4. Use the **Request access** dialog to verify an email address and finish provisioning.
+
 ![LinkedIn request access for Sign in with LinkedIn OpenID Connect](../images/linkedin-5.png)
 
 ### 3. Configure OAuth Settings and Redirect URL

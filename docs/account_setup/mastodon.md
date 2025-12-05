@@ -28,6 +28,9 @@ On the new application form:
 - Optionally provide your site URL (for example, `https://posseparty.com`)
 
 ![New Mastodon application form](../images/mastodon-2.png)
+
+Fill in the application name and website as you would like them to appear.
+
 ![Mastodon application details form](../images/mastodon-3.png)
 
 ### 2. Configure Permissions for POSSE Party
@@ -38,6 +41,9 @@ In the **Scopes** or **Permissions** section of the application form:
 - Check **write:statuses** so POSSE Party can publish posts on your behalf
 
 ![Mastodon application scopes with write:statuses selected](../images/mastodon-4.png)
+
+Confirm that the default profile scope remains enabled.
+
 ![Mastodon application scopes details](../images/mastodon-5.png)
 
 Save the application.
@@ -65,4 +71,3 @@ In POSSE Party, add a new Mastodon account:
 ![POSSE Party Mastodon account credentials form](../images/mastodon-7.png)
 
 Once saved, POSSE Party will be able to publish crossposts to your Mastodon account using your Atom feed and account settings.
-
