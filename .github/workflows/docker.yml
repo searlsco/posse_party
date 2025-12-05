@@ -1,9 +1,13 @@
 name: Docker
 
 on:
-  push:
+  workflow_run:
+    workflows:
+      - CI
     branches:
       - main
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -11,6 +15,7 @@ permissions:
 
 jobs:
   docker:
+    if: ${{ (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -19,6 +24,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 
       - name: Set RUBY_VERSION and NODE_MAJOR_VERSION
         run: |
@@ -29,14 +36,16 @@ jobs:
           echo "NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION}" >> "${GITHUB_ENV}"
 
       - name: Derive image tags
+        env:
+          REF_NAME: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.ref_name }}
         run: |
-          ref_name="${GITHUB_REF_NAME}"
+          ref_name="${REF_NAME}"
           image_tag=$(echo "${ref_name}" | tr '[:upper:]' '[:lower:]' | tr '/ ' '-')
 
           {
             echo 'IMAGE_TAGS<<EOF'
             echo "ghcr.io/searlsco/posse_party:${image_tag}"
-            if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            if [ "${ref_name}" = "main" ]; then
               echo "ghcr.io/searlsco/posse_party:latest"
             fi
             echo 'EOF'
@@ -55,7 +64,7 @@ jobs:
       - name: Build (and push) Docker image
         uses: docker/build-push-action@v6
         with:
-          push: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' }}
+          push: true
           tags: ${{ env.IMAGE_TAGS }}
           cache-from: type=registry,ref=ghcr.io/searlsco/posse_party:cache
           cache-to: type=registry,ref=ghcr.io/searlsco/posse_party:cache,mode=max
