@@ -1,8 +1,5 @@
 module EnvChecks
   class LibidnCheck
-    def initialize
-    end
-
     def check(require_fn: Kernel.method(:require))
       require_fn.call("idn")
       true

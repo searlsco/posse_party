@@ -14,9 +14,6 @@ module Platforms
       format_string: "{{content}}"
     ).freeze
 
-    def initialize
-    end
-
     def publish!(_crosspost, _crosspost_config, _crosspost_content)
       PublishesCrosspost::Result.new(success?: false, message: "Simulated publish failure")
     end

@@ -21,7 +21,7 @@ If you struggle to do any of these, pause and ask for help.
 - Always use struct `Outcome` (app/lib/outcome.rb) when the unit is a command that is only concerned with `message` and `success?`
 - Always treat ActiveRecord models and controllers as configuration classes focused solely on configuring the framework
 - Always introduce new POROs for behavior needed by a controller
-- Always define the dependencies of POROs that implement app behavior in `app/lib/**` in a zero-argument `initialize` constructor; pass all runtime/domain/unit-of-work inputs to public methods as arguments, however
+- Always define the dependencies of POROs that implement app behavior in `app/lib/**`. If the PORO depends on other POROs, instantiate them as ivars in the constructor (without duplicatively accepting them as arguments, since Mocktail can inject without constructor-injection). Pass all runtime/domain/unit-of-work inputs to public methods as arguments, however, as opposed to assigning them to the instance
 - Always extract repeated tailwind classes to a helper method so they are not duplicated
 - Always implement styles in Tailwind 4 classes
 - Always switch to keyword arguments when a method needs more than three parameters
