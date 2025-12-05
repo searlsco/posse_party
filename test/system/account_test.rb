@@ -31,7 +31,7 @@ class AccountTest < ApplicationSystemTestCase
 
     # Fill in credentials
     fill_in "Email", with: "test@example.com"
-    fill_in "Password", with: "mypassword123"
+    fill_in "App Password", with: "mypassword123"
 
     click_on "Create Account"
     assert_text "Account created successfully"
@@ -55,7 +55,7 @@ class AccountTest < ApplicationSystemTestCase
     assert_field "Crosspost cooldown (seconds)", with: "300"
     assert_field "Wait before crossposting (seconds)", with: "60"
     assert_field "Email", with: "test@example.com"
-    assert_field "Password", with: "mypassword123"
+    assert_field "App Password", with: "mypassword123"
 
     # Edit form shows manual crosspost checkboxes in the correct order
     assert_text "Manually create crossposts"
@@ -70,7 +70,7 @@ class AccountTest < ApplicationSystemTestCase
     fill_in "Crosspost cooldown (seconds)", with: "600"
     fill_in "Wait before crossposting (seconds)", with: "120"
     fill_in "Email", with: "updated@example.com"
-    fill_in "Password", with: "newpassword456"
+    fill_in "App Password", with: "newpassword456"
 
     click_on "Save"
     assert_text "Account updated successfully"
@@ -90,7 +90,7 @@ class AccountTest < ApplicationSystemTestCase
     assert_field "Crosspost cooldown (seconds)", with: "600"
     assert_field "Wait before crossposting (seconds)", with: "120"
     assert_field "Email", with: "updated@example.com"
-    assert_field "Password", with: "newpassword456"
+    assert_field "App Password", with: "newpassword456"
 
     # Test platform-specific credential fields and Turbo Frame switching
     # Open new account form directly (link nav covered earlier)

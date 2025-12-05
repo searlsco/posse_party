@@ -4,6 +4,9 @@ module Platforms
     LABEL = "Bluesky"
 
     REQUIRED_CREDENTIALS = %w[email password].freeze
+    CREDENTIAL_LABELS = {
+      "password" => "App Password"
+    }.freeze
 
     POST_CONSTRAINTS = Constants::DEFAULT_POST_CONSTRAINTS.merge(
       character_limit: 300,

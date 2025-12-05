@@ -1,10 +1,8 @@
 module Platforms
   class Base
     EMPTY_ARRAY = [].freeze
+    EMPTY_HASH = {}.freeze
     SUPPORTED_CHANNELS = %w[feed].freeze
-
-    def initialize
-    end
 
     def default_crosspost_options
       fetch_constant(:DEFAULT_CROSSPOST_OPTIONS, Platforms::DEFAULT_CROSSPOST_OPTIONS)
@@ -44,6 +42,10 @@ module Platforms
 
     def required_credentials
       fetch_constant(:REQUIRED_CREDENTIALS, EMPTY_ARRAY)
+    end
+
+    def credential_labels
+      fetch_constant(:CREDENTIAL_LABELS, EMPTY_HASH)
     end
 
     def irrelevant_config_options
