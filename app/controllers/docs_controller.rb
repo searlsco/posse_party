@@ -1,7 +1,8 @@
 class DocsController < ApplicationController
   BASE_URL = "https://github.com/searlsco/posse_party/blob/main/docs/"
   DOC_PATHS = {
-    "mastodon-account-setup" => "account_setup/mastodon"
+    "mastodon-account-setup" => "account_setup/mastodon",
+    "bsky-account-setup" => "account_setup/bsky"
   }.freeze
 
   skip_before_action :redirect_to_registration_if_no_users
