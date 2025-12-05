@@ -26,6 +26,10 @@ module Platforms
       @potentially_tells_user_to_renew_linkedin_access_token = PotentiallyTellsUserToRenewLinkedinAccessToken.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_linkedin_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
     end
