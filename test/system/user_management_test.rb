@@ -86,7 +86,7 @@ class UserManagementTest < ApplicationSystemTestCase
     assert_text "Invitation revoked."
     assert_no_text revoke_email
 
-    active_user_emails = all("[data-active-user-email]").map { |row| row["data-active-user-email"] }
+    active_user_emails = all("[data-active-user-email]").pluck("data-active-user-email")
     assert_equal active_user_emails.sort, active_user_emails
 
     # Test API key regeneration

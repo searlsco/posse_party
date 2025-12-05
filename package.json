@@ -11,7 +11,7 @@
     "yarn": "1.x"
   },
   "devDependencies": {
-    "playwright": "1.55.0",
+    "playwright": "1.57.0",
     "standard": "^17.1.2"
   },
   "standard": {

@@ -221,7 +221,7 @@ class Api::CrosspostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     response_data = JSON.parse(response.body)
-    platforms = response_data.map { |item| item["platform"] }
+    platforms = response_data.pluck("platform")
 
     assert_includes platforms, "bsky"
     assert_includes platforms, "x"
