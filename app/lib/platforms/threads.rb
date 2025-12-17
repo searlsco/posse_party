@@ -22,6 +22,10 @@ module Platforms
       @renews_threads_access_token = RenewsThreadsAccessToken.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_threads_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
     end

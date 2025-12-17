@@ -17,25 +17,23 @@ All four values come from your X developer app’s **Keys and tokens** page.
 2. [Configure your X project](#2-configure-your-x-project)
 3. [Configure your app and user authentication](#3-configure-your-app-and-user-authentication)
 4. [Generate API keys and access tokens and add them to POSSE Party](#4-generate-api-keys-and-access-tokens-and-add-them-to-posse-party)
+4. [Add X to POSSE Party](#5-add-x-to-posse-party)
 
 ### 1. Sign Up for an X Developer Account
 
-1. Visit `https://developer.x.com/en/portal` and sign in with your X account.
-2. Scroll down to the section offering free access and click **Sign up for Free Account**.
+1. Visit [https://developer.x.com/en/portal](https://developer.x.com/en/portal) and sign in with your X account.
 
 ![X developer portal home](../images/x-1.png)
 
-Scroll until you see the free tier signup panel.
+2. Scroll down to the section offering free access and click **Sign up for Free Account**.
 
 ![X developer free account signup section](../images/x-2.png)
 
-3. Fill out the application describing how you intend to use the API. For example:
+3. Fill out the application describing how you intend to use the API before agreeing to the terms and clicking **Submit**. For example, you might write something like:
 
 > I intend to publish my work more consistently to X by automatically syndicating links and media from my blog/personal site to my X account via a simple application that mirrors my RSS/Atom feed. I agree to abide by the terms and conditions of the X API Platform.
 
 ![X developer application form](../images/x-3.png)
-
-4. Submit the application to create your developer account.
 
 ### 2. Configure Your X Project
 
@@ -49,86 +47,82 @@ Once your developer account is approved:
 
 ![X project settings link](../images/x-7.png)
 
-Open the project settings to review configuration options.
+3. Fill out the project name, use case, and description (for example, “Syndicating content from my blog / personal site to my X account.”), then click **Save**.
 
 ![X project edit form](../images/x-8.png)
 
-3. Fill out the project name, use case, and description (for example, “Syndicating content from my blog / personal site to my X account.”), then save.
+4. Confirm your project details were persisted correctly
 
 ![X project settings saved](../images/x-9.png)
 
 ### 3. Configure Your App and User Authentication
 
-1. From the project **Dashboard**, find your **Project App** and click the gear icon.
+1. From the project **Dashboard**, find your **Project App** and click the **Gear** icon (⚙️).
 
 ![X project dashboard with app gear icon](../images/x-10.png)
 
-Use the gear icon to open the app-level settings.
+2. Click **Edit**
 
 ![X project app settings gear](../images/x-11.png)
 
-2. Click **Edit**, give the app a clear name and description, and save.
+3. Give the app a clear name and description, and click **Save**.
 
 ![X project app edit form](../images/x-12.png)
 
-Confirm the app name and description reflect how POSSE Party will use your account.
+4. Scroll down to **User authentication settings** and click **Set up**.
 
 ![X project app details](../images/x-13.png)
 
-3. Scroll down to **User authentication settings** and click **Set up**.
+4. Under **App permissions**, choose **Read and write**.
 
 ![X user authentication settings](../images/x-14.png)
 
-4. Under **App permissions**, choose **Read and write**.
 5. Under **Type of App**, select **Web App, Automated App, or Bot**.
 
 ![X app type configuration](../images/x-15.png)
 
 6. In **App info**, enter:
-
-   - Your website URL
-   - An OAuth callback/renewal URL (for example, `https://posseparty.com/credential_renewals/x`). POSSE Party does not currently use this URL, but X requires one to be set.
-
-![X app info with website and redirect URL](../images/x-16.png)
-
-Review the summary to confirm URLs and permissions look correct.
+      - Your website's URL
+      - An OAuth callback/renewal URL (for example, `https://posseparty.com/credential_renewals/x`). POSSE Party does not currently implement this route, but X requires one to be set.
 
 ![X app info confirmation](../images/x-17.png)
 
-7. Save and confirm your settings. X will show OAuth 2.0 client credentials; POSSE Party does not use these today, but you may want to save them.
+7. Click **Save** and confirm your settings. X will show OAuth 2.0 client credentials. POSSE Party does not use these today, but you should copy and take note of them.
 
 ![X OAuth 2.0 client credentials](../images/x-18.png)
 
-### 4. Generate API Keys and Access Tokens and Add Them to POSSE Party
+### 4. Generate API Keys and Access Tokens
 
-1. In your app’s settings, go to **Keys and tokens**.
+1. In your X app’s settings, go to **Keys and tokens**.
 
 ![X app settings main view](../images/x-19.png)
 
-Open the **Keys and tokens** section for your project app.
+2. Under **API Key and Secret**, click **Generate** (or **Regenerate** if you have previously created them).
 
 ![X Keys and tokens page](../images/x-20.png)
 
-2. Under **API Key and Secret**, click **Regenerate** (or **Generate** if you have not created them yet). Copy and store both the **API Key** and **API Key Secret**.
+3. Copy and take note of both the **API Key** and **API Key Secret**, then click **Yes, I saved them**.
 
 ![X regenerate API key and secret](../images/x-21.png)
 
-Confirm you’ve saved the new API key and secret before continuing.
+4. Under **Access Token and Secret**, click **Generate**.
 
 ![X API key regeneration confirmation](../images/x-22.png)
 
-3. Under **Access Token and Secret**, click **Generate**. Copy and store both the **Access Token** and **Access Token Secret**.
+5. Copy and store both the **Access Token** and **Access Token Secret**, then click **Yes, I saved them**.
 
 ![X generate access token and secret](../images/x-23.png)
 
-4. In POSSE Party, add a new X account:
+### 5. Add X to POSSE Party
 
-   - Set `API Key` to your X API key
-   - Set `API Key Secret` to your X API key secret
-   - Set `Access Token` to your X access token
-   - Set `Access Token Secret` to your X access token secret
-   - Save the account
+1. In POSSE Party, go to **Accounts** and click **Add Account**. Give the account a label and select **X** as the platform.
+
+2. Under **Credentials for X**, fill:
+    - `API Key`
+    - `API Key Secret`
+    - `Access Token`
+    - `Access Token Secret`
 
 ![POSSE Party X account credentials form](../images/x-24.png)
 
-Once saved, POSSE Party will be able to publish crossposts to your X account using your Atom feed and account settings.
+Once saved, POSSE Party will be able to publish crossposts to your X account using your site's feed and account settings.

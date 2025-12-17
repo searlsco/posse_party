@@ -99,6 +99,7 @@ class AccountTest < ApplicationSystemTestCase
     # Test X (Twitter) credentials
     select "X (Twitter)", from: "Platform"
     assert_text "Credentials for X"
+    assert_link "Setup instructions"
     assert_field "API Key"
     assert_field "Access Token"
     assert_field "API Key Secret"
@@ -107,6 +108,7 @@ class AccountTest < ApplicationSystemTestCase
     # Switch to LinkedIn - should show different fields
     select "LinkedIn", from: "Platform"
     assert_text "Credentials for LinkedIn"
+    assert_link "Setup instructions"
     assert_field "Client ID"
     assert_field "Access Token"
     assert_field "Client Secret"
@@ -117,8 +119,22 @@ class AccountTest < ApplicationSystemTestCase
     # Switch back to X to prove it works both ways
     select "X (Twitter)", from: "Platform"
     assert_text "Credentials for X"
+    assert_link "Setup instructions"
     assert_field "API Key"
     assert_field "API Key Secret"
+
+    select "Threads", from: "Platform"
+    assert_text "Credentials for Threads"
+    assert_link "Setup instructions"
+    assert_field "Access Token"
+
+    select "Instagram", from: "Platform"
+    assert_text "Credentials for Instagram"
+    assert_link "Setup instructions"
+    assert_field "App ID"
+    assert_field "App Secret"
+    assert_field "User ID"
+    assert_field "Access Token"
 
     # Go back and test delete (open edit directly)
     visit edit_account_path(@account)

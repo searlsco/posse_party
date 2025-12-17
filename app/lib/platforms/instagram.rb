@@ -28,6 +28,10 @@ module Platforms
       @renews_instagram_access_token = RenewsInstagramAccessToken.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       if crosspost.post.media.present?
         @publishes_instagram_post.publish(

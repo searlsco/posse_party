@@ -21,6 +21,10 @@ module Platforms
       @syndicates_facebook_post = SyndicatesFacebookPost.new
     end
 
+    def setup_docs_available?
+      true
+    end
+
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_facebook_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
     end

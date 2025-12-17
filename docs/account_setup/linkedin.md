@@ -22,19 +22,15 @@ All four values come from your LinkedIn developer app and the LinkedIn API.
 
 ### 1. Create a LinkedIn App
 
-1. Visit `https://developer.linkedin.com/` and sign in with your LinkedIn account.
-2. Click **Create app**.
+1. Visit [https://developer.linkedin.com/](https://developer.linkedin.com/) and sign in with your LinkedIn account and click **Create app**.
 
 ![LinkedIn developer portal with Create app button](../images/linkedin-1.png)
 
-3. Fill out the app details:
-
-   - App name (for example, `POSSE Party`)
-   - Company Page to associate with the app (create one if needed)
-   - App logo
-   - Accept LinkedIn’s terms
-
-4. Click **Create app**.
+2. Fill out the app details and then click **Create app**
+    - App name (for example, `POSSE Party`)
+    - Company Page to associate with the app (this is **required**, create one if needed)
+    - App logo
+    - Accept LinkedIn’s terms
 
 ![LinkedIn create app form](../images/linkedin-2.png)
 
@@ -46,73 +42,58 @@ All four values come from your LinkedIn developer app and the LinkedIn API.
 
 2. Agree to the product’s terms to enable posting via the API.
 
-3. If prompted, scroll to the **Sign in with LinkedIn OpenID Connect** section.
+3. Scroll to the **Sign in with LinkedIn OpenID Connect** section and click **Request access**.
 
 ![LinkedIn Sign in with OpenID Connect section](../images/linkedin-4.png)
 
-4. Use the **Request access** dialog to verify an email address and finish provisioning.
+4. Agree to the terms and click **Request access**
 
 ![LinkedIn request access for Sign in with LinkedIn OpenID Connect](../images/linkedin-5.png)
 
 ### 3. Configure OAuth Settings and Redirect URL
 
-Once your app is provisioned:
 
-1. Go to the **Auth** tab for your app.
+
+1. Once your app is provisioned, navigate to the **Auth** tab and take note of your **Client ID** and **Client Secret**.
 
 ![LinkedIn app Auth tab with client credentials](../images/linkedin-6.png)
 
-2. Copy and save your **Client ID** and **Client Secret**. POSSE Party uses these when renewing your token.
-
-3. Scroll down to **OAuth 2.0 settings**.
+2. Scroll down to **OAuth 2.0 settings** and click the pencil icon next to **Authorized redirect URLs for your app**
 
 ![LinkedIn OAuth 2.0 settings section](../images/linkedin-7.png)
 
-4. Next to **Authorized redirect URLs for your app**, click the pencil icon to edit.
+3. Add the LinkedIn OAuth callback URL for your POSSE Party instance. This will be `https://YOUR_IP_OR_DOMAIN/credential_renewals/linkedin` (replace the protocol and host with whatever the public URL of your instance is). Click **Update** to save.
 
 ![LinkedIn edit authorized redirect URLs](../images/linkedin-8.png)
 
-5. Add the POSSE Party LinkedIn renewal URL for your instance. For example:
+### 4. Generate an Access Token
 
-`https://your-posse-party-host/credential_renewals/linkedin`
-
-If you are running the default hosted domain, that might look like:
-
-`https://posseparty.com/credential_renewals/linkedin`
-
-This URL is important because LinkedIn access tokens must be renewed manually via OAuth every two months. POSSE Party will send you e-mail reminders and link you back to this URL.
-
-6. Click **Update** to save.
+1. Back on the **Auth tab**, click the link **OAuth 2.0 tools** in the right-hand sidebar.
 
 ![LinkedIn OAuth settings saved](../images/linkedin-9.png)
 
-### 4. Generate an Access Token
-
-1. On the right-hand sidebar, click **OAuth 2.0 tools**.
+2. Click **Create token**.
 
 ![LinkedIn OAuth 2.0 tools link](../images/linkedin-10.png)
 
-2. Click **Create token**.
-
-![LinkedIn token creation dialog](../images/linkedin-11.png)
-
 3. Select the scopes:
-
-   - `openid`
-   - `profile`
-   - `w_member_social`
+    - `openid`
+    - `profile`
+    - `w_member_social`
 
 ![LinkedIn token scopes selection](../images/linkedin-12.png)
 
-4. Acknowledge that this tool will add its redirect URL to your app’s list of redirect URLs, then click **Request access token**.
+4. Scroll down and check **I understand this tool…**, then click **Request access token**.
 
 ![LinkedIn OAuth 2.0 tools confirmation](../images/linkedin-13.png)
 
-5. Log in if prompted and authorize the app. LinkedIn will generate an **Access Token**.
+5. Log in when prompted to authorize the app. LinkedIn will generate an **Access Token**.
 
 ![LinkedIn token generation progress](../images/linkedin-14.png)
 
-Copy and save this access token; POSSE Party will use it to publish on your behalf until it expires.
+6. Copy and take note of the resulting **Access token**. POSSE Party will use it to publish on your behalf until it expires.
+
+![OAuth token](../images/linkedin-15.png)
 
 ### 5. Look Up Your Person URN
 
@@ -124,7 +105,7 @@ POSSE Party also needs your **Person URN** to post as your profile. You can look
 export ACCESS_TOKEN="PASTE YOUR ACCESS TOKEN HERE"
 ```
 
-2. Call the LinkedIn `userinfo` endpoint:
+2. Call the LinkedIn `userinfo` endpoint with the `curl` command:
 
 ```bash
 curl -X GET "https://api.linkedin.com/v2/userinfo" \
@@ -145,20 +126,19 @@ curl -X GET "https://api.linkedin.com/v2/userinfo" \
 }
 ```
 
-In this example, the **Person URN** is built by taking the fixed prefix `urn:li:person:` and appending the `sub` value, resulting in:
+In this example, the **Person URN** is built by taking the fixed prefix `urn:li:person:` and appending the value of `sub` in the above JSON object. In this example, Jane Does' Person URN would be `urn:li:person:abcd1234`.
 
-`urn:li:person:abcd1234`
-
-![POSSE Party LinkedIn credentials form showing Person URN](../images/linkedin-16.png)
 
 ### 6. Add LinkedIn to POSSE Party
 
-In POSSE Party, add a new LinkedIn account:
+1. In POSSE Party, go to **Accounts** and click **Add Account**. Give the account a label and select **LinkedIn** as the platform.
 
-1. Set `Client ID` to your LinkedIn app client ID
-2. Set `Client Secret` to your LinkedIn app client secret
-3. Set `Access Token` to the access token generated from the OAuth 2.0 tools
-4. Set `Person URN` to the `urn:li:person:...` value you derived from the `userinfo` API
-5. Save the account
+2. Under **Credentials for LinkedIn**, fill:
+    - `Client ID`
+    - `Client Secret`
+    - `Access Token`
+    - `Person URN`
 
-Once saved, POSSE Party will be able to publish crossposts to your LinkedIn account using your Atom feed and account settings, and will remind you via e-mail when it is time to renew your LinkedIn access token.
+![POSSE Party LinkedIn credentials form showing Person URN](../images/linkedin-16.png)
+
+Once saved, POSSE Party will be able to publish crossposts to your LinkedIn account using your site's feed and account settings, and will remind you via e-mail and the **Logs** page when it is time to renew your LinkedIn access token.

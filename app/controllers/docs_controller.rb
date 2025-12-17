@@ -5,7 +5,10 @@ class DocsController < ApplicationController
     "bsky-account-setup" => "account_setup/bsky",
     "x-account-setup" => "account_setup/x",
     "linkedin-account-setup" => "account_setup/linkedin",
-    "youtube-account-setup" => "account_setup/youtube"
+    "youtube-account-setup" => "account_setup/youtube",
+    "threads-account-setup" => "account_setup/threads",
+    "instagram-account-setup" => "account_setup/instagram",
+    "facebook-account-setup" => "account_setup/facebook"
   }.freeze
 
   skip_before_action :redirect_to_registration_if_no_users
