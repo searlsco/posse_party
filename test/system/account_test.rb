@@ -29,6 +29,13 @@ class AccountTest < ApplicationSystemTestCase
     # Wait for credentials fields to load dynamically via Turbo
     assert_text "Credentials for Bluesky"
 
+    assert_equal "password", find_field("Email")[:type]
+    assert_equal "password", find_field("App Password")[:type]
+    click_button "Show Email"
+    assert_equal "text", find_field("Email")[:type]
+    click_button "Hide Email"
+    assert_equal "password", find_field("Email")[:type]
+
     # Fill in credentials
     fill_in "Email", with: "test@example.com"
     fill_in "App Password", with: "mypassword123"

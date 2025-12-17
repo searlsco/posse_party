@@ -7,6 +7,10 @@ module FormHelper
     "block text-sm font-medium text-primary mb-1"
   end
 
+  def secondary_label_classes
+    label_classes.sub("text-primary", "text-secondary")
+  end
+
   def input_like_classes
     "w-full px-3 py-2 border border-primary rounded-lg text-primary bg-primary focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all duration-200"
   end
