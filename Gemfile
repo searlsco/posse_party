@@ -27,7 +27,7 @@ gem "bskyrb"
 gem "didkit"
 gem "x"
 gem "twitter-text", require: false
-gem "mastodon-api", require: "mastodon"
+# mastodon-api gem removed - incompatible with Ruby 3.4 (uses httparty directly instead)
 
 # Engine stuff
 gem "searls-auth"
