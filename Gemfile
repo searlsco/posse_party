@@ -27,7 +27,6 @@ gem "bskyrb"
 gem "didkit"
 gem "x"
 gem "twitter-text", require: false
-# mastodon-api gem removed - incompatible with Ruby 3.4 (uses httparty directly instead)
 
 # Engine stuff
 gem "searls-auth"
@@ -67,7 +66,6 @@ group :test do
   gem "capybara-playwright-driver"
   gem "mocktail"
   gem "simplecov", require: false
-  gem "ostruct" # Required explicitly for Ruby 3.4+, will be removed from default gems in Ruby 3.5
 
   gem "vcr"
   gem "webmock"

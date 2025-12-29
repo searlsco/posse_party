@@ -10,7 +10,7 @@ class Platforms::Mastodon
           "Authorization" => "Bearer #{access_token}",
           "Content-Type" => "application/json"
         },
-        body: { status: crosspost_content }.to_json
+        body: {status: crosspost_content}.to_json
       )
 
       if response.success? && (post_id = response.dig("id")).present?
@@ -23,7 +23,10 @@ class Platforms::Mastodon
         )
         PublishesCrosspost::Result.new(success?: true)
       else
-        PublishesCrosspost::Result.new(success?: false, message: "Failed to create Mastodon post. Response: #{response.body}")
+        PublishesCrosspost::Result.new(
+          success?: false,
+          message: "Failed to create Mastodon post (HTTP #{response.code}). Response: #{response.body}"
+        )
       end
     rescue => e
       PublishesCrosspost::Result.new(success?: false, message: "Failed to syndicate to Mastodon", error: e)
