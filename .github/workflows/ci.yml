@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
   schedule:
-    - cron: '0 14 * * *' # Runs at 14:00 UTC every day, which is 10:00 AM EDT
+    - cron: "0 14 * * *" # Runs at 14:00 UTC every day, which is 10:00 AM EDT
 
 jobs:
   scan_ruby:
@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+
+      - name: Install libidn
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -40,6 +43,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+
+      - name: Install libidn
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -83,8 +89,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
-          cache: 'yarn'
+          node-version: "22"
+          cache: "yarn"
 
       - run: yarn install --frozen-lockfile --immutable
 
