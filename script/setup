@@ -29,7 +29,7 @@ export PLAYWRIGHT_CLI_VERSION=$(bundle exec ruby -e 'require "playwright"; puts 
 PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 yarn add -D "playwright@$PLAYWRIGHT_CLI_VERSION"
 yarn run playwright install chromium
 
-DEVELOPMENT_DB_EXISTS=$(psql -lqt | cut -d \| -f 1 | grep -w posse_development | wc -l)
+DEVELOPMENT_DB_EXISTS=$(psql -lqt | cut -d \| -f 1 | grep -w posse_party_development | wc -l)
 if [ "$DEVELOPMENT_DB_EXISTS" -eq 0 ]; then
   echo "Creating development and test databases."
   bin/rails db:create
