@@ -27,7 +27,6 @@ gem "bskyrb"
 gem "didkit"
 gem "x"
 gem "twitter-text", require: false
-gem "mastodon-api", require: "mastodon"
 
 # Engine stuff
 gem "searls-auth"

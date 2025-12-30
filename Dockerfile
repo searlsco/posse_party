@@ -53,6 +53,11 @@ RUN --mount=type=cache,id=bld-yarn-cache,target=/root/.cache/yarn \
 # Copy Rails application code (changes every commit)
 COPY --link . .
 
+# Create app/assets/builds directory before asset precompilation
+# This is needed because .dockerignore excludes this directory, but propshaft
+# needs it to exist before initialization so it can be added to the asset paths
+RUN mkdir -p app/assets/builds
+
 # Precompile bootsnap code and assets (changes every commit)
 RUN bundle exec bootsnap precompile app/ lib/ && \
   NO_DATABASE_AVAILABLE=1 SECRET_KEY_BASE=asset-precompile ./bin/rails assets:precompile
