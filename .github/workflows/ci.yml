@@ -44,7 +44,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
@@ -79,7 +78,6 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Set up Node

@@ -52,3 +52,6 @@
 
 # ai trash
 /.code
+
+# vendored files
+/vendor/bundle
