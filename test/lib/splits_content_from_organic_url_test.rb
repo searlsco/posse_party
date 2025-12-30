@@ -1,9 +1,11 @@
 require "test_helper"
 
 class SplitsContentFromOrganicUrlTest < ActiveSupport::TestCase
+  FakeConfig = Struct.new(:attach_link, :url, keyword_init: true)
+
   def setup
     @subject = SplitsContentFromOrganicUrl.new
-    @config = OpenStruct.new(attach_link: false, url: "https://example.com")
+    @config = FakeConfig.new(attach_link: false, url: "https://example.com")
   end
 
   test "returns content and config URL when attach_link is true" do

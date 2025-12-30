@@ -6,11 +6,11 @@ class PublishesCrosspost::AppliesFormatStringTest < ActiveSupport::TestCase
   end
 
   test "replaces template variables with values from config" do
-    config = OpenStruct.new(
+    config = {
       format_string: "{{title}}: {{content}}",
       title: "My Post",
       content: "This is the content"
-    )
+    }
 
     result = @subject.apply(config)
 
@@ -18,11 +18,11 @@ class PublishesCrosspost::AppliesFormatStringTest < ActiveSupport::TestCase
   end
 
   test "handles missing template variables gracefully" do
-    config = OpenStruct.new(
+    config = {
       format_string: "Title: {{title}} - Author: {{author}}",
       title: "My Post"
       # author is missing
-    )
+    }
 
     result = @subject.apply(config)
 
@@ -30,10 +30,10 @@ class PublishesCrosspost::AppliesFormatStringTest < ActiveSupport::TestCase
   end
 
   test "normalizes unicode and removes extra spaces" do
-    config = OpenStruct.new(
+    config = {
       format_string: "{{content}}",
       content: "Text  with   extra    spaces"
-    )
+    }
 
     result = @subject.apply(config)
 
@@ -41,10 +41,10 @@ class PublishesCrosspost::AppliesFormatStringTest < ActiveSupport::TestCase
   end
 
   test "removes trailing spaces before newlines" do
-    config = OpenStruct.new(
+    config = {
       format_string: "{{content}}",
       content: "Line one   \nLine two"
-    )
+    }
 
     result = @subject.apply(config)
 
@@ -52,10 +52,10 @@ class PublishesCrosspost::AppliesFormatStringTest < ActiveSupport::TestCase
   end
 
   test "strips leading and trailing whitespace" do
-    config = OpenStruct.new(
+    config = {
       format_string: "  {{content}}  \n",
       content: "My content"
-    )
+    }
 
     result = @subject.apply(config)
 
@@ -63,12 +63,12 @@ class PublishesCrosspost::AppliesFormatStringTest < ActiveSupport::TestCase
   end
 
   test "handles complex nested template" do
-    config = OpenStruct.new(
+    config = {
       format_string: "{{title}}\n\n{{content}}\n\n{{url}}",
       title: "Great Article",
       content: "Read this amazing post",
       url: "https://example.com"
-    )
+    }
 
     result = @subject.apply(config)
 
