@@ -9,6 +9,8 @@ WORKDIR /rails
 
 EXPOSE 3000
 
+ARG GIT_COMMIT
+
 # Start the server by default, this can be overwritten at runtime to run e.g. bin/jobs
 CMD ["./bin/rails", "server"]
 
@@ -21,7 +23,8 @@ RUN apt-get update -qq && \
 ENV RAILS_ENV=production \
   BUNDLE_WITHOUT="development:test" \
   BUNDLE_DEPLOYMENT="1" \
-  BUNDLE_PATH="/usr/local/bundle"
+  BUNDLE_PATH="/usr/local/bundle" \
+  GIT_COMMIT=${GIT_COMMIT}
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
