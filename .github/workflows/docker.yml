@@ -71,5 +71,6 @@ jobs:
           provenance: mode=max
           sbom: true
           build-args: |
+            GIT_COMMIT=${{ github.sha }}
             NODE_MAJOR_VERSION=${{ env.NODE_MAJOR_VERSION }}
             RUBY_VERSION=${{ env.RUBY_VERSION }}
