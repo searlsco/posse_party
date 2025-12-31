@@ -43,6 +43,7 @@ gem "geared_pagination"
 
 # Handy stuff
 gem "bootsnap", require: false
+gem "ruby-vips", require: false
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"

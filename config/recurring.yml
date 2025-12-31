@@ -23,4 +23,6 @@ production:
   renew_access_tokens_job:
     class: "RenewAccessTokensJob"
     schedule: "0 * * * *"
-
+  purge_temporary_assets_job:
+    class: "PurgeTemporaryAssetsJob"
+    schedule: every day

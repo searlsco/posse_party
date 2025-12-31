@@ -15,7 +15,7 @@ CMD ["./bin/rails", "server"]
 # Install packages needed for both base and build stages (changes very infrequently)
 RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y \
-  curl gnupg postgresql-client libidn12 libidn-dev
+  curl gnupg postgresql-client libidn12 libidn-dev libvips
 
 # Set Rails environment
 ENV RAILS_ENV=production \

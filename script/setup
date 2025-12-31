@@ -21,6 +21,20 @@ MSG
   exit 1
 fi
 
+# Verify libvips is installed before bundling (Instagram stories letterboxing requires it)
+if ! (pkg-config --exists vips 2>/dev/null || command -v vips >/dev/null 2>&1); then
+  cat >&2 <<-'MSG'
+Missing libvips system library required by ruby-vips for Instagram story images.
+
+Install it and re-run script/setup:
+  - macOS:   brew install vips or brew bundle
+  - Debian/Ubuntu: sudo apt-get update && sudo apt-get install -y libvips libvips-dev
+  - Alpine:  apk add --no-cache vips vips-dev
+
+If you don't publish to Instagram's `story` channel, you can ignore this warning.
+MSG
+fi
+
 bundle
 yarn
 

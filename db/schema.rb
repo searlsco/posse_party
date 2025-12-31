@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_27_100000) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_19_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -93,7 +93,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_27_100000) do
     t.check_constraint "status::text <> 'accepted'::text OR email IS NULL OR email::text = ''::text", name: "accepted_invites_require_blank_email"
     t.check_constraint "status::text <> 'accepted'::text OR received_by_id IS NOT NULL", name: "accepted_invites_require_recipient"
     t.check_constraint "status::text <> 'open'::text OR email IS NOT NULL AND email::text <> ''::text", name: "open_invites_require_email"
-    t.check_constraint "status::text = ANY (ARRAY['open'::character varying::text, 'accepted'::character varying::text])", name: "invites_status_valid"
+    t.check_constraint "status::text = ANY (ARRAY['open'::character varying, 'accepted'::character varying]::text[])", name: "invites_status_valid"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -278,6 +278,17 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_27_100000) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "temporary_assets", force: :cascade do |t|
+    t.binary "bytes", null: false
+    t.string "content_type", null: false
+    t.datetime "created_at", null: false
+    t.bigint "crosspost_id", null: false
+    t.string "key", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crosspost_id"], name: "index_temporary_assets_on_crosspost_id", unique: true
+    t.index ["key"], name: "index_temporary_assets_on_key", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.boolean "admin", default: false, null: false
     t.boolean "allow_automatic_syndication", default: true, null: false
@@ -307,4 +318,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_27_100000) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "temporary_assets", "crossposts", on_delete: :cascade
 end

@@ -16,7 +16,7 @@ class Platforms::Instagram
         )
         if result.success? && result.data[:access_token].present?
           account.update!(
-            credentials: {"access_token" => result.data[:access_token]},
+            credentials: account.credentials.merge("access_token" => result.data[:access_token]),
             credentials_renewed_at: Now.time
           )
           Outcome.success

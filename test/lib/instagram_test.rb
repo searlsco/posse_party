@@ -1,4 +1,6 @@
 require "test_helper"
+require "digest"
+require "vips"
 
 class InstagramTest < ActiveJob::TestCase
   def setup
@@ -75,6 +77,93 @@ class InstagramTest < ActiveJob::TestCase
     assert_equal "18068657540343979", crosspost.remote_id
     assert_nil crosspost.url
     assert crosspost.published_at.present?
+  end
+
+  def test_instagram_story_webp_photo_is_letterboxed_before_instagram_fetches_it
+    webp_url = "https://posseparty.com/test-assets/3-by-4.webp"
+    post_url = "https://example.com/posts/3-by-4"
+    stub_request(:get, feed_url)
+      .to_return(body: <<~XML, status: 200)
+        <?xml version="1.0" encoding="utf-8"?>
+        <feed xmlns="http://www.w3.org/2005/Atom" xmlns:posse="https://posseparty.com/2024/Feed">
+          <title>Test Feed</title>
+          <id>#{feed_url}</id>
+          <updated>2025-12-19T00:00:00Z</updated>
+          <entry>
+            <title>3x4 Photo</title>
+            <id>#{post_url}</id>
+            <published>2025-12-19T00:00:00Z</published>
+            <updated>2025-12-19T00:00:00Z</updated>
+            <link rel="alternate" href="#{post_url}"/>
+            <posse:post><![CDATA[{"syndicate":true,"channel":"story","media":[{"type":"image","url":"#{webp_url}"}]}]]></posse:post>
+          </entry>
+        </feed>
+      XML
+    stub_request(:get, webp_url)
+      .to_return(
+        status: 200,
+        headers: {"Content-Type" => "image/webp"},
+        body: File.binread(file_fixture("3_by_4_photo.webp"))
+      )
+    feed = @user.feeds.create!(url: feed_url, label: "justin.searls.co - test")
+    FetchesFeed.new.fetch!(feed, cache: false)
+    post = Post.find_by!(remote_id: post_url)
+    crosspost = Crosspost.includes(:account).find_by!(post_id: post.id)
+    crosspost.update!(status: "wip")
+    expected_key = Digest::SHA256.hexdigest([post.remote_id, "SOME_USER_ID", webp_url].join("|"))
+    expected_query = {
+      access_token: "SOME_ACCESS_TOKEN",
+      media_type: "STORIES",
+      image_url: "http://posseparty.com/instagram/story_images/#{expected_key}"
+    }
+    calls_instagram_api = Mocktail.of_next(Platforms::Instagram::CallsInstagramApi)
+    stubs { calls_instagram_api.call(method: :post, path: "SOME_USER_ID/media", query: expected_query) }.with {
+      Platforms::Instagram::CallsInstagramApi::Result.new(
+        success?: false,
+        data: {error: {code: 352, error_subcode: "2207008", type: "OAuthException", fbtrace_id: "fbtrace"}},
+        message: "Waiting for Instagram container to exist"
+      )
+    }
+    result = nil
+
+    assert_enqueued_with(job: FinishCrosspostJob, args: [crosspost.id]) do
+      result = PublishesCrosspost.new.publish(crosspost.id)
+    end
+
+    crosspost.reload
+    assert result.success?
+    assert result.needs_to_finish?
+    assert_equal "wip", crosspost.status
+    assert_equal "story", post.channel
+    assert_equal [{"type" => "image", "url" => webp_url}], post.media
+    temporary_asset = crosspost.temporary_asset
+    assert_equal expected_key, temporary_asset.key
+    assert_equal "\xFF\xD8\xFF".b, temporary_asset.bytes.byteslice(0, 3)
+    image = Vips::Image.new_from_buffer(temporary_asset.bytes, "")
+    assert_equal 2000, image.width
+    assert_equal 3556, image.height
+    assert_equal [0.0, 0.0, 0.0], image.getpoint(1000, 0)
+    assert_equal [0.0, 0.0, 0.0], image.getpoint(1000, 3555)
+
+    crop_height = (image.width * 4.0 / 3).round
+    crop_top = ((image.height - crop_height) / 2.0).round
+    cropped_image = image.crop(0, crop_top, image.width, crop_height)
+
+    fixture_image = Vips::Image.new_from_file(file_fixture("3_by_4_photo.webp").to_s)
+      .autorot
+      .colourspace("srgb")
+    fixture_image = fixture_image.extract_band(0, n: 3) if fixture_image.bands > 3
+
+    resized_fixture_image = fixture_image.resize(image.width.fdiv(fixture_image.width))
+    cropped_fixture_image = resized_fixture_image.crop(0, ((resized_fixture_image.height - crop_height) / 2.0).round, image.width, crop_height)
+
+    assert_equal image.width, cropped_image.width
+    assert_equal crop_height, cropped_image.height
+    assert_equal image.width, cropped_fixture_image.width
+    assert_equal crop_height, cropped_fixture_image.height
+    assert_in_delta crop_top, image.height - (crop_top + crop_height), 1
+    assert_operator (cropped_image - cropped_fixture_image).abs.avg, :<, 5.0
+    verify { calls_instagram_api.call(method: :post, path: "SOME_USER_ID/media", query: expected_query) }
   end
 
   def test_instagram_story_video

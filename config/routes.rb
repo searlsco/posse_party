@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", :as => :rails_health_check
   get "status" => "status#show"
+  get "instagram/story_images/:key", to: "instagram_story_images#show", as: :instagram_story_image
 
   mount Searls::Auth::Engine => "/auth"
   mount MissionControl::Jobs::Engine, at: "/jobs"
