@@ -52,7 +52,7 @@ class Platforms::Linkedin
             {
               article: {
                 source: url,
-                title: crosspost_config.og_title.presence || crosspost_config.title.presence,
+                title: crosspost_config.og_title.presence || crosspost_config.title.presence || content.truncate(60),
                 description: crosspost_config.og_description.presence || crosspost_config.summary,
                 thumbnail: image_urn
               }.compact
