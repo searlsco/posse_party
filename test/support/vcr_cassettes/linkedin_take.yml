@@ -234,7 +234,8 @@ http_interactions:
       string: '{"author":"urn:li:person:someperson","commentary":"Been a fun couple
         of weeks touring more remote parts of Japan, and I''m happy to report I''ve
         now stayed at least one night in 46 of Japan''s 47 prefectures. I''m saving
-        the last—Hokkaido—for next year. RubyKaigiかな","visibility":"PUBLIC","distribution":{"feedDistribution":"MAIN_FEED","targetEntities":[],"thirdPartyDistributionChannels":[]},"lifecycleState":"PUBLISHED","content":{"article":{"source":"https://justin.searls.co/posts/all-the-pretty-prefectures/","description":"Been
+        the last—Hokkaido—for next year. RubyKaigiかな","visibility":"PUBLIC","distribution":{"feedDistribution":"MAIN_FEED","targetEntities":[],"thirdPartyDistributionChannels":[]},"lifecycleState":"PUBLISHED","content":{"article":{"source":"https://justin.searls.co/posts/all-the-pretty-prefectures/","title":"Been
+        a fun couple of weeks touring more remote parts of J...","description":"Been
         a fun couple of weeks touring more remote parts of Japan, and I''m happy to
         report I''ve now stayed at least one night in 46 of Japan''s 47 prefectures.
         I''m saving the last—Hokkaido—for next year. RubyKaigiかな https://justin.searls.co/posts/all-the-pretty-prefectures/","thumbnail":"urn:li:image:D5610AQEYzRR1C4dhFA"}}}'

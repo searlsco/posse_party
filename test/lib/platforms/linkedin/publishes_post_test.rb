@@ -59,9 +59,10 @@ class Platforms::Linkedin::PublishesPostTest < ActiveSupport::TestCase
     }
   end
 
-  def test_omits_link_card_title_when_no_title_is_available
+  def test_uses_truncated_content_when_no_title_is_available
     api = Mocktail.of_next(Platforms::Linkedin::CallsLinkedinApi)
     subject = Platforms::Linkedin::PublishesPost.new
+    content = "This is a long LinkedIn post body that should be truncated for the title."
 
     crosspost_config = CrosspostConfig.new(
       url: "https://example.com/posts/456",
@@ -73,13 +74,13 @@ class Platforms::Linkedin::PublishesPostTest < ActiveSupport::TestCase
 
     expected_body = subject.send(
       :build_post_data,
-      "Post body",
+      content,
       crosspost_config,
       person_urn: "urn:li:person:def456",
       image_urn: nil,
       url: crosspost_config.url
     )
-    assert_nil expected_body.dig(:content, :article, :title)
+    assert_equal content.truncate(60), expected_body.dig(:content, :article, :title)
     assert_equal "A consistent description", expected_body.dig(:content, :article, :description)
 
     stubs {
@@ -97,7 +98,7 @@ class Platforms::Linkedin::PublishesPostTest < ActiveSupport::TestCase
     }
 
     result = subject.publish(
-      "Post body",
+      content,
       crosspost_config,
       access_token: "token",
       person_urn: "urn:li:person:def456",
