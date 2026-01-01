@@ -2,6 +2,8 @@ require "test_helper"
 require "mocktail"
 
 class PublishesCrosspost::RecoversFromInvalidLinkAttachmentTest < ActiveSupport::TestCase
+  FakeContent = Struct.new(:string, keyword_init: true)
+
   def setup
     @subject = PublishesCrosspost::RecoversFromInvalidLinkAttachment.new
     @crosspost = crossposts(:admin_bsky_crosspost)
@@ -12,7 +14,7 @@ class PublishesCrosspost::RecoversFromInvalidLinkAttachmentTest < ActiveSupport:
       format_string: "{{content}}"
     )
     @api = Mocktail.of_next(Platforms::Bsky)
-    @failing_content = OpenStruct.new(string: "This is my post content")
+    @failing_content = FakeContent.new(string: "This is my post content")
   end
 
   test "disables attach_link and retries with same content when URL already included" do

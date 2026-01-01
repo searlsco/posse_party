@@ -1,6 +1,8 @@
 require "test_helper"
 
 class DeletesCrosspostTest < ActiveSupport::TestCase
+  FakeJob = Struct.new(:claimed_execution, keyword_init: true)
+
   def setup
     @finder = Mocktail.of_next(FindsJobsForCrosspost)
     @subject = DeletesCrosspost.new
@@ -23,7 +25,7 @@ class DeletesCrosspostTest < ActiveSupport::TestCase
   def test_refuses_when_a_job_is_claimed
     @crosspost.update!(status: "wip")
 
-    fake_job = OpenStruct.new(claimed_execution: Object.new)
+    fake_job = FakeJob.new(claimed_execution: Object.new)
     stubs { @finder.find(@crosspost) }.with { [fake_job] }
 
     outcome = @subject.delete(@crosspost)

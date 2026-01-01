@@ -1,10 +1,13 @@
 require "test_helper"
 
 class HandlesJobErrorTest < ActiveSupport::TestCase
+  FakeJobClass = Struct.new(:name, keyword_init: true)
+  FakeJob = Struct.new(:class, :arguments, :scheduled_at, :job_id, keyword_init: true)
+
   def setup
     @error = StandardError.new("Job failed")
-    @job = OpenStruct.new(
-      class: OpenStruct.new(name: "TestJob"),
+    @job = FakeJob.new(
+      class: FakeJobClass.new(name: "TestJob"),
       arguments: ["arg1", "arg2"],
       scheduled_at: Time.current,
       job_id: "123abc"

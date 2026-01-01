@@ -4,6 +4,7 @@ class PostsController < MembersController
   set_tab :posts
 
   POSTS_PER_PAGE = 30
+  Page = Struct.new(:number, :last?, keyword_init: true)
 
   def index
     @query = params[:q]&.strip
@@ -18,10 +19,10 @@ class PostsController < MembersController
       if search_result.success?
         data = search_result.data
         @posts = data[:posts].limit(POSTS_PER_PAGE)
-        @page = OpenStruct.new(number: data[:current_page], last?: !data[:has_more])
+        @page = Page.new(number: data[:current_page], last?: !data[:has_more])
       else
         @posts = []
-        @page = OpenStruct.new(number: 1, last?: true)
+        @page = Page.new(number: 1, last?: true)
         flash.now[:alert] = search_result.error
       end
     else
