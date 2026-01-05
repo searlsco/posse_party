@@ -2,7 +2,7 @@ class TestController < ActionController::Base # standard:disable Rails/Applicati
   if Rails.env.local?
     def set_session_var
       session[params[:key]] = params[:value] # brakeman:disable
-      redirect_back_or_to(settings_path)
+      redirect_back fallback_location: settings_path
     end
 
     def feed_fixture
