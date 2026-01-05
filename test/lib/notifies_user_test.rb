@@ -3,6 +3,8 @@ require "test_helper"
 class NotifiesUserTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
+  FakeExtraction = Struct.new(:text, :refs, keyword_init: true)
+
   def setup
     @user = User.create!(
       email: "x@example.com",
@@ -88,7 +90,7 @@ class NotifiesUserTest < ActiveSupport::TestCase
     creates_notification = Mocktail.of_next(Notifications::CreatesNotification)
     extracts_text_from_simulated_email = Mocktail.of_next(ExtractsTextFromSimulatedEmail)
     determines_email_capability = Mocktail.of_next(DeterminesEmailCapability)
-    stubs { extracts_text_from_simulated_email.extract(mail: NotificationMailer, method: :notify, params: "params") }.with { OpenStruct.new(text: "extractedtext", refs: ["eref"]) }
+    stubs { extracts_text_from_simulated_email.extract(mail: NotificationMailer, method: :notify, params: "params") }.with { FakeExtraction.new(text: "extractedtext", refs: ["eref"]) }
     stubs { determines_email_capability.determine }.with { false }
     subject = NotifiesUser.new
 

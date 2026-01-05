@@ -1,10 +1,13 @@
 require "test_helper"
 
 class TranslatesInstagramPostTest < ActiveSupport::TestCase
+  FakePost = Struct.new(:url, :media, keyword_init: true)
+  FakeCrosspost = Struct.new(:post, :content, keyword_init: true)
+
   def test_translates_poster_url_to_cover_url
     translator = Platforms::Instagram::TranslatesInstagramPost.new
 
-    post = OpenStruct.new(
+    post = FakePost.new(
       url: "https://example.com/post",
       media: [
         {
@@ -15,7 +18,7 @@ class TranslatesInstagramPostTest < ActiveSupport::TestCase
       ]
     )
 
-    crosspost = OpenStruct.new(
+    crosspost = FakeCrosspost.new(
       post: post,
       content: "Some caption"
     )

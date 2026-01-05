@@ -18,6 +18,9 @@ class ExtractsTextFromSimulatedEmailTest < ActiveSupport::TestCase
     end
   end
 
+  FakeBody = Struct.new(:decoded, keyword_init: true)
+  FakeMessage = Struct.new(:text_part, :html_part, :content_type, :body, keyword_init: true)
+
   class FakeMailer
     def self.with(params)
       @params = params
@@ -25,11 +28,11 @@ class ExtractsTextFromSimulatedEmailTest < ActiveSupport::TestCase
     end
 
     def self.notify
-      message = OpenStruct.new(
+      message = FakeMessage.new(
         text_part: FakePart.new("Hello world https://example.com/a"),
         html_part: nil,
         content_type: "multipart/alternative",
-        body: OpenStruct.new(decoded: "ignored")
+        body: FakeBody.new(decoded: "ignored")
       )
       FakePreview.new(message)
     end
@@ -52,11 +55,11 @@ class ExtractsTextFromSimulatedEmailTest < ActiveSupport::TestCase
       end
 
       def self.notify
-        message = OpenStruct.new(
+        message = ExtractsTextFromSimulatedEmailTest::FakeMessage.new(
           text_part: nil,
           html_part: nil,
           content_type: "text/plain; charset=UTF-8",
-          body: OpenStruct.new(decoded: "Plain https://x.test")
+          body: ExtractsTextFromSimulatedEmailTest::FakeBody.new(decoded: "Plain https://x.test")
         )
         ExtractsTextFromSimulatedEmailTest::FakePreview.new(message)
       end
