@@ -15,7 +15,8 @@ Before you start, make sure you’ve created a Meta app with the Facebook Pages 
 2. [Generate a user access token in Graph API Explorer](#2-generate-a-user-access-token-in-graph-api-explorer)
 3. [Find your page ID and short-lived page access token](#3-find-your-page-id-and-short-lived-page-access-token)
 4. [Exchange for a long-lived page access token](#4-exchange-for-a-long-lived-page-access-token)
-5. [Add Facebook to POSSE Party](#5-add-facebook-to-posse-party)
+5. [Publish your Meta app](#5-publish-your-meta-app)
+6. [Add Facebook to POSSE Party](#6-add-facebook-to-posse-party)
 
 ### 1. Enable Facebook Pages Permissions for Testing
 
@@ -134,7 +135,35 @@ Before you start, make sure you’ve created a Meta app with the Facebook Pages 
 
 ![Long-lived page access token](../images/facebook-25.png)
 
-### 5. Add Facebook to POSSE Party
+### 5. Publish Your Meta App
+
+Before posts created by POSSE Party will be visible to other users on Facebook, your Meta app must be published.
+
+1. In Meta for Developers, click **Publish** in the left sidebar.
+
+![Publish in Meta for Developers](../images/facebook-28.png)
+
+2. Click **Go to app settings**.
+
+![Go to app settings](../images/facebook-29.png)
+
+3. Add a publicly-accessible **Privacy Policy URL**.
+
+POSSE Party includes a built-in privacy policy page at `https://<your APP_HOST>/policies/privacy` ([example](https://app.posseparty.com/policies/privacy)). The URL must be reachable from the public internet, or the publishing step will fail.
+
+![App settings basic fields](../images/facebook-30.png)
+
+4. Click **Save changes**.
+
+![Save changes](../images/facebook-31.png)
+
+5. Return to **Publish** and click **Publish**.
+
+![Publish app](../images/facebook-32.png)
+
+Once your app is published, new posts created by POSSE Party should be publicly visible.
+
+### 6. Add Facebook to POSSE Party
 
 1. In POSSE Party, go to **Accounts** and click **Add account**. Enter a label and select **Facebook** as the platform.
 
