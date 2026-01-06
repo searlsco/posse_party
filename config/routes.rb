@@ -61,6 +61,10 @@ Rails.application.routes.draw do
   get "credential_renewals/linkedin" => "credential_renewals#linkedin"
   get "credential_renewals/youtube" => "credential_renewals#youtube"
 
+  resource :policies, only: [] do
+    get :privacy
+  end
+
   resources :docs, only: [:index, :show]
 
   # Test-only routes
