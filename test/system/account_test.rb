@@ -31,9 +31,9 @@ class AccountTest < ApplicationSystemTestCase
 
     assert_equal "password", find_field("Email")[:type]
     assert_equal "password", find_field("App Password")[:type]
-    click_button "Show Email"
+    click_aria "Show Email"
     assert_equal "text", find_field("Email")[:type]
-    click_button "Hide Email"
+    click_aria "Hide Email"
     assert_equal "password", find_field("Email")[:type]
 
     # Fill in credentials

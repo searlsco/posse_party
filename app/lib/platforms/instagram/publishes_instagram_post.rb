@@ -29,6 +29,7 @@ class Platforms::Instagram
       @builds_instagram_config = BuildsInstagramConfig.new
       @translates_instagram_post = TranslatesInstagramPost.new
       @builds_friendly_error_message = BuildsFriendlyErrorMessage.new
+      @generates_story_image_url = GeneratesStoryImageUrl.new
     end
 
     def publish(crosspost:, mode:, crosspost_config: nil, crosspost_content: nil)
@@ -59,6 +60,10 @@ class Platforms::Instagram
         crosspost.update!(content: crosspost_content.string)
         channel = crosspost_config.channel
         instagram_post = @translates_instagram_post.from_crosspost(crosspost, channel:)
+        media = instagram_post.medias.first
+        if channel == "story" && media.present? && !media.video?
+          media.url = @generates_story_image_url.generate(crosspost, media.url)
+        end
       when :finish
         instagram_post = @translates_instagram_post.from_json(crosspost.metadata["post"])
         channel = channel_for(instagram_post)

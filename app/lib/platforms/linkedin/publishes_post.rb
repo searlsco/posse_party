@@ -1,5 +1,8 @@
 class Platforms::Linkedin
   class PublishesPost
+    TITLE_MAX_LENGTH = 60
+    DESCRIPTION_MAX_LENGTH = 4084
+
     Result = Struct.new(:success?, :post_urn, :url, :message)
 
     def initialize
@@ -52,8 +55,8 @@ class Platforms::Linkedin
             {
               article: {
                 source: url,
-                title: crosspost_config.og_title || content.truncate(60),
-                description: crosspost_config.og_description,
+                title: crosspost_config.og_title.presence || crosspost_config.title.presence || content.truncate(TITLE_MAX_LENGTH),
+                description: crosspost_config.og_description.presence || crosspost_config.summary.truncate(DESCRIPTION_MAX_LENGTH),
                 thumbnail: image_urn
               }.compact
             }

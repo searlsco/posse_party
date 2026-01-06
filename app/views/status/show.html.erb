@@ -101,6 +101,18 @@
               <%= link_to "Log In", searls_auth.login_path, class: "#{button_class_pack(:info)} block text-center" %>
             <% end %>
             <%= link_to "Documentation", docs_path, class: "#{button_class_pack(:neutral)} block text-center" %>
+            <% commit_label = @git_commit ? @git_commit.short_sha : "unknown" %>
+            <% if @git_commit %>
+              <%= link_to "Deployed commit (#{commit_label})",
+                @git_commit.url,
+                target: "_blank",
+                rel: "noreferrer",
+                class: "#{button_class_pack(:neutral)} block text-center" %>
+            <% else %>
+              <div class="<%= class_names(button_class_pack(:neutral), "block text-center") %>">
+                Deployed commit (<%= commit_label %>)
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>

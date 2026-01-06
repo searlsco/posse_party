@@ -3,6 +3,7 @@ class Crosspost < ApplicationRecord
   belongs_to :account
   has_one :user, through: :account
   has_one :feed, through: :post
+  has_one :temporary_asset, dependent: :destroy
 
   validates :post_id, uniqueness: {scope: :account_id}
   validates :status, inclusion: {in: %w[ready skipped wip published failed]}, presence: true

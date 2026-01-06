@@ -37,7 +37,7 @@
       .hero-tag { margin-top: 12px; font-size: clamp(32px, 5.2vw, 65px); font-weight: 900; letter-spacing: .3px; }
       .hero-sub { margin-top: 24px; font-size: clamp(24px, 3.4vw, 31px); font-weight: 700; color: var(--fg); max-width: 860px; }
       .hero-platforms { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-      .hero-platforms-label { font-size: 20px; font-weight: 600; text-align: left; }
+      .section-heading { font-size: clamp(18px, 5vw, 26px); font-weight: 700; text-align: center; width: 100%; max-width: 640px; margin: 0 auto 1em; }
       .hero-platforms-icons { margin-top: 6px; display: grid; grid-template-columns: repeat(4, minmax(0, auto)); gap: 18px; justify-content: center; }
       .platform-icon { width: 52px; height: 52px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; box-shadow: 0 0 0 1px #ffffff22, 0 0 26px #ffffff1a, 0 12px 26px #000a; }
       .platform-icon svg { width: 30px; height: 30px; display: block; }
@@ -68,12 +68,36 @@
       .card h3 { margin: 0 0 6px; font-size: 16px; }
       .card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-      /* Screenshot */
-      .posts-preview { margin: var(--section-mt) 0 0; display: flex; flex-direction: column; align-items: center; gap: 0; }
-      .posts-preview-title { font-size: 20px; font-weight: 700; text-align: left; width: 100%; max-width: 640px; margin: 0 auto 0.67em; }
-      .posts-preview-text { max-width: 640px; width: 100%; text-align: left; color: var(--muted); font-size: 15px; margin: 0 auto 1em; }
-      .posts-preview-picture { width: 100%; max-width: calc(min(1400px, 80dvw)); max-height: 65dvh; border-radius: 18px; overflow: hidden; border: 1px solid #ffffff26; box-shadow: 0 18px 40px #000b; }
-      .posts-preview-picture img { width: 100%; height: 100%; display: block; object-fit: cover; }
+      /* How Much Time You Got? */
+      .time-widget { margin: var(--section-mt) 0 0; display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+      .time-widget-control { width: 100%; max-width: 640px; margin: 0 auto; }
+      .time-widget-rail { margin-top: 36px; border-radius: 999px; padding: 6px; border: 4px solid #000000aa; background: linear-gradient(180deg, #05060b, #0b0d15); box-shadow: 0 18px 40px #000b, 0 0 0 1px #ffffff12 inset; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+      .time-widget-well { border-radius: 999px; padding: 8px; background: linear-gradient(180deg, #2b2f3a, #171a22); box-shadow: inset 0 3px 6px #000b, inset 0 -2px 2px #ffffff14; }
+      .time-widget-inner { position: relative; height: 34px; }
+      .time-widget-hashes { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); z-index: 1; }
+      .time-widget-hashes > span { display: grid; place-items: center; }
+      .time-widget-options { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); }
+      .time-widget-option { position: relative; border: 0; background: transparent; color: var(--fg); padding: 0; cursor: pointer; display: grid; place-items: center; -webkit-tap-highlight-color: transparent; }
+      .time-widget-option:focus-visible { outline: 2px solid var(--accent3); outline-offset: 8px; border-radius: 14px; }
+      .time-widget-option-label { position: absolute; bottom: calc(100% + 15px); font-size: clamp(14px, 2.2vw, 22px); font-weight: 900; letter-spacing: 0.4px; color: var(--fg); text-shadow: 0 10px 24px #000c; user-select: none; -webkit-user-select: none; }
+      .time-widget-hash { width: 2px; height: 28px; border-radius: 999px; background: #0b0d15; box-shadow: inset 0 1px 1px #000f, inset 0 -1px 1px #ffffff12; opacity: 0.95; }
+
+      .time-widget-thumb { position: absolute; inset: 0 auto 0 0; width: calc(100% / 6); border-radius: 999px; background: linear-gradient(180deg, #f6f7f9, #cfd2d6); box-shadow: 0 10px 20px #000a, 0 0 0 1px #ffffff35 inset; transition: transform 140ms ease-out, box-shadow 140ms ease-out; pointer-events: none; z-index: 2; }
+      .time-widget.is-dragging .time-widget-thumb { box-shadow: 0 7px 14px #000b, 0 0 0 1px #ffffff35 inset; }
+      .time-widget[data-step="0"] .time-widget-thumb { transform: translateX(0%); }
+      .time-widget[data-step="1"] .time-widget-thumb { transform: translateX(100%); }
+      .time-widget[data-step="2"] .time-widget-thumb { transform: translateX(200%); }
+      .time-widget[data-step="3"] .time-widget-thumb { transform: translateX(300%); }
+      .time-widget[data-step="4"] .time-widget-thumb { transform: translateX(400%); }
+      .time-widget[data-step="5"] .time-widget-thumb { transform: translateX(500%); }
+      .time-widget-options { z-index: 3; }
+
+      .time-widget-stage { width: 100%; max-width: calc(min(1400px, 80dvw)); border-radius: 18px; overflow: hidden; border: 1px solid #ffffff26; box-shadow: 0 18px 40px #000b; background: #0c0f1b; margin-top: 18px; }
+      .time-widget-stage [hidden] { display: none; }
+      .time-widget-stage picture { display: block; }
+      .time-widget-stage img { width: 100%; height: auto; display: block; object-fit: cover; max-height: 65dvh; }
+      .time-widget-stage iframe { width: 100%; display: block; border: 0; aspect-ratio: 16 / 9; max-height: 65dvh; }
 
       /* Code */
       pre[class*="language-"] {
@@ -87,23 +111,30 @@
         margin: 0;
       }
       pre[class*="language-"] code { line-height: 1.4; }
-      pre.language-bash { padding-left: 32px; max-width: min(960px, 92vw); margin: 0; overflow-x: auto; }
+      pre.language-bash { max-width: 100%; margin: 0; }
       pre.language-bash code { display: block; font-size: 15px; }
       @media (min-width: 1024px) {
         pre.language-bash code { font-size: 16px; letter-spacing: 0.2px; }
       }
-      pre.language-bash::before {
-        content: '$';
-        position: absolute; left: 12px; top: 12px; color: var(--muted);
-        font-family: inherit; font-size: inherit; line-height: inherit;
-        user-select: none; -webkit-user-select: none;
-        pointer-events: none;
-      }
+      pre.terminal { padding: 0; white-space: normal; }
+      .terminal-line { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 12px 14px; }
+      .terminal-prompt { color: var(--muted); user-select: none; -webkit-user-select: none; }
+      .terminal-command { min-width: 0; }
+      .terminal-command code { overflow-x: auto; white-space: nowrap; padding: 0; }
+      .terminal-copy { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--fg); cursor: pointer; line-height: 0; }
+      .terminal-copy:focus-visible { outline: 2px solid var(--accent3); outline-offset: 2px; }
+      .terminal-copy-icon { width: 18px; height: 18px; display: block; opacity: 0.5; transition: opacity 140ms ease-out; }
+      .terminal-copy:hover .terminal-copy-icon { opacity: 0.85; }
+      .terminal-copy:active .terminal-copy-icon { opacity: 1; }
+      .terminal-copy-icon--copy { transform: scaleX(-1); }
+      .terminal-copy:not([data-copied="true"]) .terminal-copy-icon--check { display: none; }
+      .terminal-copy[data-copied="true"] { color: #16a34a; }
+      .terminal-copy[data-copied="true"] .terminal-copy-icon { opacity: 1; }
+      .terminal-copy[data-copied="true"] .terminal-copy-icon--copy { display: none; }
       #install { max-width: 640px; margin: var(--section-mt) auto 0; }
       #install pre + pre { margin-top: 28px; }
       #install p { text-align: center; margin-top: var(--section-mt); }
       #install .run-text { text-align: left; margin-top: 0; color: var(--muted); }
-      #install h2 { font-size: 20px; text-align: left; }
 
       .site-footer { margin: 120px auto 48px; font-size: 12px; color: var(--muted); text-align: center; opacity: 0.75; }
 
@@ -111,7 +142,7 @@
         .hero-sub { margin-top: 32px; }
         .hero-platforms { margin-top: 64px; }
         .features { margin-top: 64px; }
-        .posts-preview { margin-top: 64px; }
+        .time-widget { margin-top: 64px; }
         #install { margin-top: 64px; }
         .hero-platforms-icons { grid-template-columns: repeat(8, minmax(0, auto)); }
       }
@@ -130,12 +161,12 @@
 
     <main class="wrap">
       <section class="hero">
-        <img src="/img/hero.webp" alt="POSSE Party hero" class="hero-logo" />
-        <div class="hero-tag">Quit social media<br>by posting more.</div>
-        <div class="hero-sub">Take your site's feed and push it to everyone else's.</div>
-        <div class="hero-platforms">
-          <div class="hero-platforms-label">POSSE Party can syndicate to:</div>
-          <div class="hero-platforms-icons">
+	        <img src="/img/hero.webp" alt="POSSE Party hero" class="hero-logo" />
+	        <div class="hero-tag">Quit social media<br>by posting more.</div>
+	        <div class="hero-sub">Take your site's feed and push it to everyone else's.</div>
+	        <div class="hero-platforms">
+	          <h2 class="section-heading">Where do you want to crosspost?</h2>
+	          <div class="hero-platforms-icons">
             <a class="platform-icon platform-icon--bluesky" href="https://github.com/searlsco/posse_party/blob/main/docs/account_setup/bsky.md" role="img" aria-label="Bluesky setup guide" title="Bluesky setup guide" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor"><path d="M23.931,5.298c-3.21,2.418-6.663,7.32-7.931,9.951-1.267-2.631-4.721-7.533-7.931-9.951-2.316-1.744-6.069-3.094-6.069,1.201,0,.857,.49,7.206,.778,8.237,.999,3.583,4.641,4.497,7.881,3.944-5.663,.967-7.103,4.169-3.992,7.372,5.908,6.083,8.492-1.526,9.154-3.476,.123-.36,.179-.527,.179-.379,0-.148,.057,.019,.179,.379,.662,1.949,3.245,9.558,9.154,3.476,3.111-3.203,1.671-6.405-3.992-7.372,3.24,.553,6.882-.361,7.881-3.944,.288-1.031,.778-7.38,.778-8.237,0-4.295-3.753-2.945-6.069-1.201Z"></path></svg>
             </a>
@@ -178,23 +209,75 @@
         </div>
       </section>
 
-      <section class="posts-preview" aria-label="POSSE Party posts view">
-        <h2 class="posts-preview-title">The only feed you need</h2>
-        <p class="posts-preview-text">Once configured, all your posts and crossposts will be in one place for you to manage:</p>
-        <picture class="posts-preview-picture">
-          <source srcset="/img/posts-mobile-dark.webp" media="(max-width: 800px) and (prefers-color-scheme: dark)">
-          <source srcset="/img/posts-mobile-light.webp" media="(max-width: 800px)">
-          <source srcset="/img/posts-dark.webp" media="(prefers-color-scheme: dark)">
-          <img src="/img/posts-light.webp" alt="Screenshot of POSSE Party posts view">
-        </picture>
+      <section class="time-widget" aria-label="POSSE Party demo" data-time-widget data-step="3" data-placeholder-youtube-embed="https://www.youtube.com/embed/Pb8_jaOmMN4">
+        <h2 class="section-heading">How much time you got?</h2>
+        <div class="time-widget-control">
+          <div class="time-widget-rail" data-time-track>
+            <div class="time-widget-well">
+              <div class="time-widget-inner">
+                <div class="time-widget-hashes" aria-hidden="true">
+                  <span><span class="time-widget-hash"></span></span>
+                  <span><span class="time-widget-hash"></span></span>
+                  <span><span class="time-widget-hash"></span></span>
+                  <span><span class="time-widget-hash"></span></span>
+                  <span><span class="time-widget-hash"></span></span>
+                  <span><span class="time-widget-hash"></span></span>
+                </div>
+                <div class="time-widget-thumb" aria-hidden="true"></div>
+                <div class="time-widget-options" role="radiogroup" aria-label="Choose a demo length">
+                  <button class="time-widget-option" type="button" role="radio" aria-checked="false" tabindex="-1" data-time-value="0s">
+                    <span class="time-widget-option-label">0s</span>
+                  </button>
+                  <button class="time-widget-option" type="button" role="radio" aria-checked="false" tabindex="-1" data-time-value="1m" data-youtube-embed="https://www.youtube.com/embed/73OBp4-AQDc">
+                    <span class="time-widget-option-label">1m</span>
+                  </button>
+                  <button class="time-widget-option" type="button" role="radio" aria-checked="false" tabindex="-1" data-time-value="5m" data-youtube-embed="https://www.youtube.com/embed/FT4234P7NGc">
+                    <span class="time-widget-option-label">5m</span>
+                  </button>
+                  <button class="time-widget-option" type="button" role="radio" aria-checked="true" tabindex="0" data-time-value="10m" data-youtube-embed="https://www.youtube.com/embed/Pb8_jaOmMN4">
+                    <span class="time-widget-option-label">10m</span>
+                  </button>
+                  <button class="time-widget-option" type="button" role="radio" aria-checked="false" tabindex="-1" data-time-value="15m" data-youtube-embed="https://www.youtube.com/embed/08UwvMfF8Rg">
+                    <span class="time-widget-option-label">15m</span>
+                  </button>
+                  <button class="time-widget-option" type="button" role="radio" aria-checked="false" tabindex="-1" data-time-value="20m" data-youtube-embed="https://www.youtube.com/embed/DQbmSDzSoKM">
+                    <span class="time-widget-option-label">20m</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="time-widget-stage">
+          <picture data-time-screenshot hidden>
+            <source srcset="/img/posts-mobile-dark.webp" media="(max-width: 800px) and (prefers-color-scheme: dark)">
+            <source srcset="/img/posts-mobile-light.webp" media="(max-width: 800px)">
+            <source srcset="/img/posts-dark.webp" media="(prefers-color-scheme: dark)">
+            <img src="/img/posts-light.webp" alt="Screenshot of POSSE Party posts view">
+          </picture>
+          <iframe data-time-video title="POSSE Party demo video (10m)" loading="lazy" src="https://www.youtube.com/embed/Pb8_jaOmMN4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
       </section>
 
       <section id="install">
-        <h2>Get the POSSE Party started!</h2>
+        <h2 class="section-heading">Ready to start a POSSE party?</h2>
           <p class="run-text">
             Run this command on any server that speaks Docker:
           </p>
-          <pre class="language-bash"><code>/bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"</code></pre>
+          <pre class="language-bash terminal" data-terminal>
+            <span class="terminal-line">
+              <span class="terminal-prompt" aria-hidden="true">$</span>
+              <span class="terminal-command"><code data-terminal-text>/bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"</code></span>
+              <button class="terminal-copy" type="button" aria-label="Copy install command" data-terminal-copy>
+                <svg class="terminal-copy-icon terminal-copy-icon--copy" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
+                </svg>
+                <svg class="terminal-copy-icon terminal-copy-icon--check" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+              </button>
+            </span>
+          </pre>
         <p>
           <a class="btn readme" href="https://github.com/searlsco/posse_party?tab=readme-ov-file#posse-party" target="_blank" rel="noopener">View README</a>
       </p>
@@ -203,6 +286,8 @@
         Copyright <a href="https://searls.co">Searls LLC</a>, {{ now.Format "2006" }}. All rights reserved.
       </footer>
     </main>
+
+    <script src="/js/homepage.js" defer></script>
 
   </body>
   </html>

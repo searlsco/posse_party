@@ -3,8 +3,10 @@ name: CI
 on:
   pull_request:
   push:
+    branches:
+      - main
   schedule:
-    - cron: '0 14 * * *' # Runs at 14:00 UTC every day, which is 10:00 AM EDT
+    - cron: "0 14 * * *" # Runs at 14:00 UTC every day, which is 10:00 AM EDT
 
 jobs:
   scan_ruby:
@@ -13,6 +15,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev libvips libvips-dev
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -41,10 +46,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev libvips libvips-dev
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
@@ -71,7 +78,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config libidn11-dev
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config libidn11-dev libvips-dev
 
       - name: Checkout code
         uses: actions/checkout@v6
@@ -79,20 +86,19 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
-          node-version: '22'
-          cache: 'yarn'
+          node-version: "22"
+          cache: "yarn"
 
       - run: yarn install --frozen-lockfile --immutable
 
       - name: Cache Playwright Chromium browser
         id: playwright-cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
           key: playwright-browsers-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
@@ -113,7 +119,7 @@ jobs:
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: screenshots

@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Use Ruby version for base image (changes infrequently)
-ARG RUBY_VERSION=3.4.1
+ARG RUBY_VERSION=3.4.8
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
@@ -9,19 +9,22 @@ WORKDIR /rails
 
 EXPOSE 3000
 
+ARG GIT_COMMIT
+
 # Start the server by default, this can be overwritten at runtime to run e.g. bin/jobs
 CMD ["./bin/rails", "server"]
 
 # Install packages needed for both base and build stages (changes very infrequently)
 RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y \
-  curl gnupg postgresql-client libidn12 libidn-dev
+  curl gnupg postgresql-client libidn12 libidn-dev libvips
 
 # Set Rails environment
 ENV RAILS_ENV=production \
   BUNDLE_WITHOUT="development:test" \
   BUNDLE_DEPLOYMENT="1" \
-  BUNDLE_PATH="/usr/local/bundle"
+  BUNDLE_PATH="/usr/local/bundle" \
+  GIT_COMMIT=${GIT_COMMIT}
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -52,6 +55,11 @@ RUN --mount=type=cache,id=bld-yarn-cache,target=/root/.cache/yarn \
 
 # Copy Rails application code (changes every commit)
 COPY --link . .
+
+# Create app/assets/builds directory before asset precompilation
+# This is needed because .dockerignore excludes this directory, but propshaft
+# needs it to exist before initialization so it can be added to the asset paths
+RUN mkdir -p app/assets/builds
 
 # Precompile bootsnap code and assets (changes every commit)
 RUN bundle exec bootsnap precompile app/ lib/ && \

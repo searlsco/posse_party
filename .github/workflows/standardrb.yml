@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libidn11-dev libvips libvips-dev
 
       - name: Standard Ruby
         uses: standardrb/standard-ruby-action@main

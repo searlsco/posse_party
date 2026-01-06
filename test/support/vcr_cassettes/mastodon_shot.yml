@@ -4,102 +4,32 @@ http_interactions:
     method: post
     uri: https://mastodon.social/api/v1/statuses
     body:
-      encoding: ASCII-8BIT
-      string: status=Orlando%2C+I+love+you+%F0%9F%8E%B6+https%3A%2F%2Fjustin.searls.co%2Fshots%2F2024-10-28-09h56m20s%2F
+      encoding: UTF-8
+      string: "{\"status\":\"Orlando, I love you \U0001F3B6 https://justin.searls.co/shots/2024-10-28-09h56m20s/\"}"
     headers:
-      User-Agent:
-      - MastodonRubyGem/2.0.0
-      Accept:
-      - "*/*"
       Authorization:
       - Bearer SOME_TOKEN
-      Connection:
-      - close
       Content-Type:
-      - application/x-www-form-urlencoded
-      Host:
-      - mastodon.social
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
   response:
     status:
       code: 200
       message: OK
     headers:
-      Connection:
-      - close
-      Content-Length:
-      - '3974'
-      Cache-Control:
-      - private, no-store
-      X-Content-Type-Options:
-      - nosniff
-      X-Xss-Protection:
-      - '0'
-      Referrer-Policy:
-      - same-origin
-      X-Request-Id:
-      - c97327a3d475bf6e799c9ebc2462434b
-      Content-Security-Policy:
-      - default-src 'none'; frame-ancestors 'none'; form-action 'none'
-      X-Ratelimit-Remaining:
-      - '296'
-      Via:
-      - 1.1 varnish, 1.1 varnish, 1.1 varnish
-      Etag:
-      - W/"ff68c53859ff8f255cd7cbdbfff262cd"
-      X-Runtime:
-      - '0.207861'
-      X-Frame-Options:
-      - DENY
-      X-Ratelimit-Limit:
-      - '300'
       Content-Type:
       - application/json; charset=utf-8
-      Accept-Ranges:
-      - bytes
-      X-Ratelimit-Reset:
-      - '2025-02-02T21:00:00.050885Z'
-      Date:
-      - Sun, 02 Feb 2025 18:19:17 GMT
-      X-Served-By:
-      - cache-fra-etou8220058-FRA, cache-fra-etou8220145-FRA, cache-mia-kmia1760075-MIA
-      X-Cache:
-      - MISS, MISS, MISS
-      X-Cache-Hits:
-      - 0, 0, 0
-      X-Timer:
-      - S1738520357.710777,VS0,VE406
-      Vary:
-      - Authorization, Origin, Accept-Encoding
-      Strict-Transport-Security:
-      - max-age=31557600
-      Alt-Svc:
-      - h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400
+      Cache-Control:
+      - private, no-store
     body:
       encoding: UTF-8
-      string: "{\"id\":\"113935670111298635\",\"created_at\":\"2025-02-02T18:19:16.925Z\",\"in_reply_to_id\":null,\"in_reply_to_account_id\":null,\"sensitive\":false,\"spoiler_text\":\"\",\"visibility\":\"public\",\"language\":\"en\",\"uri\":\"https://mastodon.social/users/searls/statuses/113935670111298635\",\"url\":\"https://mastodon.social/@searls/113935670111298635\",\"replies_count\":0,\"reblogs_count\":0,\"favourites_count\":0,\"edited_at\":null,\"favourited\":false,\"reblogged\":false,\"muted\":false,\"bookmarked\":false,\"pinned\":false,\"content\":\"\\u003cp\\u003eOrlando,
-        I love you \U0001F3B6 \\u003ca href=\\\"https://justin.searls.co/shots/2024-10-28-09h56m20s/\\\"
-        target=\\\"_blank\\\" rel=\\\"nofollow noopener\\\" translate=\\\"no\\\"\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003ehttps://\\u003c/span\\u003e\\u003cspan class=\\\"ellipsis\\\"\\u003ejustin.searls.co/shots/2024-10\\u003c/span\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003e-28-09h56m20s/\\u003c/span\\u003e\\u003c/a\\u003e\\u003c/p\\u003e\",\"filtered\":[],\"reblog\":null,\"application\":{\"name\":\"feed2toot\",\"website\":null},\"account\":{\"id\":\"31115\",\"username\":\"searls\",\"acct\":\"searls\",\"display_name\":\"Justin
-        Searls\",\"locked\":false,\"bot\":true,\"discoverable\":true,\"indexable\":true,\"group\":false,\"created_at\":\"2017-04-02T00:00:00.000Z\",\"note\":\"\\u003cp\\u003eYou
-        might remember me from such dumpster fires as Twitter dot com. Total \U0001F41E
-        magnet. Co-founded \\u003cspan class=\\\"h-card\\\" translate=\\\"no\\\"\\u003e\\u003ca
-        href=\\\"https://mastodon.social/@testdouble\\\" class=\\\"u-url mention\\\"\\u003e@\\u003cspan\\u003etestdouble\\u003c/span\\u003e\\u003c/a\\u003e\\u003c/span\\u003e.\\u003c/p\\u003e\\u003cp\\u003e⚠️
-        This is an automated account that crossposts from \\u003ca href=\\\"https://justin.searls.co\\\"
-        target=\\\"_blank\\\" rel=\\\"nofollow noopener\\\" translate=\\\"no\\\"\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003ehttps://\\u003c/span\\u003e\\u003cspan class=\\\"\\\"\\u003ejustin.searls.co\\u003c/span\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003e\\u003c/span\\u003e\\u003c/a\\u003e -- instead
-        of replies and DMs, just email me: justin@searls.co\\u003c/p\\u003e\",\"url\":\"https://mastodon.social/@searls\",\"uri\":\"https://mastodon.social/users/searls\",\"avatar\":\"https://files.mastodon.social/accounts/avatars/000/031/115/original/4a780d80f6410e96.jpg\",\"avatar_static\":\"https://files.mastodon.social/accounts/avatars/000/031/115/original/4a780d80f6410e96.jpg\",\"header\":\"https://files.mastodon.social/accounts/headers/000/031/115/original/b12cdbbccbaca8ed.jpg\",\"header_static\":\"https://files.mastodon.social/accounts/headers/000/031/115/original/b12cdbbccbaca8ed.jpg\",\"followers_count\":3608,\"following_count\":385,\"statuses_count\":1808,\"last_status_at\":\"2025-02-02\",\"hide_collections\":false,\"noindex\":false,\"emojis\":[],\"roles\":[],\"fields\":[{\"name\":\"Location\",\"value\":\"Orlando,
-        FL\",\"verified_at\":null},{\"name\":\"Life\",\"value\":\"\\u003ca href=\\\"https://justin.searls.co\\\"
-        target=\\\"_blank\\\" rel=\\\"nofollow noopener me\\\" translate=\\\"no\\\"\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003ehttps://\\u003c/span\\u003e\\u003cspan class=\\\"\\\"\\u003ejustin.searls.co\\u003c/span\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003e\\u003c/span\\u003e\\u003c/a\\u003e\",\"verified_at\":\"2022-11-23T01:59:54.143+00:00\"},{\"name\":\"Work\",\"value\":\"\\u003ca
-        href=\\\"https://blog.testdouble.com/authors/justin-searls/\\\" target=\\\"_blank\\\"
-        rel=\\\"nofollow noopener me\\\" translate=\\\"no\\\"\\u003e\\u003cspan class=\\\"invisible\\\"\\u003ehttps://\\u003c/span\\u003e\\u003cspan
-        class=\\\"ellipsis\\\"\\u003eblog.testdouble.com/authors/ju\\u003c/span\\u003e\\u003cspan
-        class=\\\"invisible\\\"\\u003estin-searls/\\u003c/span\\u003e\\u003c/a\\u003e\",\"verified_at\":\"2022-11-23T01:59:53.846+00:00\"},{\"name\":\"Code\",\"value\":\"\\u003ca
-        href=\\\"https://github.com/searls\\\" target=\\\"_blank\\\" rel=\\\"nofollow
-        noopener me\\\" translate=\\\"no\\\"\\u003e\\u003cspan class=\\\"invisible\\\"\\u003ehttps://\\u003c/span\\u003e\\u003cspan
-        class=\\\"\\\"\\u003egithub.com/searls\\u003c/span\\u003e\\u003cspan class=\\\"invisible\\\"\\u003e\\u003c/span\\u003e\\u003c/a\\u003e\",\"verified_at\":\"2023-02-01T17:14:33.511+00:00\"}]},\"media_attachments\":[],\"mentions\":[],\"tags\":[],\"emojis\":[],\"card\":null,\"poll\":null}"
+      string: "{\"id\":\"113935670111298635\",\"created_at\":\"2025-02-02T18:19:16.925Z\",\"in_reply_to_id\":null,\"in_reply_to_account_id\":null,\"sensitive\":false,\"spoiler_text\":\"\",\"visibility\":\"public\",\"language\":\"en\",\"uri\":\"https://mastodon.social/users/searls/statuses/113935670111298635\",\"url\":\"https://mastodon.social/@searls/113935670111298635\",\"replies_count\":0,\"reblogs_count\":0,\"favourites_count\":0,\"edited_at\":null,\"favourited\":false,\"reblogged\":false,\"muted\":false,\"bookmarked\":false,\"pinned\":false,\"content\":\"<p>Orlando,
+        I love you \U0001F3B6 <a href=\\\"https://justin.searls.co/shots/2024-10-28-09h56m20s/\\\">justin.searls.co/shots/2024-10-28</a></p>\",\"filtered\":[],\"reblog\":null,\"application\":{\"name\":\"feed2toot\",\"website\":null},\"account\":{\"id\":\"31115\",\"username\":\"searls\",\"acct\":\"searls\",\"display_name\":\"Justin
+        Searls\",\"locked\":false,\"bot\":true},\"media_attachments\":[],\"mentions\":[],\"tags\":[],\"emojis\":[],\"card\":null,\"poll\":null}"
   recorded_at: Sun, 02 Feb 2025 18:19:16 GMT
 recorded_with: VCR 6.3.1
