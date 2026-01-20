@@ -6,14 +6,17 @@ class FetchesFeed
     end
 
     def persist(feed, parsed_feed, etag_header:, last_modified_header:)
+      duplicate_ids = parsed_feed.entries.map(&method(:remote_id_for)).tally.select { |_, count| count > 1 }.keys
+      raise StandardError, "Feed contains multiple entries with the same id: #{duplicate_ids.first}" if duplicate_ids.any?
+
       Feed.transaction do
         Post.upsert_all(
           parsed_feed.entries.map { |entry|
-            entry_url = links_by_rel(entry, "shorturl").first || links_by_rel(entry, "alternate").first || entry.links.first
+            entry_url = entry_url_for(entry)
 
             @applies_post_overrides.apply({
               feed_id: feed.id,
-              remote_id: entry.entry_id || entry_url,
+              remote_id: remote_id_for(entry),
               remote_published_at: entry.published,
               remote_updated_at: entry.updated,
               url: entry_url,
@@ -57,6 +60,14 @@ class FetchesFeed
     end
 
     private
+
+    def remote_id_for(entry)
+      entry.entry_id.presence || entry_url_for(entry)
+    end
+
+    def entry_url_for(entry)
+      links_by_rel(entry, "shorturl").first || links_by_rel(entry, "alternate").first || entry.links.first
+    end
 
     def links_by_rel(entry, rel)
       return [] if entry.link_rels.blank?
