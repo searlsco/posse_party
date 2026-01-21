@@ -157,6 +157,7 @@ class UserManagementTest < ApplicationSystemTestCase
     assert_text "You've been logged out"
     visit settings_path
     assert_equal searls_auth.login_path, current_path
-    assert_includes current_url, "?redirect_path=%2Fsettings"
+    assert_includes current_url, "redirect_host=127.0.0.1"
+    assert_includes current_url, "redirect_path=%2Fsettings"
   end
 end

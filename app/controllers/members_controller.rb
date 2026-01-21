@@ -19,7 +19,7 @@ class MembersController < ApplicationController
     if current_user.blank?
       redirect_to searls_auth.login_url(
         redirect_path: request.original_fullpath,
-        redirect_subdomain: request.subdomain
+        redirect_host: request.host
       ), allow_other_host: true, status: :see_other
     end
   end

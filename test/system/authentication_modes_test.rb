@@ -83,7 +83,7 @@ class AuthenticationModesTest < ApplicationSystemTestCase
         reset_mail = ActionMailer::Base.deliveries.reverse.find { |mail| mail.subject.include?("Reset your") }
         if reset_mail.blank?
           user = User.find_by(email: email)
-          Searls::Auth::DeliversPasswordReset.new.deliver(user:, redirect_path: nil, redirect_subdomain: nil)
+          Searls::Auth::DeliversPasswordReset.new.deliver(user:, redirect_path: nil, redirect_host: nil)
           perform_enqueued_jobs
           ActiveJob::Base.queue_adapter.enqueued_jobs.clear
           reset_mail = ActionMailer::Base.deliveries.reverse.find { |mail| mail.subject.include?("Reset your") }
