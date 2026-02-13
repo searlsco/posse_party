@@ -28,7 +28,27 @@ set -euo pipefail
 #   APP_HOST=your.domain.or.ip /bin/bash -c "$(curl -fsSL https://posseparty.com/setup.sh)"
 
 TAG=${TAG:-latest}
-IMAGE=${POSSE_IMAGE:-ghcr.io/searlsco/posse_party:${TAG}}
+REGISTRY_IMAGE="ghcr.io/searlsco/posse_party:${TAG}"
+
+host_arch="$(uname -m)"
+build_from_source=false
+pull_platform=""
+
+if [[ -z "${POSSE_IMAGE:-}" && ( "${host_arch}" == "arm64" || "${host_arch}" == "aarch64" ) ]]; then
+  if docker run --rm --platform linux/arm64 alpine:latest true >/dev/null 2>&1; then
+    # Docker runs arm64 natively — build from source since registry image is amd64-only
+    build_from_source=true
+  else
+    # Docker can't run arm64 (e.g. Rosetta x86 VM) — pull amd64 image explicitly
+    pull_platform="linux/amd64"
+  fi
+fi
+
+if [[ "${build_from_source}" == "true" ]]; then
+  IMAGE="posse_party:local"
+else
+  IMAGE="${POSSE_IMAGE:-${REGISTRY_IMAGE}}"
+fi
 
 if [[ -z "${SECRET_KEY_BASE:-}" ]]; then
   SECRET_KEY_BASE=$(openssl rand -hex 64)
@@ -130,15 +150,43 @@ JOB_CONCURRENCY=${JOB_CONCURRENCY:-${default_job_concurrency}}
 SOLID_QUEUE_IN_PUMA=${SOLID_QUEUE_IN_PUMA:-false}
 EOF_ENV
 
-echo "<---- Pulling image"
-docker pull "${IMAGE}"
+if [[ "${build_from_source}" == "true" ]]; then
+  echo "<---- Building image from source (arm64 detected; published image is amd64-only)"
+  echo "      This may take several minutes on first run."
+  _build_tmp="$(mktemp -d)"
+  git clone --depth 1 --branch main https://github.com/searlsco/posse_party.git "${_build_tmp}"
+  docker build -t posse_party:local "${_build_tmp}"
+  rm -rf "${_build_tmp}"
+  echo "<---- Build complete"
+else
+  echo "<---- Pulling image"
+  if [[ -n "${pull_platform}" ]]; then
+    docker pull --platform "${pull_platform}" "${IMAGE}"
+  else
+    docker pull "${IMAGE}"
+  fi
+fi
 
 echo "<---- Installing management scripts"
-docker run --rm -u root -v "$PWD":/host "${IMAGE}" bash -lc 'source /rails/script/docker_sync_assets; copy_docker_assets /rails /host'
+if [[ -n "${pull_platform}" ]]; then
+  docker run --rm --platform "${pull_platform}" -u root -v "$PWD":/host "${IMAGE}" bash -lc 'source /rails/script/docker_sync_assets; copy_docker_assets /rails /host'
+else
+  docker run --rm -u root -v "$PWD":/host "${IMAGE}" bash -lc 'source /rails/script/docker_sync_assets; copy_docker_assets /rails /host'
+fi
 
 echo "<---- Starting services"
-docker compose -f docker-compose.yml pull
-docker compose -f docker-compose.yml up -d
+if [[ "${build_from_source}" == "true" ]]; then
+  docker compose -f docker-compose.yml pull db caddy
+elif [[ -n "${pull_platform}" ]]; then
+  DOCKER_DEFAULT_PLATFORM="${pull_platform}" docker compose -f docker-compose.yml pull
+else
+  docker compose -f docker-compose.yml pull
+fi
+if [[ -n "${pull_platform}" ]]; then
+  DOCKER_DEFAULT_PLATFORM="${pull_platform}" docker compose -f docker-compose.yml up -d
+else
+  docker compose -f docker-compose.yml up -d
+fi
 
 app_host=${APP_HOST:-}
 app_private=${APP_PRIVATE_HOST:-false}
