@@ -37,6 +37,26 @@ fi
 
 export POSSE_IMAGE="${image}"
 
+# Detect local-only image (no registry hostname — e.g. "posse_party:local")
+if [[ "${image}" != *"."* && "${image}" != "localhost"* ]]; then
+  echo "<---- Local image detected (${image}); rebuilding from source"
+  echo "      This may take several minutes."
+  _build_tmp="$(mktemp -d)"
+  git clone --depth 1 --branch main https://github.com/searlsco/posse_party.git "${_build_tmp}"
+  docker build -t "${image}" "${_build_tmp}"
+  rm -rf "${_build_tmp}"
+  echo "<---- Rebuild complete"
+
+  echo "<---- Upgrading Management Scripts"
+  docker run --rm -u root -v "$PWD":/host "${image}" bash -lc \
+    'source /rails/script/docker_sync_assets; copy_docker_assets /rails /host'
+
+  echo "<---- Restarting services"
+  docker compose -f "${compose_file}" up -d
+  # Skip the rest of the normal upgrade flow
+  exit 0
+fi
+
 current_id="$(service_image_id web)"
 current_digest="$(image_digest "${current_id}")"
 
