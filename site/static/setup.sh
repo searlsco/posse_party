@@ -8,6 +8,14 @@ set -euo pipefail
 TAG=${TAG:-latest}
 IMAGE=${POSSE_IMAGE:-ghcr.io/searlsco/posse_party:${TAG}}
 
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  cat >&2 <<'MSG'
+Docker-based POSSE Party installation is unsupported on macOS.
+Deploy POSSE Party on Linux, or use the native macOS development scripts instead.
+MSG
+  exit 1
+fi
+
 if [[ -z "${SECRET_KEY_BASE:-}" ]]; then
   SECRET_KEY_BASE=$(openssl rand -hex 64)
 fi
