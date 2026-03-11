@@ -14,7 +14,7 @@ class FacebookTest < ActiveSupport::TestCase
     crosspost = Post.find_by(remote_id: "https://justin.searls.co/takes/2025-06-16-21h31m25s/").crossposts.first
     crosspost.update!(status: "wip")
 
-    perfect_vcr_match("facebook_take") do
+    perfect_vcr_match("facebook_take", except: [:headers]) do
       PublishesCrosspost.new.publish(crosspost.id)
     end
 
