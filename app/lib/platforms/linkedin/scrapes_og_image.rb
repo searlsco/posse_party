@@ -1,3 +1,5 @@
+require "open-uri"
+
 class Platforms::Linkedin
   class ScrapesOgImage
     def scrape(url)

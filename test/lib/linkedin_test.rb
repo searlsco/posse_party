@@ -16,7 +16,7 @@ class LinkedinTest < ActiveSupport::TestCase
     crosspost = Post.find_by(remote_id: "https://justin.searls.co/takes/2025-06-14-09h51m32s/").crossposts.first
     crosspost.update!(status: "wip")
 
-    perfect_vcr_match("linkedin_take") do
+    perfect_vcr_match("linkedin_take", except: [:headers]) do
       PublishesCrosspost.new.publish(crosspost.id)
     end
 

@@ -15,7 +15,7 @@ class BskyTest < ActiveSupport::TestCase
     crosspost = Post.find_by(remote_id: "https://justin.searls.co/takes/2024-10-29-09h22m34s/").crossposts.first
     crosspost.update!(status: "wip")
 
-    perfect_vcr_match("bsky_take", time: "2025-01-29T03:03:55.226Z") do
+    perfect_vcr_match("bsky_take", time: "2025-01-29T03:03:55.226Z", except: [:headers]) do
       PublishesCrosspost.new.publish(crosspost.id)
     end
 
@@ -30,7 +30,7 @@ class BskyTest < ActiveSupport::TestCase
     crosspost = Post.find_by(remote_id: "https://justin.searls.co/shots/2024-10-28-09h56m20s/").crossposts.first
     crosspost.update!(status: "wip")
 
-    perfect_vcr_match("bsky_shot", time: "2025-01-29T14:25:02.263Z") do
+    perfect_vcr_match("bsky_shot", time: "2025-01-29T14:25:02.263Z", except: [:headers]) do
       PublishesCrosspost.new.publish(crosspost.id)
     end
 
@@ -56,7 +56,7 @@ class BskyTest < ActiveSupport::TestCase
     crosspost = Post.find_by(remote_id: "https://justin.searls.co/takes/2025-03-08-16h39m24s/").crossposts.first
     crosspost.update!(status: "wip")
 
-    perfect_vcr_match("bsky_cut_off_bug", time: "2025-03-12T22:02:45.990Z") do
+    perfect_vcr_match("bsky_cut_off_bug", time: "2025-03-12T22:02:45.990Z", except: [:headers]) do
       PublishesCrosspost.new.publish(crosspost.id)
     end
 

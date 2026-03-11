@@ -18,7 +18,7 @@ class GitCommitTest < ActiveSupport::TestCase
         system("git init -q")
         File.write("README.md", "hi")
         system("git add README.md")
-        system("git -c user.email=test@example.com -c user.name=test commit -q -m 'test'")
+        system("git -c commit.gpgsign=false -c user.email=test@example.com -c user.name=test commit -q -m 'test'")
         sha = `git rev-parse HEAD`.strip
 
         commit = GitCommit.new.identify(env: {}, repo_path: Pathname.new(dir))

@@ -5,8 +5,12 @@ on:
   push:
     branches:
       - main
+      - "dependabot/**"
   schedule:
     - cron: "0 14 * * *" # Runs at 14:00 UTC every day, which is 10:00 AM EDT
+
+permissions:
+  contents: read
 
 jobs:
   scan_ruby:
@@ -111,12 +115,19 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: yarn run playwright install-deps chromium
 
+      - name: Create test database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          # REDIS_URL: redis://localhost:6379/0
+        run: bin/rails db:create
+
       - name: Run tests
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+        run: CI=true script/test
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v7

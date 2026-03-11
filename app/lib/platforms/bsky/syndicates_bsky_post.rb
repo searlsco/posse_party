@@ -59,7 +59,7 @@ class Platforms::Bsky
     end
 
     def uri_to_url(uri, session)
-      bsky_handle = DIDKit::Resolver.new.get_validated_handle(session.did)
+      bsky_handle = DIDKit::Resolver.new.get_verified_handle(session.did)
       post_id = uri[/[^\/]+$/]
       "https://bsky.app/profile/#{bsky_handle}/post/#{post_id}"
     end
