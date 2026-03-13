@@ -12,6 +12,16 @@ class Feedjira::Parser::AtomEntry
   element :"posse:post", as: :syndication_config
 end
 
+class Feedjira::Parser::GoogleDocsAtomEntry
+  element :subtitle, as: :subtitle, with: {type: "text"}
+  element :subtitle, as: :subtitle, with: {type: nil}
+  element :email, as: :author_email
+
+  elements :link, as: :link_rels, value: :rel
+
+  element :"posse:post", as: :syndication_config
+end
+
 Feedjira.configure do |config|
   config.strip_whitespace = true
 end
