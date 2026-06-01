@@ -84,8 +84,8 @@ GEM
     ast (2.4.3)
     awesome_print (1.9.2)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1233.0)
-    aws-sdk-core (3.244.0)
+    aws-partitions (1.1255.0)
+    aws-sdk-core (3.250.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
@@ -93,8 +93,8 @@ GEM
       bigdecimal
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-sesv2 (1.97.0)
-      aws-sdk-core (~> 3, >= 3.244.0)
+    aws-sdk-sesv2 (1.102.0)
+      aws-sdk-core (~> 3, >= 3.248.0)
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.12.1)
       aws-eventstream (~> 1, >= 1.0.2)
@@ -102,7 +102,7 @@ GEM
     bcrypt (3.1.22)
     bigdecimal (4.1.2)
     bindex (0.8.1)
-    bootsnap (1.24.1)
+    bootsnap (1.24.5)
       msgpack (~> 1.2)
     brakeman (8.0.4)
       racc
@@ -233,7 +233,7 @@ GEM
     mocktail (2.0.0)
       sorbet-eraser (~> 0.3.1)
       sorbet-runtime (~> 0.5.9204)
-    msgpack (1.8.0)
+    msgpack (1.8.1)
     multi_xml (0.8.1)
       bigdecimal (>= 3.1, < 5)
     net-imap (0.6.3)
@@ -289,7 +289,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (8.0.1)
+    puma (8.0.2)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
