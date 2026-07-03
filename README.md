@@ -26,7 +26,7 @@ If you want to roll up your sleeves and modify POSSE Party, check out [DEVELOPME
 
 ## License
 
-POSSE Party is free to use for non-commercial purposes and is distributed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/).
+POSSE Party is free to use for non-commercial purposes and is distributed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0).
 
 You can use, modify, self-host, and share POSSE Party for:
 
