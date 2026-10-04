@@ -181,7 +181,7 @@ def perform_last_job(expect_error: false, job_class: PublishCrosspostJob, argume
   job = nil
   deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + timeout
   until job || Process.clock_gettime(Process::CLOCK_MONOTONIC) > deadline
-    job = adapter.enqueued_jobs.reverse.find { |j|
+    job = adapter.enqueued_jobs.rfind { |j|
       j[:job] == job_class && (arguments.nil? || j[:args] == arguments)
     }
   end

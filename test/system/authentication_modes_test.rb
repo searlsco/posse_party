@@ -80,13 +80,13 @@ class AuthenticationModesTest < ApplicationSystemTestCase
         ActiveJob::Base.queue_adapter.enqueued_jobs.clear
         assert_text "If that email exists"
 
-        reset_mail = ActionMailer::Base.deliveries.reverse.find { |mail| mail.subject.include?("Reset your") }
+        reset_mail = ActionMailer::Base.deliveries.rfind { |mail| mail.subject.include?("Reset your") }
         if reset_mail.blank?
           user = User.find_by(email: email)
           Searls::Auth::DeliversPasswordReset.new.deliver(user:, redirect_path: nil, redirect_host: nil)
           perform_enqueued_jobs
           ActiveJob::Base.queue_adapter.enqueued_jobs.clear
-          reset_mail = ActionMailer::Base.deliveries.reverse.find { |mail| mail.subject.include?("Reset your") }
+          reset_mail = ActionMailer::Base.deliveries.rfind { |mail| mail.subject.include?("Reset your") }
         end
         assert reset_mail, "Expected a password reset email to be delivered, but got subjects: #{ActionMailer::Base.deliveries.map(&:subject).inspect}"
         reset_path = extract_password_reset_path(reset_mail)
