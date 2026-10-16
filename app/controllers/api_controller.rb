@@ -1,4 +1,6 @@
 class ApiController < ApplicationController
+  # API requests authenticate with a Bearer token, never with session cookies.
+  skip_forgery_protection
   skip_before_action :redirect_to_registration_if_no_users
   before_action :authenticate_api_user
 
