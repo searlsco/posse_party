@@ -55,6 +55,10 @@ else
   echo "ID: not present locally; will pull ${image}"
 fi
 
+echo "<---- Cleaning up unused Docker images"
+# Dangling images only: Docker preserves images referenced by any container.
+docker image prune --force
+
 echo "<---- Upgrading Docker Image"
 docker compose -f "${compose_file}" pull
 

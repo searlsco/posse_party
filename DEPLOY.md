@@ -107,6 +107,10 @@ cd posse_party
 ./bin/upgrade
 ```
 
+Before pulling images, the upgrade removes dangling Docker images to reclaim
+space from previous upgrades. Images referenced by containers, tagged images,
+volumes, and backups are preserved.
+
 ### Debugging your installation
 
 You can run the production Rails console with `bin/console`:
