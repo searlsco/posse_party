@@ -134,6 +134,10 @@
           rel: "noopener",
           class: "#{button_class_pack(:info)} block text-center" %>
 
+      <% if @preview_media.any? %>
+        <%= render "crossposts/compose_media", crosspost: @crosspost, media: @preview_media %>
+      <% end %>
+
       <%= form_with url: mark_published_crosspost_path(@crosspost), method: :patch, class: "mt-4 space-y-2" do |f| %>
         <%= f.label :url, "URL of the published post", class: "block text-sm font-medium text-primary" %>
         <%= f.url_field :url, placeholder: "https://x.com/searls/status/...", class: input_classes %>

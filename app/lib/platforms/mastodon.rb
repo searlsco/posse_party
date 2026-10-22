@@ -22,6 +22,17 @@ module Platforms
 
     def initialize
       @syndicates_mastodon_post = SyndicatesMastodonPost.new
+      @finishes_mastodon_post = FinishesMastodonPost.new
+      @fetches_instance_limits = FetchesInstanceLimits.new
+    end
+
+    # Mastodon allows up to max_media_attachments images, or a single video, per the instance's configuration
+    def media_constraints(account)
+      MediaConstraints.new(
+        max_images: @fetches_instance_limits.fetch(account.credentials["base_url"]).max_media_attachments,
+        max_videos: 1,
+        mixable: false
+      )
     end
 
     def setup_docs_available?
@@ -29,7 +40,15 @@ module Platforms
     end
 
     def publish!(crosspost, crosspost_config, crosspost_content)
-      @syndicates_mastodon_post.syndicate!(crosspost, crosspost_content.string)
+      @syndicates_mastodon_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
+    end
+
+    def finishable?
+      true
+    end
+
+    def finish!(crosspost)
+      @finishes_mastodon_post.finish(crosspost)
     end
 
     def embed_html(crosspost)

@@ -3,6 +3,8 @@ module Platforms
     TAG = "bsky"
     LABEL = "Bluesky"
 
+    PDS_URL = "https://bsky.social"
+
     REQUIRED_CREDENTIALS = %w[email password].freeze
     CREDENTIAL_LABELS = {
       "password" => "App Password"
@@ -24,11 +26,14 @@ module Platforms
       attach_link: true
     ).freeze
 
+    MEDIA_CONSTRAINTS = MediaConstraints.new(max_images: 4, max_videos: 1, mixable: false).freeze
+
     EMBED_SUPPORTED = true
 
     def initialize
       @assembles_rich_text_facets = AssemblesRichTextFacets.new
       @syndicates_bsky_post = SyndicatesBskyPost.new
+      @finishes_video_post = FinishesVideoPost.new
     end
 
     def setup_docs_available?
@@ -38,6 +43,14 @@ module Platforms
     def publish!(crosspost, crosspost_config, crosspost_content)
       rich_text_facets = @assembles_rich_text_facets.assemble(crosspost_content.string, crosspost_content.pattern_ranges)
       @syndicates_bsky_post.syndicate!(crosspost, crosspost_config, crosspost_content.string, rich_text_facets)
+    end
+
+    def finishable?
+      true
+    end
+
+    def finish!(crosspost)
+      @finishes_video_post.finish(crosspost)
     end
 
     def embed_html(crosspost)

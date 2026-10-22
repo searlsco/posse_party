@@ -3,7 +3,7 @@ class PersistsAccount
 
   PERMITTED_PARAMS = [
     :label, :platform_tag, :active, :manually_create_crossposts, :credentials, :manually_publish_crossposts, :crosspost_cooldown, :crosspost_min_age,
-    :format_string, :truncate, :append_url, :append_url_if_truncated, :append_url_spacer, :append_url_label, :attach_link, :og_image,
+    :format_string, :truncate, :append_url, :append_url_if_truncated, :append_url_spacer, :append_url_label, :attach_link, :og_image, :media_fallback,
     {disabled_feed_ids: []}
   ].freeze
 

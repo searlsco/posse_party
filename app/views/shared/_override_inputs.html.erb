@@ -15,6 +15,11 @@
         <%= f.select attribute_name,
               options_for_select(default_preserving_boolean_select_options(default_label: default_label), (current.nil? ? "" : current.to_s)),
               {}, { class: "#{select_classes} mt-2 !cursor-auto", disabled: disabled, id: attribute_name, data: { turbo_permanent: true } } %>
+      <% elsif meta[:type] == :enum %>
+        <% current = object.respond_to?(attribute_name) ? object.public_send(attribute_name) : nil %>
+        <%= f.select attribute_name,
+              options_for_select(default_preserving_enum_select_options(meta[:options], default_label: default_label), current.to_s),
+              {}, { class: "#{select_classes} mt-2 !cursor-auto", disabled: disabled, id: attribute_name, data: { turbo_permanent: true } } %>
       <% else %>
         <% value = object.respond_to?(attribute_name) ? object.public_send(attribute_name) : nil %>
         <%= f.text_field attribute_name, value: value, class: "#{input_classes} mt-2 !cursor-auto", disabled: disabled, id: attribute_name, data: { turbo_permanent: true } %>

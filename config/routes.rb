@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       patch :publish
       patch :skip
       patch :mark_published
+      get "media/:index", action: :media, as: :media
     end
   end
   resources :logs, only: [:index, :show, :destroy] do

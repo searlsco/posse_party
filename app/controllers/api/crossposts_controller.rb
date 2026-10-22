@@ -57,6 +57,8 @@ class Api::CrosspostsController < ApiController
       post_url: crosspost.post.url,
       content: content,
       compose_url: compose_url,
+      # The compose URL can't carry media, so whoever composes the post attaches these themselves
+      media: composes_crosspost_preview.media(crosspost).map { |item| item.to_h.slice(:type, :url, :alt) },
       mark_published_url: api_crosspost_url(crosspost),
       crosspost_url: crosspost_url(crosspost)
     }

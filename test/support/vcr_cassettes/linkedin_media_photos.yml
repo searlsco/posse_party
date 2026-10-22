@@ -1,0 +1,445 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8765/photo-1.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - SimpleHTTP/0.6 Python/3.12.10
+      Date:
+      - Thu, 22 Oct 2026 15:17:39 GMT
+      Content-Type:
+      - image/jpeg
+      Content-Length:
+      - '12268'
+      Last-Modified:
+      - Thu, 22 Oct 2026 15:07:18 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        /9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAJYAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDiqKKK8A/WwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiig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bz/N/dOm3d5ePvAZ+6enpWGJqQlTaTR6mS4PEU8bCc6cktdWmujPLKKKK8s+8CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==
+  recorded_at: Thu, 22 Oct 2026 15:17:39 GMT
+- request:
+    method: post
+    uri: https://api.linkedin.com/rest/images?action=initializeUpload
+    body:
+      encoding: UTF-8
+      string: '{"initializeUploadRequest":{"owner":"{{person_urn}}"}}'
+    headers:
+      Authorization:
+      - Bearer {{access_token}}
+      Linkedin-Version:
+      - '202605'
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:17:39 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      X-Li-Fabric:
+      - prod-lor1
+      Set-Cookie:
+      - __cf_bm=IvydY9YdpBSBhXQiJ.TOiOrS0C.K7e2LlAuZXsKThRA-1792682259.3505354-1.0.1.1-tjDl.57QReYh_xbuI9_p.7XSYXJB4eLAeRlAJQY2PorCWxqpbCcV1_jEhp9w_lQpyzzi39Lrj61NLb_kHnrFlLan2BxVwy2C4rAB1yp6M5MwbzNEb71Ti1mKknkJSyok;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=linkedin.com; Expires=Thu,
+        22 Oct 2026 15:47:39 GMT
+      - bcookie="v=2&7ce40d48-2fb0-4b55-8c38-34c83a520905"; domain=.linkedin.com;
+        Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:39 GMT; SameSite=None
+      - lidc="b=OB68:s=O:r=O:a=O:p=O:g=8016:u=334:x=1:i=1792682259:t=1792753754:v=2:sig=AQGXflMEmXt1-PtsidfWHUt33jfFV6FP"
+      X-Li-Source-Fabric:
+      - prod-lva1
+      X-Li-Pop:
+      - cf-prod-lva1-x
+      X-Li-Proto:
+      - http/1.1
+      X-Li-Uuid:
+      - AAZeb11D69tuxWE99aV56g==
+      X-Content-Type-Options:
+      - nosniff
+      X-Li-Route-Key:
+      - '"b=OB68:s=O:r=O:a=O:p=O:g=8016:u=334:x=1:i=1792682259:t=1792753754:v=2:sig=AQGXflMEmXt1-PtsidfWHUt33jfFV6FP"'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - a4e97858eba0c288-MIA
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"value":{"uploadUrlExpiresAt":1792768659534,"uploadUrl":"https://www.linkedin.com/dms-uploads/sp/v2/D5610AQHXG89KVVt4MQ/uploaded-image/B56aFkMHRBHcAE-/0?ca=vector_ads&cn=uploads&iri=B01-86&sync=0&v=beta&ut=3utcr-ZlAlVYs1","image":"urn:li:image:D5610AQHXG89KVVt4MQ"}}'
+  recorded_at: Thu, 22 Oct 2026 15:17:39 GMT
+- request:
+    method: put
+    uri: https://www.linkedin.com/dms-uploads/sp/v2/D5610AQHXG89KVVt4MQ/uploaded-image/B56aFkMHRBHcAE-/0?ca=vector_ads&cn=uploads&iri=B01-86&sync=0&ut=3utcr-ZlAlVYs1&v=beta
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        /9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAJYAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDiqKKK8A/WwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiig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bz/N/dOm3d5ePvAZ+6enpWGJqQlTaTR6mS4PEU8bCc6cktdWmujPLKKKK8s+8CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==
+    headers:
+      Authorization:
+      - Bearer {{access_token}}
+      Content-Type:
+      - image/jpeg
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:17:40 GMT
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      X-Ambry-Creation-Time:
+      - Thu Oct 22 15:17:40 UTC 2026
+      Access-Control-Allow-Origin:
+      - https://www.linkedin.com
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - sameorigin
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      X-Li-Fabric:
+      - prod-lva1
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - no-cache, no-store, no-transform
+      X-Li-Pop:
+      - cf-prod-lva1-x
+      X-Li-Proto:
+      - http/1.1
+      X-Li-Uuid:
+      - AAZeb11I89Z01aXnbdXAPQ==
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=BxKFNX4YE2IWGLMT1kiJuWts_gHPtd8_SYLH7e8rMwo-1792682259.669601-1.0.1.1-LjW6lt7iQKC0xQCjAj6DKLeXLOUTSLynvAwdqXvS0Fqa64qCo.2bUz_fZX7CFTejCf8SrqkuDKE7AMnwTLE8Shxv9b2K.P93HkEEXNf1zUzf6iDFJav5vRkdUFjiZfLU;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=linkedin.com; Expires=Thu,
+        22 Oct 2026 15:47:40 GMT
+      - bcookie="v=2&215294e9-f7ce-4e84-8658-717f202b151f"; domain=.linkedin.com;
+        Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:40 GMT; SameSite=None
+      - bscookie="v=1&20261022151739901a0483-f383-4059-883a-007cd01bdb78AQF1dQBvo1MnFrJ_IJ03VN_6WLQ6KS2j";
+        domain=.www.linkedin.com; Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:40
+        GMT; HttpOnly; SameSite=None
+      - lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+      - lidc="b=VGST09:s=V:r=V:a=V:p=V:g=3502:u=1:x=1:i=1792682260:t=1792768660:v=2:sig=AQHfsd7lCZrsRm8wJBABHGjMsBXQW9i5";
+        Expires=Fri, 23 Oct 2026 15:17:40 GMT; domain=.linkedin.com; Path=/; SameSite=None;
+        Secure
+      Cf-Ray:
+      - a4e9785aeccc1efb-MIA
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Thu, 22 Oct 2026 15:17:40 GMT
+- request:
+    method: get
+    uri: http://localhost:8765/photo-2.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - SimpleHTTP/0.6 Python/3.12.10
+      Date:
+      - Thu, 22 Oct 2026 15:17:40 GMT
+      Content-Type:
+      - image/jpeg
+      Content-Length:
+      - '12100'
+      Last-Modified:
+      - Thu, 22 Oct 2026 15:07:18 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        /9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAJYAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor50+ECiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKK9H+D3hvSfEP9r/2xafaPI8ny/3jpt3b8/dIz0Fej/8ACtvCf/QK/wDJmX/4qumnhJ1IqSaPQoZZVr01Ui1Z+v8AkfONFfR3/CtvCf8A0Cv/ACZl/wDiqP8AhW3hP/oFf+TMv/xVafUandf18jb+xq/dfj/kfONFfR3/AArbwn/0Cv8AyZl/+Ko/4Vt4T/6BX/kzL/8AFUfUandf18g/sav3X4/5HzjRX0d/wrbwn/0Cv/JmX/4qj/hW3hP/AKBX/kzL/wDFUfUandf18g/sav3X4/5HzjRX0d/wrbwn/wBAr/yZl/8AiqP+FbeE/wDoFf8AkzL/APFUfUandf18g/sav3X4/wCR840V9Hf8K28J/wDQK/8AJmX/AOKo/wCFbeE/+gV/5My//FUfUandf18g/sav3X4/5HzjRX0d/wAK28J/9Ar/AMmZf/iqP+FbeE/+gV/5My//ABVH1Gp3X9fIP7Gr91+P+R840V9Hf8K28J/9Ar/yZl/+Ko/4Vt4T/wCgV/5My/8AxVH1Gp3X9fIP7Gr91+P+R840V9Hf8K28J/8AQK/8mZf/AIqj/hW3hP8A6BX/AJMy/wDxVH1Gp3X9fIP7Gr91+P8AkfONFfR3/CtvCf8A0Cv/ACZl/wDiqP8AhW3hP/oFf+TMv/xVH1Gp3X9fIP7Gr91+P+R840V9Hf8ACtvCf/QK/wDJmX/4qj/hW3hP/oFf+TMv/wAVR9Rqd1/XyD+xq/dfj/kfONFfR3/CtvCf/QK/8mZf/iqP+FbeE/8AoFf+TMv/AMVR9Rqd1/XyD+xq/dfj/kfONFfR3/CtvCf/AECv/JmX/wCKo/4Vt4T/AOgV/wCTMv8A8VR9Rqd1/XyD+xq/dfj/AJHzjRX0d/wrbwn/ANAr/wAmZf8A4qj/AIVt4T/6BX/kzL/8VR9Rqd1/XyD+xq/dfj/kfONFfR3/AArbwn/0Cv8AyZl/+Ko/4Vt4T/6BX/kzL/8AFUfUandf18g/sav3X4/5HzjRX0d/wrbwn/0Cv/JmX/4qj/hW3hP/AKBX/kzL/wDFUfUandf18g/sav3X4/5HzjRX0d/wrbwn/wBAr/yZl/8AiqP+FbeE/wDoFf8AkzL/APFUfUandf18g/sav3X4/wCR840V9Hf8K28J/wDQK/8AJmX/AOKo/wCFbeE/+gV/5My//FUfUandf18g/sav3X4/5HzjRX0d/wAK28J/9Ar/AMmZf/iqP+FbeE/+gV/5My//ABVH1Gp3X9fIP7Gr91+P+R840V9Hf8K28J/9Ar/yZl/+Ko/4Vt4T/wCgV/5My/8AxVH1Gp3X9fIP7Gr91+P+R840V9Hf8K28J/8AQK/8mZf/AIqj/hW3hP8A6BX/AJMy/wDxVH1Gp3X9fIP7Gr91+P8AkfONFfR3/CtvCf8A0Cv/ACZl/wDiqP8AhW3hP/oFf+TMv/xVH1Gp3X9fIP7Gr91+P+R840V9Hf8ACtvCf/QK/wDJmX/4qj/hW3hP/oFf+TMv/wAVR9Rqd1/XyD+xq/dfj/kfONFfR3/CtvCf/QK/8mZf/iqP+FbeE/8AoFf+TMv/AMVR9Rqd1/XyD+xq/dfj/kfONFfR3/CtvCf/AECv/JmX/wCKo/4Vt4T/AOgV/wCTMv8A8VR9Rqd1/XyD+xq/dfj/AJHzjRX0d/wrbwn/ANAr/wAmZf8A4qj/AIVt4T/6BX/kzL/8VR9Rqd1/XyD+xq/dfj/kfONFfR3/AArbwn/0Cv8AyZl/+Ko/4Vt4T/6BX/kzL/8AFUfUandf18g/sav3X4/5HzjRX0d/wrbwn/0Cv/JmX/4qj/hW3hP/AKBX/kzL/wDFUfUandf18g/sav3X4/5HzjRX0d/wrbwn/wBAr/yZl/8AiqP+FbeE/wDoFf8AkzL/APFUfUandf18g/sav3X4/wCR840V9Hf8K28J/wDQK/8AJmX/AOKo/wCFbeE/+gV/5My//FUfUandf18g/sav3X4/5HzjRX0d/wAK28J/9Ar/AMmZf/iqP+FbeE/+gV/5My//ABVH1Gp3X9fIP7Gr91+P+R840V9Hf8K28J/9Ar/yZl/+Ko/4Vt4T/wCgV/5My/8AxVH1Gp3X9fIP7Gr91+P+R840V9Hf8K28J/8AQK/8mZf/AIqj/hW3hP8A6BX/AJMy/wDxVH1Gp3X9fIP7Gr91+P8AkfONFfR3/CtvCf8A0Cv/ACZl/wDiqP8AhW3hP/oFf+TMv/xVH1Gp3X9fIP7Gr91+P+R840V9Hf8ACtvCf/QK/wDJmX/4qj/hW3hP/oFf+TMv/wAVR9Rqd1/XyD+xq/dfj/kfONFfR3/CtvCf/QK/8mZf/iqP+FbeE/8AoFf+TMv/AMVR9Rqd1/XyD+xq/dfj/kfONFfR3/CtvCf/AECv/JmX/wCKo/4Vt4T/AOgV/wCTMv8A8VR9Rqd1/XyD+xq/dfj/AJHzjRX0d/wrbwn/ANAr/wAmZf8A4qvOPjD4b0nw9/ZH9j2n2fz/ADvM/eO+7bsx94nHU1nUwk6cXJtGNfLKtCm6kmrL1/yPOKKKK5jzwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPX/2fv+Y9/wBu/wD7Ur16vIf2fv8AmPf9u/8A7Ur16vZwn8Ff11PrMs/3WPz/ADYUUUV0neFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAV5D+0D/AMwH/t4/9p169XkP7QP/ADAf+3j/ANp1zYv+C/66nBmf+6y+X5o8gooorxj5MKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD1/8AZ+/5j3/bv/7Ur16vIf2fv+Y9/wBu/wD7Ur16vZwn8Ff11PrMs/3WPz/NhRRRXSd4UUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXkP7QP/MB/wC3j/2nXr1eQ/tA/wDMB/7eP/adc2L/AIL/AK6nBmf+6y+X5o8gooorxj5MKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD1/wDZ+/5j3/bv/wC1K9eryH9n7/mPf9u//tSvXq9nCfwV/XU+syz/AHWPz/NhRRRXSd4UUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXkP7QP/MB/7eP/AGnXr1eQ/tA/8wH/ALeP/adc2L/gv+upwZn/ALrL5fmjyCiiivGPkwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPX/2fv8AmPf9u/8A7Ur16vIf2fv+Y9/27/8AtSvXq9nCfwV/XU+syz/dY/P82FFFFdJ3hRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFeQ/tA/8AMB/7eP8A2nXr1eQ/tA/8wH/t4/8Aadc2L/gv+upwZn/usvl+aPIKKKK8Y+TCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA9f/Z+/5j3/AG7/APtSvXq8h/Z+/wCY9/27/wDtSvXq9nCfwV/XU+syz/dY/P8ANhRRRXSd4UUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXkP7QP8AzAf+3j/2nXr1eQ/tA/8AMB/7eP8A2nXNi/4L/rqcGZ/7rL5fmjyCiiivGPkwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPX/wBn7/mPf9u//tSvXq8J+D3iTSfD39r/ANsXf2fz/J8v9277tu/P3QcdRXo//CyfCf8A0Ff/ACWl/wDia9bC1IRpJNr+mfT5diKUMPGMpJPXqu7OvorkP+Fk+E/+gr/5LS//ABNH/CyfCf8A0Ff/ACWl/wDia6PbU/5l952/WqH86+9HX0VyH/CyfCf/AEFf/JaX/wCJo/4WT4T/AOgr/wCS0v8A8TR7an/MvvD61Q/nX3o6+iuQ/wCFk+E/+gr/AOS0v/xNH/CyfCf/AEFf/JaX/wCJo9tT/mX3h9aofzr70dfRXIf8LJ8J/wDQV/8AJaX/AOJo/wCFk+E/+gr/AOS0v/xNHtqf8y+8PrVD+dfejr6K5D/hZPhP/oK/+S0v/wATR/wsnwn/ANBX/wAlpf8A4mj21P8AmX3h9aofzr70dfRXIf8ACyfCf/QV/wDJaX/4mj/hZPhP/oK/+S0v/wATR7an/MvvD61Q/nX3o6+iuQ/4WT4T/wCgr/5LS/8AxNH/AAsnwn/0Ff8AyWl/+Jo9tT/mX3h9aofzr70dfRXIf8LJ8J/9BX/yWl/+Jo/4WT4T/wCgr/5LS/8AxNHtqf8AMvvD61Q/nX3o6+iuQ/4WT4T/AOgr/wCS0v8A8TR/wsnwn/0Ff/JaX/4mj21P+ZfeH1qh/OvvR19Fch/wsnwn/wBBX/yWl/8AiaP+Fk+E/wDoK/8AktL/APE0e2p/zL7w+tUP5196OvorkP8AhZPhP/oK/wDktL/8TR/wsnwn/wBBX/yWl/8AiaPbU/5l94fWqH86+9HX0VyH/CyfCf8A0Ff/ACWl/wDiaP8AhZPhP/oK/wDktL/8TR7an/MvvD61Q/nX3o6+iuQ/4WT4T/6Cv/ktL/8AE0f8LJ8J/wDQV/8AJaX/AOJo9tT/AJl94fWqH86+9HX0VyH/AAsnwn/0Ff8AyWl/+Jo/4WT4T/6Cv/ktL/8AE0e2p/zL7w+tUP5196OvorkP+Fk+E/8AoK/+S0v/AMTR/wALJ8J/9BX/AMlpf/iaPbU/5l94fWqH86+9HX0VyH/CyfCf/QV/8lpf/iaP+Fk+E/8AoK/+S0v/AMTR7an/ADL7w+tUP5196OvorkP+Fk+E/wDoK/8AktL/APE0f8LJ8J/9BX/yWl/+Jo9tT/mX3h9aofzr70dfRXIf8LJ8J/8AQV/8lpf/AImj/hZPhP8A6Cv/AJLS/wDxNHtqf8y+8PrVD+dfejr6K5D/AIWT4T/6Cv8A5LS//E0f8LJ8J/8AQV/8lpf/AImj21P+ZfeH1qh/OvvR19Fch/wsnwn/ANBX/wAlpf8A4mj/AIWT4T/6Cv8A5LS//E0e2p/zL7w+tUP5196OvorkP+Fk+E/+gr/5LS//ABNH/CyfCf8A0Ff/ACWl/wDiaPbU/wCZfeH1qh/OvvR19Fch/wALJ8J/9BX/AMlpf/iaP+Fk+E/+gr/5LS//ABNHtqf8y+8PrVD+dfejr6K5D/hZPhP/AKCv/ktL/wDE0f8ACyfCf/QV/wDJaX/4mj21P+ZfeH1qh/OvvR19Fch/wsnwn/0Ff/JaX/4mj/hZPhP/AKCv/ktL/wDE0e2p/wAy+8PrVD+dfejr6K5D/hZPhP8A6Cv/AJLS/wDxNH/CyfCf/QV/8lpf/iaPbU/5l94fWqH86+9HX0VyH/CyfCf/AEFf/JaX/wCJo/4WT4T/AOgr/wCS0v8A8TR7an/MvvD61Q/nX3o6+iuQ/wCFk+E/+gr/AOS0v/xNH/CyfCf/AEFf/JaX/wCJo9tT/mX3h9aofzr70dfRXIf8LJ8J/wDQV/8AJaX/AOJo/wCFk+E/+gr/AOS0v/xNHtqf8y+8PrVD+dfejr6K5D/hZPhP/oK/+S0v/wATR/wsnwn/ANBX/wAlpf8A4mj21P8AmX3h9aofzr70dfRXIf8ACyfCf/QV/wDJaX/4mj/hZPhP/oK/+S0v/wATR7an/MvvD61Q/nX3o6+iuQ/4WT4T/wCgr/5LS/8AxNH/AAsnwn/0Ff8AyWl/+Jo9tT/mX3h9aofzr70dfRXIf8LJ8J/9BX/yWl/+Jo/4WT4T/wCgr/5LS/8AxNHtqf8AMvvD61Q/nX3o6+iuQ/4WT4T/AOgr/wCS0v8A8TR/wsnwn/0Ff/JaX/4mj21P+ZfeH1qh/OvvR19Fch/wsnwn/wBBX/yWl/8AiaP+Fk+E/wDoK/8AktL/APE0e2p/zL7w+tUP5196OvorkP8AhZPhP/oK/wDktL/8TR/wsnwn/wBBX/yWl/8AiaPbU/5l94fWqH86+9HX0VyH/CyfCf8A0Ff/ACWl/wDiaP8AhZPhP/oK/wDktL/8TR7an/MvvD61Q/nX3o6+vIf2gf8AmA/9vH/tOuv/AOFk+E/+gr/5LS//ABNecfGHxJpPiH+yP7Hu/tHked5n7t027tmPvAZ6GufFVISpNJr+mcWY4ilPDyjGSb06rujziiiivJPmAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//2Q==
+  recorded_at: Thu, 22 Oct 2026 15:17:40 GMT
+- request:
+    method: post
+    uri: https://api.linkedin.com/rest/images?action=initializeUpload
+    body:
+      encoding: UTF-8
+      string: '{"initializeUploadRequest":{"owner":"{{person_urn}}"}}'
+    headers:
+      Authorization:
+      - Bearer {{access_token}}
+      Linkedin-Version:
+      - '202605'
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:17:40 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      Set-Cookie:
+      - __cf_bm=ThZKKlSD1VAYgT.IVQBxNetfkUKim6_LtWBP8OxE8oY-1792682260.1706302-1.0.1.1-Nm7rfaaKsrgLLpGQ8SJTxysElxBgFZ7WxlXFnldCFI5bedEhJ50OdMvIey2NIkyWYK9p88kAypLzp7ynh0rwSnzHew3LUVC0r0Ncj94Dd_aLd_xTCIJN9aG5S4UrIlMt;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=linkedin.com; Expires=Thu,
+        22 Oct 2026 15:47:40 GMT
+      - bcookie="v=2&00921196-a098-43e1-866f-1eef7b86d6f5"; domain=.linkedin.com;
+        Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:40 GMT; SameSite=None
+      - lidc="b=OB68:s=O:r=O:a=O:p=O:g=8016:u=334:x=1:i=1792682260:t=1792753754:v=2:sig=AQGXG-B2f2wvj03nrnqOKehDKhxRnyvU"
+      X-Li-Fabric:
+      - prod-lor1
+      X-Li-Pop:
+      - cf-prod-lor1-x
+      X-Li-Proto:
+      - http/1.1
+      X-Li-Uuid:
+      - AAZeb11RDvT/xqXgtnKMZA==
+      X-Content-Type-Options:
+      - nosniff
+      X-Li-Route-Key:
+      - '"b=OB68:s=O:r=O:a=O:p=O:g=8016:u=334:x=1:i=1792682260:t=1792753754:v=2:sig=AQGXG-B2f2wvj03nrnqOKehDKhxRnyvU"'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - a4e9785e0ada74c4-MIA
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"value":{"uploadUrlExpiresAt":1792768660350,"uploadUrl":"https://www.linkedin.com/dms-uploads/sp/v2/D5610AQGDpaj3GE4b3g/uploaded-image/B56aFkMHdxH0AA-/0?ca=vector_ads&cn=uploads&iri=B01-86&sync=0&v=beta&ut=3j50zaUKAlVYs1","image":"urn:li:image:D5610AQGDpaj3GE4b3g"}}'
+  recorded_at: Thu, 22 Oct 2026 15:17:40 GMT
+- request:
+    method: put
+    uri: https://www.linkedin.com/dms-uploads/sp/v2/D5610AQGDpaj3GE4b3g/uploaded-image/B56aFkMHdxH0AA-/0?ca=vector_ads&cn=uploads&iri=B01-86&sync=0&ut=3j50zaUKAlVYs1&v=beta
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        /9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAJYAyADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLooor50+ECiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKA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oAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//2Q==
+    headers:
+      Authorization:
+      - Bearer {{access_token}}
+      Content-Type:
+      - image/jpeg
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:17:40 GMT
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      Server:
+      - cloudflare
+      X-Ambry-Creation-Time:
+      - Thu Oct 22 15:17:40 UTC 2026
+      Access-Control-Allow-Origin:
+      - https://www.linkedin.com
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - sameorigin
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      X-Li-Fabric:
+      - prod-lva1
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - no-cache, no-store, no-transform
+      X-Li-Pop:
+      - cf-prod-lva1-x
+      X-Li-Proto:
+      - http/1.1
+      X-Li-Uuid:
+      - AAZeb11VLsf25eBvVFUQDw==
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=6nbzKmpC_WOOrH14ivC6cIsr6MqmeaZCjweDUoY7hjU-1792682260.483434-1.0.1.1-IX7wLl3j15yQeHgttzCU7UkX3whMYD7LwVe6rEgKE3h1qiHYHzuKLvoWA8nlwGdHt6.bzpGmeq5D5nu9o1pW8Tr6_Lkf_tSEJnnGqGeB3SMXajkMYrCdxOItI7YTVcoE;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=linkedin.com; Expires=Thu,
+        22 Oct 2026 15:47:40 GMT
+      - bcookie="v=2&1b92fe3f-84ae-470a-8a58-b04a6698d023"; domain=.linkedin.com;
+        Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:40 GMT; SameSite=None
+      - bscookie="v=1&20261022151740cfdabaa1-67e7-4aeb-8b8a-120b8fc41330AQFRZE52q1EgVCU-n80CjPHWviTgZiFd";
+        domain=.www.linkedin.com; Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:40
+        GMT; HttpOnly; SameSite=None
+      - lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+      - lidc="b=VGST09:s=V:r=V:a=V:p=V:g=3502:u=1:x=1:i=1792682260:t=1792768660:v=2:sig=AQHfsd7lCZrsRm8wJBABHGjMsBXQW9i5";
+        Expires=Fri, 23 Oct 2026 15:17:40 GMT; domain=.linkedin.com; Path=/; SameSite=None;
+        Secure
+      Cf-Ray:
+      - a4e978600ce9ecf0-MIA
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Thu, 22 Oct 2026 15:17:40 GMT
+- request:
+    method: post
+    uri: https://api.linkedin.com/rest/posts
+    body:
+      encoding: UTF-8
+      string: '{"author":"{{person_urn}}","commentary":"Two photos for the POSSE Party
+        media test https://posseparty.com/test/media/photos/","visibility":"PUBLIC","distribution":{"feedDistribution":"MAIN_FEED","targetEntities":[],"thirdPartyDistributionChannels":[]},"lifecycleState":"PUBLISHED","content":{"multiImage":{"images":[{"id":"urn:li:image:D5610AQHXG89KVVt4MQ","altText":"Test
+        card 1: a colored field with a white bar"},{"id":"urn:li:image:D5610AQGDpaj3GE4b3g","altText":"Test
+        card 2: a colored field with a white bar"}]}}}'
+    headers:
+      Authorization:
+      - Bearer {{access_token}}
+      Linkedin-Version:
+      - '202605'
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:17:41 GMT
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      Location:
+      - "/posts/urn%3Ali%3AugcPost%3A7519054379178553344"
+      X-Restli-Id:
+      - urn:li:ugcPost:7519054379178553344
+      X-Restli-Protocol-Version:
+      - 2.0.0
+      X-Li-Fabric:
+      - prod-lor1
+      X-Li-Source-Fabric:
+      - prod-lva1
+      X-Li-Pop:
+      - cf-prod-lva1-x
+      X-Li-Proto:
+      - http/1.1
+      X-Li-Uuid:
+      - AAZeb11cQs9Gm2WdJrjWaQ==
+      X-Content-Type-Options:
+      - nosniff
+      X-Li-Route-Key:
+      - '"b=OB68:s=O:r=O:a=O:p=O:g=8016:u=334:x=1:i=1792682260:t=1792753754:v=2:sig=AQGXG-B2f2wvj03nrnqOKehDKhxRnyvU"'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - __cf_bm=4fZ_RF6ThHyk5awv5UN54NOctvrZUDafVdciEh9D8Yg-1792682260.9496782-1.0.1.1-Rv2d87pEZMVYbkIAB8jUCFshIRyabW5hJKRqUEG.BzL7none2OJGHjIWFQ7U9AVj9jpNG0BRXCd8XA3HbWzHaFG0Q4EHidsNWwgDlkwD8TqJdO0I9ieAxJala7Q.RSqd;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=linkedin.com; Expires=Thu,
+        22 Oct 2026 15:47:41 GMT
+      - bcookie="v=2&a6251c61-5601-4243-84d9-b247be0a5f17"; domain=.linkedin.com;
+        Path=/; Secure; Expires=Fri, 22-Oct-2027 15:17:41 GMT; SameSite=None
+      - lidc="b=OB68:s=O:r=O:a=O:p=O:g=8016:u=334:x=1:i=1792682260:t=1792753754:v=2:sig=AQGXG-B2f2wvj03nrnqOKehDKhxRnyvU"
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - a4e97862ef1c0b08-MIA
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Thu, 22 Oct 2026 15:17:41 GMT
+recorded_with: VCR 6.4.0

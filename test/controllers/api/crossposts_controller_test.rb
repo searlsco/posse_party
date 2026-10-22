@@ -316,6 +316,16 @@ class Api::CrosspostsControllerTest < ActionDispatch::IntegrationTest
     assert crosspost["compose_url"].start_with?("https://x.com/intent/tweet?text=")
   end
 
+  def test_pending_lists_the_media_to_attach_by_hand
+    user = users(:admin)
+    posts(:admin_post).update!(media: [{"type" => "image", "url" => "https://admin.example.com/1.jpg", "alt" => "A photo"}])
+    posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready")
+
+    get api_pending_crossposts_path, headers: {"Authorization" => "Bearer #{user.api_key}"}
+
+    assert_equal [{"type" => "image", "url" => "https://admin.example.com/1.jpg", "alt" => "A photo"}], JSON.parse(response.body)["crossposts"].first["media"]
+  end
+
   test "pending omits crossposts that are already published" do
     user = users(:admin)
     posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "published", url: "https://x.com/searls/status/1")

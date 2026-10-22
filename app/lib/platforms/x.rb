@@ -18,6 +18,8 @@ module Platforms
       attach_link: false # not supported
     ).freeze
 
+    MEDIA_CONSTRAINTS = MediaConstraints.new(max_images: 4, max_videos: 1, mixable: false).freeze
+
     IRRELEVANT_CONFIG_OPTIONS = [:append_url_label, :attach_link, :og_image].freeze
     EMBED_SUPPORTED = true
 
@@ -30,7 +32,7 @@ module Platforms
     end
 
     def publish!(crosspost, crosspost_config, crosspost_content)
-      @syndicates_x_post.syndicate!(crosspost, crosspost_content.string)
+      @syndicates_x_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
     end
 
     def manual_compose_url(crosspost_content)

@@ -5,9 +5,10 @@ class Account < ApplicationRecord
   attribute :credentials, :json, default: -> { {} }
 
   normalizes :credentials, with: ->(value) { value.is_a?(String) ? JSON.parse(value) : value }
-  normalizes :format_string, :append_url_spacer, :append_url_label, :og_image, with: ->(v) { v.presence }
+  normalizes :format_string, :append_url_spacer, :append_url_label, :og_image, :media_fallback, with: ->(v) { v.presence }
 
   validates :platform_tag, :label, presence: true
+  validates :media_fallback, inclusion: {in: PublishesCrosspost::OVERRIDABLE_FIELDS[:media_fallback][:options]}, allow_nil: true
   validate :validate_required_credentials
 
   def platform

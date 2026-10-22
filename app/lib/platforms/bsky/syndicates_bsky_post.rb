@@ -1,32 +1,30 @@
 class Platforms::Bsky
   class SyndicatesBskyPost
-    PDS_URL = "https://bsky.social"
-
     def initialize
+      @opens_session = OpensSession.new
       @attaches_web_card = AttachesWebCard.new
+      @uploads_images = UploadsImages.new
+      @uploads_video = UploadsVideo.new
+      @creates_post = CreatesPost.new
+      @finishes_video_post = FinishesVideoPost.new
     end
 
     def syndicate!(crosspost, crosspost_config, crosspost_content, rich_text_facets)
-      session = Bskyrb::Session.new(
-        Bskyrb::Credentials.new(
-          crosspost.account.credentials["email"],
-          crosspost.account.credentials["password"]
-        ), PDS_URL
-      )
-      uri = post!(crosspost_config, crosspost_content, rich_text_facets, session)
-      if uri.nil?
-        PublishesCrosspost::Result.new(success?: false, message: "Failed to create Bsky post")
+      session = @opens_session.open(crosspost.account)
+      post = {"text" => crosspost_content, "facets" => rich_text_facets}.compact
+      if (video = crosspost_config.media.find(&:video?))
+        syndicate_video!(crosspost, session, post, video)
       else
-        url = uri_to_url(uri, session)
-        crosspost.update!(
-          remote_id: uri,
-          url: url,
-          content: crosspost_content,
-          status: "published",
-          published_at: Now.time
-        )
-        PublishesCrosspost::Result.new(success?: true)
+        record_manager = Bskyrb::RecordManager.new(session)
+        embed = if crosspost_config.media.any?
+          @uploads_images.upload(crosspost_config.media, session)
+        elsif crosspost_config.attach_link
+          @attaches_web_card.attach!(crosspost_config, record_manager)
+        end
+        @creates_post.create(crosspost, session, post.merge("embed" => embed).compact)
       end
+    rescue PublishesCrosspost::UnsupportedMediaError
+      raise
     rescue Bskyrb::UnauthorizedError => e
       PublishesCrosspost::Result.new(success?: false, message: "Failed to authenticate to Bsky (invalid credentials)", error: e)
     rescue => e
@@ -35,33 +33,13 @@ class Platforms::Bsky
 
     private
 
-    def post!(crosspost_config, crosspost_content, rich_text_facets, session)
-      record_manager = Bskyrb::RecordManager.new(session)
-      embed = @attaches_web_card.attach!(crosspost_config, record_manager) if crosspost_config.attach_link
-      record = {
-        "collection" => "app.bsky.feed.post",
-        "$type" => "app.bsky.feed.post",
-        "repo" => session.did,
-        "record" => {
-          "$type" => "app.bsky.feed.post",
-          "createdAt" => Now.time.iso8601(3),
-          "text" => crosspost_content,
-          "facets" => rich_text_facets,
-          "embed" => embed
-        }.compact
-      }.compact
-      result = record_manager.create_record(record)
-      if result["error"].present?
-        raise "Failed to create Bsky post: #{result["error"]} - #{result["message"]}. Record we sent follows: #{record.inspect}"
-      end
-
-      result&.dig("uri")
-    end
-
-    def uri_to_url(uri, session)
-      bsky_handle = DIDKit::Resolver.new.get_verified_handle(session.did)
-      post_id = uri[/[^\/]+$/]
-      "https://bsky.app/profile/#{bsky_handle}/post/#{post_id}"
+    # Bsky's video service processes uploads asynchronously, so the post is created once it's done (possibly by finish!)
+    def syndicate_video!(crosspost, session, post, video)
+      job_id = @uploads_video.upload(video, session)
+      crosspost.update!(content: post["text"], metadata: crosspost.metadata.merge(
+        "bsky_video_post" => {"post" => post, "url" => video.url, "alt" => video.alt, "job_id" => job_id}
+      ))
+      @finishes_video_post.finish(crosspost, session:)
     end
   end
 end

@@ -17,6 +17,8 @@ module Platforms
       attach_link: true
     ).freeze
 
+    MEDIA_CONSTRAINTS = MediaConstraints.new(max_images: 20, max_videos: 1, mixable: false).freeze
+
     RENEWABLE = true
     RENEWAL_URL_SUPPORTED = true
     IRRELEVANT_CONFIG_OPTIONS = [:append_url_label].freeze
@@ -24,6 +26,7 @@ module Platforms
     def initialize
       @syndicates_linkedin_post = SyndicatesLinkedinPost.new
       @potentially_tells_user_to_renew_linkedin_access_token = PotentiallyTellsUserToRenewLinkedinAccessToken.new
+      @finishes_linkedin_post = FinishesLinkedinPost.new
     end
 
     def setup_docs_available?
@@ -32,6 +35,14 @@ module Platforms
 
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_linkedin_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
+    end
+
+    def finishable?
+      true
+    end
+
+    def finish!(crosspost)
+      @finishes_linkedin_post.finish(crosspost)
     end
 
     def renew!(account)
