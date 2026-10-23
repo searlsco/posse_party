@@ -14,7 +14,7 @@ class Api::CrosspostsController < ApiController
   # Crossposts that can't be published via API (or already failed trying) but whose
   # platform offers a prefilled compose URL, so they can be posted by hand instead.
   def pending
-    render json: {crossposts: pending_crossposts}
+    render json: ListsPendingCrossposts.new.list(current_user, url_options: url_options).to_h
   end
 
   def update
@@ -30,37 +30,6 @@ class Api::CrosspostsController < ApiController
   end
 
   private
-
-  def pending_crossposts
-    composes_crosspost_preview = ComposesCrosspostPreview.new
-    matches_platform_api = PublishesCrosspost::MatchesPlatformApi.new
-
-    current_user.crossposts
-      .where(status: %w[ready failed])
-      .includes(:account, :post)
-      .order(created_at: :asc)
-      .filter_map { |crosspost| format_pending_crosspost(crosspost, composes_crosspost_preview, matches_platform_api) }
-  end
-
-  def format_pending_crosspost(crosspost, composes_crosspost_preview, matches_platform_api)
-    content = composes_crosspost_preview.compose(crosspost).data
-    return nil if content.blank?
-
-    compose_url = matches_platform_api.match(crosspost.account).manual_compose_url(content)
-    return nil if compose_url.blank?
-
-    {
-      id: crosspost.id,
-      platform: crosspost.account.platform_tag,
-      account: crosspost.account.label,
-      status: crosspost.status,
-      post_url: crosspost.post.url,
-      content: content,
-      compose_url: compose_url,
-      mark_published_url: api_crosspost_url(crosspost),
-      crosspost_url: crosspost_url(crosspost)
-    }
-  end
 
   def find_user_post(remote_id)
     Post.joins(feed: :user)

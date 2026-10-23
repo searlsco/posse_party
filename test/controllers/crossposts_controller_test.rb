@@ -99,4 +99,54 @@ class CrosspostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href^='https://x.com/intent/tweet']", false
   end
+
+  def test_show_offers_to_copy_each_image_for_a_manual_compose
+    login_as(users(:admin))
+    posts(:admin_post).update!(media: [{"type" => "image", "url" => "https://admin.example.com/1.jpg", "alt" => "A photo"}, {"type" => "image", "url" => "https://admin.example.com/2.jpg"}])
+    crosspost = posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready")
+
+    get crosspost_path(crosspost)
+
+    assert_select "[data-media-clipboard-url-value=?] button", media_crosspost_path(crosspost, index: 1), text: "Copy image 2"
+    assert_select "img[src=?][alt=?]", media_crosspost_path(crosspost, index: 0), "A photo"
+  end
+
+  def test_show_offers_nothing_to_copy_when_x_cant_take_the_media
+    login_as(users(:admin))
+    posts(:admin_post).update!(media: [{"type" => "image", "url" => "https://admin.example.com/1.jpg"}, {"type" => "video", "url" => "https://admin.example.com/clip.mp4"}])
+
+    get crosspost_path(posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready"))
+
+    assert_select "[data-controller='media-clipboard']", false
+  end
+
+  def test_media_serves_images_as_pngs_for_the_clipboard
+    login_as(users(:admin))
+    stub_request(:get, "https://admin.example.com/1.jpg").to_return(body: file_fixture("media/photo-1.jpg").binread, headers: {"Content-Type" => "image/jpeg"})
+    posts(:admin_post).update!(media: [{"type" => "image", "url" => "https://admin.example.com/1.jpg"}])
+    crosspost = posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready")
+
+    get media_crosspost_path(crosspost, index: 0)
+
+    assert_response :success
+    assert_equal "image/png", response.media_type
+    assert_equal "image/png", Marcel::MimeType.for(response.body)
+  end
+
+  def test_media_never_proxies_videos
+    login_as(users(:admin))
+    posts(:admin_post).update!(media: [{"type" => "video", "url" => "http://169.254.169.254/latest/meta-data"}])
+
+    get media_crosspost_path(posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready"), index: 0)
+
+    assert_response :not_found
+  end
+
+  def test_media_is_not_found_past_the_last_attachment
+    login_as(users(:admin))
+
+    get media_crosspost_path(posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready"), index: 0)
+
+    assert_response :not_found
+  end
 end

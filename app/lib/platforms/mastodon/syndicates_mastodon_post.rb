@@ -1,33 +1,21 @@
 class Platforms::Mastodon
   class SyndicatesMastodonPost
-    def syndicate!(crosspost, crosspost_content)
-      base_url = crosspost.account.credentials["base_url"]
-      access_token = crosspost.account.credentials["access_token"]
+    def initialize
+      @uploads_media = UploadsMedia.new
+      @finishes_mastodon_post = FinishesMastodonPost.new
+    end
 
-      response = HTTParty.post(
-        "#{base_url}/api/v1/statuses",
-        headers: {
-          "Authorization" => "Bearer #{access_token}",
-          "Content-Type" => "application/json"
-        },
-        body: {status: crosspost_content}.to_json
-      )
-
-      if response.success? && (post_id = response.dig("id")).present?
-        crosspost.update!(
-          remote_id: post_id,
-          url: response["url"],
-          content: crosspost_content,
-          status: "published",
-          published_at: Now.time
-        )
-        PublishesCrosspost::Result.new(success?: true)
-      else
-        PublishesCrosspost::Result.new(
-          success?: false,
-          message: "Failed to create Mastodon post (HTTP #{response.code}). Response: #{response.body}"
-        )
-      end
+    def syndicate!(crosspost, crosspost_config, crosspost_content)
+      credentials = crosspost.account.credentials
+      media_urls = crosspost_config.media.to_h { |item|
+        [@uploads_media.upload(item, base_url: credentials["base_url"], access_token: credentials["access_token"]), item.url]
+      }
+      crosspost.update!(content: crosspost_content, metadata: crosspost.metadata.merge(
+        "mastodon_post" => {"status" => crosspost_content, "media_ids" => media_urls.keys, "media_urls" => media_urls}
+      ))
+      @finishes_mastodon_post.finish(crosspost)
+    rescue PublishesCrosspost::UnsupportedMediaError, PublishesCrosspost::UnretriableError
+      raise
     rescue => e
       PublishesCrosspost::Result.new(success?: false, message: "Failed to syndicate to Mastodon", error: e)
     end

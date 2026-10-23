@@ -48,6 +48,7 @@ class FetchesFeed
         :og_image, # string, URL to an image to use as the website card image (supported by Bluesky)
         :og_title, # string, title to use on the website card (supported by Bluesky), defaults to title
         :og_description, # string, description to use on the website card (supported by Bluesky), defaults to summary
+        :media_fallback, # "link"|"best_effort"|"fail", what to do when a platform can't attach all of the post's media
         # platform-specific configuration (nesting any of the above attributes underneath a known platform tag like "bsky")
         :platform_overrides, # hash of platform tag (e.g. "bsky") mapping to a hash of platform-specific overrides of the above attributes
         :media, # array of media objects [{"type": "image", "url": "https://example.com/image.jpg"}]

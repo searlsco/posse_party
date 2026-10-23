@@ -14,7 +14,7 @@ module Platforms
       attach_link: true
     ).freeze
 
-    IRRELEVANT_CONFIG_OPTIONS = [:append_url_label, :og_image].freeze
+    IRRELEVANT_CONFIG_OPTIONS = [:append_url_label, :og_image, :media_fallback].freeze
     EMBED_SUPPORTED = true
 
     def initialize

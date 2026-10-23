@@ -12,7 +12,17 @@ class Platforms::Linkedin
     def publish(content, crosspost_config, access_token:, person_urn:, image_urn: nil, url: nil)
       return Result.new(success?: false, message: "Content is required") if content.blank?
 
-      post_data = build_post_data(content, crosspost_config, person_urn:, image_urn:, url:)
+      post!(build_post_data(content, crosspost_config, person_urn:, image_urn:, url:), access_token:)
+    end
+
+    # Publishes commentary with already-uploaded media content (e.g. {media: {id: "urn:li:image:..."}})
+    def publish_content(commentary, content, access_token:, person_urn:)
+      post!(base_post_data(commentary, person_urn:).merge(content:), access_token:)
+    end
+
+    private
+
+    def post!(post_data, access_token:)
       response = @api.call(method: :post, path: "rest/posts", body: post_data, access_token: access_token)
 
       if response.success?
@@ -37,9 +47,7 @@ class Platforms::Linkedin
       end
     end
 
-    private
-
-    def build_post_data(content, crosspost_config, person_urn:, image_urn:, url:)
+    def base_post_data(content, person_urn:)
       {
         author: person_urn,
         commentary: content,
@@ -49,7 +57,12 @@ class Platforms::Linkedin
           targetEntities: [],
           thirdPartyDistributionChannels: []
         },
-        lifecycleState: "PUBLISHED",
+        lifecycleState: "PUBLISHED"
+      }
+    end
+
+    def build_post_data(content, crosspost_config, person_urn:, image_urn:, url:)
+      base_post_data(content, person_urn:).merge(
         content: (
           if url.present?
             {
@@ -62,7 +75,7 @@ class Platforms::Linkedin
             }
           end
         )
-      }.compact
+      ).compact
     end
   end
 end

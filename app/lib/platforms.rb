@@ -14,6 +14,7 @@ module Platforms
     og_image: nil,
     og_title: nil,
     og_description: nil,
+    media_fallback: "link",
     channel: "feed"
   }.freeze
 end

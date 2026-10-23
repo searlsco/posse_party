@@ -305,6 +305,46 @@ class Api::CrosspostsControllerTest < ActionDispatch::IntegrationTest
     assert_equal ["x"], crossposts.pluck("platform")
   end
 
+  def test_pending_reports_enabled_syndication
+    get api_pending_crossposts_path, headers: {"Authorization" => "Bearer #{users(:admin).api_key}"}
+
+    assert_response :success
+    assert_equal false, JSON.parse(response.body)["syndication_paused"]
+  end
+
+  def test_pending_reports_pause_and_preserves_work_until_resumed
+    user = users(:admin)
+    ready = posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready")
+    failed_post = feeds(:admin_feed).posts.create!(remote_id: "paused-post", url: "https://admin.example.com/paused", title: "Paused post")
+    failed = failed_post.crossposts.create!(account: accounts(:admin_x_account), status: "failed")
+    user.update!(allow_automatic_syndication: false)
+
+    get api_pending_crossposts_path, headers: {"Authorization" => "Bearer #{user.api_key}"}
+
+    assert_response :success
+    assert_equal({"syndication_paused" => true, "crossposts" => []}, JSON.parse(response.body))
+    assert_equal "ready", ready.reload.status
+    assert_equal "failed", failed.reload.status
+
+    user.update!(allow_automatic_syndication: true)
+    get api_pending_crossposts_path, headers: {"Authorization" => "Bearer #{user.api_key}"}
+
+    assert_response :success
+    assert_equal false, JSON.parse(response.body)["syndication_paused"]
+    assert_equal [ready.id, failed.id], JSON.parse(response.body)["crossposts"].pluck("id")
+  end
+
+  def test_pending_uses_the_authenticated_users_pause_setting
+    users(:admin).update!(allow_automatic_syndication: false)
+    crosspost = posts(:user_post).crossposts.create!(account: accounts(:user_x_account), status: "ready")
+
+    get api_pending_crossposts_path, headers: {"Authorization" => "Bearer #{users(:user).api_key}"}
+
+    assert_response :success
+    assert_equal false, JSON.parse(response.body)["syndication_paused"]
+    assert_equal [crosspost.id], JSON.parse(response.body)["crossposts"].pluck("id")
+  end
+
   test "pending includes the composed content and compose url" do
     user = users(:admin)
     posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready")
@@ -314,6 +354,16 @@ class Api::CrosspostsControllerTest < ActionDispatch::IntegrationTest
     crosspost = JSON.parse(response.body)["crossposts"].first
     assert_equal "Admin's First Post https://admin.example.com/posts/1", crosspost["content"]
     assert crosspost["compose_url"].start_with?("https://x.com/intent/tweet?text=")
+  end
+
+  def test_pending_lists_the_media_to_attach_by_hand
+    user = users(:admin)
+    posts(:admin_post).update!(media: [{"type" => "image", "url" => "https://admin.example.com/1.jpg", "alt" => "A photo"}])
+    posts(:admin_post).crossposts.create!(account: accounts(:admin_x_account), status: "ready")
+
+    get api_pending_crossposts_path, headers: {"Authorization" => "Bearer #{user.api_key}"}
+
+    assert_equal [{"type" => "image", "url" => "https://admin.example.com/1.jpg", "alt" => "A photo"}], JSON.parse(response.body)["crossposts"].first["media"]
   end
 
   test "pending omits crossposts that are already published" do
