@@ -237,3 +237,13 @@ Feed elsewhere, Story only on Instagram:
   }
 }
 ```
+
+### Paused automatic syndication
+
+`GET /api/crossposts/pending` reports the authenticated user's automatic syndication
+setting as `syndication_paused`. When paused, the response is
+`{"syndication_paused": true, "crossposts": []}`. When enabled, it returns
+`syndication_paused: false` alongside the pending crossposts. Pausing preserves
+queued crossposts and their statuses so they can be processed after resuming.
+External publishers must require `syndication_paused: false` before posting and
+refresh pending work after any scheduling or idle wait.
