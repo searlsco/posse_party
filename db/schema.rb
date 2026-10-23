@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_19_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_22_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -32,6 +32,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_19_120000) do
     t.string "label", null: false
     t.boolean "manually_create_crossposts", default: false, null: false
     t.boolean "manually_publish_crossposts", default: false, null: false
+    t.string "media_fallback"
     t.string "og_image"
     t.string "platform_tag", null: false
     t.boolean "truncate"
@@ -129,6 +130,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_19_120000) do
     t.bigint "feed_id", null: false
     t.string "format_string"
     t.jsonb "media", default: [], null: false, array: true
+    t.string "media_fallback"
     t.string "og_description"
     t.string "og_image"
     t.string "og_title"

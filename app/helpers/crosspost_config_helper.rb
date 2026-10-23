@@ -8,6 +8,7 @@ module CrosspostConfigHelper
     append_url_label: "Appended URL Label",
     attach_link: "Attach Website Card",
     og_image: "OpenGraph Image URL",
+    media_fallback: "Unsupported Media",
     platform_overrides: "Platform Overrides (JSON)"
   }.freeze
 
@@ -28,6 +29,10 @@ module CrosspostConfigHelper
     [[default_label, ""], ["False", "false"], ["True", "true"]]
   end
 
+  def default_preserving_enum_select_options(options, default_label: "-- Default --")
+    [[default_label, ""]] + options.map { |option| [option.humanize, option] }
+  end
+
   def override_default_details(default:, source: nil)
     segments = [default_label_segment(default)]
     segments << content_tag(:em, "From: #{ERB::Util.html_escape(source)}") if source
@@ -35,7 +40,10 @@ module CrosspostConfigHelper
   end
 
   def doc_url(attribute_name)
-    doc_path("format-string") if attribute_name == :format_string
+    case attribute_name
+    when :format_string then doc_path("format-string")
+    when :media_fallback then doc_path("feed", anchor: "media")
+    end
   end
 
   private

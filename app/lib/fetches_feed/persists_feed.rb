@@ -43,6 +43,7 @@ class FetchesFeed
               og_image: nil,
               og_title: nil,
               og_description: nil,
+              media_fallback: nil,
               channel: nil,
               platform_overrides: {},
               media: []

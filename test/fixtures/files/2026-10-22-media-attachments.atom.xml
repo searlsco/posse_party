@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:posse="https://posseparty.com/2024/Feed">
+  <title>POSSE Party media attachments fixture</title>
+  <updated>2026-10-22T00:00:00Z</updated>
+  <!-- Media is served from test/fixtures/files/media at localhost:8765 when recording cassettes -->
+  <entry>
+    <id>https://posseparty.com/test/media/photos/</id>
+    <title>Two photos</title>
+    <updated>2026-10-22T00:00:00Z</updated>
+    <link rel="alternate" href="https://posseparty.com/test/media/photos/" />
+    <posse:post format="json"><![CDATA[{
+        "id": "https://posseparty.com/test/media/photos/",
+        "url": "https://posseparty.com/test/media/photos/",
+        "title": "Two photos",
+        "format_string": "{{content}}",
+        "content": "Two photos for the POSSE Party media test",
+        "media": [
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-1.jpg",
+            "alt": "Test card 1: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-2.jpg",
+            "alt": "Test card 2: a colored field with a white bar"
+          }
+        ]
+      }]]></posse:post>
+  </entry>
+  <entry>
+    <id>https://posseparty.com/test/media/clip/</id>
+    <title>A clip</title>
+    <updated>2026-10-22T01:00:00Z</updated>
+    <link rel="alternate" href="https://posseparty.com/test/media/clip/" />
+    <posse:post format="json"><![CDATA[{
+        "id": "https://posseparty.com/test/media/clip/",
+        "url": "https://posseparty.com/test/media/clip/",
+        "title": "A clip",
+        "format_string": "{{content}}",
+        "content": "A short clip for the POSSE Party media test",
+        "media": [
+          {
+            "type": "video",
+            "url": "http://localhost:8765/clip.mp4",
+            "alt": "A test pattern with a tone"
+          }
+        ]
+      }]]></posse:post>
+  </entry>
+  <entry>
+    <id>https://posseparty.com/test/media/five-photos/</id>
+    <title>Five photos</title>
+    <updated>2026-10-22T02:00:00Z</updated>
+    <link rel="alternate" href="https://posseparty.com/test/media/five-photos/" />
+    <posse:post format="json"><![CDATA[{
+        "id": "https://posseparty.com/test/media/five-photos/",
+        "url": "https://posseparty.com/test/media/five-photos/",
+        "title": "Five photos",
+        "format_string": "{{content}}",
+        "content": "Five photos is one too many for some platforms",
+        "media": [
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-1.jpg",
+            "alt": "Test card 1: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-2.jpg",
+            "alt": "Test card 2: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-3.jpg",
+            "alt": "Test card 3: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-4.jpg",
+            "alt": "Test card 4: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-5.jpg",
+            "alt": "Test card 5: a colored field with a white bar"
+          }
+        ]
+      }]]></posse:post>
+  </entry>
+  <entry>
+    <id>https://posseparty.com/test/media/five-photos-best-effort/</id>
+    <title>Five photos, best effort</title>
+    <updated>2026-10-22T03:00:00Z</updated>
+    <link rel="alternate" href="https://posseparty.com/test/media/five-photos-best-effort/" />
+    <posse:post format="json"><![CDATA[{
+        "id": "https://posseparty.com/test/media/five-photos-best-effort/",
+        "url": "https://posseparty.com/test/media/five-photos-best-effort/",
+        "title": "Five photos, best effort",
+        "format_string": "{{content}}",
+        "content": "Five photos, but post what fits",
+        "media_fallback": "best_effort",
+        "media": [
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-1.jpg",
+            "alt": "Test card 1: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-2.jpg",
+            "alt": "Test card 2: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-3.jpg",
+            "alt": "Test card 3: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-4.jpg",
+            "alt": "Test card 4: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-5.jpg",
+            "alt": "Test card 5: a colored field with a white bar"
+          }
+        ]
+      }]]></posse:post>
+  </entry>
+  <entry>
+    <id>https://posseparty.com/test/media/five-photos-fail/</id>
+    <title>Five photos or bust</title>
+    <updated>2026-10-22T04:00:00Z</updated>
+    <link rel="alternate" href="https://posseparty.com/test/media/five-photos-fail/" />
+    <posse:post format="json"><![CDATA[{
+        "id": "https://posseparty.com/test/media/five-photos-fail/",
+        "url": "https://posseparty.com/test/media/five-photos-fail/",
+        "title": "Five photos or bust",
+        "format_string": "{{content}}",
+        "content": "Five photos or nothing",
+        "media_fallback": "fail",
+        "media": [
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-1.jpg",
+            "alt": "Test card 1: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-2.jpg",
+            "alt": "Test card 2: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-3.jpg",
+            "alt": "Test card 3: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-4.jpg",
+            "alt": "Test card 4: a colored field with a white bar"
+          },
+          {
+            "type": "image",
+            "url": "http://localhost:8765/photo-5.jpg",
+            "alt": "Test card 5: a colored field with a white bar"
+          }
+        ]
+      }]]></posse:post>
+  </entry>
+</feed>

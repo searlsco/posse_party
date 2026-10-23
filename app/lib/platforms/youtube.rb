@@ -15,7 +15,7 @@ module Platforms
 
     RENEWABLE = true
     RENEWAL_URL_SUPPORTED = true
-    IRRELEVANT_CONFIG_OPTIONS = [:append_url_label, :attach_link, :og_image].freeze
+    IRRELEVANT_CONFIG_OPTIONS = [:append_url_label, :attach_link, :og_image, :media_fallback].freeze
     EMBED_SUPPORTED = true
 
     def initialize

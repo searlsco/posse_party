@@ -1,0 +1,185 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://bsky.social/xrpc/com.atproto.server.createSession
+    body:
+      encoding: UTF-8
+      string: '{"identifier":"{{email}}","password":"{{password}}"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:09:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Ratelimit-Limit:
+      - '10'
+      Ratelimit-Reset:
+      - '1792768171'
+      Ratelimit-Remaining:
+      - '9'
+      Ratelimit-Policy:
+      - 10;w=86400
+      Access-Control-Expose-Headers:
+      - RateLimit-Limit, RateLimit-Reset, RateLimit-Remaining, RateLimit-Policy
+      Etag:
+      - W/"5dc-ryaFkracrgzjK1+cJpERQ2OKUQg"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: '{"did":"did:plc:vvwq23uzqcsoekea65qzdddk","didDoc":{"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1","https://w3id.org/security/suites/secp256k1-2019/v1"],"id":"did:plc:vvwq23uzqcsoekea65qzdddk","alsoKnownAs":["at://alharrington.bsky.social"],"verificationMethod":[{"id":"did:plc:vvwq23uzqcsoekea65qzdddk#atproto","type":"Multikey","controller":"did:plc:vvwq23uzqcsoekea65qzdddk","publicKeyMultibase":"zQ3shujw8QjiJLmHLfE8xJazAmb6L3Hz8eJ21A5ahaWj5e18X"}],"service":[{"id":"#atproto_pds","type":"AtprotoPersonalDataServer","serviceEndpoint":"https://rooter.us-west.host.bsky.network"}]},"handle":"alharrington.bsky.social","email":"{{email}}","emailConfirmed":true,"emailAuthFactor":false,"accessJwt":"ACCESS_JWT_PLACEHOLDER","refreshJwt":"REFRESH_JWT_PLACEHOLDER","active":true}'
+  recorded_at: Thu, 22 Oct 2026 15:09:31 GMT
+- request:
+    method: post
+    uri: https://bsky.social/xrpc/com.atproto.repo.createRecord
+    body:
+      encoding: UTF-8
+      string: '{"collection":"app.bsky.feed.post","$type":"app.bsky.feed.post","repo":"did:plc:vvwq23uzqcsoekea65qzdddk","record":{"$type":"app.bsky.feed.post","createdAt":"2026-10-22T11:45:00.000Z","text":"Five
+        photos is one too many for some platforms","facets":[],"embed":{"$type":"app.bsky.embed.external","external":{"uri":"https://posseparty.com/test/media/five-photos/","title":"Five
+        photos","description":"Five photos"}}}}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer JWT_PLACEHOLDER
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:09:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '276'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Ratelimit-Limit:
+      - '3000'
+      Ratelimit-Reset:
+      - '1792682071'
+      Ratelimit-Remaining:
+      - '2999'
+      Ratelimit-Policy:
+      - 3000;w=300
+      Access-Control-Expose-Headers:
+      - RateLimit-Limit, RateLimit-Reset, RateLimit-Remaining, RateLimit-Policy
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: '{"uri":"at://did:plc:vvwq23uzqcsoekea65qzdddk/app.bsky.feed.post/3myhx24wjj42c","cid":"bafyreif5cpddolgylv6ujgydgd2arvbbeykkitml3f3cfjxhnbq52u3t6a","commit":{"cid":"bafyreidvzarduf5bdm2fxzqebpsayihcv73atwbe6gwzmdkenyc5t6h2ka","rev":"3myhx24wsce2c"},"validationStatus":"valid"}'
+  recorded_at: Thu, 22 Oct 2026 15:09:31 GMT
+- request:
+    method: get
+    uri: https://plc.directory/did:plc:vvwq23uzqcsoekea65qzdddk
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - plc.directory
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:09:31 GMT
+      Content-Type:
+      - application/did+ld+json; charset=utf-8
+      Content-Length:
+      - '568'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"238-AlBoAINHXE/P6+qG6Jf/IYKeZRY"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: '{"@context":["https://www.w3.org/ns/did/v1","https://w3id.org/security/multikey/v1","https://w3id.org/security/suites/secp256k1-2019/v1"],"id":"did:plc:vvwq23uzqcsoekea65qzdddk","alsoKnownAs":["at://alharrington.bsky.social"],"verificationMethod":[{"id":"did:plc:vvwq23uzqcsoekea65qzdddk#atproto","type":"Multikey","controller":"did:plc:vvwq23uzqcsoekea65qzdddk","publicKeyMultibase":"zQ3shujw8QjiJLmHLfE8xJazAmb6L3Hz8eJ21A5ahaWj5e18X"}],"service":[{"id":"#atproto_pds","type":"AtprotoPersonalDataServer","serviceEndpoint":"https://rooter.us-west.host.bsky.network"}]}'
+  recorded_at: Thu, 22 Oct 2026 15:09:31 GMT
+- request:
+    method: get
+    uri: https://alharrington.bsky.social/.well-known/atproto-did
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - alharrington.bsky.social
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 22 Oct 2026 15:09:31 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Content-Length:
+      - '32'
+      Connection:
+      - keep-alive
+      X-Powered-By:
+      - Express
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - W/"20-Ynh6l4D29pFCIVmPhEngUa5383Y"
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: did:plc:vvwq23uzqcsoekea65qzdddk
+  recorded_at: Thu, 22 Oct 2026 15:09:31 GMT
+recorded_with: VCR 6.4.0

@@ -53,7 +53,7 @@ class PublishesCrosspost
       crosspost.update!({
         failures: crosspost.failures + [{
           message: result.message,
-          cause: result.error&.message,
+          cause: error_message(result),
           backtrace: result.error&.backtrace,
           time: Now.time
         }],
@@ -63,8 +63,13 @@ class PublishesCrosspost
       notify_user(crosspost,
         title: "#{action_description} #{crosspost.post.notification_label} to #{crosspost.account.notification_label} failed",
         severity: "danger",
-        text: [result.message, result.error&.message, result.error&.backtrace&.join("\n")].compact.join("\n\n").presence || "Unknown failure",
+        text: [result.message, error_message(result), result.error&.backtrace&.join("\n")].compact.join("\n\n").presence || "Unknown failure",
         badge: true)
+    end
+
+    # Errors can quote binary request bodies (e.g. uploaded media), which can't be stored as text
+    def error_message(result)
+      result.error&.message&.dup&.force_encoding(Encoding::UTF_8)&.scrub
     end
 
     def notify_user(crosspost, title:, severity:, text:, badge: false)

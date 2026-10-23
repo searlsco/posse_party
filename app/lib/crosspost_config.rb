@@ -26,5 +26,6 @@ CrosspostConfig = Struct.new(
   :channel,
   :platform_overrides,
   :media,
+  :media_fallback,
   keyword_init: true
 )

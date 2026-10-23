@@ -8,6 +8,11 @@ module Platforms
       fetch_constant(:DEFAULT_CROSSPOST_OPTIONS, Platforms::DEFAULT_CROSSPOST_OPTIONS)
     end
 
+    # Platforms that attach a post's media declare MEDIA_CONSTRAINTS. Those that don't (or that handle media on their own terms) return nil.
+    def media_constraints(_account)
+      fetch_constant(:MEDIA_CONSTRAINTS, nil)
+    end
+
     def post_constraints
       fetch_constant(:POST_CONSTRAINTS, Constants::DEFAULT_POST_CONSTRAINTS)
     end

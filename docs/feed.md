@@ -63,9 +63,10 @@ POSSE Party reads per-entry syndication settings from a namespaced Atom element.
   "og_image": "https://example.com/card.jpg",
   "og_title": "Example Card Title",
   "og_description": "One–two sentence description",
+  "media_fallback": "link",
 
   "media": [
-    {"type": "image", "url": "https://example.com/img/1.jpg"},
+    {"type": "image", "url": "https://example.com/img/1.jpg", "alt": "A description of the photo"},
     {
       "type": "video",
       "url": "https://example.com/vid/clip.mp4",
@@ -150,7 +151,8 @@ POSSE Party reads per-entry syndication settings from a namespaced Atom element.
 | `og_image` | string (URL) | Card image URL (supported on Bluesky). |
 | `og_title` | string | Card title override (Bluesky). Defaults to `title` if omitted. |
 | `og_description` | string | Card description override (Bluesky). Defaults to `summary` if omitted. |
-| `media` | array<object> | Media attachments used by certain platforms (Instagram requires images/video; YouTube requires exactly one video). When present, `media.poster_url` is used by platforms that support custom covers/thumbnails (such as Instagram Reels and YouTube). |
+| `media` | array<object> | Photos and videos to attach. See [Media](#media) for which platforms attach what. Instagram requires media and YouTube requires exactly one video. When present, `media.poster_url` is used by platforms that support custom covers/thumbnails (such as Instagram Reels and YouTube). |
+| `media_fallback` | string | What to do when a platform can't attach all of the post's `media`: `"link"` (default) attaches none of it, `"best_effort"` attaches whatever fits, and `"fail"` records a failure instead of publishing. See [Media](#media). |
 | `platform_overrides` | object | Map of platform tag → object of overrides for any properties in this table. Unknown tags are ignored. |
 | `channel` | string | Global destination channel. Supported values: `"feed"` (default) or `"story"` (Instagram only). |
 
@@ -161,6 +163,31 @@ POSSE Party reads per-entry syndication settings from a namespaced Atom element.
 | `type` | string | `"image"` or `"video"`. |
 | `url` | string (URL) | Direct URL to the media asset. |
 | `poster_url` | string (URL) | Optional cover/thumbnail image used by platforms that support custom posters (for example Instagram Reels covers and YouTube thumbnails). |
+| `alt` | string | Optional alt text (image description), sent to every platform that accepts it. |
+
+## Media
+
+Bluesky, X, Mastodon, Threads, and LinkedIn attach a post's `media` to the crosspost. Each has its own limits:
+
+| Platform | Photos | Videos | Photos and videos together |
+| --- | --- | --- | --- |
+| Bluesky (`bsky`) | up to 4 | 1 | no |
+| X (`x`) | up to 4 | 1 | no |
+| Mastodon (`mastodon`) | up to the instance's limit (usually 4) | 1 | no |
+| Threads (`threads`) | up to 20 items in a carousel | | yes |
+| LinkedIn (`linkedin`) | up to 20 | 1 | no |
+
+Photos that are too large or in a format the platform won't take are converted to JPEG and shrunk to fit. Videos that are too large (or that the platform otherwise refuses) count as media the platform can't attach.
+
+When a platform can't attach all of the post's media, `media_fallback` decides what happens:
+
+- `"link"` (default): attach no media. The post still links back to the source: by its website card when `attach_link` is on, otherwise by appending its `url`, even if `append_url` is off.
+- `"best_effort"`: attach as much as fits, in order. On platforms that can't mix photos and videos, items of the first item's kind are kept. Because some media is left behind, the post's `url` is appended.
+- `"fail"`: don't publish. The crosspost fails without retrying.
+
+Media and website cards can't share a post on Bluesky, Threads, or LinkedIn, so attached media replaces the card. When `attach_link` was on, the post's `url` is appended instead (on Bluesky, as its `append_url_label`). Set `attach_link` to `false` to post the media without a link.
+
+X's "Compose Manually" link can't carry media, so a crosspost's page offers to copy each photo (paste it into X's composer) or open each video to save and drag in, and `GET /api/crossposts/pending` lists the `media` to attach.
 
 ## Precedence
 

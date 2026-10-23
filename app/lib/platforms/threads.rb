@@ -14,12 +14,15 @@ module Platforms
       attach_link: true
     ).freeze
 
+    MEDIA_CONSTRAINTS = MediaConstraints.new(max_items: 20, mixable: true).freeze
+
     RENEWABLE = true
     IRRELEVANT_CONFIG_OPTIONS = [:append_url_label, :og_image].freeze
 
     def initialize
       @syndicates_threads_post = SyndicatesThreadsPost.new
       @renews_threads_access_token = RenewsThreadsAccessToken.new
+      @finishes_threads_post = FinishesThreadsPost.new
     end
 
     def setup_docs_available?
@@ -28,6 +31,14 @@ module Platforms
 
     def publish!(crosspost, crosspost_config, crosspost_content)
       @syndicates_threads_post.syndicate!(crosspost, crosspost_config, crosspost_content.string)
+    end
+
+    def finishable?
+      true
+    end
+
+    def finish!(crosspost)
+      @finishes_threads_post.finish(crosspost)
     end
 
     def renew!(account)

@@ -1,0 +1,20 @@
+<div class="mt-4 space-y-2">
+  <p class="text-sm text-secondary">
+    The composer can't be prefilled with media, so add it yourself: copy each image and paste it (⌘V) into the composer, or save the video and drag it in.
+  </p>
+  <ul class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+    <% media.each_with_index do |item, index| %>
+      <li class="space-y-2">
+        <% if item.video? %>
+          <%= link_to "Open video #{index + 1}", item.url, target: "_blank", rel: "noopener",
+                class: "#{button_class_pack(:neutral)} block text-center text-sm" %>
+        <% else %>
+          <%= image_tag media_crosspost_path(crosspost, index: index), alt: item.alt.to_s, class: "w-full rounded-lg border border-primary/10" %>
+          <div data-controller="media-clipboard" data-media-clipboard-url-value="<%= media_crosspost_path(crosspost, index: index) %>">
+            <button type="button" data-action="media-clipboard#copy" data-media-clipboard-target="button" class="<%= button_class_pack(:neutral) %> block w-full text-center text-sm">Copy image <%= index + 1 %></button>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

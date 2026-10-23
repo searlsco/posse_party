@@ -4,9 +4,21 @@ class CrosspostsController < MembersController
   def show
     @crosspost = current_user.crossposts.includes(:feed, :post, :account).find(params[:id])
     @preview = ComposesCrosspostPreview.new.compose(@crosspost)
+    @preview_media = ComposesCrosspostPreview.new.media(@crosspost)
     default_crosspost_options = PublishesCrosspost::MatchesPlatformApi.new.match(@crosspost.account).default_crosspost_options
     @config = PublishesCrosspost::MungesConfig.new.munge(@crosspost, default_crosspost_options)
     @provenance = DeterminesProvenanceOfCrosspostConfig.new.determine(@crosspost, default_crosspost_options)
+  end
+
+  # Serves the crosspost's images as PNGs so they can be copied into a platform's own composer
+  def media
+    crosspost = current_user.crossposts.includes(:account, :post).find(params[:id])
+
+    if (image = PreparesComposeMedia.new.prepare(crosspost, params[:index].to_i)).nil?
+      head :not_found
+    else
+      send_data image.bytes, type: "image/png", filename: image.filename, disposition: "inline"
+    end
   end
 
   def publish
