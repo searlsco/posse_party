@@ -19,7 +19,7 @@ class Platforms::Mastodon
         headers: {"Authorization" => "Bearer #{access_token}", "Content-Type" => "multipart/form-data; boundary=#{boundary}"},
         body: multipart_body(boundary, bytes:, content_type:, description: item.alt)
       )
-      if response.code == 422
+      if [413, 415, 422].include?(response.code)
         raise PublishesCrosspost::UnsupportedMediaError.new(item, "Mastodon refused #{item.url}: #{response.body}")
       elsif !response.success? || response["id"].blank?
         raise "Failed to upload #{item.url} to Mastodon (HTTP #{response.code}). Response: #{response.body}"
@@ -31,13 +31,15 @@ class Platforms::Mastodon
     private
 
     def file_for(item, limits)
-      download = @downloads_media.download(item, max_bytes: (limits.video_size_limit if item.video?))
+      download = @downloads_media.download(item, max_bytes: item.video? ? limits.video_size_limit : DownloadsMedia::MAX_IMAGE_BYTES)
       if item.video?
         [download.bytes, download.content_type]
       else
         image = @prepares_image_upload.prepare(item, download.bytes, download.content_type, max_bytes: limits.image_size_limit, accepted_types: limits.supported_mime_types)
         [image.bytes, image.content_type]
       end
+    ensure
+      download&.file&.close!
     end
 
     # Built by hand (rather than by HTTParty) so the boundary is stable for the same media

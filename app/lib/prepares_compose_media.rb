@@ -18,11 +18,14 @@ class PreparesComposeMedia
     return unless item&.image?
 
     require "vips"
+    download = @downloads_media.download(item, max_bytes: MAX_BYTES)
     Image.new(
-      bytes: Vips::Image.thumbnail_buffer(@downloads_media.download(item, max_bytes: MAX_BYTES).bytes, MAX_DIMENSION, size: :down).write_to_buffer(".png"),
+      bytes: Vips::Image.thumbnail_buffer(download.bytes, MAX_DIMENSION, size: :down).write_to_buffer(".png"),
       filename: "#{File.basename(item.url.split(/[?#]/).first, ".*")}.png"
     )
   rescue PublishesCrosspost::UnsupportedMediaError, Vips::Error
     nil
+  ensure
+    download&.file&.close!
   end
 end

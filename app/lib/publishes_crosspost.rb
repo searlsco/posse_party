@@ -51,6 +51,11 @@ class PublishesCrosspost
     end
   end
 
+  # Continue the current attempt after asynchronous processing refuses an attachment.
+  def replan(crosspost, api)
+    syndicate(crosspost, api, @munges_config.munge(crosspost, api.default_crosspost_options), rejected_urls: crosspost.metadata.fetch("rejected_media_urls", []))
+  end
+
   private
 
   def syndicate(crosspost, api, crosspost_config, rejected_urls: [])

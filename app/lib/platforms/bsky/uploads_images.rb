@@ -24,6 +24,9 @@ class Platforms::Bsky
         body: image.bytes,
         headers: {"Authorization" => "Bearer #{session.access_token}", "Content-Type" => image.content_type}
       )
+      if [413, 415, 422].include?(response.code) || (response.code == 400 && response.parsed_response.is_a?(Hash) && %w[BlobTooLarge InvalidMimeType].include?(response["error"]))
+        raise PublishesCrosspost::UnsupportedMediaError.new(item, "Bsky refused #{item.url}: #{response.body}")
+      end
       raise "Failed to upload #{item.url} to Bsky. Response: #{response.body}" unless response.success?
 
       {
@@ -31,6 +34,8 @@ class Platforms::Bsky
         "image" => response["blob"],
         "aspectRatio" => {"width" => image.width, "height" => image.height}
       }
+    ensure
+      download&.file&.close!
     end
   end
 end

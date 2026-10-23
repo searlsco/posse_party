@@ -53,6 +53,32 @@ class PublishesCrosspost::AppliesMediaPlanTest < ActiveSupport::TestCase
     assert_equal false, config.append_url
   end
 
+  def test_link_fallback_preserves_a_source_url_that_would_be_truncated_away
+    config = @subject.apply(config_with(media: FIVE_PHOTOS, title: "word " * 100, format_string: "{{title}} {{url}}", truncate: true, append_url_if_truncated: false, append_url_spacer: " "), Platforms::X.new, @account)
+
+    composed = PublishesCrosspost::ComposesCrosspostContent.new.compose(config, Platforms::X::POST_CONSTRAINTS)
+
+    assert_empty config.media
+    assert_equal true, config.append_url
+    assert_equal 1, composed.string.scan(config.url).size
+    assert_operator Platforms::X::POST_CONSTRAINTS[:counter].call(composed.string), :<=, 280
+  end
+
+  def test_link_fallback_does_not_duplicate_a_source_url_that_survives_truncation
+    config = @subject.apply(config_with(media: FIVE_PHOTOS, title: "word " * 100, format_string: "{{url}} {{title}}", truncate: true, append_url_if_truncated: false), Platforms::X.new, @account)
+
+    composed = PublishesCrosspost::ComposesCrosspostContent.new.compose(config, Platforms::X::POST_CONSTRAINTS)
+
+    assert_equal false, config.append_url
+    assert_equal 1, composed.string.scan(config.url).size
+  end
+
+  def test_link_fallback_recognizes_a_transformed_source_url
+    config = @subject.apply(config_with(media: FIVE_PHOTOS, format_string: "{{title}} {{url}}", url_transformer: Platforms::Bsky::AbbreviatesUrl.new), Platforms::Bsky.new, @account)
+
+    assert_equal false, config.append_url
+  end
+
   def test_unrecognized_fallbacks_behave_like_link
     config = @subject.apply(config_with(media: FIVE_PHOTOS, media_fallback: "lol"), Platforms::X.new, @account)
 
@@ -111,6 +137,7 @@ class PublishesCrosspost::AppliesMediaPlanTest < ActiveSupport::TestCase
       title: "A post",
       format_string: "{{title}}",
       append_url: false,
+      truncation_marker: "…",
       attach_link: false,
       media_fallback: "link",
       media: [],

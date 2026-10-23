@@ -24,9 +24,14 @@ class Platforms::Linkedin
       raise "Failed to initiate LinkedIn image upload for #{item.url}. #{upload.message}" unless upload.success?
 
       response = HTTParty.put(upload.upload_url, body: image.bytes, headers: {"Authorization" => "Bearer #{access_token}", "Content-Type" => image.content_type})
+      if [413, 415, 422].include?(response.code)
+        raise PublishesCrosspost::UnsupportedMediaError.new(item, "LinkedIn refused #{item.url}: #{response.body}")
+      end
       raise "Failed to upload #{item.url} to LinkedIn (HTTP #{response.code}). Response: #{response.body}" unless response.success?
 
       upload.image_urn
+    ensure
+      download&.file&.close!
     end
   end
 end

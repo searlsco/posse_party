@@ -27,6 +27,8 @@ class Platforms::Bsky
         # Authorization trouble, rate limiting, or an outage: retry with the video
         raise "Failed to upload video #{item.url} to Bsky (HTTP #{response.code}). Response: #{response.body}"
       end
+    ensure
+      download&.file&.close!
     end
 
     def status(job_id)

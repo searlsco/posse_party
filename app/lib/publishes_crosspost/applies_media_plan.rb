@@ -1,7 +1,7 @@
 class PublishesCrosspost
   class AppliesMediaPlan
     def initialize
-      @applies_format_string = AppliesFormatString.new
+      @composes_crosspost_content = ComposesCrosspostContent.new
     end
 
     # Narrows crosspost_config.media to what the platform can attach, as media_fallback directs:
@@ -28,9 +28,9 @@ class PublishesCrosspost
       crosspost_config.media = planned
       if planned.any? && crosspost_config.attach_link
         crosspost_config.attach_link = false
-        ensure_link!(crosspost_config)
+        ensure_link!(crosspost_config, api.post_constraints)
       elsif planned.size < media.size && !crosspost_config.attach_link
-        ensure_link!(crosspost_config)
+        ensure_link!(crosspost_config, api.post_constraints)
       end
       crosspost_config
     end
@@ -57,8 +57,13 @@ class PublishesCrosspost
       ].all? { |count, max| max.nil? || count <= max }
     end
 
-    def ensure_link!(crosspost_config)
-      return if crosspost_config.url.blank? || @applies_format_string.apply(crosspost_config).include?(crosspost_config.url)
+    def ensure_link!(crosspost_config, post_constraints)
+      return if crosspost_config.url.blank?
+
+      composed = @composes_crosspost_content.compose(crosspost_config, post_constraints)
+      return if composed.pattern_ranges.any? { |range|
+        range[:substring] == crosspost_config.url && range[:byte_index] + range[:byte_length] <= composed.string.bytesize
+      }
 
       crosspost_config.append_url = true
     end

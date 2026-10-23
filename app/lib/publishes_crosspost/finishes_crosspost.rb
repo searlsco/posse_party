@@ -4,6 +4,7 @@ class PublishesCrosspost
       @matches_platform_api = MatchesPlatformApi.new
       @tracks_crosspost_status = TracksCrosspostStatus.new
       @rejects_media = RejectsMedia.new
+      @publishes_crosspost = PublishesCrosspost.new
     end
 
     def publish(crosspost_id)
@@ -21,13 +22,12 @@ class PublishesCrosspost
 
     private
 
-    # Media can fail the platform's processing after it was uploaded. Publishing starts over (as a
-    # retry) planning without it, so media_fallback decides what becomes of the post
+    # Replan within the current attempt so even the final attempt can use its media fallback.
     def finish(crosspost, api)
       api.finish!(crosspost)
     rescue UnsupportedMediaError => e
       @rejects_media.reject(crosspost, e.media)
-      PublishesCrosspost::Result.new(success?: false, message: "#{e.message}. Publishing again without it", error: e)
+      @publishes_crosspost.replan(crosspost, api)
     end
   end
 end

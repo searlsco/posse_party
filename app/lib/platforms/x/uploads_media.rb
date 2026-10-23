@@ -24,6 +24,8 @@ class Platforms::X
       download = @downloads_media.download(item)
       image = @prepares_image_upload.prepare(item, download.bytes, download.content_type, max_bytes: MAX_IMAGE_BYTES, accepted_types: %w[image/jpeg image/png image/webp image/gif])
       X::MediaUploader.upload_binary(client:, content: image.bytes, media_category: "tweet_image").fetch("id")
+    ensure
+      download&.file&.close!
     end
 
     def upload_video(item, client)
@@ -34,6 +36,8 @@ class Platforms::X
       end
 
       media.fetch("id")
+    ensure
+      download&.file&.close!
     end
   end
 end

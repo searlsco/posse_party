@@ -21,6 +21,8 @@ class Platforms::Linkedin
       })
 
       initialized.fetch("video")
+    ensure
+      download&.file&.close!
     end
 
     def available?(video_urn, access_token:)
