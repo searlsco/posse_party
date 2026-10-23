@@ -22,7 +22,7 @@ This guide walks through connecting your Mastodon account to POSSE Party so it c
 
 ![Mastodon application details form](../images/mastodon-3.png)
 
-3. Scroll to **Scopes** and—leaving `profile` checked—check `write:statuses` as well. Click **Submit**
+3. Scroll to **Scopes** and—leaving `profile` checked—check `write:statuses` and `write:media` as well (`write:media` lets POSSE Party attach photos and videos). Click **Submit**
 
 ![Mastodon application scopes with write:statuses selected](../images/mastodon-4.png)
 

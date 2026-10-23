@@ -2,6 +2,10 @@
 
 This file lists user-visible changes (including potentially breaking changes). The app is not versioned; entries are reverse-chronological by date.
 
+## 2026-10-23
+
+- Attaching media to Mastodon needs the access token's `write:media` scope, which earlier setup instructions didn't ask for. Mastodon accounts set up before this change must add `write:media` to their application (Mastodon's **Development** settings), regenerate the access token, and paste it into the account in POSSE Party. Until then, crossposts with media fail right away with a message saying so, instead of retrying.
+
 ## 2026-10-22
 
 - Bluesky, X, Mastodon, Threads, and LinkedIn now attach a post's `media` (photos and videos, configured the same way as for Instagram), including alt text from a new optional `alt` field on each media item. See [Media](docs/feed.md#media) for each platform's limits.

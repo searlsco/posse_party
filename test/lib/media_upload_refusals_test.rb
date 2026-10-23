@@ -50,6 +50,13 @@ class MediaUploadRefusalsTest < ActiveSupport::TestCase
     end
   end
 
+  def test_mastodon_missing_media_scope_is_unretriable
+    simulate_response("mastodon_media_photos", 403, '{"error":"This action is outside the authorized scopes"}') do
+      error = assert_raises(PublishesCrosspost::UnretriableError) { Platforms::Mastodon::UploadsMedia.new.upload(@item, base_url: "https://mastodon.social", access_token: "token") }
+      assert_includes error.message, "write:media"
+    end
+  end
+
   private
 
   # Inject a simulated failure into a recorded upload, retaining the real download
@@ -58,7 +65,7 @@ class MediaUploadRefusalsTest < ActiveSupport::TestCase
     tag = "simulated_#{cassette}_#{status}"
     VCR.configure do |config|
       config.before_playback(tag) do |interaction|
-        next unless interaction.request.uri.include?("uploadBlob") || interaction.request.uri.include?("dms-uploads")
+        next unless %w[uploadBlob dms-uploads /api/v2/media].any? { |path| interaction.request.uri.include?(path) }
 
         interaction.response.status.code = status
         interaction.response.body = body

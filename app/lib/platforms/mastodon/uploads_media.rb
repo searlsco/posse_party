@@ -21,6 +21,9 @@ class Platforms::Mastodon
       )
       if [413, 415, 422].include?(response.code)
         raise PublishesCrosspost::UnsupportedMediaError.new(item, "Mastodon refused #{item.url}: #{response.body}")
+      elsif response.code == 403
+        # Usually an access token created before media was supported, without the write:media scope. Retrying won't help
+        raise PublishesCrosspost::UnretriableError, "Mastodon wouldn't let this account upload #{item.url} (HTTP 403). Make sure the access token has the write:media scope (see docs/account_setup/mastodon.md). Response: #{response.body}"
       elsif !response.success? || response["id"].blank?
         raise "Failed to upload #{item.url} to Mastodon (HTTP #{response.code}). Response: #{response.body}"
       end

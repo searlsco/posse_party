@@ -14,7 +14,7 @@ class Platforms::Mastodon
         "mastodon_post" => {"status" => crosspost_content, "media_ids" => media_urls.keys, "media_urls" => media_urls}
       ))
       @finishes_mastodon_post.finish(crosspost)
-    rescue PublishesCrosspost::UnsupportedMediaError
+    rescue PublishesCrosspost::UnsupportedMediaError, PublishesCrosspost::UnretriableError
       raise
     rescue => e
       PublishesCrosspost::Result.new(success?: false, message: "Failed to syndicate to Mastodon", error: e)
